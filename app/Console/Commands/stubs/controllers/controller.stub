@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers\Api\v1\DummyApiNamespace;
+
+use App\Models\DummyModel;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\v1\DummyModel\{ IndexDummyModel, ShowDummyModel, StoreDummyModel, UpdateDummyModel, DestroyDummyModel };
+
+class DummyController extends Controller
+{
+    /**
+     * 
+     */
+    public function index(IndexDummyModel $request)
+    {
+        return DummyModel::all();
+    }
+
+    /**
+     * 
+     */
+    public function show(DummyModel $DummyBinding, ShowDummyModel $request)
+    {
+        return $DummyBinding;
+    }
+
+    /**
+     * 
+     */
+    public function store(StoreDummyModel $request)
+    {
+        return DummyModel::create( $request->validated() );
+    }
+
+    /**
+     * 
+     */
+    public function update(DummyModel $DummyBinding, UpdateDummyModel $request)
+    {
+        $fields = $request->validated();
+
+        $DummyBinding->fill($fields);
+        $DummyBinding->save();
+
+        return $DummyBinding->only( array_keys($fields) );
+    }
+
+    /**
+     * 
+     */
+    public function destroy(DummyModel $DummyBinding, DestroyDummyModel $request)
+    {
+        $DummyBinding->delete();
+    }
+}

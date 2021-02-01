@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Requests\Api\v1\DummyClass;
+
+use App\Http\Requests\Api\v1\ApiRequest;
+
+class DummyRequest extends ApiRequest
+{
+    /**
+     * 
+     */
+    public function __construct()
+    {
+        $this->ability = 'show';
+        $this->binding = 'DummyBinding';
+        $this->model = config('croft.bouncer.models.DummyModel');
+    }
+}
