@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Admin;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Models\Image;
 use App\Traits\Controllers\Api\v1\HasQueryFilter;
