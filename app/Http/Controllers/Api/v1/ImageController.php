@@ -57,8 +57,8 @@ class ImageController extends Controller
         $image_id = Image::createFromFile($fields, $file)->id;
 
         return Image::find($image_id)
-                    ->load(config('croft.relationships.image.show'))
-                    ->append(config('croft.attributes.image.show'));
+                    ->load(config('croft.relationships.image.store'))
+                    ->append(config('croft.attributes.image.store'));
     }
 
     /**

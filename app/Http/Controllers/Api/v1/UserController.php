@@ -56,8 +56,8 @@ class UserController extends Controller
         $user_id = User::create($fields)->id;
 
         return User::find($user_id)
-                   ->load(config('croft.relationships.user.show'))
-                   ->append(config('croft.attributes.user.show'));
+                   ->load(config('croft.relationships.user.store'))
+                   ->append(config('croft.attributes.user.store'));
     }
 
     /**

@@ -56,8 +56,8 @@ class AddressController extends Controller
         $address_id = Address::create($fields)->id;
 
         return Address::find($address_id)
-                      ->load(config('croft.relationships.address.show'))
-                      ->append(config('croft.attributes.address.show'));
+                      ->load(config('croft.relationships.address.store'))
+                      ->append(config('croft.attributes.address.store'));
     }
 
     /**
