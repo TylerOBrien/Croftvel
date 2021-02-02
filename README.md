@@ -1,5 +1,14 @@
 # Croftvel
 
+### Setup Laravel
+
+Clone the `.env.example` file and generate new keys for Laravel.
+
+```
+cp .env.example .env
+php artisan key:generate
+```
+
 ### Setup JWT Authentication
 
 The `Tymon/JWTAuth` library requires a `JWT_SECRET` param in the .env file. Either manually add it or use the command below.
