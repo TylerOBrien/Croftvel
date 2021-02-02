@@ -54,8 +54,9 @@ class ImageController extends Controller
     {
         $fields = $request->validated();
         $file = $request->file('image');
+        $image_id = Image::createFromFile($fields, $file)->id;
 
-        return Image::createFromFile($fields, $file)
+        return Image::find($image_id)
                     ->load(config('croft.relationships.image.show'))
                     ->append(config('croft.attributes.image.show'));
     }

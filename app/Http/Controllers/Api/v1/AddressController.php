@@ -52,7 +52,9 @@ class AddressController extends Controller
      */
     public function store(StoreAddress $request)
     {
-        return Address::create($request->validated())
+        $address_id = Address::create($request->validated())->id;
+
+        return Address::find($address_id)
                       ->load(config('croft.relationships.address.show'))
                       ->append(config('croft.attributes.address.show'));
     }

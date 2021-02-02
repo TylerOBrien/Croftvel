@@ -55,10 +55,9 @@ class UserController extends Controller
         $fields = $request->validated();
         $user_id = User::create($fields)->id;
 
-        // Use ::find rather than the return of ::create to ensure the response is a full User model.
-        // Using ::create will only return the attrs given in the request.
-
-        return User::find($user_id);
+        return User::find($user_id)
+                   ->load(config('croft.relationships.user.show'))
+                   ->append(config('croft.attributes.user.show'));
     }
 
     /**
