@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Models\{
+    Address,
     Image,
     User };
 
 use App\Policies\Api\v1\{
+    AddressPolicy,
     ImagePolicy,
     UserPolicy };
 
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
+        Address::class => AddressPolicy::class,
         Image::class => ImagePolicy::class,
         User::class => UserPolicy::class
     ];
