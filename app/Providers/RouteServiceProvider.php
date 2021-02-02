@@ -59,15 +59,12 @@ class RouteServiceProvider extends ServiceProvider
             ],
             function() {
                 Route::middleware('jwt.guest')
-                     ->namespace($this->namespace)
                      ->group(base_path('routes/api/v1/guest.php'));
 
                 Route::middleware('jwt.user')
-                     ->namespace($this->namespace)
                      ->group(base_path('routes/api/v1/user.php'));
 
                 Route::middleware('jwt.admin')
-                     ->namespace($this->namespace)
                      ->group(base_path('routes/api/v1/admin.php'));
             }
         );
