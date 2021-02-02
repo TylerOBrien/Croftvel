@@ -21,4 +21,18 @@ class Meta extends Model
         'name',
         'value'
     ];
+
+    /**
+     * 
+     */
+    public function integers() {
+        return $this->hasMany(MetaInteger::class);
+    }
+
+    /**
+     * 
+     */
+    public function strings() {
+        return $this->hasMany(MetaString::class);
+    }
 }
