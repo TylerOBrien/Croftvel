@@ -90,17 +90,20 @@ return [
     'relationships' => [
         'address' => [
             'index' => [],
-            'show'  => []
+            'show'  => [],
+            'store' => []
         ],
 
         'image' => [
             'index' => [],
-            'show' => []
+            'show' => [],
+            'store' => []
         ],
 
         'user' => [
             'index' => [],
-            'show' =>  []
+            'show' =>  [],
+            'store' => []
         ]
     ],
     
@@ -115,17 +118,20 @@ return [
     'attributes' => [
         'address' => [
             'index' => [],
-            'show'  => []
+            'show'  => [],
+            'store' => []
         ],
 
         'image' => [
             'index' => [ 'url' ],
-            'show' => [ 'url' ]
+            'show' => [ 'url' ],
+            'store' => []
         ],
 
         'user' => [
             'index' => [],
-            'show' => []
+            'show' => [],
+            'store' => []
         ]
     ]
 
