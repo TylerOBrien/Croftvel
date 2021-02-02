@@ -52,7 +52,8 @@ class AddressController extends Controller
      */
     public function store(StoreAddress $request)
     {
-        $address_id = Address::create($request->validated())->id;
+        $fields = $request->validated();
+        $address_id = Address::create($fields)->id;
 
         return Address::find($address_id)
                       ->load(config('croft.relationships.address.show'))
