@@ -28,12 +28,6 @@ class RegisterController extends Controller
         $user = auth()->user()
                       ->load(config('croft.relationships.user.show'))
                       ->append(config('croft.attributes.user.show'));
-        
-        EmailVerification::create([
-            'user_id' => $user->id,
-            'code' => random_int(111111, 999999) ]);
-
-        $user->sendEmailVerificationNotification();
 
         event(new RegisterEvent($user));
 
