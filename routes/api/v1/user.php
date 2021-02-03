@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\v1\{
     AddressController,
     ImageController,
+    MetaController,
     UserController };
 
 use App\Http\Controllers\Api\v1\Auth\{
@@ -18,4 +19,5 @@ Route::post('auth/resend-email-verification', [ EmailVerificationController::cla
 
 Route::apiResource('addresses', AddressController::class);
 Route::apiResource('images', ImageController::class);
+Route::apiResource('metas', MetaController::class);
 Route::apiResource('users', UserController::class)->except([ 'index', 'store', 'destroy' ]);
