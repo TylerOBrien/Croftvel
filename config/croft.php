@@ -100,6 +100,12 @@ return [
             'store' => []
         ],
 
+        'meta' => [
+            'index' => [],
+            'show'  => [],
+            'store' => []
+        ],
+
         'user' => [
             'index' => [],
             'show' =>  [],
@@ -125,6 +131,12 @@ return [
         'image' => [
             'index' => [ 'url' ],
             'show' => [ 'url' ],
+            'store' => []
+        ],
+
+        'meta' => [
+            'index' => [],
+            'show'  => [],
             'store' => []
         ],
 
