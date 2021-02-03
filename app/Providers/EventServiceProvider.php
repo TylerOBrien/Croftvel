@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Events\Api\v1\Auth\RegisterEvent;
+use App\Listeners\Api\v1\Auth\SendEmailVerificationNotification;
 
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
