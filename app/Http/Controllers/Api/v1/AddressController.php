@@ -89,5 +89,6 @@ class AddressController extends Controller
     public function destroy(Address $address, DestroyAddress $request)
     {
         $address->delete();
+        return response()->json(null, 204);
     }
 }

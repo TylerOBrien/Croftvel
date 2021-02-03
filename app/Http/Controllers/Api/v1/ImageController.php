@@ -90,5 +90,6 @@ class ImageController extends Controller
     public function destroy(Image $image, DestroyImage $request)
     {
         $image->delete();
+        return response()->json(null, 204);
     }
 }
