@@ -13,7 +13,7 @@ return [
         'province' => 'The given :attribute is not valid.'
     ],
 
-    'current_password' => 'The :attribute field does not match our records.',
+    'matches_current' => 'The current :attribute field does not match our records.',
 
     /*
     |--------------------------------------------------------------------------
