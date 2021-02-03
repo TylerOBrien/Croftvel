@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\v1\DummyClass;
 
-use App\Models\DummyModel;
+use App\Models\DummyClass;
 use App\Http\Requests\Api\v1\ApiRequest;
 
 class DummyRequest extends ApiRequest
@@ -16,6 +16,6 @@ class DummyRequest extends ApiRequest
     {
         $this->ability = 'show';
         $this->binding = 'DummyBinding';
-        $this->model = DummyModel::class;
+        $this->model = DummyClass::class;
     }
 }
