@@ -51,7 +51,7 @@ class MetaIntegerController extends Controller
      */
     public function store(Meta $meta, StoreMetaInteger $request)
     {
-        $fields = $request->validated();
+        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
         $integer_id = MetaInteger::create($fields)->id;
 
         return MetaInteger::find($integer_id);
@@ -68,7 +68,7 @@ class MetaIntegerController extends Controller
      */
     public function update(Meta $meta, MetaInteger $integer, UpdateMetaInteger $request)
     {
-        $fields = $request->validated();
+        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
 
         $integer->fill($fields);
         $integer->save();
