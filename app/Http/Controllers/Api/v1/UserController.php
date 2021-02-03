@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Models\User;
 use App\Traits\Controllers\Api\v1\{ HasPasswordReset, HasQueryFilter };
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser, VerifyUserEmail };
+use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser };
 
 class UserController extends Controller
 {
