@@ -18,8 +18,7 @@ class Meta extends Model
     protected $fillable = [
         'owner_id',
         'owner_type',
-        'name',
-        'value'
+        'name'
     ];
 
     /**
