@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\v1\{
     ImageController,
     MetaController,
     MetaIntegerController,
+    MetaStringController,
     UserController };
 
 use App\Http\Controllers\Api\v1\Auth\{
