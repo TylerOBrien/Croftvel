@@ -23,6 +23,7 @@ return [
     'uploads' => [
         'disk' => 'public',
         'dir' => [
+            'files' => 'files',
             'images' => 'images'
         ]
     ],
