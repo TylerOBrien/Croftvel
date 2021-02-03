@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Models\{
     Address,
     Image,
+    Meta,
     User };
 
 use App\Policies\Api\v1\{
     AddressPolicy,
     ImagePolicy,
+    MetaPolicy,
     UserPolicy };
 
 use App\Services\Authenticate;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Address::class => AddressPolicy::class,
         Image::class => ImagePolicy::class,
+        Meta::class => MetaPolicy::class,
         User::class => UserPolicy::class
     ];
 
