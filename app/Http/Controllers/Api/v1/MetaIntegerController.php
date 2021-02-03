@@ -68,7 +68,7 @@ class MetaIntegerController extends Controller
      */
     public function update(Meta $meta, MetaInteger $integer, UpdateMetaInteger $request)
     {
-        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
+        $fields = $request->validated();
 
         $integer->fill($fields);
         $integer->save();

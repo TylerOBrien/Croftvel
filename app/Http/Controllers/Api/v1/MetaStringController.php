@@ -68,7 +68,7 @@ class MetaStringController extends Controller
      */
     public function update(Meta $meta, MetaString $string, UpdateMetaString $request)
     {
-        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
+        $fields = $request->validated();
 
         $string->fill($fields);
         $string->save();
