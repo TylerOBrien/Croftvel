@@ -11,7 +11,7 @@ class AddressPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any images.
+     * Determine whether the user can view any addresses.
      *
      * @param \App\Models\User $user
      * 
@@ -23,7 +23,7 @@ class AddressPolicy
     }
 
     /**
-     * Determine whether the user can view the image.
+     * Determine whether the user can view the address.
      *
      * @param \App\Models\User    $user
      * @param \App\Models\Address $address
@@ -46,7 +46,7 @@ class AddressPolicy
     }
 
     /**
-     * Determine whether the user can create images.
+     * Determine whether the user can create addresses.
      *
      * @param \App\Models\User $user
      * 

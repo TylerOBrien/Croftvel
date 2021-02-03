@@ -11,7 +11,7 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can view any users.
      *
      * @param \App\Models\User $user
      * 
@@ -23,7 +23,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view the user.
      *
      * @param \App\Models\User $user
      * @param \App\Models\User $model
@@ -40,7 +40,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create users.
      *
      * @param \App\Models\User $user
      * 
@@ -52,7 +52,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update the user.
      *
      * @param \App\Models\User $user
      * @param \App\Models\User $model
@@ -69,7 +69,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete the user.
      *
      * @param \App\Models\User $user
      * @param \App\Models\User $model
@@ -82,7 +82,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can restore the user.
      *
      * @param \App\Models\User $user
      * @param \App\Models\User $model
