@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    use HasFileUpload, HasOwnership, HasUserRevisions;
+    use HasOwnership, HasUserRevisions;
+    use HasFileUpload { 
+        createFromFile as protected createFromFileBase;
+        updateFromFile as protected updateFromFileBase;
+    }
 
     protected $hidden = [
         'disk',
@@ -26,4 +30,20 @@ class File extends Model
         'owner_id',
         'owner_type'
     ];
+
+    /**
+     * @return $this
+     */
+    public function updateFromFile(array $attributes, $file)
+    {
+        return self::updateFromFileBase($this, config('croft.uploads.dir.files'), $file, $attributes);
+    }
+
+    /**
+     * @return File
+     */
+    static public function createFromFile(array $attributes, $file)
+    {
+        return self::createFromFileBase(config('croft.uploads.dir.files'), $file, $attributes);
+    }
 }
