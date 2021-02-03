@@ -4,7 +4,6 @@ namespace App\Http\Requests\Api\v1\User;
 
 use App\Models\User;
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Rules\MatchCurrentPassword;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
@@ -46,11 +45,15 @@ class UpdateUser extends ApiRequest
         return array_merge(
             [
                 'email' => "email|unique:users,email,$current_id,id,is_active,1",
-                'password' => 'confirmed|zxcvbn_min:2'
-            ],
-            $this->needsCurrentPassword()
-                ? $this->getCurrentPasswordRules()
-                : []
+                'password' => array_merge(
+                    [
+                        'confirmed', 'zxcvbn_min:2'
+                    ],
+                    $this->needsCurrentPassword()
+                        ? [ 'matches_current' ]
+                        : []
+                )
+            ]
         );
     }
 
@@ -67,28 +70,14 @@ class UpdateUser extends ApiRequest
     }
 
     /**
-     * @return array
-     */
-    public function getCurrentPasswordRules()
-    {
-        return [
-            'current_password' => [ 'required', 'string', new MatchCurrentPassword ]
-        ];
-    }
-
-    /**
      * @return boolean
      */
     public function needsCurrentPassword()
     {
-        if (!Request::has('password')) {
-            return false;
-        }
-
         if (Request::has('email')) {
             return Request::input('email') !== $this->route('user')->email;
         }
 
-        return true;
+        return Request::has('password');
     }
 }
