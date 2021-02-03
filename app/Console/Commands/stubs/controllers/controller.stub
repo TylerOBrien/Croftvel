@@ -9,7 +9,11 @@ use App\Http\Requests\Api\v1\DummyModel\{ IndexDummyModel, ShowDummyModel, Store
 class DummyController extends Controller
 {
     /**
+     * Display a listing of the DummyBinding.
      * 
+     * @param IndexDummyModel $request
+     *
+     * @return Response
      */
     public function index(IndexDummyModel $request)
     {
@@ -17,7 +21,12 @@ class DummyController extends Controller
     }
 
     /**
+     * Display the specified DummyBinding.
      * 
+     * @param DummyModel $DummyBinding
+     * @param ShowDummyModel $request
+     *
+     * @return Response
      */
     public function show(DummyModel $DummyBinding, ShowDummyModel $request)
     {
@@ -25,7 +34,11 @@ class DummyController extends Controller
     }
 
     /**
+     * Store a newly created DummyBinding in storage.
      * 
+     * @param StoreDummyModel $request
+     *
+     * @return Response
      */
     public function store(StoreDummyModel $request)
     {
@@ -33,7 +46,12 @@ class DummyController extends Controller
     }
 
     /**
+     * Update the specified DummyBinding in storage.
      * 
+     * @param DummyModel $DummyBinding
+     * @param UpdateDummyModel $request
+     * 
+     * @return Response
      */
     public function update(DummyModel $DummyBinding, UpdateDummyModel $request)
     {
@@ -46,7 +64,12 @@ class DummyController extends Controller
     }
 
     /**
+     * Remove the specified DummyBinding from storage.
      * 
+     * @param DummyModel $DummyBinding
+     * @param DestroyDummyModel $request
+     *
+     * @return Response
      */
     public function destroy(DummyModel $DummyBinding, DestroyDummyModel $request)
     {
