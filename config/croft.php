@@ -95,6 +95,12 @@ return [
             'store' => []
         ],
 
+        'file' => [
+            'index' => [],
+            'show' => [],
+            'store' => []
+        ],
+
         'image' => [
             'index' => [],
             'show' => [],
@@ -129,10 +135,16 @@ return [
             'store' => []
         ],
 
+        'file' => [
+            'index' => [ 'url' ],
+            'show' => [ 'url' ],
+            'store' => [ 'url' ]
+        ],
+
         'image' => [
             'index' => [ 'url' ],
             'show' => [ 'url' ],
-            'store' => []
+            'store' => [ 'url' ]
         ],
 
         'meta' => [
