@@ -58,6 +58,32 @@ class MetaPolicy
     }
 
     /**
+     * Determine whether the user can create meta integers.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Meta $meta
+     * 
+     * @return mixed
+     */
+    public function storeInteger(User $user, Meta $meta)
+    {
+        return $user->can('store', $meta);
+    }
+
+    /**
+     * Determine whether the user can create meta strings.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Meta $meta
+     * 
+     * @return mixed
+     */
+    public function storeString(User $user, Meta $meta)
+    {
+        return $user->can('store', $meta);
+    }
+
+    /**
      * Determine whether the user can update the meta.
      *
      * @param \App\Models\User $user
@@ -78,6 +104,32 @@ class MetaPolicy
         }
         
         return in_array($user->type, config('croft.privileges.admin'));
+    }
+
+    /**
+     * Determine whether the user can update the meta integer.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Meta $meta
+     * 
+     * @return mixed
+     */
+    public function updateInteger(User $user, Meta $meta)
+    {
+        return $user->can('update', $meta);
+    }
+
+    /**
+     * Determine whether the user can update the meta string.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Meta $meta
+     * 
+     * @return mixed
+     */
+    public function updateString(User $user, Meta $meta)
+    {
+        return $user->can('update', $meta);
     }
 
     /**
