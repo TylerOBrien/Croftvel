@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\v1\{
     AddressController,
+    FileController,
     ImageController,
     MetaController,
     MetaIntegerController,
@@ -20,6 +21,7 @@ Route::post('auth/email-verification', [ EmailVerificationController::class, 've
 Route::post('auth/resend-email-verification', [ EmailVerificationController::class, 'resend' ]);
 
 Route::apiResource('addresses', AddressController::class);
+Route::apiResource('files', FileController::class);
 Route::apiResource('images', ImageController::class);
 
 Route::apiResource('metas', MetaController::class);
