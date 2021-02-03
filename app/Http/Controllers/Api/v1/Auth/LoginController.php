@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\Auth;
 
+use App\Events\Api\v1\Auth\LoginEvent;
 use App\Services\Authenticate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\Login;
@@ -23,6 +24,8 @@ class LoginController extends Controller
         $user = auth()->user()
                       ->load(config('croft.relationships.user.show'))
                       ->append(config('croft.attributes.user.show'));
+        
+        event(new LoginEvent($user));
 
         return array_merge($token, compact('user'));
     }
