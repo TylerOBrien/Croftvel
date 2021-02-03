@@ -2,21 +2,26 @@
 
 namespace App\Http\Requests\Api\v1\DummyClass;
 
+use App\Models\DummyModel;
 use App\Http\Requests\Api\v1\ApiRequest;
 
 class DummyRequest extends ApiRequest
 {
     /**
-     * 
+     * Instantiate the request.
+     *
+     * @return void
      */
     public function __construct()
     {
         $this->ability = 'store';
-        $this->model = config('croft.bouncer.models.DummyModel');
+        $this->model = DummyModel::class;
     }
 
     /**
-     * 
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
      */
     public function rules()
     {
