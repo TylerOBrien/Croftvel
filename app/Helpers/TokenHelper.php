@@ -10,10 +10,11 @@ class TokenHelper
     public static function makeResponse($token)
     {
         return [
-            'token' => $token,
-            'token_type' => 'Bearer',
-            'ttl' => auth()->factory()->getTTL(),
-            'ttl_type' => 'minute'
+            'token' => [
+                'value' => "Bearer $token",
+                'ttl' => auth()->factory()->getTTL(),
+                'ttl_type' => 'minute'
+            ]
         ];
     }
 }
