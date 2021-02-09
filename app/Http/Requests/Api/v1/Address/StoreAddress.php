@@ -9,6 +9,8 @@ class StoreAddress extends ApiRequest
 {
     /**
      * Instantiate the request.
+     * 
+     * @return void
      */
     public function __construct()
     {

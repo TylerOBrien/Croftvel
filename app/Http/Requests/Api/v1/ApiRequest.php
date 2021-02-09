@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\v1;
 
-use App\Exceptions\Auth\Unauthorized;
+use App\Exceptions\Auth\Forbidden;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -22,22 +22,21 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     protected $validator;
 
     /**
-     * 
+     * @return bool
      */
     public function authorize()
     {
         if ($this->ability) {
             return $this->binding
-                ? auth()->user()->can($this->ability, $this->route($this->binding))
-                : auth()->user()->can($this->ability, $this->model)
-            ;
+                ? auth()->user()->can($this->ability, request()->route($this->binding))
+                : auth()->user()->can($this->ability, $this->model);
         }
 
         return true;
     }
 
     /**
-     * 
+     * @return array
      */
     public function attributes()
     {
@@ -45,7 +44,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return array
      */
     public function messages()
     {
@@ -53,7 +52,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return array
      */
     public function rules()
     {
@@ -61,7 +60,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return array
      */
     public function validated()
     {
@@ -69,15 +68,34 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return array
+     */
+    public function validationData()
+    {
+        return $this->all();
+    }
+
+    /**
+     * @return void
      */
     protected function failedAuthorization()
     {
-        throw new Unauthorized(
+        throw new Forbidden(
             $this->ability,
             $this->binding
                 ? $this->route($this->binding)
                 : $this->model);
+    }
+
+    /**
+     * 
+     */
+    protected function createDefaultValidator(ValidationFactory $factory)
+    {
+        return $factory->make(
+            $this->validationData(), $this->container->call([$this, 'rules']),
+            $this->messages(), $this->attributes()
+        );
     }
 
     /**
@@ -90,9 +108,16 @@ class ApiRequest extends Request implements ValidatesWhenResolved
         }
 
         $factory = $this->container->make(ValidationFactory::class);
-        $validator = $factory->make(
-            $this->all(), $this->rules(), $this->messages(), $this->attributes()
-        );
+
+        if (method_exists($this, 'validator')) {
+            $validator = $this->container->call([$this, 'validator'], compact('factory'));
+        } else {
+            $validator = $this->createDefaultValidator($factory);
+        }
+
+        if (method_exists($this, 'withValidator')) {
+            $this->withValidator($validator);
+        }
 
         $this->setValidator($validator);
 
@@ -100,7 +125,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return ApiRequest
      */
     public function setContainer(Container $container)
     {
@@ -110,7 +135,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * 
+     * @return ApiRequest
      */
     public function setValidator(Validator $validator)
     {

@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasOwnership, HasUserRevisions };
+use App\Traits\Models\HasOwnership;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    use HasOwnership, HasUserRevisions;
+    use HasOwnership;
 
     protected $hidden = [
         'owner_id',

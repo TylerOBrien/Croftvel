@@ -2,25 +2,17 @@
 
 namespace App\Exceptions\Auth;
 
-use Exception;
+use App\Exceptions\ApiException;
 
-class ExpiredToken extends Exception
+class ExpiredToken extends ApiException
 {
     /**
+     * Instantiate the exception.
      * 
+     * @return void
      */
     public function __construct()
     {
-        parent::__construct( trans('auth.token.expired') );
-    }
-
-    /**
-     * 
-     */
-    public function render()
-    {
-        return response()->json([
-            config('croft.responses.key.message') => $this->message
-        ], 401);
+        parent::__construct('auth.token.expired', 401);
     }
 }

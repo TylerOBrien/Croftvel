@@ -2,29 +2,25 @@
 
 namespace App\Traits\Models;
 
-use Carbon\Carbon;
-
 trait HasActiveState
 {
     /**
-     * 
+     * @return Model
      */
     public function activate()
     {
         $this->is_active = 1;
-        $this->deleted_by = null;
-        $this->deleted_at = null;
-        $this->save();
+        
+        return $this->save();
     }
 
     /**
-     * 
+     * @return Model
      */
     public function deactivate()
     {
         $this->is_active = 0;
-        $this->deleted_by = auth()->id();
-        $this->deleted_at = Carbon::now(config('app.timezone'));
-        $this->save();
+        
+        return $this->save();
     }
 }

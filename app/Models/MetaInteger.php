@@ -2,23 +2,20 @@
 
 namespace App\Models;
 
-use App\Traits\Models\HasUserRevisions;
-
 use Illuminate\Database\Eloquent\Model;
 
 class MetaInteger extends Model
 {
-    use HasUserRevisions;
-    
     protected $fillable = [
         'meta_id',
         'value'
     ];
     
     /**
-     * 
+     * @return BelongsTo
      */
-    public function meta() {
+    public function meta()
+    {
         return $this->belongsTo(Meta::class);
     }
 }

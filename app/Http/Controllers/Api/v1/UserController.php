@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\User;
+use App\Models\{ Account, User };
 use App\Traits\Controllers\Api\v1\{ HasPasswordReset, HasQueryFilter };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser };
+use App\Http\Resources\Api\v1\TokenResource;
 
 class UserController extends Controller
 {
@@ -53,11 +54,12 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $fields = $request->validated();
-        $user_id = User::create($fields)->id;
+        $account = Account::create();
+        $user = User::create([ 'account_id' => $account->id ]);
+        $pat = $user->createToken(config('croft.token.name'));
+        $token = new TokenResource($pat);
 
-        return User::find($user_id)
-                   ->load(config('croft.relationships.user.store'))
-                   ->append(config('croft.attributes.user.store'));
+        return compact('token', 'user');
     }
 
     /**

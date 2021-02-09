@@ -2,23 +2,15 @@
 
 namespace App\Providers;
 
-use App\Models\{
-    Address,
-    Image,
-    Meta,
-    User };
+use App\Models\{ Identity, User };
+use App\Policies\Api\v1\{ IdentityPolicy, UserPolicy };
 
-use App\Policies\Api\v1\{
-    AddressPolicy,
-    ImagePolicy,
-    MetaPolicy,
-    UserPolicy };
+use App\Guards\Api\v1\ApiGuard;
 
-use App\Services\Authenticate;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as BaseAuthServiceProvider;
 
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
-class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends BaseAuthServiceProvider
 {
     /**
      * The policy mappings for the application.
@@ -26,9 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        Address::class => AddressPolicy::class,
-        Image::class => ImagePolicy::class,
-        Meta::class => MetaPolicy::class,
+        Identity::class => IdentityPolicy::class,
         User::class => UserPolicy::class
     ];
 
@@ -47,8 +37,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Authenticate::class, function($app) {
-            return new Authenticate;
+        Auth::extend('croft', function ($app, $name, array $config) {
+            return new ApiGuard(Auth::createUserProvider($config['provider']), $app->make('request'));
         });
     }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasFileUpload, HasOwnership, HasUserRevisions };
+use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
 use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    use HasOwnership, HasUserRevisions;
+    use HasOwnership;
     use HasFileUpload { 
         createFromFile as protected createFromFileBase;
-        updateFromFile as protected updateFromFileBase;
     }
 
     protected $hidden = [
@@ -32,18 +31,18 @@ class File extends Model
     ];
 
     /**
-     * @return $this
+     * @return File
      */
-    public function updateFromFile(array $attributes, $file)
+    static public function createFromFile(array $attributes, $file)
     {
-        return self::updateFromFileBase($this, config('croft.uploads.dir.files'), $file, $attributes);
+        return self::createFromFileBase($file, $attributes, config('croft.uploads.dir.files'));
     }
 
     /**
      * @return File
      */
-    static public function createFromFile(array $attributes, $file)
+    public function updateFromFile(array $attributes, $file)
     {
-        return self::createFromFileBase(config('croft.uploads.dir.files'), $file, $attributes);
+        return parent::updateFromFile($file, $attributes, config('croft.uploads.dir.files'));
     }
 }

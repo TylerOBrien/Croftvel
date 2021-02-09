@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasOwnership, HasUserRevisions };
+use App\Traits\Models\HasOwnership;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Meta extends Model
 {
-    use HasOwnership, HasUserRevisions;
+    use HasOwnership;
 
     protected $hidden = [
         'owner_id',
@@ -22,16 +22,18 @@ class Meta extends Model
     ];
 
     /**
-     * 
+     * @return HasMany
      */
-    public function integers() {
+    public function integers()
+    {
         return $this->hasMany(MetaInteger::class);
     }
 
     /**
-     * 
+     * @return HasMany
      */
-    public function strings() {
+    public function strings()
+    {
         return $this->hasMany(MetaString::class);
     }
 }

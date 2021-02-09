@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasFileUpload, HasOwnership, HasUserRevisions };
+use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
 use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    use HasOwnership, HasUserRevisions;
+    use HasOwnership;
     use HasFileUpload { 
         createFromFile as protected createFromFileBase;
-        updateFromFile as protected updateFromFileBase;
     }
 
     protected $hidden = [
@@ -34,28 +33,28 @@ class Image extends Model
     ];
 
     /**
-     * 
-     */
-    public function updateFromFile(array $attributes, $file)
-    {
-        $imgsize = getimagesize($file);
-        $attributes['width'] = $imgsize[0];
-        $attributes['height'] = $imgsize[1];
-
-        self::updateFromFileBase($this, config('croft.uploads.dir.images'), $file, $attributes);
-
-        return $this;
-    }
-
-    /**
-     * 
+     * @return Image
      */
     static public function createFromFile(array $attributes, $file)
     {
-        $imgsize = getimagesize($file);
-        $attributes['width'] = $imgsize[0];
-        $attributes['height'] = $imgsize[1];
+        [ $width, $height ] = getimagesize($file);
 
-        return self::createFromFileBase(config('croft.uploads.dir.images'), $file, $attributes);
+        $attributes['width'] = $width;
+        $attributes['height'] = $height;
+
+        return self::createFromFileBase($file, $attributes, config('croft.uploads.dir.images'));
+    }
+
+    /**
+     * @return Image
+     */
+    public function updateFromFile(array $attributes, $file)
+    {
+        [ $width, $height ] = getimagesize($file);
+        
+        $attributes['width'] = $width;
+        $attributes['height'] = $height;
+
+        return parent::updateFromFile($file, $attributes, config('croft.uploads.dir.images'));
     }
 }
