@@ -6,7 +6,7 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
     'not-admin' => 'Your account lacks permission to access this.',
-    'unauthorized' => 'Your account lacks :ability:target permissions.',
+    'forbidden' => 'Your account lacks :ability:target permissions.',
 
     'token' => [
         'invalid' => 'Invalid token.',

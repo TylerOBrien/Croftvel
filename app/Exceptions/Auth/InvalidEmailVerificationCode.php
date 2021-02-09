@@ -2,25 +2,17 @@
 
 namespace App\Exceptions\Auth;
 
-use Exception;
+use App\Exceptions\ApiException;
 
-class InvalidEmailVerificationCode extends Exception
+class InvalidEmailVerificationCode extends ApiException
 {
     /**
+     * Instantiate the exception.
      * 
+     * @return void
      */
     public function __construct()
     {
-        parent::__construct( trans('auth.email-verification.invalid') );
-    }
-
-    /**
-     * 
-     */
-    public function render()
-    {
-        return response()->json([
-            config('croft.responses.key.message') => $this->message
-        ], 422);
+        parent::__construct('auth.email-verification.invalid', 422);
     }
 }

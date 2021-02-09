@@ -5,15 +5,15 @@ namespace App\Traits\Models;
 trait HasOwnership
 {
     /**
-     * 
+     * @return MorphTo
      */
-    public function getOwnerAttribute()
+    public function owner()
     {
-        return call_user_func("{$this->owner_type}::find", $this->owner_id);
+        return $this->morphTo();
     }
 
     /**
-     * 
+     * @return void
      */
     public function setOwnerTypeAttribute(string $owner_type)
     {

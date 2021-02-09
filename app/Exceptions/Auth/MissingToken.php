@@ -2,25 +2,17 @@
 
 namespace App\Exceptions\Auth;
 
-use Exception;
+use App\Exceptions\ApiException;
 
-class MissingToken extends Exception
+class MissingToken extends ApiException
 {
     /**
+     * Instantiate the exception.
      * 
+     * @return void
      */
     public function __construct()
     {
-        parent::__construct( trans('auth.token.missing') );
-    }
-
-    /**
-     * 
-     */
-    public function render()
-    {
-        return response()->json([
-            config('croft.responses.key.message') => $this->message
-        ], 400);
+        parent::__construct('auth.token.missing', 400);
     }
 }

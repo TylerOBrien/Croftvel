@@ -5,7 +5,7 @@ namespace App\Traits\Models;
 trait HasFullName
 {
     /**
-     * 
+     * @return string|null
      */
     public function getFullNameAttribute()
     {
@@ -19,7 +19,7 @@ trait HasFullName
     }
 
     /**
-     * 
+     * @return string|null
      */
     public function getFullNameReverseAttribute()
     {

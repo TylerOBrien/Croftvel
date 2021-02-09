@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\DummyApiNamespace;
+namespace App\Http\Controllers\Api\v1;
 
-use App\Models\DummyModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\DummyModel\{ IndexDummyModel, ShowDummyModel, StoreDummyModel, UpdateDummyModel, DestroyDummyModel };
+use App\Models\DummyModel;
 
 class DummyController extends Controller
 {
@@ -42,7 +42,10 @@ class DummyController extends Controller
      */
     public function store(StoreDummyModel $request)
     {
-        return DummyModel::create( $request->validated() );
+        $fields = $request->validated();
+        $DummyBindingId = DummyModel::create($fields)->id;
+
+        return DummyModel::find($DummyBindingId);
     }
 
     /**
@@ -60,7 +63,7 @@ class DummyController extends Controller
         $DummyBinding->fill($fields);
         $DummyBinding->save();
 
-        return $DummyBinding->only( array_keys($fields) );
+        return $DummyBinding->only(array_keys($fields));
     }
 
     /**

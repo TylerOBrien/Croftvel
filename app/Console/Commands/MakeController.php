@@ -41,6 +41,7 @@ class MakeController extends GeneratorCommand
         $replace['DummyController'] = $this->getControllerName();
         $replace['DummyModel'] = $name;
         $replace['DummyBinding'] = Str::snake($name);
+        $replace['DummyBindingId'] = Str::snake($name) . '_id';
 
         return str_replace(
             array_keys($replace), array_values($replace), parent::buildClass($name)

@@ -15,6 +15,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Authentication and Verification
+    |--------------------------------------------------------------------------
+    | 
+    */
+
+    'token' => [
+        'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel'))
+    ],
+
+    'verification' => [
+        'ttl' => 60
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Uploads
     |--------------------------------------------------------------------------
     | 
@@ -30,41 +45,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Privileges
-    |--------------------------------------------------------------------------
-    | The enums associated with the given privilege. All enums listed here must
-    | be fined in the enums below.
-    */
-
-    'privileges' => [
-        'admin' => [
-            'Admin'
-        ],
-        'user' => [
-            'User'
-        ]
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Enums
     |--------------------------------------------------------------------------
-    | Migrations depend on these values. Don't change these without being
-    | aware of the side-effects.
+    | 
     */
 
     'enum' => [
-        'user' => [
-            'status' => [
-                'Ok',
-                'Suspended',
-                'Unverified'
-            ],
-            'type' => [
-                'Admin',
-                'User'
-            ]
-        ]
+        
     ],
 
     /*

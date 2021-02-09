@@ -7,11 +7,10 @@ use App\Models\Image;
 trait HasImages
 {
     /**
-     * 
+     * @return HasMany
      */
     public function images()
     {
-        return $this->hasMany(Image::class, 'owner_id')
-                    ->where('owner_type', self::class);
+        return $this->morphMany(Image::class, 'owner');
     }
 }

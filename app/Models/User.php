@@ -2,94 +2,62 @@
 
 namespace App\Models;
 
-use App\Notifications\{ PasswordResetRequestNotification, VerifyEmailNotification };
-use App\Traits\Models\{ HasActiveState, HasFullName, HasUserRevisions };
+use App\Traits\Models\{ HasActiveState, HasFullName };
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Sanctum\HasApiTokens;
 
-use Illuminate\Contracts\Auth\CanResetPassword;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable implements CanResetPassword, JWTSubject
+class User extends BaseUser
 {
-    use Notifiable, HasActiveState, HasFullName, HasUserRevisions;
-
-    protected $appends = [
-        'full_name',
-        'full_name_reverse'
-    ];
+    use Notifiable, HasApiTokens, HasActiveState, HasFullName;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'type',
-        'status',
-        'password',
+        'account_id',
         'is_active'
     ];
 
-    protected $hidden = [
-        'password'
-    ];
-
     /**
-     * 
+     * @return BelongsTo
      */
-    public function email_verification()
+    public function account()
     {
-        return $this->hasOne(EmailVerification::class);
+        return $this->belongsTo(Account::class);
     }
 
     /**
-     * 
+     * @return HasMany
      */
-    public function setPasswordAttribute($password)
+    public function identities()
     {
-        $this->attributes['password'] = Hash::make($password);
+        return $this->hasMany(Identity::class);
     }
 
     /**
-     * 
+     * @return HasMany
      */
-    public function setRawPasswordAttribute($password)
+    public function secrets()
     {
-        $this->attributes['password'] = $password;
+        return $this->hasMany(Secret::class);
     }
 
     /**
-     * 
+     * @return bool
      */
-    public function getJWTIdentifier()
+    public function getIdentitiesVerifiedAttribute()
     {
-        return $this->getKey();
+        return $this->identities()
+                    ->join('verifications', 'identities.id', '=', 'verifications.identity_id')
+                    ->whereNotNull('verifications.verified_at')
+                    ->count();
     }
 
     /**
-     * 
+     * @return bool
      */
-    public function getJWTCustomClaims()
+    public function getIdentifiedAttribute()
     {
-        return [];
-    }
-
-    /**
-     * 
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new PasswordResetRequestNotification($token));
-    }
-
-    /**
-     * 
-     */
-    public function sendEmailVerificationNotification()
-    {
-        if (!$this->email_verified_at) {
-            return $this->notify(new VerifyEmailNotification);
-        }
+        return (bool) $this->identities_verified;
     }
 }

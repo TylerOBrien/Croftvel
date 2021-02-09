@@ -7,48 +7,45 @@ use Illuminate\Support\Facades\Storage;
 trait HasFileUpload
 {
     /**
-     * 
+     * @return Model
      */
-    static public function createFromFile($folder, $file, $attributes)
+    static public function createFromFile($file, array $attributes, string $dest, string $disk=null)
     {
-        $disk = config('croft.uploads.disk');
+        $disk = $disk ?? config('croft.uploads.disk');
         $filesize = filesize($file);
         $mimetype = $file->getMimeType();
-        $filepath = Storage::disk($disk)->put($folder, $file);
+        $filepath = Storage::disk($disk)->put($dest, $file);
 
-        return self::create(
-            array_merge($attributes, compact('disk', 'filesize', 'filepath', 'mimetype'))
-        );
+        return self::create(array_merge($attributes, compact('disk', 'filesize', 'filepath', 'mimetype')));
     }
 
     /**
-     * 
+     * @return Model
      */
-    static public function updateFromFile($model, $folder, $file, $attributes)
+    public function updateFromFile($file, array $attributes, string $dest)
     {
-        $storage = Storage::disk($model->disk);
-        $storage->delete($model->filepath);
+        $storage = Storage::disk($this->disk);
+        $storage->delete($this->filepath);
 
         $filesize = filesize($file);
         $mimetype = $file->getMimeType();
-        $filepath = $storage->put($folder, $file);
+        $filepath = $storage->put($dest, $file);
 
-        return $model->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')))
-                     ->save();
+        return $this->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')))
+                    ->save();
     }
 
     /**
-     * 
+     * @return Model
      */
     public function delete()
     {
         Storage::disk($this->disk)->delete($this->filepath);
-
         return parent::delete();
     }
 
     /**
-     * 
+     * @return string
      */
     public function getUrlAttribute()
     {
