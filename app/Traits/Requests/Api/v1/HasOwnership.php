@@ -5,28 +5,27 @@ namespace App\Traits\Requests\Api\v1;
 trait HasOwnership
 {
     /**
-     * Get the store validation rules that apply to the request.
+     * Get the owner_id and owner_type value from the request.
      * 
      * @return array
      */
-    protected function ownershipStoreRules()
+    protected function owner():array
     {
-        return [
-            'owner_id' => 'required|int',
-            'owner_type' => 'required|string'
-        ];
-    }
+        if (!request()->has([ 'owner_id', 'owner_type' ])) {
+            return [ null, null, null ];
+        }
+        
+        $owner_id = request()->input('owner_id');
+        $owner_type = request()->input('owner_type');
 
-    /**
-     * Get the update validation rules that apply to the request.
-     * 
-     * @return array
-     */
-    protected function ownershipUpdateRules()
-    {
-        return [
-            'owner_id' => 'int',
-            'owner_type' => 'string'
-        ];
+        if (strpos($owner_type, 'App\\Models\\') !== 0) {
+            $owner_type = "App\\Models\\$owner_type";
+        }
+
+        if (!class_exists($owner_type)) {
+            return [ null, null, null ];
+        }
+
+        return [ $owner_id, $owner_type, app($owner_type)->getTable() ];
     }
 }
