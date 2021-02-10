@@ -11,7 +11,7 @@ class DummyController extends Controller
     /**
      * Display a listing of the DummyBinding.
      * 
-     * @param IndexDummyModel $request
+     * @param  IndexDummyModel  $request
      *
      * @return Response
      */
@@ -23,8 +23,8 @@ class DummyController extends Controller
     /**
      * Display the specified DummyBinding.
      * 
-     * @param DummyModel $DummyBinding
-     * @param ShowDummyModel $request
+     * @param  DummyModel  $DummyBinding
+     * @param  ShowDummyModel  $request
      *
      * @return Response
      */
@@ -36,7 +36,7 @@ class DummyController extends Controller
     /**
      * Store a newly created DummyBinding in storage.
      * 
-     * @param StoreDummyModel $request
+     * @param  StoreDummyModel  $request
      *
      * @return Response
      */
@@ -51,8 +51,8 @@ class DummyController extends Controller
     /**
      * Update the specified DummyBinding in storage.
      * 
-     * @param DummyModel $DummyBinding
-     * @param UpdateDummyModel $request
+     * @param  DummyModel  $DummyBinding
+     * @param  UpdateDummyModel  $request
      * 
      * @return Response
      */
@@ -69,8 +69,8 @@ class DummyController extends Controller
     /**
      * Remove the specified DummyBinding from storage.
      * 
-     * @param DummyModel $DummyBinding
-     * @param DestroyDummyModel $request
+     * @param  DummyModel  $DummyBinding
+     * @param  DestroyDummyModel  $request
      *
      * @return Response
      */
