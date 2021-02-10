@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Exceptions\Api\v1\Identity\{ AlreadyVerified, ExpiredVerificationCode, InvalidVerificationCode, MissingVerificationCode };
+
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class Identity extends Model
 {
@@ -59,11 +59,13 @@ class Identity extends Model
             throw new InvalidVerificationCode;
         }
 
-        if ($this->verification->created_at->diffInMinutes(Carbon::now()) > config('croft.verification.ttl')) {
+        $now = now();
+
+        if ($this->verification->created_at->diffInMinutes($now) > config('croft.verification.ttl')) {
             throw new ExpiredVerificationCode;
         }
 
-        $this->verified_at = Carbon::now();
+        $this->verified_at = $now;
         
         return $this->save();
     }
