@@ -19,6 +19,14 @@ class Identity extends Model
     ];
 
     /**
+     * @return HasOne
+     */
+    public function oauth_token()
+    {
+        return $this->hasOne(OAuthToken::class);
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user()
