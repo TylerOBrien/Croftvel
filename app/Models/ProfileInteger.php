@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileInteger extends Model
 {
+    protected $fillable = [
+        'profile_id',
+        'name',
+        'value'
+    ];
+    
     /**
      * @return BelongsTo
      */
