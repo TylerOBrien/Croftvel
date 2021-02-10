@@ -22,7 +22,7 @@ trait HasFileUpload
     }
 
     /**
-     * @return Model
+     * @return bool
      */
     public function updateFromFile($file, array $attributes, string $dest=null)
     {
@@ -36,9 +36,8 @@ trait HasFileUpload
         $filepath = $storage->put($dest, $file);
 
         $this->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')));
-        $this->save();
         
-        return $this;
+        return $this->save();
     }
 
     /**
