@@ -5,32 +5,36 @@ namespace App\Traits\Requests\Api\v1;
 trait HasAddress
 {
     /**
+     * Get the store validation rules that apply to the request.
      * 
+     * @return array
      */
-    protected function addressStoreRules()
+    protected function addressStoreRules(string $prefix='')
     {
         return [
-            'address.line1' => 'required|string',
-            'address.line2' => 'nullable|string',
-            'address.city' => 'required|string',
-            'address.province' => 'required|string|size:2|province',
-            'address.country' => 'required|string|size:2|country',
-            'address.postal_code' => 'required|string'
+            "{$prefix}line1" => 'nullable|string',
+            "{$prefix}line2" => 'nullable|string',
+            "{$prefix}city" => 'nullable|string',
+            "{$prefix}province" => 'required|string|size:2|province',
+            "{$prefix}country" => 'required|string|size:2|country',
+            "{$prefix}postal_code" => 'nullable|string'
         ];
     }
 
     /**
+     * Get the store validation rules that apply to the request.
      * 
+     * @return array
      */
-    protected function addressUpdateRules()
+    protected function addressUpdateRules(string $prefix='')
     {
         return [
-            'address.line1' => 'string',
-            'address.line2' => 'nullable|string',
-            'address.city' => 'string',
-            'address.province' => 'string|size:2|province',
-            'address.country' => 'string|size:2|country',
-            'address.postal_code' => 'string'
+            "{$prefix}line1" => 'nullable|string',
+            "{$prefix}line2" => 'nullable|string',
+            "{$prefix}city" => 'nullable|string',
+            "{$prefix}province" => 'string|size:2|province',
+            "{$prefix}country" => 'string|size:2|country',
+            "{$prefix}postal_code" => 'nullable|string'
         ];
     }
 }
