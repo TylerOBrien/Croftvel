@@ -2,14 +2,14 @@
 
 namespace App\Traits\Models;
 
-trait HasActiveState
+trait HasEnabledState
 {
     /**
      * @return Model
      */
-    public function activate()
+    public function enable()
     {
-        $this->is_active = 1;
+        $this->is_enabled = 1;
         
         return $this->save();
     }
@@ -17,9 +17,9 @@ trait HasActiveState
     /**
      * @return Model
      */
-    public function deactivate()
+    public function disable()
     {
-        $this->is_active = 0;
+        $this->is_enabled = 0;
         
         return $this->save();
     }
