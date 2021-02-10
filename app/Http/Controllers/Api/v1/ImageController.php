@@ -23,10 +23,7 @@ class ImageController extends Controller
         $fields = $request->validated();
         $images = Image::select();
 
-        return $this->filtered($images, $fields)
-                    ->with(config('croft.relationships.image.index'))
-                    ->get()
-                    ->each->append(config('croft.attributes.image.index'));
+        return $this->filtered($images, $fields);
     }
 
     /**
@@ -39,8 +36,7 @@ class ImageController extends Controller
      */
     public function show(Image $image, ShowImage $request)
     {
-        return $image->load(config('croft.relationships.image.show'))
-                     ->append(config('croft.attributes.image.show'));
+        return $image;
     }
 
     /**
@@ -56,9 +52,7 @@ class ImageController extends Controller
         $file = $request->file('image');
         $image_id = Image::createFromFile($fields, $file)->id;
 
-        return Image::find($image_id)
-                    ->load(config('croft.relationships.image.store'))
-                    ->append(config('croft.attributes.image.store'));
+        return Image::find($image_id);
     }
 
     /**

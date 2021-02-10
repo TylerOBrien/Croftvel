@@ -23,10 +23,7 @@ class FileController extends Controller
         $fields = $request->validated();
         $files = File::select();
 
-        return $this->filtered($files, $fields)
-                    ->with(config('croft.relationships.file.index'))
-                    ->get()
-                    ->each->append(config('croft.attributes.file.index'));
+        return $this->filtered($files, $fields);
     }
 
     /**
@@ -39,8 +36,7 @@ class FileController extends Controller
      */
     public function show(File $file, ShowFile $request)
     {
-        return $file->load(config('croft.relationships.file.show'))
-                    ->append(config('croft.attributes.file.show'));
+        return $file;
     }
 
     /**
@@ -56,9 +52,7 @@ class FileController extends Controller
         $given = $request->file('file');
         $file_id = File::createFromFile($fields, $given)->id;
 
-        return File::find($file_id)
-                   ->load(config('croft.relationships.file.store'))
-                   ->append(config('croft.attributes.file.store'));
+        return File::find($file_id);
     }
 
     /**
@@ -74,9 +68,14 @@ class FileController extends Controller
         $fields = $request->validated();
         $given = $request->file('file');
 
-        return $file->updateFromFile($fields, $given)
-                    ->load(config('croft.relationships.file.show'))
-                    ->append(config('croft.attributes.file.show'));
+        if ($given) {
+            $file->updateFromFile($fields, $given);
+            unset($fields['file']);
+        } else {
+            $file->fill($fields)->save();
+        }
+
+        return $file;
     }
 
     /**

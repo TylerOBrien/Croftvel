@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Video\{ IndexVideo, ShowVideo, StoreVideo, UpdateVideo, DestroyVideo };
 use App\Models\Video;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class VideoController extends Controller
 {
+    use HasQueryFilter;
+    
     /**
      * Display a listing of the video.
      * 
@@ -17,7 +20,10 @@ class VideoController extends Controller
      */
     public function index(IndexVideo $request)
     {
-        return Video::all();
+        $fields = $request->validated();
+        $videos = Video::select();
+
+        return $this->filtered($videos, $fields);
     }
 
     /**
@@ -59,11 +65,16 @@ class VideoController extends Controller
     public function update(Video $video, UpdateVideo $request)
     {
         $fields = $request->validated();
+        $given = $request->file('video');
 
-        $video->fill($fields);
-        $video->save();
+        if ($given) {
+            $video->updateFromFile($fields, $given);
+            unset($fields['video']);
+        } else {
+            $video->fill($fields)->save();
+        }
 
-        return $video->only(array_keys($fields));
+        return $video;
     }
 
     /**
