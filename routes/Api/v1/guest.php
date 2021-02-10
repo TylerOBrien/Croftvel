@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\v1\{ TokenController, UserController };
+namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Support\Facades\Route;
 
