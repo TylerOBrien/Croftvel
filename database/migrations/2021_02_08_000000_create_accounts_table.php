@@ -16,7 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->enum('status', [ 'Ok', 'Suspended' ])->default('Ok');
-            $table->boolean('is_active')->default(1);
+            $table->boolean('is_enabled')->default(1);
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
         });
