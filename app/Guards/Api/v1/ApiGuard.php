@@ -10,14 +10,9 @@ use Laravel\Sanctum\{ HasApiTokens, Sanctum };
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Traits\Macroable;
 
 class ApiGuard implements Guard
 {
-    use Macroable {
-        __call as macroCall;
-    }
-
     /**
      * The currently authenticated user.
      *
