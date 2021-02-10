@@ -9,6 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasOwnership;
+
+    protected $hidden = [
+        'owner_id',
+        'owner_type'
+    ];
+
+    protected $fillable = [
+        'owner_id',
+        'owner_type',
+        'name'
+    ];
     
     /**
      * @return HasMany
