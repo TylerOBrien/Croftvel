@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\Token;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\Token;
+use App\Models\PersonalAccessToken;
 
 class UpdateToken extends ApiRequest
 {
@@ -16,7 +16,7 @@ class UpdateToken extends ApiRequest
     {
         $this->ability = 'update';
         $this->binding = 'token';
-        $this->model = Token::class;
+        $this->model = PersonalAccessToken::class;
     }
 
     /**

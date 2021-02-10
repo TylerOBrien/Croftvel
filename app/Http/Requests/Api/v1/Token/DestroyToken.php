@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\Token;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\Token;
+use App\Models\PersonalAccessToken;
 
 class DestroyToken extends ApiRequest
 {
@@ -16,6 +16,6 @@ class DestroyToken extends ApiRequest
     {
         $this->ability = 'destroy';
         $this->binding = 'token';
-        $this->model = Token::class;
+        $this->model = PersonalAccessToken::class;
     }
 }
