@@ -19,6 +19,8 @@ class CreateAccountsTable extends Migration
             $table->boolean('is_enabled')->default(1);
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
+            
+            $table->index('is_enabled');
         });
     }
 
