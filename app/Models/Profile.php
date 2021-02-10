@@ -15,7 +15,7 @@ class Profile extends Model
      */
     public function floats()
     {
-        return $this->hasMany(ProfileFloatEntry::class);
+        return $this->hasMany(ProfileFloat::class);
     }
 
     /**
@@ -23,7 +23,7 @@ class Profile extends Model
      */
     public function integers()
     {
-        return $this->hasMany(ProfileIntegerEntry::class);
+        return $this->hasMany(ProfileInteger::class);
     }
     
     /**
@@ -31,7 +31,7 @@ class Profile extends Model
      */
     public function strings()
     {
-        return $this->hasMany(ProfileStringEntry::class);
+        return $this->hasMany(ProfileString::class);
     }
     
     /**
@@ -39,6 +39,6 @@ class Profile extends Model
      */
     public function texts()
     {
-        return $this->hasMany(ProfileTextEntry::class);
+        return $this->hasMany(ProfileText::class);
     }
 }
