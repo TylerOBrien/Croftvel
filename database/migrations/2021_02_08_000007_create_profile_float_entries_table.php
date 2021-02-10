@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfileEntriesTable extends Migration
+class CreateProfileFloatEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,18 @@ class CreateProfileEntriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_entries', function (Blueprint $table) {
+        Schema::create('profile_float_entries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('profile_id');
-            $table->text('value');
+            $table->string('name');
+            $table->double('value');
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
+
+            $table->foreign('profile_id')
+                  ->references('id')->on('profiles')
+                  ->onDelete('cascade')
+                  ->onUpdate('restrict');
         });
     }
 
@@ -29,6 +35,6 @@ class CreateProfileEntriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_entries');
+        Schema::dropIfExists('profile_float_entries');
     }
 }
