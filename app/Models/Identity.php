@@ -43,7 +43,7 @@ class Identity extends Model
     }
 
     /**
-     * @return void
+     * @return bool
      */
     public function attemptVerify(array $fields)
     {
@@ -64,7 +64,8 @@ class Identity extends Model
         }
 
         $this->verified_at = Carbon::now();
-        $this->save();
+        
+        return $this->save();
     }
 
     /**
