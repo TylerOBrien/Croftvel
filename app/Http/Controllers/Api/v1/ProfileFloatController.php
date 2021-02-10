@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\ProfileFloat\{ IndexProfileFloat, ShowProfileFloat, StoreProfileFloat, UpdateProfileFloat, DestroyProfileFloat };
-use App\Models\ProfileFloat;
+use App\Models\{ Profile, ProfileFloat };
 
 class ProfileFloatController extends Controller
 {
@@ -36,16 +36,17 @@ class ProfileFloatController extends Controller
     /**
      * Store a newly created profile float in storage.
      * 
+     * @param  Profile  $profile
      * @param  StoreProfileFloat  $request
      *
      * @return Response
      */
-    public function store(StoreProfileFloat $request)
+    public function store(Profile $profile, StoreProfileFloat $request)
     {
-        $fields = $request->validated();
-        $profile_floatId = ProfileFloat::create($fields)->id;
+        $fields = array_merge($request->validated(), [ 'profile_id' => $profile->id, ]);
+        $profile_float_id = ProfileFloat::create($fields)->id;
 
-        return ProfileFloat::find($profile_floatId);
+        return ProfileFloat::find($profile_float_id);
     }
 
     /**
