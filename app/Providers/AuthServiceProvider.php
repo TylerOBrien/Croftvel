@@ -34,6 +34,8 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     }
 
     /**
+     * 
+     * 
      * @return void
      */
     public function register()
@@ -48,19 +50,15 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     }
 
     /**
-     * Register the guard.
+     * Create the guard,
      *
      * @param \Illuminate\Contracts\Auth\Factory  $auth
      * @param array $config
      * 
-     * @return RequestGuard
+     * @return ApiGuard
      */
     protected function createGuard($auth, $config)
     {
-        return new RequestGuard(
-            new ApiGuard($auth, config('sanctum.expiration'), $config['provider']),
-            $this->app['request'],
-            $auth->createUserProvider($config['provider'] ?? null)
-        );
+        return new ApiGuard($auth, config('sanctum.expiration'), $config['provider']);
     }
 }
