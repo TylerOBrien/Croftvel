@@ -39,7 +39,7 @@ class File extends Model
     }
 
     /**
-     * @return File
+     * @return bool
      */
     public function updateFromFile(array $attributes, $file)
     {

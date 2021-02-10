@@ -39,7 +39,7 @@ class Video extends Model
     }
 
     /**
-     * @return Video
+     * @return bool
      */
     public function updateFromFile(array $attributes, $file)
     {
