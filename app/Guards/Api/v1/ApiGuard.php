@@ -142,8 +142,7 @@ class ApiGuard implements Guard
      */
     public function validate(array $credentials = [])
     {
-        echo 'arse';
-        die();
+        //
     }
 
     public function setUser($user)
