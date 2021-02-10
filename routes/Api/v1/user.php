@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Support\Facades\Route;
 
-Route::apiResource('accounts', AccountController::class);
+Route::apiResource('accounts', AccountController::class)->except('store');
 Route::apiResource('addresses', AddressController::class);
 Route::apiResource('files', FileController::class);
 
@@ -12,6 +12,9 @@ Route::put('identities/{identity}/verification', [ IdentityController::class, 'v
 Route::apiResource('identities', IdentityController::class);
 
 Route::apiResource('images', ImageController::class);
+
+Route::apiResource('metas/{meta}/integers', MetaController::class);
+Route::apiResource('metas/{meta}/strings', MetaController::class);
 Route::apiResource('metas', MetaController::class);
 
 Route::apiResource('profiles/{profile}/floats', ProfileController::class);
