@@ -10,8 +10,9 @@ trait HasEnabledState
     public function enable()
     {
         $this->is_enabled = 1;
-        
-        return $this->save();
+        $this->save();
+
+        return $this;
     }
 
     /**
@@ -20,7 +21,8 @@ trait HasEnabledState
     public function disable()
     {
         $this->is_enabled = 0;
-        
-        return $this->save();
+        $this->save();
+
+        return $this;
     }
 }
