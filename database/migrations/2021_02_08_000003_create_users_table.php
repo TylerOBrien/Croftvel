@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
             $table->boolean('is_active')->default(1);
+            $table->datetime('last_active_at')->nullable();
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
