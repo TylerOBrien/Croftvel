@@ -76,12 +76,12 @@ class ImageController extends Controller
 
         if ($file) {
             $image->updateFromFile($fields, $file);
+            unset($fields['image']);
         } else {
             $image->fill($fields)->save();
         }
 
-        return $image->load(config('croft.relationships.image.show'))
-                     ->append(config('croft.attributes.image.show'));
+        return $image->only(array_keys($fields));
     }
 
     /**
