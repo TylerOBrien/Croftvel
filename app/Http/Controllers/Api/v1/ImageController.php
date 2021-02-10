@@ -74,8 +74,13 @@ class ImageController extends Controller
         $fields = $request->validated();
         $file = $request->file('image');
 
-        return $image->updateFromFile($fields, $file)
-                     ->load(config('croft.relationships.image.show'))
+        if ($file) {
+            $image->updateFromFile($fields, $file);
+        } else {
+            $image->fill($fields)->save();
+        }
+
+        return $image->load(config('croft.relationships.image.show'))
                      ->append(config('croft.attributes.image.show'));
     }
 
