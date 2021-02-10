@@ -27,14 +27,14 @@ class UpdateAddress extends ApiRequest
     public function rules()
     {
         return [
-            'line1' => 'string',
-            'line2' => 'string',
-            'city' => 'string',
+            'owner_id' => 'int',
+            'owner_type' => 'string',
+            'line1' => 'nullable|string',
+            'line2' => 'nullable|string',
+            'city' => 'nullable|string',
             'province' => 'province',
             'country' => 'country',
-            'postal_code' => 'string',
-            'owner_id' => 'int',
-            'owner_type' => 'string'
+            'postal_code' => 'nullable|string'
         ];
     }
 }

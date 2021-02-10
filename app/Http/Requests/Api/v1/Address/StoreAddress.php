@@ -26,14 +26,14 @@ class StoreAddress extends ApiRequest
     public function rules()
     {
         return [
-            'line1' => 'required|string',
+            'owner_id' => 'required|int',
+            'owner_type' => 'required|string',
+            'line1' => 'nullable|string',
             'line2' => 'nullable|string',
-            'city' => 'required|string',
+            'city' => 'nullable|string',
             'province' => 'required|province',
             'country' => 'required|country',
-            'postal_code' => 'required|string',
-            'owner_id' => 'required|int',
-            'owner_type' => 'required|string'
+            'postal_code' => 'nullable|string'
         ];
     }
 }
