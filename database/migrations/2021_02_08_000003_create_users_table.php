@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
+            $table->index('is_enabled');
+
             $table->foreign('account_id')
                   ->references('id')->on('accounts')
                   ->onDelete('set null')
