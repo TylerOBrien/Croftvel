@@ -46,7 +46,7 @@ class Image extends Model
     }
 
     /**
-     * @return Image
+     * @return bool
      */
     public function updateFromFile(array $attributes, $file)
     {
