@@ -9,9 +9,11 @@ trait HasFileUpload
     /**
      * @return Model
      */
-    static public function createFromFile($file, array $attributes, string $dest, string $disk=null)
+    static public function createFromFile($file, array $attributes, string $dest=null, string $disk=null)
     {
-        $disk = $disk ?? config('croft.uploads.disk');
+        $disk = $disk ?? config('croft.uploads.default.disk');
+        $dest = $dest ?? config('croft.uploads.default.dir');
+
         $filesize = filesize($file);
         $mimetype = $file->getMimeType();
         $filepath = Storage::disk($disk)->put($dest, $file);
@@ -22,8 +24,10 @@ trait HasFileUpload
     /**
      * @return Model
      */
-    public function updateFromFile($file, array $attributes, string $dest)
+    public function updateFromFile($file, array $attributes, string $dest=null)
     {
+        $dest = $dest ?? config('croft.uploads.default.dir');
+        
         $storage = Storage::disk($this->disk);
         $storage->delete($this->filepath);
 
