@@ -5,16 +5,16 @@ namespace App\Providers;
 use App\Guards\Api\v1\ApiGuard;
 
 use App\Models\Address;
-use App\Models\AddressPolicy;
+use App\Policies\Api\v1\AddressPolicy;
 
 use App\Models\Identity;
-use App\Models\IdentityPolicy;
+use App\Policies\Api\v1\IdentityPolicy;
 
 use App\Models\PersonalAccessToken;
-use App\Models\PersonalAccessTokenPolicy;
+use App\Policies\Api\v1\PersonalAccessTokenPolicy;
 
 use App\Models\User;
-use App\Models\UserPolicy;
+use App\Policies\Api\v1\UserPolicy;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as BaseAuthServiceProvider;
