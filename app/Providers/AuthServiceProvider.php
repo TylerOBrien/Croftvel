@@ -44,8 +44,6 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     }
 
     /**
-     * 
-     * 
      * @return void
      */
     public function register()
