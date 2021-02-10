@@ -42,7 +42,7 @@ trait HasFileUpload
     }
 
     /**
-     * @return Model
+     * @return bool
      */
     public function delete()
     {
