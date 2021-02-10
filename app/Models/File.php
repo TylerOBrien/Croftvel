@@ -35,7 +35,7 @@ class File extends Model
      */
     static public function createFromFile(array $attributes, $file)
     {
-        return self::createFromFileBase($file, $attributes, config('croft.uploads.dir.files'));
+        return self::createFromFileBase($file, $attributes, config('croft.uploads.files.dir'));
     }
 
     /**
@@ -43,6 +43,6 @@ class File extends Model
      */
     public function updateFromFile(array $attributes, $file)
     {
-        return parent::updateFromFile($file, $attributes, config('croft.uploads.dir.files'));
+        return parent::updateFromFile($file, $attributes, config('croft.uploads.files.dir'));
     }
 }
