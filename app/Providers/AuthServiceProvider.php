@@ -2,12 +2,20 @@
 
 namespace App\Providers;
 
-use App\Models\{ Identity, PersonalAccessToken, User };
-use App\Policies\Api\v1\{ IdentityPolicy, PersonalAccessTokenPolicy, UserPolicy };
-
 use App\Guards\Api\v1\ApiGuard;
 
-use Illuminate\Auth\RequestGuard;
+use App\Models\Address;
+use App\Models\AddressPolicy;
+
+use App\Models\Identity;
+use App\Models\IdentityPolicy;
+
+use App\Models\PersonalAccessToken;
+use App\Models\PersonalAccessTokenPolicy;
+
+use App\Models\User;
+use App\Models\UserPolicy;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as BaseAuthServiceProvider;
 
@@ -19,6 +27,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      * @var array
      */
     protected $policies = [
+        Address::class => AddressPolicy::class,
         Identity::class => IdentityPolicy::class,
         PersonalAccessToken::class => PersonalAccessTokenPolicy::class,
         User::class => UserPolicy::class
@@ -44,31 +53,5 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         Auth::extend('croft', function ($app, $name, array $config) {
             return new ApiGuard(config('sanctum.expiration'));
         });
-
-        /* Auth::resolved(function ($auth) {
-            $auth->extend('croft', function ($app, $name, array $config) use ($auth) {
-                return tap($this->createGuard($auth, $config), function ($guard) {
-                    $this->app->refresh('request', $guard, 'setRequest');
-                });
-            });
-        }); */
-    }
-
-    /**
-     * Create the guard,
-     *
-     * @param \Illuminate\Contracts\Auth\Factory  $auth
-     * @param array $config
-     * 
-     * @return ApiGuard
-     */
-    protected function createGuard($auth, array $config)
-    {
-        /* return new RequestGuard(
-            new ApiGuard($auth, config('sanctum.expiration'), $config['provider']),
-            $this->app['request'],
-            $auth->createUserProvider($config['provider'] ?? null)
-        ); */
-        return new ApiGuard(config('sanctum.expiration'));
     }
 }
