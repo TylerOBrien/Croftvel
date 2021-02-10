@@ -43,7 +43,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return bool
+     * @return int
      */
     public function getIdentitiesVerifiedAttribute()
     {
