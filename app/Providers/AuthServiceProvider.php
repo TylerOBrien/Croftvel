@@ -7,6 +7,7 @@ use App\Policies\Api\v1\{ IdentityPolicy, UserPolicy };
 
 use App\Guards\Api\v1\ApiGuard;
 
+use Illuminate\Auth\RequestGuard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as BaseAuthServiceProvider;
 
@@ -37,8 +38,29 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     public function register()
     {
-        Auth::extend('croft', function ($app, $name, array $config) {
-            return new ApiGuard(Auth::createUserProvider($config['provider']), $app->make('request'));
+        Auth::resolved(function ($auth) {
+            $auth->extend('croft', function ($app, $name, array $config) use ($auth) {
+                return tap($this->createGuard($auth, $config), function ($guard) {
+                    $this->app->refresh('request', $guard, 'setRequest');
+                });
+            });
         });
+    }
+
+    /**
+     * Register the guard.
+     *
+     * @param \Illuminate\Contracts\Auth\Factory  $auth
+     * @param array $config
+     * 
+     * @return RequestGuard
+     */
+    protected function createGuard($auth, $config)
+    {
+        return new RequestGuard(
+            new ApiGuard($auth, config('sanctum.expiration'), $config['provider']),
+            $this->app['request'],
+            $auth->createUserProvider($config['provider'] ?? null)
+        );
     }
 }
