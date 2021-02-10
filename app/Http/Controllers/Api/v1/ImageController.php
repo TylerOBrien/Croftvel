@@ -75,7 +75,7 @@ class ImageController extends Controller
             $image->fill($fields)->save();
         }
 
-        return $image->only(array_keys($fields));
+        return $image;
     }
 
     /**
