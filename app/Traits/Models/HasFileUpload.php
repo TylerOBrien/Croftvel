@@ -35,8 +35,10 @@ trait HasFileUpload
         $mimetype = $file->getMimeType();
         $filepath = $storage->put($dest, $file);
 
-        return $this->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')))
-                    ->save();
+        $this->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')))
+             ->save();
+        
+        return $this;
     }
 
     /**
