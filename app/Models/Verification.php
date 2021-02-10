@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Verification extends Model
 {
+    protected $hidden = [
+        'code'
+    ];
+
     protected $fillable = [
         'identity_id',
         'code'

@@ -12,7 +12,7 @@ class MetaString extends Model
     ];
 
     /**
-     * 
+     * @return BelongsTo
      */
     public function meta()
     {
