@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\v1\Token;
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Token;
 
-class DestroyToken extends ApiRequest
+class ShowToken extends ApiRequest
 {
     /**
      * Instantiate the request.
@@ -14,7 +14,7 @@ class DestroyToken extends ApiRequest
      */
     public function __construct()
     {
-        $this->ability = 'destroy';
+        $this->ability = 'show';
         $this->binding = 'token';
         $this->model = Token::class;
     }

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\v1\Token;
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Token;
 
-class StoreToken extends ApiRequest
+class UpdateToken extends ApiRequest
 {
     /**
      * Instantiate the request.
@@ -14,6 +14,8 @@ class StoreToken extends ApiRequest
      */
     public function __construct()
     {
+        $this->ability = 'update';
+        $this->binding = 'token';
         $this->model = Token::class;
     }
 
@@ -25,10 +27,10 @@ class StoreToken extends ApiRequest
     public function rules()
     {
         return [
-            'identity.type' => 'required|in:email,mobile,oauth',
-            'identity.value' => 'required|string',
-            'secret.type' => 'required_with:secret.value|in:password,totp',
-            'secret.value' => 'required_with:secret.type|string'
+            'tokenable_id' => 'required_with:tokenable_type|int',
+            'tokenable_type' => 'required_with:tokenable_id|string',
+            'name' => 'string',
+            'abilities' => 'array'
         ];
     }
 }
