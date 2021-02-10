@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasActiveState, HasFullName };
+use App\Traits\Models\{ HasEnabledState, HasFullName };
 
 use Laravel\Sanctum\HasApiTokens;
 
@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends BaseUser
 {
-    use Notifiable, HasApiTokens, HasActiveState, HasFullName;
+    use Notifiable, HasApiTokens, HasEnabledState, HasFullName;
 
     protected $fillable = [
         'account_id',
