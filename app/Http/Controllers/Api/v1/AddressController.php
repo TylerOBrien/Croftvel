@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\Address;
-use App\Traits\Controllers\Api\v1\HasQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Address\{ IndexAddress, ShowAddress, StoreAddress, UpdateAddress, DestroyAddress };
+use App\Models\Address;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class AddressController extends Controller
 {
@@ -23,10 +23,7 @@ class AddressController extends Controller
         $fields = $request->validated();
         $addresses = Address::select();
 
-        return $this->filtered($addresses, $fields)
-                    ->with(config('croft.relationships.address.index'))
-                    ->get()
-                    ->each->append(config('croft.attributes.address.index'));
+        return $this->filtered($addresses, $fields);
     }
 
     /**
@@ -39,8 +36,7 @@ class AddressController extends Controller
      */
     public function show(Address $address, ShowAddress $request)
     {
-        return $address->load(config('croft.relationships.address.show'))
-                       ->append(config('croft.attributes.address.show'));
+        return $address;
     }
 
     /**
@@ -55,9 +51,7 @@ class AddressController extends Controller
         $fields = $request->validated();
         $address_id = Address::create($fields)->id;
 
-        return Address::find($address_id)
-                      ->load(config('croft.relationships.address.store'))
-                      ->append(config('croft.attributes.address.store'));
+        return Address::find($address_id);
     }
 
     /**
