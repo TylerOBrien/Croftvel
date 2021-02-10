@@ -43,18 +43,18 @@ class User extends BaseUser
     }
 
     /**
-     * @return int
-     */
-    public function getIdentitiesVerifiedAttribute()
-    {
-        return $this->identities()->whereNotNull('verified_at')->count();
-    }
-
-    /**
      * @return bool
      */
     public function getIdentifiedAttribute()
     {
         return (bool) $this->identities_verified;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentitiesVerifiedAttribute()
+    {
+        return $this->identities()->whereNotNull('verified_at')->count();
     }
 }
