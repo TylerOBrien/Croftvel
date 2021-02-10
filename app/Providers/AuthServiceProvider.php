@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\{ Identity, User };
-use App\Policies\Api\v1\{ IdentityPolicy, UserPolicy };
+use App\Models\{ Identity, PersonalAccessToken, User };
+use App\Policies\Api\v1\{ IdentityPolicy, PersonalAccessTokenPolicy, UserPolicy };
 
 use App\Guards\Api\v1\ApiGuard;
 
@@ -20,6 +20,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     protected $policies = [
         Identity::class => IdentityPolicy::class,
+        PersonalAccessToken::class => PersonalAccessTokenPolicy::class,
         User::class => UserPolicy::class
     ];
 
