@@ -136,7 +136,7 @@ class ApiGuard implements Guard
     {
         $identity = Identity::where($credentials['identity'])->limit(1)->first();
 
-        if (!$identity) {
+        if (is_null($identity)) {
             throw new InvalidCredentials;
         }
 
