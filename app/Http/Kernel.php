@@ -50,8 +50,7 @@ class Kernel extends HttpKernel
         ],
 
         'croft.user' => [
-            'api',
-            'auth:sanctum'
+            'api'
         ],
     ];
 
