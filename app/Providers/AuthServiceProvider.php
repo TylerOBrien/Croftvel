@@ -13,6 +13,9 @@ use App\Policies\Api\v1\IdentityPolicy;
 use App\Models\PersonalAccessToken as Token;
 use App\Policies\Api\v1\PersonalAccessTokenPolicy as TokenPolicy;
 
+use App\Models\Profile;
+use App\Policies\Api\v1\ProfilePolicy;
+
 use App\Models\User;
 use App\Policies\Api\v1\UserPolicy;
 
@@ -29,6 +32,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     protected $policies = [
         Address::class => AddressPolicy::class,
         Identity::class => IdentityPolicy::class,
+        Profile::class => ProfilePolicy::class,
         Token::class => TokenPolicy::class,
         User::class => UserPolicy::class
     ];
