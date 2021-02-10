@@ -2,7 +2,7 @@
 
 namespace App\Providers\Api\v1;
 
-use App\Rules\{ Country, Province, MatchesCurrent };
+use App\Rules\{ Country, Province, MatchesCurrent, Morphable };
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +36,10 @@ class ValidationServiceProvider extends ServiceProvider
 
         Validator::extendImplicit('matches_current', function($attribute, $value, $parameter, $validator) {
             return (new MatchesCurrent)->passes($attribute, $value);
+        });
+
+        Validator::extendImplicit('morphable', function($attribute, $value, $parameter, $validator) {
+            return (new Morphable)->passes($attribute, $value);
         });
     }
 }
