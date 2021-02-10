@@ -11,7 +11,7 @@ class IdentityPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the identity can view any identitys.
+     * Determine whether the user can view any identities.
      *
      * @param \App\Models\User $user
      * 
@@ -23,7 +23,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can view the identity.
+     * Determine whether the user can view the identity.
      *
      * @param \App\Models\User $user
      * @param \App\Models\Identity $model
@@ -36,7 +36,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can create identitys.
+     * Determine whether the user can create identitys.
      *
      * @param \App\Models\User $user
      * 
@@ -48,7 +48,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can update the identity.
+     * Determine whether the user can update the identity.
      *
      * @param \App\Models\User $user
      * @param \App\Models\Identity $model
@@ -61,7 +61,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can verify the identity.
+     * Determine whether the user can verify the identity.
      *
      * @param \App\Models\User $user
      * @param \App\Models\Identity $model
@@ -74,7 +74,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can delete the identity.
+     * Determine whether the user can delete the identity.
      *
      * @param \App\Models\User $user
      * @param \App\Models\Identity $model
@@ -87,7 +87,7 @@ class IdentityPolicy
     }
 
     /**
-     * Determine whether the identity can restore the identity.
+     * Determine whether the user can restore the identity.
      *
      * @param \App\Models\User $user
      * @param \App\Models\Identity $model
