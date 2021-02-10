@@ -32,8 +32,8 @@ class UpdateProfile extends ApiRequest
         [ $owner_id, $owner_type ] = $this->owner();
 
         return [
-            'owner_id' => 'sometimes|required_with:owner_type|morphable',
-            'owner_type' => 'sometimes|required_with:owner_id|morphable',
+            'owner_id' => 'required_with:owner_type|morphable',
+            'owner_type' => 'required_with:owner_id|morphable',
             'name' => "string|unique:profiles,name,$owner_id,owner_id,$owner_type,owner_type"
         ];
     }
