@@ -42,7 +42,7 @@ class Image extends Model
         $attributes['width'] = $width;
         $attributes['height'] = $height;
 
-        return self::createFromFileBase($file, $attributes, config('croft.uploads.dir.images'));
+        return self::createFromFileBase($file, $attributes, config('croft.uploads.images.dir'));
     }
 
     /**
@@ -55,6 +55,6 @@ class Image extends Model
         $attributes['width'] = $width;
         $attributes['height'] = $height;
 
-        return parent::updateFromFile($file, $attributes, config('croft.uploads.dir.images'));
+        return parent::updateFromFile($file, $attributes, config('croft.uploads.images.dir'));
     }
 }
