@@ -8,7 +8,6 @@ use App\Models\Identity;
 use Illuminate\Auth\GuardHelpers;
 use Illuminate\Contracts\Auth\{ Guard, UserProvider };
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class ApiGuard implements Guard
@@ -18,6 +17,7 @@ class ApiGuard implements Guard
     protected $provider;
     protected $request;
     protected $identity;
+    protected $secret;
 
     /**
      * Create a new API guard.
@@ -90,11 +90,13 @@ class ApiGuard implements Guard
      */
     public function attempt(array $credentials = [])
     {
-        [ $this->identity, $secret ] = $this->parseCredentials($credentials);
+        [ $this->identity, $this->secret ] = $this->parseCredentials($credentials);
 
-        $method = 'bySecret' . Str::ucfirst($secret->type);
-
-        call_user_func([ $this, $method ], $credentials['secret']['value'], $secret->value);
+        if (is_null($this->secret)) {
+            //
+        } else {
+            call_user_func([ $this, "bySecret{$this->secret->type}" ], $credentials);
+        }
 
         return $this->identity;
     }
@@ -112,9 +114,9 @@ class ApiGuard implements Guard
     /**
      * @return void
      */
-    protected function bySecretPassword(string $password, string $hash)
+    protected function bySecretPassword(array $credentials)
     {
-        if (!Hash::check($password, $hash)) {
+        if (!Hash::check($credentials['secret']['value'], $this->secret->value)) {
             throw new InvalidCredentials;
         }
     }
@@ -122,7 +124,7 @@ class ApiGuard implements Guard
     /**
      * @return void
      */
-    protected function bySecretTotp(string $password, string $hash)
+    protected function bySecretTotp(array $credentials)
     {
         //
     }
@@ -138,11 +140,8 @@ class ApiGuard implements Guard
             throw new InvalidCredentials;
         }
 
-        $secret = $identity->user->secrets()->where('type', $credentials['secret']['type'])->limit(1)->first();
-
-        if (!$secret) {
-            throw new InvalidCredentials;
-        }
+        $provider = $identity->user->secrets();
+        $secret = $provider->where('type', $credentials['secret']['type'])->limit(1)->first();
 
         return [ $identity, $secret ];
     }
