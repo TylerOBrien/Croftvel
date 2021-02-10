@@ -11,7 +11,12 @@ use Illuminate\Contracts\Validation\Rule;
 class Country implements Rule
 {
     /**
+     * Determine if the validation rule passes.
+     *
+     * @param  string  $attribute
+     * @param  mixed   $value
      * 
+     * @return bool
      */
     public function passes($attribute, $value)
     {
@@ -36,7 +41,9 @@ class Country implements Rule
     }
 
     /**
-     * 
+     * Get the validation error message.
+     *
+     * @return string
      */
     public function message()
     {
