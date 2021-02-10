@@ -34,7 +34,7 @@ class UpdateProfile extends ApiRequest
         return [
             'owner_id' => 'required_with:owner_type|morphable',
             'owner_type' => 'required_with:owner_id|morphable',
-            'name' => "string|unique:profiles,name,$owner_id,owner_id,$owner_type,owner_type"
+            'name' => "string|unique:profiles,name,$owner_id,owner_id,owner_type,$owner_type"
         ];
     }
 }
