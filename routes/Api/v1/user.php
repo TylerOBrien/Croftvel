@@ -13,14 +13,14 @@ Route::apiResource('identities', IdentityController::class);
 
 Route::apiResource('images', ImageController::class);
 
-Route::apiResource('metas/{meta}/integers', MetaController::class);
-Route::apiResource('metas/{meta}/strings', MetaController::class);
+Route::apiResource('metas/{meta}/integers', MetaIntegerController::class);
+Route::apiResource('metas/{meta}/strings', MetaStringController::class);
 Route::apiResource('metas', MetaController::class);
 
-Route::apiResource('profiles/{profile}/floats', ProfileController::class);
-Route::apiResource('profiles/{profile}/integers', ProfileController::class);
-Route::apiResource('profiles/{profile}/strings', ProfileController::class);
-Route::apiResource('profiles/{profile}/texts', ProfileController::class);
+Route::apiResource('profiles/{profile}/floats', ProfileFloatController::class);
+Route::apiResource('profiles/{profile}/integers', ProfileIntegerController::class);
+Route::apiResource('profiles/{profile}/strings', ProfileStringController::class);
+Route::apiResource('profiles/{profile}/texts', ProfileTextController::class);
 Route::apiResource('profiles', ProfileController::class);
 
 Route::apiResource('secrets', SecretController::class);
