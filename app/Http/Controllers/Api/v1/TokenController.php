@@ -19,11 +19,11 @@ class TokenController extends Controller
     public function store(StoreToken $request)
     {
         $fields = $request->validated();
-        $identity = auth()->attempt($fields);
-        $pat = $identity->user->createToken(config('croft.token.name'));
+        $user = auth()->attempt($fields);
+        $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
 
-        return compact('identity', 'token');
+        return compact('user', 'token');
     }
 
     /**
