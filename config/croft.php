@@ -49,6 +49,11 @@ return [
         'videos' => [
             'disk' => 'public',
             'dir' => 'videos'
+        ],
+
+        'default' => [
+            'disk' => 'public',
+            'dir' => 'upload'
         ]
     ],
 
