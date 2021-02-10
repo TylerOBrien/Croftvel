@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index(IndexUser $request)
     {
         $fields = $request->validated();
-        $users = User::where('is_active', 1);
+        $users = User::where('is_enabled', 1);
 
         return $this->filtered($users, $fields)
                     ->with(config('croft.relationships.user.index'))
