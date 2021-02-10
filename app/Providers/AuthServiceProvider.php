@@ -40,13 +40,17 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     public function register()
     {
-        Auth::resolved(function ($auth) {
+        Auth::extend('croft', function ($app, $name, array $config) {
+            return new ApiGuard(config('sanctum.expiration'));
+        });
+
+        /* Auth::resolved(function ($auth) {
             $auth->extend('croft', function ($app, $name, array $config) use ($auth) {
                 return tap($this->createGuard($auth, $config), function ($guard) {
                     $this->app->refresh('request', $guard, 'setRequest');
                 });
             });
-        });
+        }); */
     }
 
     /**
@@ -57,8 +61,13 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      * 
      * @return ApiGuard
      */
-    protected function createGuard($auth, $config)
+    protected function createGuard($auth, array $config)
     {
-        return new ApiGuard($auth, config('sanctum.expiration'), $config['provider']);
+        /* return new RequestGuard(
+            new ApiGuard($auth, config('sanctum.expiration'), $config['provider']),
+            $this->app['request'],
+            $auth->createUserProvider($config['provider'] ?? null)
+        ); */
+        return new ApiGuard(config('sanctum.expiration'));
     }
 }

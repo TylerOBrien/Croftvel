@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
         ],
 
         'croft.user' => [
+            'bearer.token',
             'api'
         ],
     ];
@@ -71,5 +72,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        'bearer.token' => \App\Http\Middleware\BearerToken::class
     ];
 }

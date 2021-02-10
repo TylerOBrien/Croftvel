@@ -7,17 +7,16 @@ use App\Models\{ Identity, Secret };
 
 use Laravel\Sanctum\{ HasApiTokens, Sanctum };
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Traits\Macroable;
 
-class ApiGuard
+class ApiGuard implements Guard
 {
-    /**
-     * The authentication factory implementation.
-     *
-     * @var \Illuminate\Contracts\Auth\Factory
-     */
-    protected $auth;
+    use Macroable {
+        __call as macroCall;
+    }
 
     /**
      * The currently authenticated user.
@@ -25,13 +24,6 @@ class ApiGuard
      * @var \App\Models\User
      */
     protected $user;
-
-    /**
-     * The secret used to authenticate
-     *
-     * @var \App\Models\Secret|null
-     */
-    protected $secret;
 
     /**
      * The number of minutes tokens should be allowed to remain valid.
@@ -43,14 +35,12 @@ class ApiGuard
     /**
      * Create a new API guard.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
      * @param  int  $expiration
      * 
      * @return void
      */
-    public function __construct($auth, int $expiration, string $provider)
+    public function __construct(int $expiration)
     {
-        $this->auth = $auth;
         $this->expiration = $expiration;
     }
 
@@ -61,7 +51,7 @@ class ApiGuard
      * 
      * @return mixed
      */
-    public function __invoke(Request $request)
+    public function parseToken(Request $request)
     {
         $bearer_token = $request->bearerToken();
 
@@ -142,6 +132,23 @@ class ApiGuard
         }
 
         return $this->user = $identity->user;
+    }
+
+    /**
+     * Validate a user's credentials.
+     *
+     * @param  array  $credentials
+     * @return bool
+     */
+    public function validate(array $credentials = [])
+    {
+        echo 'arse';
+        die();
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
     /**
