@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVerificationsTable extends Migration
+class CreateProfileIntegerEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateVerificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('verifications', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('identity_id')->nullable();
-            $table->unsignedBigInteger('code');
+        Schema::create('profile_integer_entries', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('profile_id');
+            $table->string('name');
+            $table->unsignedBigInteger('value');
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
-            $table->unique('code');
-
-            $table->foreign('identity_id')
-                  ->references('id')->on('identities')
-                  ->onDelete('set null')
+            $table->foreign('profile_id')
+                  ->references('id')->on('profiles')
+                  ->onDelete('cascade')
                   ->onUpdate('restrict');
         });
     }
@@ -36,6 +35,6 @@ class CreateVerificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verifications');
+        Schema::dropIfExists('profile_integer_entries');
     }
 }
