@@ -43,9 +43,8 @@ class DummyController extends Controller
     public function store(StoreDummyModel $request)
     {
         $fields = $request->validated();
-        $DummyBindingId = DummyModel::create($fields)->id;
 
-        return DummyModel::find($DummyBindingId);
+        return DummyModel::create($fields)->fresh();
     }
 
     /**
