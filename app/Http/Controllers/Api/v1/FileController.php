@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\File;
-use App\Traits\Controllers\Api\v1\HasQueryFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\File\{ IndexFile, ShowFile, StoreFile, UpdateFile, DestroyFile };
+use App\Models\File;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class FileController extends Controller
 {
@@ -14,7 +14,7 @@ class FileController extends Controller
     /**
      * Display a listing of the file.
      * 
-     * @param IndexFile $request
+     * @param  IndexFile  $request
      *
      * @return Response
      */
@@ -29,8 +29,8 @@ class FileController extends Controller
     /**
      * Display the specified file.
      * 
-     * @param File $file
-     * @param ShowFile $request
+     * @param  File  $file
+     * @param  ShowFile  $request
      *
      * @return Response
      */
@@ -42,7 +42,7 @@ class FileController extends Controller
     /**
      * Store a newly created file in storage.
      * 
-     * @param StoreFile $request
+     * @param  StoreFile  $request
      *
      * @return Response
      */
@@ -58,8 +58,8 @@ class FileController extends Controller
     /**
      * Update the specified file in storage.
      * 
-     * @param File $file
-     * @param UpdateFile $request
+     * @param  File  $file
+     * @param  UpdateFile  $request
      * 
      * @return Response
      */
@@ -81,8 +81,8 @@ class FileController extends Controller
     /**
      * Remove the specified file from storage.
      * 
-     * @param File $file
-     * @param DestroyFile $request
+     * @param  File  $file
+     * @param  DestroyFile  $request
      *
      * @return Response
      */
