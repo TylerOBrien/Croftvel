@@ -8,6 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends BaseUser
 {
@@ -54,19 +55,20 @@ class User extends BaseUser
     /**
      * @return bool
      */
-    public function hasAbility(string $name, string $model)
+    public function hasAbility(string $ability, string $model)
     {
-        foreach ($this->privileges as $privilege) {
-            foreach ($privilege->abilities as $ability) {
-                if (($ability->name === '*' || $ability->name === $name) &&
-                    ($ability->model === '*' || $ability->model === $model))
-                {
-                    return true;
-                }
-            }
-        }
+        $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model'));
+        $query = DB::raw('
+            SELECT COUNT(abilities.id) as total
+            FROM abilities
+            JOIN privileges ON privileges.id = abilities.privilege_id
+            JOIN privilege_user ON privileges.id = abilities.privilege_id
+            WHERE privilege_user.user_id = :user_id AND
+                (abilities.name = "*" OR abilities.name = :ability) AND
+                (abilities.model = "*" OR abilities.model = :model)
+            LIMIT 1;');
 
-        return false;
+        return (bool) DB::select($query, $bindings)[0]->total ?? false;
     }
 
     /**
