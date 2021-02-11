@@ -11,6 +11,7 @@ class Identity extends Model
 {
     protected $fillable = [
         'user_id',
+        'name',
         'type',
         'value'
     ];
@@ -60,7 +61,7 @@ class Identity extends Model
             throw new MissingVerificationCode;
         }
 
-        if ($this->verification->code !== intval($fields['code'])) {
+        if ($this->verification->code !== hash('sha256', $fields['code'])) {
             throw new InvalidVerificationCode;
         }
 
