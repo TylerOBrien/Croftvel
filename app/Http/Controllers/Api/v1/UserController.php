@@ -24,10 +24,7 @@ class UserController extends Controller
         $fields = $request->validated();
         $users = User::where('is_enabled', 1);
 
-        return $this->filtered($users, $fields)
-                    ->with(config('croft.relationships.user.index'))
-                    ->get()
-                    ->each->append(config('croft.attributes.user.index'));
+        return $this->filtered($users, $fields);
     }
 
     /**
@@ -40,8 +37,7 @@ class UserController extends Controller
      */
     public function show(User $user, ShowUser $request)
     {
-        return $user->load(config('croft.relationships.user.show'))
-                    ->append(config('croft.attributes.user.show'));
+        return $user;
     }
 
     /**
