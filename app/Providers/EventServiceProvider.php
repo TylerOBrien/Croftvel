@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Events\Api\v1\Recovery\RecoveryCreated;
 
-use App\Listeners\Api\v1\Identity\SendVerificationNotification;
+use App\Listeners\Api\v1\Identity\SendVerifyIdentityNotification;
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
@@ -19,7 +19,7 @@ class EventServiceProvider extends BaseEventServiceProvider
      */
     protected $listen = [
         IdentityCreated::class => [
-            SendVerificationNotification::class
+            SendVerifyIdentityNotification::class
         ],
         
         RecoveryCreated::class => [

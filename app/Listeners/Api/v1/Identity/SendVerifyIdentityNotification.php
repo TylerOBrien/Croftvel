@@ -6,7 +6,7 @@ use App\Events\Api\v1\Identity\IdentityCreated;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendVerificationNotification implements ShouldQueue
+class SendVerifyIdentityNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
