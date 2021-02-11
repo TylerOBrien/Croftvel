@@ -14,7 +14,7 @@ class VerificationController extends Controller
     /**
      * Display a listing of the verification.
      * 
-     * @param IndexVerification $request
+     * @param  IndexVerification  $request
      *
      * @return Response
      */
@@ -29,8 +29,8 @@ class VerificationController extends Controller
     /**
      * Display the specified verification.
      * 
-     * @param Verification $verification
-     * @param ShowVerification $request
+     * @param  Verification  $verification
+     * @param  ShowVerification  $request
      *
      * @return Response
      */
@@ -42,7 +42,7 @@ class VerificationController extends Controller
     /**
      * Store a newly created verification in storage.
      * 
-     * @param StoreVerification $request
+     * @param  StoreVerification  $request
      *
      * @return Response
      */
@@ -59,8 +59,8 @@ class VerificationController extends Controller
     /**
      * Remove the specified verification from storage.
      * 
-     * @param Verification $verification
-     * @param DestroyVerification $request
+     * @param  Verification  $verification
+     * @param  DestroyVerification  $request
      *
      * @return Response
      */
