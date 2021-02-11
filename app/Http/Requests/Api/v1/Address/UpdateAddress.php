@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\v1\Address;
 
-use App\Models\Address;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\Address;
 use App\Traits\Requests\Api\v1\HasOwnership;
 
 class UpdateAddress extends ApiRequest

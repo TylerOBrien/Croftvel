@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\v1\Meta;
 
-use App\Models\Meta;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\Meta;
 use App\Traits\Requests\Api\v1\HasOwnership;
 
 class StoreMeta extends ApiRequest
@@ -26,11 +26,10 @@ class StoreMeta extends ApiRequest
      */
     public function rules()
     {
-        return array_merge(
-            [
-                'name' => 'required|string'
-            ],
-            $this->ownershipStoreRules()
-        );
+        return [
+            'owner_id' => 'required|morphable',
+            'owner_type' => 'required|morphable',
+            'name' => 'required|string'
+        ];
     }
 }

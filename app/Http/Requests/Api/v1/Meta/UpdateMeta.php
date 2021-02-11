@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Api\v1\Meta;
 
-use App\Models\Meta;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\Meta;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class UpdateMeta extends ApiRequest
 {
+    use HasOwnership;
+
     /**
      * Instantiate the request.
      */
@@ -24,11 +27,10 @@ class UpdateMeta extends ApiRequest
      */
     public function rules()
     {
-        return array_merge(
-            [
-                'name' => 'string'
-            ],
-            $this->ownershipUpdateRules()
-        );
+        return [
+            'owner_id' => 'required_with:owner_type|morphable',
+            'owner_type' => 'required_with:owner_id|morphable',
+            'name' => 'required|string'
+        ];
     }
 }
