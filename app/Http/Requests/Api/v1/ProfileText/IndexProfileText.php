@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileText;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileText;
+use App\Models\Profile;
 
 class IndexProfileText extends ApiRequest
 {
@@ -15,6 +15,6 @@ class IndexProfileText extends ApiRequest
     public function __construct()
     {
         $this->ability = 'index';
-        $this->model = ProfileText::class;
+        $this->model = Profile::class;
     }
 }

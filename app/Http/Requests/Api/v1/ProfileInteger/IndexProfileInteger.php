@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileInteger;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileInteger;
+use App\Models\Profile;
 
 class IndexProfileInteger extends ApiRequest
 {
@@ -15,6 +15,6 @@ class IndexProfileInteger extends ApiRequest
     public function __construct()
     {
         $this->ability = 'index';
-        $this->model = ProfileInteger::class;
+        $this->model = Profile::class;
     }
 }

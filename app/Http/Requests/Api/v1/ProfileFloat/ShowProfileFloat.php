@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileFloat;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileFloat;
+use App\Models\Profile;
 
 class ShowProfileFloat extends ApiRequest
 {
@@ -15,7 +15,7 @@ class ShowProfileFloat extends ApiRequest
     public function __construct()
     {
         $this->ability = 'show';
-        $this->binding = 'profile_float';
-        $this->model = ProfileFloat::class;
+        $this->binding = 'profile';
+        $this->model = Profile::class;
     }
 }

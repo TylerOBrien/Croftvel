@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileString;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileString;
+use App\Models\Profile;
 
 class ShowProfileString extends ApiRequest
 {
@@ -15,7 +15,7 @@ class ShowProfileString extends ApiRequest
     public function __construct()
     {
         $this->ability = 'show';
-        $this->binding = 'profile_string';
-        $this->model = ProfileString::class;
+        $this->binding = 'profile';
+        $this->model = Profile::class;
     }
 }
