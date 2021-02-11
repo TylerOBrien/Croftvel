@@ -15,7 +15,9 @@ class EventServiceProvider extends BaseEventServiceProvider
      * @var array
      */
     protected $listen = [
-        CreateIdentity::class => SendVerificationNotification::class
+        CreateIdentity::class => [
+            SendVerificationNotification::class
+        ]
     ];
 
     /**
