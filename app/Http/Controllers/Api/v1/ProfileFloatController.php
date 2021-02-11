@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\ProfileFloat\{ IndexProfileFloat, ShowProfileFloat, StoreProfileFloat, UpdateProfileFloat, DestroyProfileFloat };
 use App\Models\{ Profile, ProfileFloat };
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class ProfileFloatController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the profile float.
      * 
@@ -18,7 +21,10 @@ class ProfileFloatController extends Controller
      */
     public function index(Profile $profile, IndexProfileFloat $request)
     {
-        return ProfileFloat::all();
+        $fields = $request->validated();
+        $floats = ProfileFloat::select();
+
+        return $this->filtered($floats, $fields);
     }
 
     /**
