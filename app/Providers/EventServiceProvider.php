@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\Api\v1\Identity\CreateIdentity;
+use App\Listeners\Api\v1\Identity\SendVerificationNotification;
+
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
 
 class EventServiceProvider extends BaseEventServiceProvider
@@ -12,7 +15,7 @@ class EventServiceProvider extends BaseEventServiceProvider
      * @var array
      */
     protected $listen = [
-        //
+        CreateIdentity::class => SendVerificationNotification::class
     ];
 
     /**
