@@ -14,8 +14,8 @@ class MetaStringController extends Controller
     /**
      * Display a listing of the meta strings.
      * 
-     * @param Meta $meta
-     * @param IndexMetaString $request
+     * @param  Meta  $meta
+     * @param  IndexMetaString  $request
      *
      * @return Response
      */
@@ -24,15 +24,15 @@ class MetaStringController extends Controller
         $fields = $request->validated();
         $strings = MetaString::select();
 
-        return $this->filtered($strings, $fields)->get();
+        return $this->filtered($strings, $fields);
     }
 
     /**
      * Display the specified meta string.
      * 
-     * @param Meta $meta
-     * @param MetaString $string
-     * @param ShowMetaString $request
+     * @param  Meta  $meta
+     * @param  MetaString  $string
+     * @param  ShowMetaString  $request
      *
      * @return Response
      */
@@ -44,25 +44,26 @@ class MetaStringController extends Controller
     /**
      * Store a newly created meta string in storage.
      * 
-     * @param Meta $meta
-     * @param StoreMetaString $request
+     * @param  Meta  $meta
+     * @param  StoreMetaString  $request
      *
      * @return Response
      */
     public function store(Meta $meta, StoreMetaString $request)
     {
-        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
-        $string_id = MetaString::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'meta_id' => $meta->id
+        ]);
 
-        return MetaString::find($string_id);
+        return MetaString::create($fields)->fresh();
     }
 
     /**
      * Update the specified meta string in storage.
      * 
-     * @param Meta $meta
-     * @param MetaString $string
-     * @param UpdateMetaString $request
+     * @param  Meta  $meta
+     * @param  MetaString  $string
+     * @param  UpdateMetaString  $request
      *
      * @return Response
      */
@@ -79,9 +80,9 @@ class MetaStringController extends Controller
     /**
      * Remove the specified meta string from storage.
      * 
-     * @param Meta $meta
-     * @param MetaString $string
-     * @param DestroyMetaString $request
+     * @param  Meta  $meta
+     * @param  MetaString  $string
+     * @param  DestroyMetaString  $request
      * 
      * @return Response
      */

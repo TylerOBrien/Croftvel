@@ -14,8 +14,8 @@ class MetaIntegerController extends Controller
     /**
      * Display a listing of the meta integers.
      * 
-     * @param Meta $meta
-     * @param IndexMetaInteger $request
+     * @param  Meta  $meta
+     * @param  IndexMetaInteger  $request
      *
      * @return Response
      */
@@ -24,15 +24,15 @@ class MetaIntegerController extends Controller
         $fields = $request->validated();
         $integers = MetaInteger::select();
 
-        return $this->filtered($integers, $fields)->get();
+        return $this->filtered($integers, $fields);
     }
 
     /**
      * Display the specified meta integer.
      * 
-     * @param Meta $meta
-     * @param MetaInteger $integer
-     * @param ShowMetaInteger $request
+     * @param  Meta  $meta
+     * @param  MetaInteger  $integer
+     * @param  ShowMetaInteger  $request
      *
      * @return Response
      */
@@ -44,25 +44,26 @@ class MetaIntegerController extends Controller
     /**
      * Store a newly created meta integer in storage.
      * 
-     * @param Meta $meta
-     * @param StoreMetaInteger $request
+     * @param  Meta  $meta
+     * @param  StoreMetaInteger  $request
      *
      * @return Response
      */
     public function store(Meta $meta, StoreMetaInteger $request)
     {
-        $fields = array_merge($request->validated(), [ 'meta_id' => $meta->id ]);
-        $integer_id = MetaInteger::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'meta_id' => $meta->id
+        ]);
 
-        return MetaInteger::find($integer_id);
+        return MetaInteger::create($fields)->fresh();
     }
 
     /**
      * Update the specified meta integer in storage.
      * 
-     * @param Meta $meta
-     * @param MetaInteger $integer
-     * @param UpdateMetaInteger $request
+     * @param  Meta  $meta
+     * @param  MetaInteger  $integer
+     * @param  UpdateMetaInteger  $request
      *
      * @return Response
      */
@@ -79,9 +80,9 @@ class MetaIntegerController extends Controller
     /**
      * Remove the specified meta integer from storage.
      * 
-     * @param Meta $meta
-     * @param MetaInteger $integer
-     * @param DestroyMetaInteger $request
+     * @param  Meta  $meta
+     * @param  MetaInteger  $integer
+     * @param  DestroyMetaInteger  $request
      * 
      * @return Response
      */
