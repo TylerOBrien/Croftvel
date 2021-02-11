@@ -27,6 +27,7 @@ class StoreIdentity extends ApiRequest
     {
         return [
             'user_id' => 'sometimes|exists:users,id',
+            'name' => 'required|string',
             'type' => 'required|in:email,mobile,oauth',
             'value' => 'required|unique:identities,value|string'
         ];
