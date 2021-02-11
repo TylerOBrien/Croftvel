@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\DummyModel\{ IndexDummyModel, ShowDummyModel, StoreDummyModel, UpdateDummyModel, DestroyDummyModel };
 use App\Models\DummyModel;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class DummyController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the DummyPluralBinding.
      * 
@@ -17,7 +20,10 @@ class DummyController extends Controller
      */
     public function index(IndexDummyModel $request)
     {
-        return DummyModel::all();
+        $fields = $request->validated();
+        $DummyPluralBinding = DummyModel::select();
+
+        return $this->filtered($DummyPluralBinding, $fields);
     }
 
     /**
