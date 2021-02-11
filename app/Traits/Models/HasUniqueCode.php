@@ -12,6 +12,9 @@ trait HasUniqueCode
     protected $temporary_plaintext_code;
 
     /**
+     * Retrieve the current plaintext code. After retrieval the code will be
+     * deleted and cannot be retrieved again.
+     * 
      * @return string|null
      */
     public function consumePlaintextCode()
@@ -22,11 +25,15 @@ trait HasUniqueCode
     }
 
     /**
+     * Hash the plaintext code and assign it.
+     * 
+     * @param  string  $plaintext_code
+     * 
      * @return void
      */
-    public function setCodeAttribute(string $code)
+    public function setCodeAttribute(string $plaintext_code)
     {
-        $this->temporary_plaintext_code = $code;
-        $this->attributes['code'] = hash('sha256', $code);
+        $this->temporary_plaintext_code = $plaintext_code;
+        $this->attributes['code'] = hash('sha256', $plaintext_code);
     }
 }
