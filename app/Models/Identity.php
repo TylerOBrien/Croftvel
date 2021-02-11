@@ -84,6 +84,16 @@ class Identity extends Model
     }
 
     /**
+     * @return void
+     */
+    public function setVerifiedAtAttribute($value)
+    {
+        if (is_null($this->verified_at)) {
+            $this->attributes['verified_at'] = $value;
+        }
+    }
+
+    /**
      * Register the updating callback to detect when this identity is verified.
      * 
      * @return void
