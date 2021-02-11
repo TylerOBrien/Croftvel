@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Requests\Api\v1\ProfileFloat;
+namespace App\Http\Requests\Api\v1\Profile;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Profile;
 
-class IndexProfileFloat extends ApiRequest
+class StoreProfileEntries extends ApiRequest
 {
     /**
-     * Create a new request.
+     * Instantiate the request.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->ability = 'index';
+        $this->ability = 'store';
         $this->model = Profile::class;
     }
 
@@ -26,8 +26,9 @@ class IndexProfileFloat extends ApiRequest
     public function rules()
     {
         return [
-            'filter' => 'array',
-            'filter.*.is' => 'string'
+            'entries.*.type' => 'required|in:float,integer,string,text',
+            'entries.*.name' => 'required|string',
+            'entries.*.value' => 'required'
         ];
     }
 }
