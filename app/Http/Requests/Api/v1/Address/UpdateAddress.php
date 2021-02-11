@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\Address;
 
 use App\Models\Address;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class UpdateAddress extends ApiRequest
 {
+    use HasOwnership;
+
     /**
      * Instantiate the request.
      * 
@@ -27,8 +30,8 @@ class UpdateAddress extends ApiRequest
     public function rules()
     {
         return [
-            'owner_id' => 'int',
-            'owner_type' => 'string',
+            'owner_id' => 'required_with:owner_type|morphable',
+            'owner_type' => 'required_with:owner_id|morphable',
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',

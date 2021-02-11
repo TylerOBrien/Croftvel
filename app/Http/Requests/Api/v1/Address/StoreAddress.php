@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\Address;
 
 use App\Models\Address;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class StoreAddress extends ApiRequest
 {
+    use HasOwnership;
+    
     /**
      * Instantiate the request.
      * 
@@ -26,8 +29,8 @@ class StoreAddress extends ApiRequest
     public function rules()
     {
         return [
-            'owner_id' => 'required|int',
-            'owner_type' => 'required|string',
+            'owner_id' => 'required|morphable',
+            'owner_type' => 'required|morphable',
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',
