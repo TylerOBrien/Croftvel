@@ -11,9 +11,9 @@ trait HasUniqueMaker
      * @param  int  $digits
      * @param  string  $hash_algo
      * 
-     * @return int|string
+     * @return int
      */
-    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null)
+    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null):int
     {
         $min = intval(str_repeat('1', $digits));
         $max = intval(str_repeat('9', $digits));
