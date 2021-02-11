@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileFloat;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileFloat;
+use App\Models\Profile;
 
 class IndexProfileFloat extends ApiRequest
 {
@@ -15,6 +15,6 @@ class IndexProfileFloat extends ApiRequest
     public function __construct()
     {
         $this->ability = 'index';
-        $this->model = ProfileFloat::class;
+        $this->model = Profile::class;
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileText;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileText;
+use App\Models\Profile;
 
 class StoreProfileText extends ApiRequest
 {
@@ -15,7 +15,7 @@ class StoreProfileText extends ApiRequest
     public function __construct()
     {
         $this->ability = 'store';
-        $this->model = ProfileText::class;
+        $this->model = Profile::class;
     }
 
     /**

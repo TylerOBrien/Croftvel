@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileInteger;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileInteger;
+use App\Models\Profile;
 
 class ShowProfileInteger extends ApiRequest
 {
@@ -15,7 +15,7 @@ class ShowProfileInteger extends ApiRequest
     public function __construct()
     {
         $this->ability = 'show';
-        $this->binding = 'profile_integer';
-        $this->model = ProfileInteger::class;
+        $this->binding = 'profile';
+        $this->model = Profile::class;
     }
 }

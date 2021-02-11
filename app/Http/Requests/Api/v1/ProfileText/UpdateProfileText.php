@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileText;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileText;
+use App\Models\Profile;
 
 class UpdateProfileText extends ApiRequest
 {
@@ -15,8 +15,8 @@ class UpdateProfileText extends ApiRequest
     public function __construct()
     {
         $this->ability = 'update';
-        $this->binding = 'profile_text';
-        $this->model = ProfileText::class;
+        $this->binding = 'profile';
+        $this->model = Profile::class;
     }
 
     /**
