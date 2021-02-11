@@ -26,7 +26,9 @@ class StoreProfileInteger extends ApiRequest
     public function rules()
     {
         return [
-            //
+            'profile_id' => 'required|int|exists:profiles,id',
+            'name' => 'required|string',
+            'value' => 'required|int'
         ];
     }
 }

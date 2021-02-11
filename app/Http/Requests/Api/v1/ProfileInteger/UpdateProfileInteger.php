@@ -27,7 +27,9 @@ class UpdateProfileInteger extends ApiRequest
     public function rules()
     {
         return [
-            //
+            'profile_id' => 'int|exists:profiles,id',
+            'name' => 'string',
+            'value' => 'int'
         ];
     }
 }
