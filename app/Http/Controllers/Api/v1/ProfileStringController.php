@@ -11,11 +11,12 @@ class ProfileStringController extends Controller
     /**
      * Display a listing of the profile string.
      * 
+     * @param  Profile  $profile
      * @param  IndexProfileString  $request
      *
      * @return Response
      */
-    public function index(IndexProfileString $request)
+    public function index(Profile $profile, IndexProfileString $request)
     {
         return ProfileString::all();
     }
@@ -23,12 +24,13 @@ class ProfileStringController extends Controller
     /**
      * Display the specified profile string.
      * 
+     * @param  Profile  $profile
      * @param  ProfileString  $profile_string
      * @param  ShowProfileString  $request
      *
      * @return Response
      */
-    public function show(ProfileString $profile_string, ShowProfileString $request)
+    public function show(Profile $profile, ProfileString $profile_string, ShowProfileString $request)
     {
         return $profile_string;
     }
@@ -53,12 +55,13 @@ class ProfileStringController extends Controller
     /**
      * Update the specified profile string in storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileString  $profile_string
      * @param  UpdateProfileString  $request
      * 
      * @return Response
      */
-    public function update(ProfileString $profile_string, UpdateProfileString $request)
+    public function update(Profile $profile, ProfileString $profile_string, UpdateProfileString $request)
     {
         $fields = $request->validated();
 
@@ -71,12 +74,13 @@ class ProfileStringController extends Controller
     /**
      * Remove the specified profile string from storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileString  $profile_string
      * @param  DestroyProfileString  $request
      *
      * @return Response
      */
-    public function destroy(ProfileString $profile_string, DestroyProfileString $request)
+    public function destroy(Profile $profile, ProfileString $profile_string, DestroyProfileString $request)
     {
         $profile_string->delete();
         return response()->json(null, 204);

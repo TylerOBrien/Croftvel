@@ -11,11 +11,12 @@ class ProfileFloatController extends Controller
     /**
      * Display a listing of the profile float.
      * 
+     * @param  Profile  $profile
      * @param  IndexProfileFloat  $request
      *
      * @return Response
      */
-    public function index(IndexProfileFloat $request)
+    public function index(Profile $profile, IndexProfileFloat $request)
     {
         return ProfileFloat::all();
     }
@@ -23,12 +24,13 @@ class ProfileFloatController extends Controller
     /**
      * Display the specified profile float.
      * 
+     * @param  Profile  $profile
      * @param  ProfileFloat  $profile_float
      * @param  ShowProfileFloat  $request
      *
      * @return Response
      */
-    public function show(ProfileFloat $profile_float, ShowProfileFloat $request)
+    public function show(Profile $profile, ProfileFloat $profile_float, ShowProfileFloat $request)
     {
         return $profile_float;
     }
@@ -72,12 +74,13 @@ class ProfileFloatController extends Controller
     /**
      * Remove the specified profile float from storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileFloat  $profile_float
      * @param  DestroyProfileFloat  $request
      *
      * @return Response
      */
-    public function destroy(ProfileFloat $profile_float, DestroyProfileFloat $request)
+    public function destroy(Profile $profile, ProfileFloat $profile_float, DestroyProfileFloat $request)
     {
         $profile_float->delete();
         return response()->json(null, 204);
