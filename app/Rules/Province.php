@@ -2,7 +2,10 @@
 
 namespace App\Rules;
 
+use Exception;
+
 use L91\ISO_3166_2\Subdivision;
+use League\ISO3166\ISO3166;
 
 use Illuminate\Contracts\Validation\Rule;
 
@@ -37,14 +40,21 @@ class Province implements Rule
      */
     public function passes($attribute, $value)
     {
-        $value = strtoupper($value);
-        $data = Subdivision::getSubdivisions($this->country_code);
+        try {
+            $countries = new ISO3166;
+            $alpha2 = $countries->alpha3($this->country_code)['alpha2'];
+        } catch (Exception $error) {
+            return false;
+        }
+
+        $iso31662 = [ strtoupper($alpha2), strtoupper($value) ];
+        $data = Subdivision::getSubdivisions($alpha2);
 
         if (!$subdivisions = get_object_vars($data)) {
             return false;
         }
 
-        return in_array("{$this->country_code}-{$value}", array_keys($subdivisions));
+        return in_array(implode('-', $iso31662), array_keys($subdivisions));
     }
 
     /**
