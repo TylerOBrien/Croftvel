@@ -7,7 +7,7 @@ use App\Models\Image;
 trait HasImages
 {
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function images()
     {

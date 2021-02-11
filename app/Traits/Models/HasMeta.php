@@ -7,7 +7,7 @@ use App\Models\Meta;
 trait HasMeta
 {
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function meta()
     {

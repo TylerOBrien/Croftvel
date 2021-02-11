@@ -7,7 +7,7 @@ use App\Models\File;
 trait HasFiles
 {
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function files()
     {

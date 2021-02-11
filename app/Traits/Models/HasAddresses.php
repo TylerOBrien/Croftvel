@@ -7,7 +7,7 @@ use App\Models\Address;
 trait HasAddress
 {
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function addresses()
     {
