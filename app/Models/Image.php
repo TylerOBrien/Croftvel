@@ -14,6 +14,10 @@ class Image extends Model
         createFromFile as protected createFromFileBase;
     }
 
+    protected $appends = [
+        'url'
+    ];
+
     protected $hidden = [
         'disk',
         'filepath',
