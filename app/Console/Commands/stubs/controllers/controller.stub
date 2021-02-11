@@ -9,7 +9,7 @@ use App\Models\DummyModel;
 class DummyController extends Controller
 {
     /**
-     * Display a listing of the DummyBinding.
+     * Display a listing of the DummyPluralBinding.
      * 
      * @param  IndexDummyModel  $request
      *
