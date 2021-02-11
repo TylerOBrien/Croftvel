@@ -5,18 +5,15 @@ namespace App\Providers;
 use App\Guards\Api\v1\ApiGuard;
 
 use App\Models\Address;
-use App\Policies\Api\v1\AddressPolicy;
-
 use App\Models\Identity;
-use App\Policies\Api\v1\IdentityPolicy;
-
-use App\Models\PersonalAccessToken as Token;
-use App\Policies\Api\v1\PersonalAccessTokenPolicy as TokenPolicy;
-
+use App\Models\PersonalAccessToken;
 use App\Models\Profile;
-use App\Policies\Api\v1\ProfilePolicy;
-
 use App\Models\User;
+
+use App\Policies\Api\v1\AddressPolicy;
+use App\Policies\Api\v1\IdentityPolicy;
+use App\Policies\Api\v1\PersonalAccessTokenPolicy;
+use App\Policies\Api\v1\ProfilePolicy;
 use App\Policies\Api\v1\UserPolicy;
 
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +30,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         Address::class => AddressPolicy::class,
         Identity::class => IdentityPolicy::class,
         Profile::class => ProfilePolicy::class,
-        Token::class => TokenPolicy::class,
+        PersonalAccessToken::class => PersonalAccessTokenPolicy::class,
         User::class => UserPolicy::class
     ];
 
