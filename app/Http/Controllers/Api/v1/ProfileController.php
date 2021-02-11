@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\v1\Profile\{ IndexProfile, ShowProfile, StoreProfile, UpdateProfile, DestroyProfile };
+use App\Http\Requests\Api\v1\Profile\{ IndexProfile, ShowProfile, StoreProfile, StoreProfileEntries, UpdateProfile, DestroyProfile };
 use App\Models\Profile;
+
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -31,6 +33,43 @@ class ProfileController extends Controller
     public function show(Profile $profile, ShowProfile $request)
     {
         return $profile;
+    }
+
+    /**
+     * Display a listing of the specified profile's entries.
+     * 
+     * @param Profile $profile
+     * @param ShowProfile $request
+     *
+     * @return Response
+     */
+    public function indexEntries(Profile $profile, ShowProfile $request)
+    {
+        return $profile->entries;
+    }
+
+    /**
+     * Store new entries for the profile in storage.
+     * 
+     * @param Profile $profile
+     * @param ShowProfile $request
+     *
+     * @return Response
+     */
+    public function storeEntries(Profile $profile, StoreProfileEntries $request)
+    {
+        $created = collect();
+
+        foreach ($request->validated()['entries'] as $entry) {
+            $model = 'App\Models\Profile' . Str::ucfirst($entry['type']);
+            $attributes = array_merge($entry, [
+                'profile_id' => $profile->id
+            ]);
+
+            $created->push($model::create($attributes));
+        }
+
+        return $created;
     }
 
     /**
