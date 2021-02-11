@@ -52,12 +52,13 @@ class ProfileFloatController extends Controller
     /**
      * Update the specified profile float in storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileFloat  $profile_float
      * @param  UpdateProfileFloat  $request
      * 
      * @return Response
      */
-    public function update(ProfileFloat $profile_float, UpdateProfileFloat $request)
+    public function update(Profile $profile, ProfileFloat $profile_float, UpdateProfileFloat $request)
     {
         $fields = $request->validated();
 
