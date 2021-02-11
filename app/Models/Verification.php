@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Models\{ HasUniqueCode, HasUniqueMaker };
+
 use Illuminate\Database\Eloquent\Model;
 
 class Verification extends Model
 {
+    use HasUniqueCode, HasUniqueMaker;
+
     protected $hidden = [
         'code'
     ];
