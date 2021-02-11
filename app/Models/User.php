@@ -77,6 +77,19 @@ class User extends BaseUser
     }
 
     /**
+     * @return string|null
+     */
+    public function getEmailAttribute()
+    {
+        $predicate = [
+            'type' => 'email',
+            'name' => 'primary'
+        ];
+
+        return $this->identities()->where($predicate)->first()->value ?? null;
+    }
+
+    /**
      * @return bool
      */
     public function getIdentifiedAttribute()
