@@ -13,7 +13,7 @@ trait HasUniqueMaker
      * 
      * @return int|string
      */
-    static public function makeUniqueInt(string $column, int $digits=12, string $hash_algo=null)
+    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null)
     {
         $model = self::class;
         $min = intval(str_repeat('1', $digits));
@@ -34,7 +34,7 @@ trait HasUniqueMaker
      * 
      * @return array|string
      */
-    static public function makeUniqueString(string $column, int $length=12, string $hash_algo=null):string
+    static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null):string
     {
         $model = self::class;
 
