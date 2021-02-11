@@ -7,7 +7,7 @@ use App\Models\Video;
 trait HasVideos
 {
     /**
-     * @return HasMany
+     * @return MorphMany
      */
     public function videos()
     {
