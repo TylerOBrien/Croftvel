@@ -25,14 +25,14 @@ class ProfileTextController extends Controller
      * Display the specified profile text.
      * 
      * @param  Profile  $profile
-     * @param  ProfileText  $profile_text
+     * @param  ProfileText  $text
      * @param  ShowProfileText  $request
      *
      * @return Response
      */
-    public function show(Profile $profile, ProfileText $profile_text, ShowProfileText $request)
+    public function show(Profile $profile, ProfileText $text, ShowProfileText $request)
     {
-        return $profile_text;
+        return $text;
     }
 
     /**
@@ -56,33 +56,33 @@ class ProfileTextController extends Controller
      * Update the specified profile text in storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileText  $profile_text
+     * @param  ProfileText  $text
      * @param  UpdateProfileText  $request
      * 
      * @return Response
      */
-    public function update(Profile $profile, ProfileText $profile_text, UpdateProfileText $request)
+    public function update(Profile $profile, ProfileText $text, UpdateProfileText $request)
     {
         $fields = $request->validated();
 
-        $profile_text->fill($fields);
-        $profile_text->save();
+        $text->fill($fields);
+        $text->save();
 
-        return $profile_text->only(array_keys($fields));
+        return $text->only(array_keys($fields));
     }
 
     /**
      * Remove the specified profile text from storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileText  $profile_text
+     * @param  ProfileText  $text
      * @param  DestroyProfileText  $request
      *
      * @return Response
      */
-    public function destroy(Profile $profile, ProfileText $profile_text, DestroyProfileText $request)
+    public function destroy(Profile $profile, ProfileText $text, DestroyProfileText $request)
     {
-        $profile_text->delete();
+        $text->delete();
         return response()->json(null, 204);
     }
 }

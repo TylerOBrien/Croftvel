@@ -25,14 +25,14 @@ class ProfileFloatController extends Controller
      * Display the specified profile float.
      * 
      * @param  Profile  $profile
-     * @param  ProfileFloat  $profile_float
+     * @param  ProfileFloat  $float
      * @param  ShowProfileFloat  $request
      *
      * @return Response
      */
-    public function show(Profile $profile, ProfileFloat $profile_float, ShowProfileFloat $request)
+    public function show(Profile $profile, ProfileFloat $float, ShowProfileFloat $request)
     {
-        return $profile_float;
+        return $float;
     }
 
     /**
@@ -56,33 +56,33 @@ class ProfileFloatController extends Controller
      * Update the specified profile float in storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileFloat  $profile_float
+     * @param  ProfileFloat  $float
      * @param  UpdateProfileFloat  $request
      * 
      * @return Response
      */
-    public function update(Profile $profile, ProfileFloat $profile_float, UpdateProfileFloat $request)
+    public function update(Profile $profile, ProfileFloat $float, UpdateProfileFloat $request)
     {
         $fields = $request->validated();
 
-        $profile_float->fill($fields);
-        $profile_float->save();
+        $float->fill($fields);
+        $float->save();
 
-        return $profile_float->only(array_keys($fields));
+        return $float->only(array_keys($fields));
     }
 
     /**
      * Remove the specified profile float from storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileFloat  $profile_float
+     * @param  ProfileFloat  $float
      * @param  DestroyProfileFloat  $request
      *
      * @return Response
      */
-    public function destroy(Profile $profile, ProfileFloat $profile_float, DestroyProfileFloat $request)
+    public function destroy(Profile $profile, ProfileFloat $float, DestroyProfileFloat $request)
     {
-        $profile_float->delete();
+        $float->delete();
         return response()->json(null, 204);
     }
 }

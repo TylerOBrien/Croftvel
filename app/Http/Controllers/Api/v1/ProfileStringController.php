@@ -25,14 +25,14 @@ class ProfileStringController extends Controller
      * Display the specified profile string.
      * 
      * @param  Profile  $profile
-     * @param  ProfileString  $profile_string
+     * @param  ProfileString  $string
      * @param  ShowProfileString  $request
      *
      * @return Response
      */
-    public function show(Profile $profile, ProfileString $profile_string, ShowProfileString $request)
+    public function show(Profile $profile, ProfileString $string, ShowProfileString $request)
     {
-        return $profile_string;
+        return $string;
     }
 
     /**
@@ -56,33 +56,33 @@ class ProfileStringController extends Controller
      * Update the specified profile string in storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileString  $profile_string
+     * @param  ProfileString  $string
      * @param  UpdateProfileString  $request
      * 
      * @return Response
      */
-    public function update(Profile $profile, ProfileString $profile_string, UpdateProfileString $request)
+    public function update(Profile $profile, ProfileString $string, UpdateProfileString $request)
     {
         $fields = $request->validated();
 
-        $profile_string->fill($fields);
-        $profile_string->save();
+        $string->fill($fields);
+        $string->save();
 
-        return $profile_string->only(array_keys($fields));
+        return $string->only(array_keys($fields));
     }
 
     /**
      * Remove the specified profile string from storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileString  $profile_string
+     * @param  ProfileString  $string
      * @param  DestroyProfileString  $request
      *
      * @return Response
      */
-    public function destroy(Profile $profile, ProfileString $profile_string, DestroyProfileString $request)
+    public function destroy(Profile $profile, ProfileString $string, DestroyProfileString $request)
     {
-        $profile_string->delete();
+        $string->delete();
         return response()->json(null, 204);
     }
 }

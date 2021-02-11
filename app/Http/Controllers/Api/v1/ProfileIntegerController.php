@@ -25,14 +25,14 @@ class ProfileIntegerController extends Controller
      * Display the specified profile integer.
      * 
      * @param  Profile  $profile
-     * @param  ProfileInteger  $profile_integer
+     * @param  ProfileInteger  $integer
      * @param  ShowProfileInteger  $request
      *
      * @return Response
      */
-    public function show(Profile $profile, ProfileInteger $profile_integer, ShowProfileInteger $request)
+    public function show(Profile $profile, ProfileInteger $integer, ShowProfileInteger $request)
     {
-        return $profile_integer;
+        return $integer;
     }
 
     /**
@@ -56,33 +56,33 @@ class ProfileIntegerController extends Controller
      * Update the specified profile integer in storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileInteger  $profile_integer
+     * @param  ProfileInteger  $integer
      * @param  UpdateProfileInteger  $request
      * 
      * @return Response
      */
-    public function update(Profile $profile, ProfileInteger $profile_integer, UpdateProfileInteger $request)
+    public function update(Profile $profile, ProfileInteger $integer, UpdateProfileInteger $request)
     {
         $fields = $request->validated();
 
-        $profile_integer->fill($fields);
-        $profile_integer->save();
+        $integer->fill($fields);
+        $integer->save();
 
-        return $profile_integer->only(array_keys($fields));
+        return $integer->only(array_keys($fields));
     }
 
     /**
      * Remove the specified profile integer from storage.
      * 
      * @param  Profile  $profile
-     * @param  ProfileInteger  $profile_integer
+     * @param  ProfileInteger  $integer
      * @param  DestroyProfileInteger  $request
      *
      * @return Response
      */
-    public function destroy(Profile $profile, ProfileInteger $profile_integer, DestroyProfileInteger $request)
+    public function destroy(Profile $profile, ProfileInteger $integer, DestroyProfileInteger $request)
     {
-        $profile_integer->delete();
+        $integer->delete();
         return response()->json(null, 204);
     }
 }
