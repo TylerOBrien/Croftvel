@@ -52,4 +52,18 @@ class Profile extends Model
     {
         return $this->hasMany(ProfileText::class);
     }
+
+    /**
+     * @return Collection
+     */
+    public function getEntriesAttribute()
+    {
+        return collect(
+            array_merge_recursive(
+                $this->floats->keyBy('name')->toArray(),
+                $this->integers->keyBy('name')->toArray(),
+                $this->strings->keyBy('name')->toArray(),
+                $this->texts->keyBy('name')->toArray())
+        );
+    }
 }
