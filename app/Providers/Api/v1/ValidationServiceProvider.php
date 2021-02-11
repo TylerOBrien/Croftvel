@@ -31,7 +31,7 @@ class ValidationServiceProvider extends ServiceProvider
         });
 
         Validator::extendImplicit('province', function($attribute, $value, $parameter, $validator) {
-            return (new Province)->passes($attribute, $value);
+            return (new Province($parameter))->passes($attribute, $value);
         });
 
         Validator::extendImplicit('matches_current', function($attribute, $value, $parameter, $validator) {
