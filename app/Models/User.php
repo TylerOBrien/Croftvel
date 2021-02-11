@@ -13,8 +13,6 @@ class User extends BaseUser
 {
     use Notifiable, HasApiTokens, HasEnabledState, HasFullName;
 
-    protected $abilitiesChecked = [];
-
     protected $fillable = [
         'account_id',
         'is_active'
@@ -58,12 +56,6 @@ class User extends BaseUser
      */
     public function hasAbility(string $name, string $model)
     {
-        $key = "$name.$model";
-
-        if (isset($this->abilitiesChecked[$key])) {
-            return $this->abilitiesChecked[$key];
-        }
-
         foreach ($this->privileges as $privilege) {
             foreach ($privilege->abilities as $ability) {
                 if (($ability->name === '*' || $ability->name === $name) &&
@@ -74,7 +66,7 @@ class User extends BaseUser
             }
         }
 
-        return $this->abilitiesChecked[$key] = false;
+        return false;
     }
 
     /**
