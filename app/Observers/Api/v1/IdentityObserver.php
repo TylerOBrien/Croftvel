@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Api\v1;
 
 use App\Events\Api\v1\Identity\IdentityVerified;
 use App\Models\Identity;

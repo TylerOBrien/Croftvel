@@ -12,7 +12,7 @@ use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
 
 use App\Models\Identity;
-use App\Observers\IdentityObserver;
+use App\Observers\Api\v1\IdentityObserver;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
 
