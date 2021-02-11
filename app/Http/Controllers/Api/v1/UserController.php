@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\{ Account, User };
-use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser };
 use App\Http\Resources\Api\v1\TokenResource;
+use App\Models\{ Account, User };
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class UserController extends Controller
 {
