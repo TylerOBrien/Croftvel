@@ -18,13 +18,13 @@ class Province implements Rule
     /**
      * Create a new rule.
      *
-     * @param  string  $country_code
+     * @param  array  $parameters
      * 
      * @return bool
      */
-    public function __construct(string $country_code)
+    public function __construct(array $parameters)
     {
-        $this->country_code = strtoupper($country_code);
+        $this->country_code = strtoupper($parameters[0] ?? '');
     }
 
     /**
