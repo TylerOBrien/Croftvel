@@ -9,10 +9,11 @@ trait HasUniqueMaker
     /**
      * @param  string  $column
      * @param  int  $digits
+     * @param  string  $hash_algo
      * 
-     * @return int
+     * @return int|string
      */
-    static public function makeUniqueInt(string $column, int $digits=12):int
+    static public function makeUniqueInt(string $column, int $digits=12, string $hash_algo=null)
     {
         $model = self::class;
         $min = intval(str_repeat('1', $digits));
@@ -20,7 +21,8 @@ trait HasUniqueMaker
 
         do {
             $id = random_int($min, $max);
-        } while ($model::where([ $column => $id ])->count());
+            $maybe_hashed = $hash_algo ? hash($hash_algo, $id) : $id;
+        } while ($model::where([ $column => $maybe_hashed ])->count());
 
         return $id;
     }
