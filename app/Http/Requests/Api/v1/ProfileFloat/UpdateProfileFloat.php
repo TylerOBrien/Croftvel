@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\ProfileFloat;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\ProfileFloat;
+use App\Models\Profile;
 
 class UpdateProfileFloat extends ApiRequest
 {
@@ -15,8 +15,8 @@ class UpdateProfileFloat extends ApiRequest
     public function __construct()
     {
         $this->ability = 'update';
-        $this->binding = 'profile_float';
-        $this->model = ProfileFloat::class;
+        $this->binding = 'profile';
+        $this->model = Profile::class;
     }
 
     /**
@@ -27,7 +27,9 @@ class UpdateProfileFloat extends ApiRequest
     public function rules()
     {
         return [
-            //
+            'profile_id' => 'int|exists:profiles,id',
+            'name' => 'string',
+            'value' => 'numeric'
         ];
     }
 }
