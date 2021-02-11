@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index(IndexUser $request)
     {
         $fields = $request->validated();
-        $users = User::where('is_enabled', 1);
+        $users = User::select();
 
         return $this->filtered($users, $fields);
     }
