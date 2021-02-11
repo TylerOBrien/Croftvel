@@ -7,7 +7,6 @@ use App\Models\User;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class VerifyRecoveryNotification extends Notification
@@ -34,10 +33,11 @@ class VerifyRecoveryNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  \App\Models\User  $notifiable
+     * 
      * @return array
      */
-    public function via($notifiable)
+    public function via(User $notifiable)
     {
         return ['mail'];
     }
@@ -61,10 +61,11 @@ class VerifyRecoveryNotification extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  \App\Models\User  $notifiable
+     * 
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray(User $notifiable)
     {
         return [
             //
