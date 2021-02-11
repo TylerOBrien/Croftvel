@@ -49,9 +49,8 @@ class IdentityController extends Controller
     public function store(StoreIdentity $request)
     {
         $fields = $request->validated();
-        $identity_id = Identity::create($fields)->id;
 
-        return Identity::find($identity_id);
+        return Identity::create($fields);
     }
 
     /**
