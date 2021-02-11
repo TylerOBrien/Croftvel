@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\Image\ImageCreated;
 use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,10 @@ class Image extends Model
         'height',
         'owner_id',
         'owner_type'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => ImageCreated::class
     ];
 
     /**
