@@ -8,7 +8,7 @@ use Illuminate\Broadcasting\{ InteractsWithSockets, PrivateChannel };
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedRecovery
+class RecoveryCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
