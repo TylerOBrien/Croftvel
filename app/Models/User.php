@@ -13,6 +13,8 @@ class User extends BaseUser
 {
     use Notifiable, HasApiTokens, HasEnabledState, HasFullName;
 
+    protected $abilitiesChecked = [];
+
     protected $fillable = [
         'account_id',
         'is_active'
@@ -49,6 +51,30 @@ class User extends BaseUser
     public function secrets()
     {
         return $this->hasMany(Secret::class);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAbility(string $name, string $model)
+    {
+        $key = "$name.$model";
+
+        if (isset($this->abilitiesChecked[$key])) {
+            return $this->abilitiesChecked[$key];
+        }
+
+        foreach ($this->privileges as $privilege) {
+            foreach ($privilege->abilities as $ability) {
+                if (($ability->name === '*' || $ability->name === $name) &&
+                    ($ability->model === '*' || $ability->model === $model))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return $this->abilitiesChecked[$key] = false;
     }
 
     /**
