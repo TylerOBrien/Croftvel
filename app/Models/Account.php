@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\Account\AccountCreated;
 use App\Traits\Models\HasEnabledState;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasEnabledState;
+
+    protected $dispatchesEvents = [
+        'created' => AccountCreated::class
+    ];
     
     /**
      * @return HasMany
