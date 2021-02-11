@@ -8,7 +8,7 @@ use Illuminate\Broadcasting\{ InteractsWithSockets, PrivateChannel };
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CreatedIdentity
+class IdentityCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
