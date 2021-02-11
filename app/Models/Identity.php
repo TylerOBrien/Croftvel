@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\Api\v1\Identity\IdentityCreated;
+use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerified };
 use App\Exceptions\Api\v1\Identity\{ AlreadyVerified, ExpiredVerificationCode, InvalidVerificationCode, MissingVerificationCode };
 
 use Illuminate\Database\Eloquent\Model;
@@ -81,5 +81,20 @@ class Identity extends Model
     public function getVerifiedAttribute()
     {
         return (bool) $this->verified_at;
+    }
+
+    /**
+     * Register the updating callback to detect when this identity is verified.
+     * 
+     * @return void
+     */
+    static public function boot()
+    {
+        parent::boot();
+        self::updated(function(Identity $identity) {
+            if (in_array('verified_at', $identity->getChanges())) {
+                event(new IdentityVerified($identity));
+            } 
+        });
     }
 }
