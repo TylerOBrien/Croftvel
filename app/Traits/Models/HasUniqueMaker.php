@@ -15,14 +15,13 @@ trait HasUniqueMaker
      */
     static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null)
     {
-        $model = self::class;
         $min = intval(str_repeat('1', $digits));
         $max = intval(str_repeat('9', $digits));
 
         do {
             $id = random_int($min, $max);
             $maybe_hashed = $hash_algo ? hash($hash_algo, $id) : $id;
-        } while ($model::where([ $column => $maybe_hashed ])->count());
+        } while (self::where([ $column => $maybe_hashed ])->count());
 
         return $id;
     }
@@ -36,12 +35,10 @@ trait HasUniqueMaker
      */
     static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null):string
     {
-        $model = self::class;
-
         do {
             $id = Str::random($length);
             $maybe_hashed = $hash_algo ? hash($hash_algo, $id) : $id;
-        } while ($model::where([ $column => $maybe_hashed ])->count());
+        } while (self::where([ $column => $maybe_hashed ])->count());
 
         return $id;
     }
