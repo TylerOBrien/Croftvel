@@ -15,10 +15,39 @@ class ApiRequest extends Request implements ValidatesWhenResolved
 {
     use ValidatesWhenResolvedTrait;
 
+    /**
+     * The name of the ability (e.g. index, store, destroy) the request is using.
+     *
+     * @var string
+     */
     protected $ability;
+
+    /**
+     * The name of the bound param.
+     *
+     * @var string
+     */
     protected $binding;
+
+    /**
+     * The fully qualified class name of the model.
+     *
+     * @var string
+     */
     protected $model;
+    
+    /**
+     * 
+     *
+     * @var 
+     */
     protected $container;
+
+    /**
+     * 
+     *
+     * @var 
+     */
     protected $validator;
 
     /**
