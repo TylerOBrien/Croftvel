@@ -3,15 +3,13 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Recovery\RecoveryCreated;
-use App\Traits\Models\HasUniqueMaker;
+use App\Traits\Models\{ HasUniqueCode, HasUniqueMaker };
 
 use Illuminate\Database\Eloquent\Model;
 
 class Recovery extends Model
 {
-    use HasUniqueMaker;
-
-    protected $temporary_plaintext_code;
+    use HasUniqueCode, HasUniqueMaker;
     
     protected $hidden = [
         'code'
@@ -32,24 +30,5 @@ class Recovery extends Model
     public function identity()
     {
         return $this->belongsTo(Identity::class);
-    }
-
-    /**
-     * @return string|null
-     */
-    public function consumePlaintextCode()
-    {
-        $code = $this->temporary_plaintext_code;
-        unset($this->temporary_plaintext_code);
-        return $code;
-    }
-
-    /**
-     * @return void
-     */
-    public function setCodeAttribute(string $code)
-    {
-        $this->temporary_plaintext_code = $code;
-        $this->attributes['code'] = hash('sha256', $code);
     }
 }
