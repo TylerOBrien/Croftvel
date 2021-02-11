@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\File\FileCreated;
 use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,10 @@ class File extends Model
         'filesize',
         'owner_id',
         'owner_type'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => FileCreated::class
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\User\UserCreated;
 use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles };
 
 use Laravel\Sanctum\HasApiTokens;
@@ -17,6 +18,10 @@ class User extends BaseUser
     protected $fillable = [
         'account_id',
         'is_active'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => UserCreated::class
     ];
 
     /**
