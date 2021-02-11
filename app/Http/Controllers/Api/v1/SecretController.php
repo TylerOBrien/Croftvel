@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Secret\{ IndexSecret, ShowSecret, StoreSecret, UpdateSecret, DestroySecret };
 use App\Models\Secret;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class SecretController extends Controller
 {
+    use HasControllerHelpers;
+    
     /**
      * Display a listing of the secret.
      * 
@@ -17,7 +20,10 @@ class SecretController extends Controller
      */
     public function index(IndexSecret $request)
     {
-        return Secret::all();
+        $fields = $request->validated();
+        $secrets = Secret::select();
+
+        return $this->filtered($secrets, $fields);
     }
 
     /**
