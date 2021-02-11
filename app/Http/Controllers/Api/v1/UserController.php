@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\{ Account, User };
-use App\Traits\Controllers\Api\v1\{ HasPasswordReset, HasQueryFilter };
+use App\Traits\Controllers\Api\v1\{ HasPasswordReset, HasControllerHelpers };
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser };
 use App\Http\Resources\Api\v1\TokenResource;
 
 class UserController extends Controller
 {
-    use HasPasswordReset, HasQueryFilter;
+    use HasPasswordReset, HasControllerHelpers;
     
     /**
      * Display a listing of the users.
