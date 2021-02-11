@@ -11,9 +11,9 @@ class DummyController extends Controller
     /**
      * Display a listing of the DummyPluralBinding.
      * 
-     * @param  IndexDummyModel  $request
+     * @param  \App\Http\Requests\Api\v1\DummyModel\IndexDummyModel  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexDummyModel $request)
     {
@@ -23,10 +23,10 @@ class DummyController extends Controller
     /**
      * Display the specified DummyBinding.
      * 
-     * @param  DummyModel  $DummyBinding
-     * @param  ShowDummyModel  $request
+     * @param  \App\Models\DummyModel  $DummyBinding
+     * @param  \App\Http\Requests\Api\v1\DummyModel\ShowDummyModel  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show(DummyModel $DummyBinding, ShowDummyModel $request)
     {
@@ -36,9 +36,9 @@ class DummyController extends Controller
     /**
      * Store a newly created DummyBinding in storage.
      * 
-     * @param  StoreDummyModel  $request
+     * @param  \App\Http\Requests\Api\v1\DummyModel\StoreDummyModel  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreDummyModel $request)
     {
@@ -50,10 +50,10 @@ class DummyController extends Controller
     /**
      * Update the specified DummyBinding in storage.
      * 
-     * @param  DummyModel  $DummyBinding
-     * @param  UpdateDummyModel  $request
+     * @param  \App\Models\DummyModel  $DummyBinding
+     * @param  \App\Http\Requests\Api\v1\DummyModel\UpdateDummyModel  $request
      * 
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(DummyModel $DummyBinding, UpdateDummyModel $request)
     {
@@ -68,10 +68,10 @@ class DummyController extends Controller
     /**
      * Remove the specified DummyBinding from storage.
      * 
-     * @param  DummyModel  $DummyBinding
-     * @param  DestroyDummyModel  $request
+     * @param  \App\Models\DummyModel  $DummyBinding
+     * @param  \App\Http\Requests\Api\v1\DummyModel\DestroyDummyModel  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function destroy(DummyModel $DummyBinding, DestroyDummyModel $request)
     {
