@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Api\v1\Image;
 
-use App\Models\Image;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\Image;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class StoreImage extends ApiRequest
 {
+    use HasOwnership;
+
     /**
      * Instantiate the request.
      */
@@ -24,10 +27,10 @@ class StoreImage extends ApiRequest
     public function rules()
     {
         return [
+            'owner_id' => 'required|morphable',
+            'owner_type' => 'required|morphable',
             'image' => 'required|image',
-            'name' => 'required|string',
-            'owner_id' => 'required|int',
-            'owner_type' => 'required|string'
+            'name' => 'required|string'
         ];
     }
 }

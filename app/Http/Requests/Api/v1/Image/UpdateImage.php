@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Api\v1\Image;
 
-use App\Models\Image;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\Image;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class UpdateImage extends ApiRequest
 {
+    use HasOwnership;
+    
     /**
      * Instantiate the request.
      */
@@ -25,10 +28,10 @@ class UpdateImage extends ApiRequest
     public function rules()
     {
         return [
+            'owner_id' => 'required_with:owner_type|morphable',
+            'owner_type' => 'required_with:owner_id|morphable',
             'image' => 'image',
-            'name' => 'string',
-            'owner_id' => 'int',
-            'owner_type' => 'string'
+            'name' => 'string'
         ];
     }
 }

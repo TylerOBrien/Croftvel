@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\Video;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Video;
+use App\Traits\Requests\Api\v1\HasOwnership;
 
 class UpdateVideo extends ApiRequest
 {
+    use HasOwnership;
+
     /**
      * Instantiate the request.
      *
@@ -27,7 +30,8 @@ class UpdateVideo extends ApiRequest
     public function rules()
     {
         return [
-            //
+            'owner_id' => 'required_with:owner_type|morphable',
+            'owner_type' => 'required_with:owner_id|morphable'
         ];
     }
 }
