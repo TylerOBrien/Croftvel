@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\Api\v1\Recovery\RecoveryCreated;
+use App\Events\Api\v1\Recovery\CreatedRecovery;
 use App\Traits\Models\HasUniqueMaker;
 
 use Illuminate\Database\Eloquent\Model;
@@ -23,7 +23,7 @@ class Recovery extends Model
     ];
 
     protected $dispatchesEvents = [
-        'created' => RecoveryCreated::class
+        'created' => CreatedRecovery::class
     ];
 
     /**
