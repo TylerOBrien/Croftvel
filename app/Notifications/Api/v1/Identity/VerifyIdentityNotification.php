@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Api\v1\User;
+namespace App\Notifications\Api\v1\Identity;
 
 use App\Mail\Api\v1\Identity\VerifyIdentity;
 use App\Models\User;
