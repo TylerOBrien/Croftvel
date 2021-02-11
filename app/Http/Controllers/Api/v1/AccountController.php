@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Account\{ IndexAccount, ShowAccount, StoreAccount, UpdateAccount, DestroyAccount };
 use App\Models\Account;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class AccountController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the account.
      * 
@@ -17,7 +20,10 @@ class AccountController extends Controller
      */
     public function index(IndexAccount $request)
     {
-        return Account::all();
+        $fields = $request->validated();
+        $accounts = Account::select();
+
+        return $this->filtered($accounts, $fields);
     }
 
     /**

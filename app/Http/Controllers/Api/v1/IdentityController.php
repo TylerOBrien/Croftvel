@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, VerifyIdentity, DestroyIdentity };
 use App\Models\Identity;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class IdentityController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the identity.
      * 
@@ -17,7 +20,10 @@ class IdentityController extends Controller
      */
     public function index(IndexIdentity $request)
     {
-        return Identity::all();
+        $fields = $request->validated();
+        $identities = Identity::select();
+
+        return $this->filtered($identities, $fields);
     }
 
     /**
