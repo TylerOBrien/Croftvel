@@ -31,7 +31,7 @@ class StoreAddress extends ApiRequest
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',
-            'province' => 'required|province',
+            'province' => 'required|province:' . request('country'),
             'country' => 'required|country',
             'postal_code' => 'nullable|string'
         ];
