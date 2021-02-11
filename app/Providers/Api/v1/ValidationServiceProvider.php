@@ -2,7 +2,7 @@
 
 namespace App\Providers\Api\v1;
 
-use App\Rules\{ Country, Province, MatchesCurrent, Morphable };
+use App\Rules\{ Can, Country, Province, MatchesCurrent, Morphable };
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +26,10 @@ class ValidationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Validator::extendImplicit('can', function($attribute, $value, $parameters, $validator) {
+            return (new Can($parameters))->passes($attribute, $value);
+        });
+
         Validator::extendImplicit('country', function($attribute, $value, $parameter, $validator) {
             return (new Country)->passes($attribute, $value);
         });
