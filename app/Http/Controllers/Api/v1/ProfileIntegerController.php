@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\ProfileInteger\{ IndexProfileInteger, ShowProfileInteger, StoreProfileInteger, UpdateProfileInteger, DestroyProfileInteger };
-use App\Models\ProfileInteger;
+use App\Models\{ Profile, ProfileInteger };
 
 class ProfileIntegerController extends Controller
 {
@@ -36,16 +36,18 @@ class ProfileIntegerController extends Controller
     /**
      * Store a newly created profile integer in storage.
      * 
+     * @param  Profile  $profile
      * @param  StoreProfileInteger  $request
      *
      * @return Response
      */
-    public function store(StoreProfileInteger $request)
+    public function store(Profile $profile, StoreProfileInteger $request)
     {
-        $fields = $request->validated();
-        $profile_integerId = ProfileInteger::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'profile_id' => $profile->id
+        ]);
 
-        return ProfileInteger::find($profile_integerId);
+        return ProfileInteger::create($fields)->fresh();
     }
 
     /**

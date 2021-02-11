@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\ProfileString\{ IndexProfileString, ShowProfileString, StoreProfileString, UpdateProfileString, DestroyProfileString };
-use App\Models\ProfileString;
+use App\Models\{ Profile, ProfileString };
 
 class ProfileStringController extends Controller
 {
@@ -36,16 +36,18 @@ class ProfileStringController extends Controller
     /**
      * Store a newly created profile string in storage.
      * 
+     * @param  Profile  $profile
      * @param  StoreProfileString  $request
      *
      * @return Response
      */
-    public function store(StoreProfileString $request)
+    public function store(Profile $profile, StoreProfileString $request)
     {
-        $fields = $request->validated();
-        $profile_stringId = ProfileString::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'profile_id' => $profile->id
+        ]);
 
-        return ProfileString::find($profile_stringId);
+        return ProfileString::create($fields)->fresh();
     }
 
     /**
