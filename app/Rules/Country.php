@@ -20,6 +20,10 @@ class Country implements Rule
      */
     public function passes($attribute, $value)
     {
+        if (strlen($value) !== 3) {
+            return false;
+        }
+
         $iso = new ISO3166;
 
         try {
