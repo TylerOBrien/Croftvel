@@ -21,6 +21,8 @@ class SendVerifyRecoveryNotification implements ShouldQueue
      */
     public function handle(RecoveryCreated $event)
     {
-        $event->recovery->identity->user->notify(new VerifyRecoveryNotification($event->plaintext_code));
+        $event->recovery->identity->user->notify(
+            new VerifyRecoveryNotification($event->plaintext_code)
+        );
     }
 }
