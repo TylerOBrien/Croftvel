@@ -19,7 +19,7 @@ class ProfilePolicy
      */
     public function index(User $user)
     {
-        return true;
+        return $user->hasAbility('index', Profile::class);
     }
 
     /**
@@ -40,7 +40,7 @@ class ProfilePolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('show', Profile::class);
     }
 
     /**
@@ -73,7 +73,7 @@ class ProfilePolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('update', Profile::class);
     }
 
     /**
@@ -94,6 +94,6 @@ class ProfilePolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('destroy', Profile::class);
     }
 }

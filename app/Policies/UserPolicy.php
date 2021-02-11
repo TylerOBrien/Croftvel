@@ -19,7 +19,7 @@ class UserPolicy
      */
     public function index(User $user)
     {
-        return true;
+        return $user->hasAbility('index', User::class);
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
             return true;
         }
 
-        return true;
+        return $user->hasAbility('show', User::class);
     }
 
     /**
@@ -65,7 +65,7 @@ class UserPolicy
             return true;
         }
         
-        return true;
+        return $user->hasAbility('update', User::class);
     }
 
     /**
@@ -78,7 +78,7 @@ class UserPolicy
      */
     public function destroy(User $user, User $model)
     {
-        return true;
+        return $user->hasAbility('destroy', User::class);
     }
 
     /**
@@ -91,6 +91,6 @@ class UserPolicy
      */
     public function restore(User $user, User $model)
     {
-        return true;
+        return $user->hasAbility('restore', User::class);
     }
 }

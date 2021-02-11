@@ -19,7 +19,7 @@ class IdentityPolicy
      */
     public function index(User $user)
     {
-        return true;
+        return $user->hasAbility('index', Identity::class);
     }
 
     /**
@@ -32,7 +32,11 @@ class IdentityPolicy
      */
     public function show(User $user, Identity $model)
     {
-        return true;
+        if ($user->id === $model->user_id) {
+            return true;
+        }
+
+        return $user->hasAbility('show', Identity::class);
     }
 
     /**
@@ -57,7 +61,7 @@ class IdentityPolicy
      */
     public function update(User $user, Identity $model)
     {
-        return true;
+        return $user->hasAbility('update', Identity::class);
     }
 
     /**
@@ -83,7 +87,11 @@ class IdentityPolicy
      */
     public function destroy(User $user, Identity $model)
     {
-        return true;
+        if ($user->id === ($model->user->id ?? null)) {
+            return true;
+        }
+
+        return $user->hasAbility('destroy', Identity::class);
     }
 
     /**
@@ -96,6 +104,6 @@ class IdentityPolicy
      */
     public function restore(User $user, Identity $model)
     {
-        return true;
+        return $user->hasAbility('restore', Identity::class);
     }
 }

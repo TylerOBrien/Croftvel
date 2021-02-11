@@ -19,7 +19,7 @@ class AddressPolicy
      */
     public function index(User $user)
     {
-        return true;
+        return $user->hasAbility('index', Address::class);
     }
 
     /**
@@ -40,7 +40,7 @@ class AddressPolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('show', Address::class);
     }
 
     /**
@@ -73,7 +73,7 @@ class AddressPolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('update', Address::class);
     }
 
     /**
@@ -94,6 +94,6 @@ class AddressPolicy
             }
         }
         
-        return true;
+        return $user->hasAbility('destroy', Address::class);
     }
 }
