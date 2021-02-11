@@ -19,11 +19,11 @@ class PersonalAccessTokenPolicy
      */
     public function index(User $user)
     {
-        return true;
+        return $user->hasAbility('index', PersonalAccessToken::class);
     }
 
     /**
-     * Determine whether the user can view the identity.
+     * Determine whether the user can view the token.
      *
      * @param \App\Models\User $user
      * @param \App\Models\PersonalAccessToken $model
@@ -32,7 +32,11 @@ class PersonalAccessTokenPolicy
      */
     public function show(User $user, PersonalAccessToken $model)
     {
-        return true;
+        if ($user->id === $model->tokenable_id && $model->tokenable_type === User::class) {
+            return true;
+        }
+
+        return $user->hasAbility('show', PersonalAccessToken::class);
     }
 
     /**
@@ -48,7 +52,7 @@ class PersonalAccessTokenPolicy
     }
 
     /**
-     * Determine whether the user can update the identity.
+     * Determine whether the user can update the token.
      *
      * @param \App\Models\User $user
      * @param \App\Models\PersonalAccessToken $model
@@ -57,24 +61,11 @@ class PersonalAccessTokenPolicy
      */
     public function update(User $user, PersonalAccessToken $model)
     {
-        return true;
+        return $user->hasAbility('update', PersonalAccessToken::class);
     }
 
     /**
-     * Determine whether the user can verify the identity.
-     *
-     * @param \App\Models\User $user
-     * @param \App\Models\PersonalAccessToken $model
-     * 
-     * @return mixed
-     */
-    public function verify(User $user, PersonalAccessToken $model)
-    {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can delete the identity.
+     * Determine whether the user can delete the token.
      *
      * @param \App\Models\User $user
      * @param \App\Models\PersonalAccessToken $model
@@ -83,19 +74,10 @@ class PersonalAccessTokenPolicy
      */
     public function destroy(User $user, PersonalAccessToken $model)
     {
-        return true;
-    }
-
-    /**
-     * Determine whether the user can restore the identity.
-     *
-     * @param \App\Models\User $user
-     * @param \App\Models\PersonalAccessToken $model
-     * 
-     * @return mixed
-     */
-    public function restore(User $user, PersonalAccessToken $model)
-    {
-        return true;
+        if ($user->id === $model->tokenable_id && $model->tokenable_type === User::class) {
+            return true;
+        }
+        
+        return $user->hasAbility('destroy', PersonalAccessToken::class);
     }
 }
