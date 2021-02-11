@@ -48,6 +48,10 @@ class ApiGuard implements Guard
      */
     public function parseToken(Request $request)
     {
+        if ($this->check()) {
+            return $this->user();
+        }
+
         $bearer_token = $request->bearerToken();
 
         if (is_null($bearer_token)) {
