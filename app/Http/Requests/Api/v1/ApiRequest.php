@@ -26,10 +26,11 @@ class ApiRequest extends Request implements ValidatesWhenResolved
      */
     public function authorize()
     {
-        if ($this->ability) {
-            return $this->binding
-                ? auth()->user()->can($this->ability, request()->route($this->binding))
-                : auth()->user()->can($this->ability, $this->model);
+        $user = auth()->user();
+        $target = $this->binding ? request()->route($this->binding) : $this->model;
+
+        if ($user && $this->ability) {
+            return $user->can($this->ability, $target);
         }
 
         return true;
