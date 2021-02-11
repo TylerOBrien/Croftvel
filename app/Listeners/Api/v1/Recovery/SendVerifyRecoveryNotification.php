@@ -14,12 +14,16 @@ class SendVerifyRecoveryNotification implements ShouldQueue
     use InteractsWithQueue;
 
     /**
+     * The recipient of the notification.
+     * 
      * @var \App\Models\User
      */
     protected $user;
 
     /**
      * Create the event listener.
+     * 
+     * @param  \App\Models\User  $user
      *
      * @return void
      */
