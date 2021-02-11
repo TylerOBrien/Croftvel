@@ -2,9 +2,11 @@
 
 namespace App\Listeners\Api\v1\Identity;
 
-use App\Events\Api\v1\Identity\CreateIdentity;
+use App\Events\Api\v1\Identity\IdentityCreated;
 
-class SendVerificationNotification
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class SendVerificationNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -19,11 +21,11 @@ class SendVerificationNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Events\Api\v1\Identity\CreateIdentity  $event
+     * @param  \App\Events\Api\v1\Identity\IdentityCreated  $event
      * 
      * @return void
      */
-    public function handle(CreateIdentity $event)
+    public function handle(IdentityCreated $event)
     {
         //
     }
