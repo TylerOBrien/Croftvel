@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Address\{ IndexAddress, ShowAddress, StoreAddress, UpdateAddress, DestroyAddress };
 use App\Models\Address;
-use App\Traits\Controllers\Api\v1\HasQueryFilter;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class AddressController extends Controller
 {
-    use HasQueryFilter;
+    use HasControllerHelpers;
 
     /**
      * Display a listing of the addresses.

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\Image;
-use App\Traits\Controllers\Api\v1\HasQueryFilter;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Image\{ IndexImage, ShowImage, StoreImage, UpdateImage, DestroyImage };
 
 class ImageController extends Controller
 {
-    use HasQueryFilter;
+    use HasControllerHelpers;
 
     /**
      * Display a listing of the images.
