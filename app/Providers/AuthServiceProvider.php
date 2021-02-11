@@ -4,16 +4,24 @@ namespace App\Providers;
 
 use App\Guards\Api\v1\ApiGuard;
 
+use App\Models\Ability;
 use App\Models\Address;
 use App\Models\Identity;
+use App\Models\Image;
 use App\Models\PersonalAccessToken;
+use App\Models\Privilege;
 use App\Models\Profile;
+use App\Models\Secret;
 use App\Models\User;
 
+use App\Policies\Api\v1\AbilityPolicy;
 use App\Policies\Api\v1\AddressPolicy;
 use App\Policies\Api\v1\IdentityPolicy;
+use App\Policies\Api\v1\ImagePolicy;
 use App\Policies\Api\v1\PersonalAccessTokenPolicy;
+use App\Policies\Api\v1\PrivilegePolicy;
 use App\Policies\Api\v1\ProfilePolicy;
+use App\Policies\Api\v1\SecretPolicy;
 use App\Policies\Api\v1\UserPolicy;
 
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +35,14 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      * @var array
      */
     protected $policies = [
+        Ability::class => AbilityPolicy::class,
         Address::class => AddressPolicy::class,
         Identity::class => IdentityPolicy::class,
+        Image::class => ImagePolicy::class,
+        Privilege::class => PrivilegePolicy::class,
         Profile::class => ProfilePolicy::class,
         PersonalAccessToken::class => PersonalAccessTokenPolicy::class,
+        Secret::class => SecretPolicy::class,
         User::class => UserPolicy::class
     ];
 
