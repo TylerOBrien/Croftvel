@@ -23,16 +23,6 @@ class Country implements Rule
         $iso = new ISO3166;
 
         try {
-            $iso->name($value);
-            return true;
-        } catch (Exception $error) {}
-
-        try {
-            $iso->alpha2($value);
-            return true;
-        } catch (Exception $error) {}
-
-        try {
             $iso->alpha3($value);
             return true;
         } catch (Exception $error) {}
