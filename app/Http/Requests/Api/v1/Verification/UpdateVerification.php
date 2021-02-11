@@ -27,6 +27,7 @@ class UpdateVerification extends ApiRequest
     public function rules()
     {
         return [
+            'identity_id' => 'int|exists:identities,id',
             'code' => 'required|exists:verifications,code',
             'touch' => 'required|in:verified_at'
         ];
