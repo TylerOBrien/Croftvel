@@ -35,6 +35,15 @@ class User extends BaseUser
     }
 
     /**
+     * @return BelongsToMany
+     */
+    public function privileges()
+    {
+        return $this->belongsToMany(Privilege::class)
+                    ->using(PrivilegeUser::class);
+    }
+
+    /**
      * @return HasMany
      */
     public function secrets()
