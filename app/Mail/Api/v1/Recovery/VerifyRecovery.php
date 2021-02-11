@@ -43,8 +43,8 @@ class VerifyRecovery extends Mailable
      */
     public function build()
     {
-        return $this->subject(trans('mail.guest.recovery.verify-recovery.subject'))
-                    ->markdown('mail.guest.recovery.verify-recovery', [
+        return $this->subject(trans('mail.recovery.verify-recovery.subject'))
+                    ->markdown('mail.recovery.verify-recovery', [
                         'user' => $this->user,
                         'code' => $this->code ]);
     }
