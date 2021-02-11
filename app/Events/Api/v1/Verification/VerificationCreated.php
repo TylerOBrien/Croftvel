@@ -20,6 +20,13 @@ class VerificationCreated
     public $verification;
 
     /**
+     * The plaintext verification code.
+     * 
+     * @var string
+     */
+    public $plaintext_code;
+
+    /**
      * Create a new event instance.
      * 
      * @param  \App\Models\Verification $verification
@@ -29,6 +36,7 @@ class VerificationCreated
     public function __construct(Verification $verification)
     {
         $this->verification = $verification;
+        $this->plaintext_code = $verification->consumePlaintextCode();
     }
 
     /**
