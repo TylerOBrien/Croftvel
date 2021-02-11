@@ -13,9 +13,18 @@ class CreatedRecovery
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
+     * The newly created recovery instance.
+     * 
      * @var \App\Models\Recovery
      */
     public $recovery;
+
+    /**
+     * The plaintext recovery code.
+     * 
+     * @var string
+     */
+    public $plaintext_code;
 
     /**
      * Create a new event instance.
