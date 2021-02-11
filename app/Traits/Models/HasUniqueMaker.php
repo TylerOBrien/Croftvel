@@ -31,7 +31,7 @@ trait HasUniqueMaker
      * @param  int  $length
      * @param  string  $hash_algo
      * 
-     * @return array|string
+     * @return string
      */
     static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null):string
     {
