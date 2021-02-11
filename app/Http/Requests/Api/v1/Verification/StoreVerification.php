@@ -26,7 +26,7 @@ class StoreVerification extends ApiRequest
     public function rules()
     {
         return [
-            //
+            'identity_id' => 'required|int|exists:identities,id'
         ];
     }
 }
