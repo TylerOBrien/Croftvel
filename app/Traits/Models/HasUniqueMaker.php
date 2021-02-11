@@ -28,16 +28,18 @@ trait HasUniqueMaker
     /**
      * @param  string  $column
      * @param  int  $length
+     * @param  string  $hash_algo
      * 
-     * @return string
+     * @return array|string
      */
-    static public function makeUniqueString(string $column, int $length=12):string
+    static public function makeUniqueString(string $column, int $length=12, string $hash_algo=null):string
     {
         $model = self::class;
 
         do {
             $id = Str::random($length);
-        } while ($model::where([ $column => $id ])->count());
+            $maybe_hashed = $hash_algo ? hash($hash_algo, $id) : $id;
+        } while ($model::where([ $column => $maybe_hashed ])->count());
 
         return $id;
     }
