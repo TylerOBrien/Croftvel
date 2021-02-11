@@ -92,7 +92,7 @@ class UserController extends Controller
      */
     public function restore(User $user, RestoreUser $request)
     {
-        $user->enabled();
+        $user->enable();
         return response()->json(null, 204);
     }
 
