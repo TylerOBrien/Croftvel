@@ -14,7 +14,7 @@ class StoreUser extends ApiRequest
      */
     public function __construct()
     {
-        //$this->ability = 'store';
+        $this->ability = 'store';
         $this->model = User::class;
     }
 
