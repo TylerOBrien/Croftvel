@@ -11,6 +11,9 @@ use App\Listeners\Api\v1\Identity\{ CreateIdentityVerification, SendVerifyIdenti
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
 
+use App\Models\Identity;
+use App\Observers\IdentityObserver;
+
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
 
 class EventServiceProvider extends BaseEventServiceProvider
@@ -49,6 +52,6 @@ class EventServiceProvider extends BaseEventServiceProvider
      */
     public function boot()
     {
-        //
+        Identity::observe(IdentityObserver::class);
     }
 }
