@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\ProfileText\{ IndexProfileText, ShowProfileText, StoreProfileText, UpdateProfileText, DestroyProfileText };
-use App\Models\ProfileText;
+use App\Models\{ Profile, ProfileText };
 
 class ProfileTextController extends Controller
 {
@@ -36,16 +36,18 @@ class ProfileTextController extends Controller
     /**
      * Store a newly created profile text in storage.
      * 
+     * @param  Profile  $profile
      * @param  StoreProfileText  $request
      *
      * @return Response
      */
-    public function store(StoreProfileText $request)
+    public function store(Profile $profile, StoreProfileText $request)
     {
-        $fields = $request->validated();
-        $profile_textId = ProfileText::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'profile_id' => $profile->id
+        ]);
 
-        return ProfileText::find($profile_textId);
+        return ProfileText::create($fields)->fresh();
     }
 
     /**

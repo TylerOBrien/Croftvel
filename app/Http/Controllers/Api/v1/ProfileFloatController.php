@@ -43,10 +43,11 @@ class ProfileFloatController extends Controller
      */
     public function store(Profile $profile, StoreProfileFloat $request)
     {
-        $fields = array_merge($request->validated(), [ 'profile_id' => $profile->id, ]);
-        $profile_float_id = ProfileFloat::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'profile_id' => $profile->id
+        ]);
 
-        return ProfileFloat::find($profile_float_id);
+        return ProfileFloat::create($fields)->fresh();
     }
 
     /**
