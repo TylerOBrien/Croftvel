@@ -48,10 +48,12 @@ class VerificationController extends Controller
      */
     public function store(StoreVerification $request)
     {
-        $fields = $request->validated();
-        $verification_id = Verification::create($fields)->id;
+        $code = Verification::makeUniqueInt('code', config('croft.verification.length'), 'sha256');
+        $fields = array_merge($request->validated(), [
+            'code' => $code
+        ]);
 
-        return Verification::find($verification_id);
+        return Verification::create($fields);
     }
 
     /**
