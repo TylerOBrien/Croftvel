@@ -15,7 +15,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Authentication and Verification
+    | Security
     |--------------------------------------------------------------------------
     | 
     */
@@ -24,8 +24,14 @@ return [
         'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel'))
     ],
 
+    'recovery' => [
+        'ttl' => 60,
+        'length' => 32
+    ],
+
     'verification' => [
-        'ttl' => 60
+        'ttl' => 60,
+        'length' => 12
     ],
 
     /*
