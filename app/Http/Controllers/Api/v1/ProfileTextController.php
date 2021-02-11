@@ -11,11 +11,12 @@ class ProfileTextController extends Controller
     /**
      * Display a listing of the profile text.
      * 
+     * @param  Profile  $profile
      * @param  IndexProfileText  $request
      *
      * @return Response
      */
-    public function index(IndexProfileText $request)
+    public function index(Profile $profile, IndexProfileText $request)
     {
         return ProfileText::all();
     }
@@ -23,12 +24,13 @@ class ProfileTextController extends Controller
     /**
      * Display the specified profile text.
      * 
+     * @param  Profile  $profile
      * @param  ProfileText  $profile_text
      * @param  ShowProfileText  $request
      *
      * @return Response
      */
-    public function show(ProfileText $profile_text, ShowProfileText $request)
+    public function show(Profile $profile, ProfileText $profile_text, ShowProfileText $request)
     {
         return $profile_text;
     }
@@ -53,12 +55,13 @@ class ProfileTextController extends Controller
     /**
      * Update the specified profile text in storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileText  $profile_text
      * @param  UpdateProfileText  $request
      * 
      * @return Response
      */
-    public function update(ProfileText $profile_text, UpdateProfileText $request)
+    public function update(Profile $profile, ProfileText $profile_text, UpdateProfileText $request)
     {
         $fields = $request->validated();
 
@@ -71,12 +74,13 @@ class ProfileTextController extends Controller
     /**
      * Remove the specified profile text from storage.
      * 
+     * @param  Profile  $profile
      * @param  ProfileText  $profile_text
      * @param  DestroyProfileText  $request
      *
      * @return Response
      */
-    public function destroy(ProfileText $profile_text, DestroyProfileText $request)
+    public function destroy(Profile $profile, ProfileText $profile_text, DestroyProfileText $request)
     {
         $profile_text->delete();
         return response()->json(null, 204);
