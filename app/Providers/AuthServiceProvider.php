@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Guards\Api\v1\ApiGuard;
 
 use App\Models\Ability;
+use App\Models\Account;
 use App\Models\Address;
 use App\Models\File;
 use App\Models\Identity;
@@ -18,6 +19,7 @@ use App\Models\User;
 use App\Models\Verification;
 
 use App\Policies\Api\v1\AbilityPolicy;
+use App\Policies\Api\v1\AccountPolicy;
 use App\Policies\Api\v1\AddressPolicy;
 use App\Policies\Api\v1\FilePolicy;
 use App\Policies\Api\v1\IdentityPolicy;
@@ -42,6 +44,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     protected $policies = [
         Ability::class => AbilityPolicy::class,
+        Account::class => AccountPolicy::class,
         Address::class => AddressPolicy::class,
         File::class => FilePolicy::class,
         Identity::class => IdentityPolicy::class,
