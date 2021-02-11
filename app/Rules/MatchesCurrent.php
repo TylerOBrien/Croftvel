@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\{ Hash, Request };
+use Illuminate\Support\Facades\Hash;
 
 class MatchesCurrent implements Rule
 {
@@ -19,11 +19,11 @@ class MatchesCurrent implements Rule
     {
         $name = "{$attribute}_current";
 
-        if (!Request::has($name)) {
+        if (!request()->has($name)) {
             return false;
         }
 
-        $given = Request::input($name);
+        $given = request()->input($name);
         $current = auth()->user()->attributes[$attribute];
 
         if ($attribute !== 'password') {
