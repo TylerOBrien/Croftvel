@@ -23,10 +23,7 @@ class MetaController extends Controller
         $fields = $request->validated();
         $metas = Meta::select();
 
-        return $this->filtered($metas, $fields)
-                    ->with(config('croft.relationships.meta.index'))
-                    ->get()
-                    ->each->append(config('croft.attributes.meta.index'));
+        return $this->filtered($metas, $fields);
     }
 
     /**
@@ -39,8 +36,7 @@ class MetaController extends Controller
      */
     public function show(Meta $meta, ShowMeta $request)
     {
-        return $meta->load(config('croft.relationships.meta.show'))
-                    ->append(config('croft.attributes.meta.show'));
+        return $meta;
     }
 
     /**
@@ -53,11 +49,8 @@ class MetaController extends Controller
     public function store(StoreMeta $request)
     {
         $fields = $request->validated();
-        $meta_id = Meta::create($fields)->id;
 
-        return Meta::find($meta_id)
-                   ->load(config('croft.relationships.meta.store'))
-                   ->append(config('croft.attributes.meta.store'));
+        return Meta::create($fields)->fresh();
     }
 
     /**
