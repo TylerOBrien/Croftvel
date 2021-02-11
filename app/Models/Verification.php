@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\Verification\VerificationCreated;
 use App\Traits\Models\{ HasUniqueCode, HasUniqueMaker };
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,10 @@ class Verification extends Model
     protected $fillable = [
         'identity_id',
         'code'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => VerificationCreated::class
     ];
 
     /**
