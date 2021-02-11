@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\Api\v1\Identity\CreateIdentity;
-use App\Events\Api\v1\Recovery\CreatedRecovery;
+use App\Events\Api\v1\Recovery\RecoveryCreated;
 
 use App\Listeners\Api\v1\Identity\SendVerificationNotification;
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
@@ -22,7 +22,7 @@ class EventServiceProvider extends BaseEventServiceProvider
             SendVerificationNotification::class
         ],
         
-        CreatedRecovery::class => [
+        RecoveryCreated::class => [
             SendVerifyRecoveryNotification::class
         ]
     ];
