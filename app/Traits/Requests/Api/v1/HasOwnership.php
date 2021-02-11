@@ -15,8 +15,8 @@ trait HasOwnership
             return [ null, null, null ];
         }
         
-        $owner_id = request()->input('owner_id');
-        $owner_type = request()->input('owner_type');
+        $owner_id = request('owner_id');
+        $owner_type = request('owner_type');
 
         if (strpos($owner_type, 'App\\Models\\') !== 0) {
             $owner_type = "App\\Models\\$owner_type";
