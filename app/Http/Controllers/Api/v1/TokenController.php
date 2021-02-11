@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Token\{ IndexToken, ShowToken, StoreToken, UpdateToken, DestroyToken };
 use App\Http\Resources\Api\v1\TokenResource;
 use App\Models\PersonalAccessToken;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class TokenController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the token.
      * 
@@ -18,7 +21,10 @@ class TokenController extends Controller
      */
     public function index(IndexToken $request)
     {
-        return PersonalAccessToken::all();
+        $fields = $request->validated();
+        $tokens = PersonalAccessToken::select();
+
+        return $this->filtered($tokens, $fields);
     }
 
     /**

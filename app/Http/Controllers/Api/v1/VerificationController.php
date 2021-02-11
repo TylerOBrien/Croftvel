@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Verification\{ IndexVerification, ShowVerification, StoreVerification, UpdateVerification, DestroyVerification };
 use App\Models\Verification;
-
-use Illuminate\Support\Carbon;
+use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class VerificationController extends Controller
 {
+    use HasControllerHelpers;
+
     /**
      * Display a listing of the verification.
      * 
@@ -19,7 +20,10 @@ class VerificationController extends Controller
      */
     public function index(IndexVerification $request)
     {
-        return Verification::all();
+        $fields = $request->validated();
+        $verifications = Verification::select();
+
+        return $this->filtered($verifications, $fields);
     }
 
     /**
