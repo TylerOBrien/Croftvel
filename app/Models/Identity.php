@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Exceptions\Api\v1\Identity\{ AlreadyVerified, ExpiredVerificationCode, InvalidVerificationCode, MissingVerificationCode };
 
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,10 @@ class Identity extends Model
 
     protected $casts = [
         'verified_at' => 'datetime'
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => IdentityCreated::class
     ];
 
     /**
