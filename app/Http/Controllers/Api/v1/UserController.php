@@ -50,8 +50,14 @@ class UserController extends Controller
     public function store(StoreUser $request)
     {
         $fields = $request->validated();
-        $account = Account::create();
-        $user = User::create([ 'account_id' => $account->id ]);
+
+        if (array_key_exists('account_id', $fields)) {
+            $account_id = intval($fields['account_id']);
+        } else {
+            $account_id = auth('croft')->parseToken($request)->account->id ?? Account::create()->id;
+        }
+
+        $user = User::create(compact('account_id'));
         $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
 
