@@ -116,9 +116,11 @@ class ApiGuard implements Guard
     }
 
     /**
-     * Validate a user's credentials.
+     * Attempt to authenticate the user.
      * 
-     * @return bool
+     * @param  array  $credentials
+     * 
+     * @return \App\Models\User
      */
     public function attempt(array $credentials = [])
     {
@@ -137,16 +139,12 @@ class ApiGuard implements Guard
      * Validate a user's credentials.
      *
      * @param  array  $credentials
+     * 
      * @return bool
      */
     public function validate(array $credentials = [])
     {
-        //
-    }
-
-    public function setUser($user)
-    {
-        $this->user = $user;
+        return (bool) $this->attempt($credentials);
     }
 
     /**
@@ -198,5 +196,17 @@ class ApiGuard implements Guard
         }
 
         return (bool) in_array(HasApiTokens::class, class_uses_recursive( get_class($tokenable) ));
+    }
+
+    /**
+     * Set the currently authenticated user.
+     *
+     * @param  \App\Models\User  $user
+     * 
+     * @return void
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
