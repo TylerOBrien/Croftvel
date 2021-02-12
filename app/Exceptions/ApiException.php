@@ -20,8 +20,7 @@ class ApiException extends Exception
      */
     public function __construct(string $lang_file, int $http_code)
     {
-        parent::__construct(trans($lang_file));
-
+        $this->message = trans($lang_file);
         $this->http_code = $http_code;
     }
 
