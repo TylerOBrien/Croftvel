@@ -3,7 +3,7 @@
 namespace App\Listeners\Api\v1\Recovery;
 
 use App\Events\Api\v1\Recovery\RecoveryCreated;
-use App\Notifications\Api\v1\VerifyRecoveryNotification;
+use App\Notifications\Api\v1\Recovery\VerifyRecoveryNotification;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
