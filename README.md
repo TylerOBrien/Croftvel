@@ -50,4 +50,4 @@ php artisan make:croft-requests MyThing --ability=index,store,update
 ```
 php artisan make:croft-policy MyThing
 php artisan make:croft-policy MyThing --owned
-``
+```
