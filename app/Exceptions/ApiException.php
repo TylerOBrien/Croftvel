@@ -6,10 +6,15 @@ use Exception;
 
 class ApiException extends Exception
 {
+    /**
+     * The HTTP status code to be used in the response.
+     * 
+     * @var int
+     */
     protected $http_code;
 
     /**
-     * Instantiate the exception.
+     * Create a new exception.
      * 
      * @return void
      */
@@ -21,7 +26,7 @@ class ApiException extends Exception
     }
 
     /**
-     * 
+     * Retrieve the error response.
      * 
      * @return Response
      */
