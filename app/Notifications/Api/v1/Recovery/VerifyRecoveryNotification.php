@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\Api\v1;
+namespace App\Notifications\Api\v1\Recovery;
 
 use App\Mail\Api\v1\Recovery\VerifyRecovery;
 use App\Models\User;
