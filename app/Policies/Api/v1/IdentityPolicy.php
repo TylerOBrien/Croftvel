@@ -87,7 +87,7 @@ class IdentityPolicy
      */
     public function destroy(User $user, Identity $model)
     {
-        if ($user->id === ($model->user->id ?? null)) {
+        if ($user->id === $model->user_id) {
             return true;
         }
 
