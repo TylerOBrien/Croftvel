@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Secret\{ IndexSecret, ShowSecret, StoreSecret, UpdateSecret, DestroySecret };
-use App\Models\Secret;
+use App\Models\{ User, Secret };
 use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class SecretController extends Controller
@@ -46,12 +46,13 @@ class SecretController extends Controller
      *
      * @return Response
      */
-    public function store(StoreSecret $request)
+    public function store(StoreSecret $request, User $user = null)
     {
-        $fields = $request->validated();
-        $secretId = Secret::create($fields)->id;
+        $fields = array_merge($request->validated(), [
+            'user_id' => $user->id ?? request('user_id')
+        ]);
 
-        return Secret::find($secretId);
+        return Secret::create($fields);
     }
 
     /**
