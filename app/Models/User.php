@@ -67,7 +67,7 @@ class User extends BaseUser
             SELECT COUNT(abilities.id) as total
             FROM abilities
             JOIN privileges ON privileges.id = abilities.privilege_id
-            JOIN privilege_user ON privileges.id = abilities.privilege_id
+            JOIN privilege_user ON privileges.id = privilege_user.privilege_id
             WHERE privilege_user.user_id = :user_id AND
                 (abilities.name = "*" OR abilities.name = :ability) AND
                 (abilities.model = "*" OR abilities.model = :model)
