@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class QueryFilterHelper
 {
     const IS        = 'is';
@@ -12,9 +14,12 @@ class QueryFilterHelper
     const MAX       = 'max';
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  Array  $filter
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function handle($query, $filter)
+    public static function handle(Builder $query, Array $filter)
     {
         foreach ($filter as $column => $types) {
             $query = self::processFilter($query, $column, $types);
@@ -24,9 +29,13 @@ class QueryFilterHelper
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  Array  $types
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function processFilter($query, $column, $types)
+    protected static function processFilter(Builder $query, string $column, Array $types)
     {
         $keys = array_keys($types);
         $values = array_values($types);
@@ -66,57 +75,83 @@ class QueryFilterHelper
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  mixed  $value
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleIs($query, $column, $value)
+    protected static function handleIs(Builder $query, string $column, $value)
     {
         return $query->where($column, '=', $value);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  mixed  $value
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleIsnt($query, $column, $value)
+    protected static function handleIsnt(Builder $query, string $column, $value)
     {
         return $query->where($column, '!=', $value);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleIsNull($query, $column)
+    protected static function handleIsNull(Builder $query, string $column)
     {
         return $query->whereNull($column);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleIsntNull($query, $column)
+    protected static function handleIsntNull(Builder $query, string $column)
     {
         return $query->whereNotNull($column);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  mixed  $value
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleMin($query, $column, $value)
+    protected static function handleMin(Builder $query, string $column, $value)
     {
         return $query->where($column, '>=', $value);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  mixed  $value
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleMax($query, $column, $value)
+    protected static function handleMax(Builder $query, string $column, $value)
     {
         return $query->where($column, '<=', $value);
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  string  $column
+     * @param  Array  $range
      * 
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function handleBetween($query, $column, $range)
+    protected static function handleBetween(Builder $query, string $column, Array $range)
     {
         return $query->whereBetween($column, $range);
     }
