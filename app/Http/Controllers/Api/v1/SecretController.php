@@ -14,9 +14,10 @@ class SecretController extends Controller
     /**
      * Display a listing of the secret.
      * 
-     * @param IndexSecret $request
+     * @param  \App\Http\Requests\Api\v1\Secret\IndexSecret  $request
+     * @param  \App\Models\User  $user
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexSecret $request)
     {
@@ -29,10 +30,11 @@ class SecretController extends Controller
     /**
      * Display the specified secret.
      * 
-     * @param Secret $secret
-     * @param ShowSecret $request
+     * @param  \App\Models\Secret  $secret
+     * @param  \App\Http\Requests\Api\v1\Secret\ShowSecret  $request
+     * @param  \App\Models\User  $user
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show(Secret $secret, ShowSecret $request)
     {
@@ -42,9 +44,10 @@ class SecretController extends Controller
     /**
      * Store a newly created secret in storage.
      * 
-     * @param StoreSecret $request
+     * @param  \App\Http\Requests\Api\v1\Secret\StoreSecret  $request
+     * @param  \App\Models\User  $user
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreSecret $request, User $user = null)
     {
@@ -58,10 +61,11 @@ class SecretController extends Controller
     /**
      * Update the specified secret in storage.
      * 
-     * @param Secret $secret
-     * @param UpdateSecret $request
+     * @param  \App\Models\Secret  $secret
+     * @param  \App\Http\Requests\Api\v1\Secret\UpdateSecret  $request
+     * @param  \App\Models\User  $user
      * 
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(Secret $secret, UpdateSecret $request)
     {
@@ -76,10 +80,11 @@ class SecretController extends Controller
     /**
      * Remove the specified secret from storage.
      * 
-     * @param Secret $secret
-     * @param DestroySecret $request
+     * @param  \App\Models\Secret  $secret
+     * @param  \App\Http\Requests\Api\v1\Secret\DestroySecret  $request
+     * @param  \App\Models\User  $user
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Secret $secret, DestroySecret $request)
     {
