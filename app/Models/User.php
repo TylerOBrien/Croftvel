@@ -96,13 +96,13 @@ class User extends BaseUser
      */
     public function getIdentifiedAttribute()
     {
-        return (bool) $this->identities_verified;
+        return (bool) $this->total_identities_verified;
     }
 
     /**
      * @return int
      */
-    public function getIdentitiesVerifiedAttribute()
+    public function getTotalIdentitiesVerifiedAttribute()
     {
         return $this->identities()->whereNotNull('verified_at')->count();
     }
