@@ -25,8 +25,14 @@ class StoreSecret extends ApiRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return array_merge(
+            request()->route('user')
+                ? []
+                : [ 'user_id' => 'required|int|exists:users,id' ],
+            [
+                'type' => 'required|string|in:password,totp',
+                'value' => 'required|string'
+            ]
+        );
     }
 }
