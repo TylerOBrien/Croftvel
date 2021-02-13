@@ -32,11 +32,10 @@ class SecretController extends Controller
      * 
      * @param  \App\Models\Secret  $secret
      * @param  \App\Http\Requests\Api\v1\Secret\ShowSecret  $request
-     * @param  \App\Models\User  $user
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Secret $secret, ShowSecret $request, User $user = null)
+    public function show(Secret $secret, ShowSecret $request)
     {
         return $secret;
     }
@@ -63,11 +62,10 @@ class SecretController extends Controller
      * 
      * @param  \App\Models\Secret  $secret
      * @param  \App\Http\Requests\Api\v1\Secret\UpdateSecret  $request
-     * @param  \App\Models\User  $user
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Secret $secret, UpdateSecret $request, User $user = null)
+    public function update(Secret $secret, UpdateSecret $request)
     {
         $fields = $request->validated();
 
@@ -82,11 +80,10 @@ class SecretController extends Controller
      * 
      * @param  \App\Models\Secret  $secret
      * @param  \App\Http\Requests\Api\v1\Secret\DestroySecret  $request
-     * @param  \App\Models\User  $user
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Secret $secret, DestroySecret $request, User $user = null)
+    public function destroy(Secret $secret, DestroySecret $request)
     {
         $secret->delete();
         return response()->json(null, 204);
