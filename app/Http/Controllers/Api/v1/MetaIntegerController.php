@@ -55,7 +55,7 @@ class MetaIntegerController extends Controller
             'meta_id' => $meta->id
         ]);
 
-        return MetaInteger::create($fields)->fresh();
+        return MetaInteger::create($fields);
     }
 
     /**

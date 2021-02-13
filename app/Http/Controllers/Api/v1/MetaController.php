@@ -50,7 +50,7 @@ class MetaController extends Controller
     {
         $fields = $request->validated();
 
-        return Meta::create($fields)->fresh();
+        return Meta::create($fields);
     }
 
     /**

@@ -49,9 +49,8 @@ class VideoController extends Controller
     public function store(StoreVideo $request)
     {
         $fields = $request->validated();
-        $videoId = Video::create($fields)->id;
 
-        return Video::find($videoId);
+        return Video::create($fields);
     }
 
     /**

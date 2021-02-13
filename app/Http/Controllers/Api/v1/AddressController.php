@@ -49,9 +49,8 @@ class AddressController extends Controller
     public function store(StoreAddress $request)
     {
         $fields = $request->validated();
-        $address_id = Address::create($fields)->id;
 
-        return Address::find($address_id);
+        return Address::create($fields);
     }
 
     /**

@@ -55,7 +55,7 @@ class ProfileFloatController extends Controller
             'profile_id' => $profile->id
         ]);
 
-        return ProfileFloat::create($fields)->fresh();
+        return ProfileFloat::create($fields);
     }
 
     /**

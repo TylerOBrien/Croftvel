@@ -49,9 +49,8 @@ class AccountController extends Controller
     public function store(StoreAccount $request)
     {
         $fields = $request->validated();
-        $accountId = Account::create($fields)->id;
 
-        return Account::find($accountId);
+        return Account::create($fields);
     }
 
     /**

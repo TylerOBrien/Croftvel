@@ -55,7 +55,7 @@ class MetaStringController extends Controller
             'meta_id' => $meta->id
         ]);
 
-        return MetaString::create($fields)->fresh();
+        return MetaString::create($fields);
     }
 
     /**

@@ -50,9 +50,8 @@ class ImageController extends Controller
     {
         $fields = $request->validated();
         $file = $request->file('image');
-        $image_id = Image::createFromFile($fields, $file)->id;
 
-        return Image::find($image_id);
+        return Image::createFromFile($fields, $file);
     }
 
     /**

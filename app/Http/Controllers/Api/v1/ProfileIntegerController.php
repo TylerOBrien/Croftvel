@@ -49,7 +49,7 @@ class ProfileIntegerController extends Controller
             'profile_id' => $profile->id
         ]);
 
-        return ProfileInteger::create($fields)->fresh();
+        return ProfileInteger::create($fields);
     }
 
     /**

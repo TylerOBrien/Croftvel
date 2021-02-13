@@ -50,9 +50,8 @@ class FileController extends Controller
     {
         $fields = $request->validated();
         $given = $request->file('file');
-        $file_id = File::createFromFile($fields, $given)->id;
 
-        return File::find($file_id);
+        return File::createFromFile($fields, $given);
     }
 
     /**

@@ -49,7 +49,7 @@ class ProfileStringController extends Controller
             'profile_id' => $profile->id
         ]);
 
-        return ProfileString::create($fields)->fresh();
+        return ProfileString::create($fields);
     }
 
     /**
