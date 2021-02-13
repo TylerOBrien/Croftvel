@@ -82,9 +82,8 @@ class ProfileController extends Controller
     public function store(StoreProfile $request)
     {
         $fields = $request->validated();
-        $profileId = Profile::create($fields)->id;
 
-        return Profile::find($profileId);
+        return Profile::create($fields);
     }
 
     /**
