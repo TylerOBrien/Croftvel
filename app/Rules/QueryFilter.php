@@ -40,6 +40,10 @@ class QueryFilter implements Rule
      */
     public function passes($attribute, $value)
     {
+        if (is_null($value)) {
+            return true;
+        }
+
         if (!is_array($value) || empty($value)) {
             return false;
         }
