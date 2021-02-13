@@ -54,7 +54,9 @@ class Profile extends Model
     }
 
     /**
-     * @return Collection
+     * Retrieve all floats, integers, strings, and texts for this profile.
+     * 
+     * @return \Illuminate\Support\Collection\Collection
      */
     public function getEntriesAttribute()
     {
