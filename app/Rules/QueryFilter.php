@@ -47,7 +47,7 @@ class QueryFilter implements Rule
         $predicate_names = array_flip((new ReflectionClass(QueryFilterHelper::class))->getConstants());
 
         foreach ($value as $column => $predicate) {
-            if (empty(trim($column)) || (!ctype_alpha($column[0]) && $column[0] !== '_')) {
+            if (!is_string($column) || empty(trim($column)) || (!ctype_alpha($column[0]) && $column[0] !== '_')) {
                 return false;
             } else if (!$predicate || !array_intersect_key($predicate, $predicate_names)) {
                 return false;
