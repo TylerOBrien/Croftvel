@@ -19,7 +19,7 @@ class SecretController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(IndexSecret $request)
+    public function index(IndexSecret $request, User $user = null)
     {
         $fields = $request->validated();
         $secrets = Secret::select();
@@ -36,7 +36,7 @@ class SecretController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Secret $secret, ShowSecret $request)
+    public function show(Secret $secret, ShowSecret $request, User $user = null)
     {
         return $secret;
     }
@@ -67,7 +67,7 @@ class SecretController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function update(Secret $secret, UpdateSecret $request)
+    public function update(Secret $secret, UpdateSecret $request, User $user = null)
     {
         $fields = $request->validated();
 
@@ -86,7 +86,7 @@ class SecretController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Secret $secret, DestroySecret $request)
+    public function destroy(Secret $secret, DestroySecret $request, User $user = null)
     {
         $secret->delete();
         return response()->json(null, 204);
