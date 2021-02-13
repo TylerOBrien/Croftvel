@@ -17,4 +17,16 @@ class IndexToken extends ApiRequest
         $this->ability = 'index';
         $this->model = PersonalAccessToken::class;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'filter' => 'array'
+        ];
+    }
 }

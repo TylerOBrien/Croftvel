@@ -17,4 +17,16 @@ class IndexProfile extends ApiRequest
         $this->ability = 'index';
         $this->model = Profile::class;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'filter' => 'array'
+        ];
+    }
 }

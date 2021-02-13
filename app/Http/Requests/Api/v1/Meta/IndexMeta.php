@@ -15,4 +15,16 @@ class IndexMeta extends ApiRequest
         $this->ability = 'index';
         $this->model = Meta::class;
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'filter' => 'array'
+        ];
+    }
 }
