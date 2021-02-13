@@ -77,6 +77,8 @@ class User extends BaseUser
     }
 
     /**
+     * Retreive the primary email address for this user.
+     * 
      * @return string|null
      */
     public function getEmailAttribute()
