@@ -64,16 +64,16 @@ class User extends BaseUser
     {
         $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model'));
         $query = DB::raw('
-            SELECT COUNT(abilities.id) as total
+            SELECT EXISTS(SELECT *
             FROM abilities
             JOIN privileges ON privileges.id = abilities.privilege_id
             JOIN privilege_user ON privileges.id = privilege_user.privilege_id
             WHERE privilege_user.user_id = :user_id AND
                 (abilities.name = "*" OR abilities.name = :ability) AND
                 (abilities.model = "*" OR abilities.model = :model)
-            LIMIT 1;');
+            LIMIT 1) as `exists`;');
 
-        return (bool) DB::select($query, $bindings)[0]->total ?? false;
+        return (bool) DB::select($query, $bindings)[0]->exists ?? false;
     }
 
     /**
