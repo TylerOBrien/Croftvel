@@ -26,7 +26,7 @@ class IndexUser extends ApiRequest
     public function rules()
     {
         return [
-            'filter' => 'array'
+            'filter' => 'query_filter:User'
         ];
     }
 }

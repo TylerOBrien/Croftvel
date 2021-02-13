@@ -26,8 +26,7 @@ class IndexProfileFloat extends ApiRequest
     public function rules()
     {
         return [
-            'filter' => 'array',
-            'filter.*.is' => 'string'
+            'filter' => 'query_filter:ProfileFloat'
         ];
     }
 }

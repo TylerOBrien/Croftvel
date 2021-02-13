@@ -26,7 +26,7 @@ class IndexVerification extends ApiRequest
     public function rules()
     {
         return [
-            'filter' => 'array'
+            'filter' => 'query_filter:Verification'
         ];
     }
 }
