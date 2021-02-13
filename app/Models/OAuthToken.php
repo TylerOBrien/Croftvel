@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class OAuthToken extends Model
 {
+    protected $hidden = [
+        'value'
+    ];
+
     protected $fillable = [
         'identity_id',
         'scope',
