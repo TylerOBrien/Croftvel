@@ -32,6 +32,14 @@ class ImagePolicy
      */
     public function show(User $user, Image $image)
     {
+        if ($image->owner) {
+            if ($user->id === $image->owner->id) {
+                return true;
+            } else if ($user->can('show', $image->owner)) {
+                return true;
+            }
+        }
+
         return $user->hasAbility('show', Image::class);
     }
 
@@ -57,6 +65,14 @@ class ImagePolicy
      */
     public function update(User $user, Image $image)
     {
+        if ($image->owner) {
+            if ($user->id === $image->owner->id) {
+                return true;
+            } else if ($user->can('update', $image->owner)) {
+                return true;
+            }
+        }
+
         return $user->hasAbility('update', Image::class);
     }
 
@@ -70,6 +86,14 @@ class ImagePolicy
      */
     public function destroy(User $user, Image $image)
     {
+        if ($image->owner) {
+            if ($user->id === $image->owner->id) {
+                return true;
+            } else if ($user->can('destroy', $image->owner)) {
+                return true;
+            }
+        }
+
         return $user->hasAbility('destroy', Image::class);
     }
 }
