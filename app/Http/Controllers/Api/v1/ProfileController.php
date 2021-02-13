@@ -13,9 +13,9 @@ class ProfileController extends Controller
     /**
      * Display a listing of the profile.
      * 
-     * @param IndexProfile $request
+     * @param  \App\Http\Requests\Api\v1\Profile\IndexProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexProfile $request)
     {
@@ -25,10 +25,10 @@ class ProfileController extends Controller
     /**
      * Display the specified profile.
      * 
-     * @param Profile $profile
-     * @param ShowProfile $request
+     * @param  \App\Models\Profile  $profile
+     * @param  \App\Http\Requests\Api\v1\Profile\ShowProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show(Profile $profile, ShowProfile $request)
     {
@@ -38,10 +38,10 @@ class ProfileController extends Controller
     /**
      * Display a listing of the specified profile's entries.
      * 
-     * @param Profile $profile
-     * @param ShowProfile $request
+     * @param  \App\Models\Profile  $profile
+     * @param  \App\Http\Requests\Api\v1\Profile\ShowProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function indexEntries(Profile $profile, ShowProfile $request)
     {
@@ -51,10 +51,10 @@ class ProfileController extends Controller
     /**
      * Store new entries for the profile in storage.
      * 
-     * @param Profile $profile
-     * @param ShowProfile $request
+     * @param  \App\Models\Profile  $profile
+     * @param  \App\Http\Requests\Api\v1\Profile\ShowProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function storeEntries(Profile $profile, StoreProfileEntries $request)
     {
@@ -75,9 +75,9 @@ class ProfileController extends Controller
     /**
      * Store a newly created profile in storage.
      * 
-     * @param StoreProfile $request
+     * @param  \App\Http\Requests\Api\v1\Profile\StoreProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreProfile $request)
     {
@@ -90,10 +90,10 @@ class ProfileController extends Controller
     /**
      * Update the specified profile in storage.
      * 
-     * @param Profile $profile
-     * @param UpdateProfile $request
+     * @param  \App\Models\Profile  $profile
+     * @param  \App\Http\Requests\Api\v1\Profile\UpdateProfile  $request
      * 
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function update(Profile $profile, UpdateProfile $request)
     {
@@ -108,10 +108,10 @@ class ProfileController extends Controller
     /**
      * Remove the specified profile from storage.
      * 
-     * @param Profile $profile
-     * @param DestroyProfile $request
+     * @param  \App\Models\Profile  $profile
+     * @param  \App\Http\Requests\Api\v1\Profile\DestroyProfile  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Profile $profile, DestroyProfile $request)
     {
