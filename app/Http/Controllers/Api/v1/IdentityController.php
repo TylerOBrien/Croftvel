@@ -48,15 +48,11 @@ class IdentityController extends Controller
      */
     public function store(StoreIdentity $request, User $user = null)
     {
-        $fields = $request->validated();
+        $fields = array_merge($request->validated(), [
+            'user_id' => $user->id ?? request('user_id') ?? auth()->id()
+        ]);
 
-        if (array_key_exists('user_id', $fields)) {
-            $user_id = intval($fields['user_id']);
-        } else {
-            $user_id = $user->id ?? auth()->id();
-        }
-
-        return Identity::create(array_merge($fields, compact('user_id')));
+        return Identity::create($fields);
     }
 
     /**
