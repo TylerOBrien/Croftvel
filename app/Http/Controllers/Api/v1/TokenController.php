@@ -54,7 +54,7 @@ class TokenController extends Controller
         $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
 
-        return compact('token', 'user');
+        return response()->json(compact('token', 'user'), 201);
     }
 
     /**
