@@ -58,18 +58,19 @@ class ApiGuard implements Guard
             return null;
         }
 
+        $now = now();
         $pat = Sanctum::$personalAccessTokenModel::findToken($bearer_token);
 
         if (is_null($pat)) {
             return null;
-        } else if ($this->expiration && $pat->created_at->lte(now()->subMinutes($this->expiration))) {
+        } else if ($this->expiration && $pat->created_at->lte($now->subMinutes($this->expiration))) {
             return null;
         } else if (!$this->supportsTokens($pat->tokenable)) {
             return null;
         }
 
         $this->user = $pat->tokenable->withAccessToken(
-            tap($pat->forceFill(['last_used_at' => now()]))->save()
+            tap($pat->forceFill(['last_used_at' => $now]))->save()
         );
 
         return $this->user;
