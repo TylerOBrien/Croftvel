@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, VerifyIdentity, DestroyIdentity };
-use App\Models\Identity;
+use App\Models\{ Identity, User };
 use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class IdentityController extends Controller
@@ -18,7 +18,7 @@ class IdentityController extends Controller
      *
      * @return Response
      */
-    public function index(IndexIdentity $request)
+    public function index(IndexIdentity $request, User $user = null)
     {
         $fields = $request->validated();
         $identities = Identity::select();
@@ -46,14 +46,14 @@ class IdentityController extends Controller
      *
      * @return Response
      */
-    public function store(StoreIdentity $request)
+    public function store(StoreIdentity $request, User $user = null)
     {
         $fields = $request->validated();
 
         if (array_key_exists('user_id', $fields)) {
             $user_id = intval($fields['user_id']);
         } else {
-            $user_id = auth()->id();
+            $user_id = $user->id ?? auth()->id();
         }
 
         return Identity::create(array_merge($fields, compact('user_id')));

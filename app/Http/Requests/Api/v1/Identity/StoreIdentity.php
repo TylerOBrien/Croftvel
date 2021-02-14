@@ -25,11 +25,15 @@ class StoreIdentity extends ApiRequest
      */
     public function rules()
     {
-        return [
-            'user_id' => 'sometimes|exists:users,id',
-            'name' => 'required|string',
-            'type' => 'required|in:email,mobile,oauth',
-            'value' => 'required|unique:identities,value|string'
-        ];
+        return array_merge(
+            request()->route('user')
+                ? []
+                : [ 'user_id' => 'required|int|exists:users,id' ],
+            [
+                'name' => 'required|string',
+                'type' => 'required|in:email,mobile,oauth',
+                'value' => 'required|unique:identities,value|string'
+            ]
+        );
     }
 }

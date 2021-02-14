@@ -14,6 +14,7 @@ Route::apiResource('verifications', VerificationController::class);
 Route::apiResource('videos', VideoController::class);
 
 Route::apiResource('users', UserController::class)->except('store');
+Route::apiResource('users/{user}/identities', IdentityController::class)->only('index', 'store');
 Route::apiResource('users/{user}/secrets', SecretController::class)->only('index', 'store');
 
 Route::put('identities/{identity}/verification', [ IdentityController::class, 'verify' ]);
