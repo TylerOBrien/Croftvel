@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\v1;
 
-use App\Exceptions\Auth\Forbidden;
+use App\Exceptions\Api\v1\Auth\Forbidden;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
