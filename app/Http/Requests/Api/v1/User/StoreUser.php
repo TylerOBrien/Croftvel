@@ -26,7 +26,7 @@ class StoreUser extends ApiRequest
     public function rules()
     {
         return [
-            'account_id' => 'int|exists:accounts,id|can:attach,Account'
+            'account_id' => 'sometimes|int|exists:accounts,id|can:attach,Account'
         ];
     }
 }
