@@ -18,7 +18,8 @@ class TokenResource extends JsonResource
         return [
             'value' => 'Bearer ' . $this->plainTextToken,
             'ttl' => config('sanctum.expiration'),
-            'ttl_type' => 'minute'
+            'ttl_type' => 'minute',
+            'created_at' => $this->accessToken->created_at
         ];
     }
 }
