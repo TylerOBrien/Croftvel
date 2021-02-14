@@ -15,6 +15,10 @@ class User extends BaseUser
 {
     use Notifiable, HasApiTokens, HasEnabledState, HasFullName, HasProfiles;
 
+    protected $appends = [
+        'is_identified'
+    ];
+
     protected $fillable = [
         'account_id',
         'is_active'
@@ -94,7 +98,7 @@ class User extends BaseUser
     /**
      * @return bool
      */
-    public function getIdentifiedAttribute()
+    public function getIsIdentifiedAttribute()
     {
         return (bool) $this->total_identities_verified;
     }
