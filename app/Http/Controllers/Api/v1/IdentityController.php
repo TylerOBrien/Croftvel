@@ -50,7 +50,13 @@ class IdentityController extends Controller
     {
         $fields = $request->validated();
 
-        return Identity::create($fields);
+        if (array_key_exists('user_id', $fields)) {
+            $user_id = intval($fields['user_id']);
+        } else {
+            $user_id = auth()->id();
+        }
+
+        return Identity::create(array_merge($fields, compact('user_id')));
     }
 
     /**
