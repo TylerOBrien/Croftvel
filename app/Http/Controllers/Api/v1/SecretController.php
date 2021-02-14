@@ -51,7 +51,7 @@ class SecretController extends Controller
     public function store(StoreSecret $request, User $user = null)
     {
         $fields = array_merge($request->validated(), [
-            'user_id' => $user->id ?? request('user_id')
+            'user_id' => $user->id ?? request('user_id') ?? auth()->id()
         ]);
 
         return Secret::create($fields);
