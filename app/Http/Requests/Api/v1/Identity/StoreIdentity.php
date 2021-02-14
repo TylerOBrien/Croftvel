@@ -28,7 +28,7 @@ class StoreIdentity extends ApiRequest
         return array_merge(
             request()->route('user')
                 ? []
-                : [ 'user_id' => 'required|int|exists:users,id' ],
+                : [ 'user_id' => 'sometimes|int|exists:users,id' ],
             [
                 'name' => 'required|string',
                 'type' => 'required|in:email,mobile,oauth',
