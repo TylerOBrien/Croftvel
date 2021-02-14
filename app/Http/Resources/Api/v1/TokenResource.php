@@ -16,7 +16,7 @@ class TokenResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'value' => $this->plainTextToken,
+            'value' => 'Bearer ' . $this->plainTextToken,
             'ttl' => config('sanctum.expiration'),
             'ttl_type' => 'minute'
         ];
