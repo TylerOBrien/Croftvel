@@ -96,6 +96,21 @@ class User extends BaseUser
     }
 
     /**
+     * Retreive the primary mobile number for this user.
+     * 
+     * @return string|null
+     */
+    public function getMobileAttribute()
+    {
+        $predicate = [
+            'type' => 'mobile',
+            'name' => 'primary'
+        ];
+
+        return $this->identities()->where($predicate)->first()->value ?? null;
+    }
+
+    /**
      * @return bool
      */
     public function getIsIdentifiedAttribute()
