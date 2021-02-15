@@ -21,7 +21,10 @@ class User extends BaseUser
 
     protected $fillable = [
         'account_id',
-        'is_active'
+        'first_name',
+        'middle_name',
+        'last_name',
+        'is_enabled'
     ];
 
     protected $dispatchesEvents = [
