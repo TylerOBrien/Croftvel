@@ -7,12 +7,12 @@ use App\Events\Api\v1\Recovery\RecoveryCreated;
 use App\Events\Api\v1\User\UserIdentified;
 use App\Events\Api\v1\Verification\VerificationCreated;
 
-use App\Listeners\Api\v1\Identity\{ CreateIdentityVerification, SendVerifyIdentityNotification };
+use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerification, SendVerifyIdentityNotification };
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
 
-use App\Models\Identity;
-use App\Observers\Api\v1\IdentityObserver;
+use App\Models\{ Identity, User };
+use App\Observers\Api\v1\{ IdentityObserver, UserObserver };
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
 
@@ -29,7 +29,7 @@ class EventServiceProvider extends BaseEventServiceProvider
         ],
 
         IdentityVerified::class => [
-            //
+            CheckForFirstTimeVerify::class
         ],
 
         RecoveryCreated::class => [
@@ -53,5 +53,6 @@ class EventServiceProvider extends BaseEventServiceProvider
     public function boot()
     {
         Identity::observe(IdentityObserver::class);
+        User::observe(UserObserver::class);
     }
 }
