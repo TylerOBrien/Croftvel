@@ -9,7 +9,7 @@
 
 Please verify you are the owner of this email address.
 
-Your secret verification code is {{ chunk_split($plaintext_code, 3, '—') }}.
+Your secret verification code is {{ implode('-', str_split($plaintext_code, 3)) }}.
 
 Thanks,<br>
 {{ config('app.name') }}
