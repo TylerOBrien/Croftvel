@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserAdded extends Mailable
+class RemovedFromAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,29 +21,29 @@ class UserAdded extends Mailable
     protected $recipient;
 
     /**
-     * The account to which the new user was added.
-     * 
-     * @var \App\Models\Account
-     */
-    protected $account;
-
-    /**
-     * The user that was added to the account.
+     * The user that was removed from the account.
      * 
      * @var \App\Models\User
      */
     protected $user;
 
     /**
+     * The account from which the user was removed.
+     * 
+     * @var \App\Models\Account
+     */
+    protected $account;
+
+    /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $recipient, Account $account, User $user)
+    public function __construct(User $recipient, User $user, Account $account)
     {
         $this->recipient = $recipient;
-        $this->account = $account;
         $this->user = $user;
+        $this->account = $account;
     }
 
     /**
@@ -53,10 +53,10 @@ class UserAdded extends Mailable
      */
     public function build()
     {
-        return $this->subject(trans('mail.account.user-added.subject'))
-                    ->markdown('mail.account.user-added', [
+        return $this->subject(trans('mail.user.removed-from-account.subject'))
+                    ->markdown('mail.user.removed-from-account', [
                         'recipient' => $this->recipient,
-                        'account' => $this->account,
-                        'user' => $this->user ]);
+                        'user' => $this->user,
+                        'account' => $this->account ]);
     }
 }
