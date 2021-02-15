@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests\Api\v1\User;
 
-use App\Models\User;
 use App\Http\Requests\Api\v1\ApiRequest;
-
-use Illuminate\Support\Facades\Request;
-use Illuminate\Validation\Rule;
+use App\Models\User;
 
 class UpdateUser extends ApiRequest
 {
@@ -27,57 +24,11 @@ class UpdateUser extends ApiRequest
      */
     public function rules()
     {
-        switch (auth()->user()->type) {
-        case 'Admin':
-            return array_merge($this->getUserRules(), $this->getAdminRules());
-        default:
-            return $this->getUserRules();
-        }
-    }
-
-    /**
-     * @return array
-     */
-    public function getUserRules()
-    {
-        $current_id = $this->route('user')->id;
-
-        return array_merge(
-            [
-                'email' => "email|unique:users,email,$current_id,id,is_active,1",
-                'password' => array_merge(
-                    [
-                        'confirmed', 'zxcvbn_min:2'
-                    ],
-                    $this->needsCurrentPassword()
-                        ? [ 'matches_current' ]
-                        : []
-                )
-            ]
-        );
-    }
-
-    /**
-     * @return array
-     */
-    public function getAdminRules()
-    {
         return [
-            'is_active' => 'boolean',
-            'type' => [ 'string', Rule::in(config('croft.enum.user.type')) ],
-            'status' => [ 'string', Rule::in(config('croft.enum.user.status')) ]
+            'account_id' => 'sometimes|int|exists:accounts,id',
+            'first_name' => 'nullable|string',
+            'middle_name' => 'nullable|string',
+            'last_name' => 'nullable|string'
         ];
-    }
-
-    /**
-     * @return boolean
-     */
-    public function needsCurrentPassword()
-    {
-        if (Request::has('email')) {
-            return Request::input('email') !== $this->route('user')->email;
-        }
-
-        return Request::has('password');
     }
 }
