@@ -67,7 +67,7 @@ class VideoController extends Controller
         $given = $request->file('video');
 
         if ($given) {
-            $video->updateFromFile($fields, $given);
+            $video->updateFromFile($given, $fields);
             unset($fields['video']);
         } else {
             $video->fill($fields)->save();

@@ -51,7 +51,7 @@ class ImageController extends Controller
         $fields = $request->validated();
         $file = $request->file('image');
 
-        return Image::createFromFile($fields, $file);
+        return Image::createFromFile($file, $fields);
     }
 
     /**
@@ -68,7 +68,7 @@ class ImageController extends Controller
         $file = $request->file('image');
 
         if ($file) {
-            $image->updateFromFile($fields, $file);
+            $image->updateFromFile($file, $fields);
             unset($fields['image']);
         } else {
             $image->fill($fields)->save();

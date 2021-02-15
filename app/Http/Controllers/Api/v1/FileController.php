@@ -51,7 +51,7 @@ class FileController extends Controller
         $fields = $request->validated();
         $given = $request->file('file');
 
-        return File::createFromFile($fields, $given);
+        return File::createFromFile($given, $fields);
     }
 
     /**
@@ -68,7 +68,7 @@ class FileController extends Controller
         $given = $request->file('file');
 
         if ($given) {
-            $file->updateFromFile($fields, $given);
+            $file->updateFromFile($given, $fields);
             unset($fields['file']);
         } else {
             $file->fill($fields)->save();
