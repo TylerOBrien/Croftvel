@@ -11,6 +11,18 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can use Laravel Telescope.
+     *
+     * @param \App\Models\User $user
+     * 
+     * @return mixed
+     */
+    public function telescope(User $user)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can view any users.
      *
      * @param \App\Models\User $user
