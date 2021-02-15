@@ -15,6 +15,7 @@
         "l91/iso-3166-2": "^1.0",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
+        "laravel/socialite": "^5.1",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "league/iso3166": "^3.0",
