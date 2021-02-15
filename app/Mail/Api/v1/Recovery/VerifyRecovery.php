@@ -14,6 +14,8 @@ class VerifyRecovery extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * The recipient of the mail.
+     * 
      * @var \App\Models\User
      */
     protected $recipient;
