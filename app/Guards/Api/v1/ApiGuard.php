@@ -44,14 +44,15 @@ class ApiGuard implements Guard
      *
      * @param  \Illuminate\Http\Request  $request
      * 
-     * @return mixed
+     * @return \App\Models\User
      */
-    public function parseToken(Request $request)
+    public function parseToken(Request $request = null)
     {
         if ($this->check()) {
             return $this->user();
         }
 
+        $request = $request ?? request();
         $bearer_token = $request->bearerToken();
 
         if (is_null($bearer_token)) {
@@ -59,18 +60,17 @@ class ApiGuard implements Guard
         }
 
         $now = now();
+        $expires_at = $now->subMinutes($this->expiration);
         $pat = Sanctum::$personalAccessTokenModel::findToken($bearer_token);
 
         if (is_null($pat)) {
             return null;
-        } else if ($this->expiration && $pat->created_at->lte($now->subMinutes($this->expiration))) {
-            return null;
-        } else if (!$this->supportsTokens($pat->tokenable)) {
+        } else if ($this->expiration && $pat->created_at->lte($expires_at)) {
             return null;
         }
 
         $this->user = $pat->tokenable->withAccessToken(
-            tap($pat->forceFill(['last_used_at' => $now]))->save()
+            tap( $pat->forceFill(['last_used_at' => $now]) )->save()
         );
 
         return $this->user;
@@ -125,6 +125,10 @@ class ApiGuard implements Guard
      */
     public function attempt(array $credentials = [])
     {
+        if ($this->check()) {
+            die('uhoh');
+        }
+
         [ $identity, $secret ] = $this->parseCredentials($credentials);
 
         if (is_null($secret)) {
@@ -181,22 +185,6 @@ class ApiGuard implements Guard
         $secret = $provider->where('type', $credentials['secret']['type'])->limit(1)->first();
 
         return [ $identity, $secret ];
-    }
-
-    /**
-     * Determine if the tokenable model supports API tokens.
-     *
-     * @param  mixed  $tokenable
-     * 
-     * @return bool
-     */
-    protected function supportsTokens($tokenable)
-    {
-        if (!$tokenable) {
-            return false;
-        }
-
-        return (bool) in_array(HasApiTokens::class, class_uses_recursive( get_class($tokenable) ));
     }
 
     /**
