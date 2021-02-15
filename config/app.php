@@ -47,6 +47,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         
         App\Providers\Api\v1\ValidationServiceProvider::class,
         App\Providers\Api\v1\RequestServiceProvider::class,
