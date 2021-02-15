@@ -45,7 +45,7 @@ class Identity extends Model
      */
     public function verification()
     {
-        return $this->hasOne(Verification::class);
+        return $this->hasOne(Verification::class)->orderBy('id', 'desc');
     }
 
     /**
