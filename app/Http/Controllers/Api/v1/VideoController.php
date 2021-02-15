@@ -49,8 +49,9 @@ class VideoController extends Controller
     public function store(StoreVideo $request)
     {
         $fields = $request->validated();
+        $given = $request->file('video');
 
-        return Video::create($fields);
+        return Video::createFromFile($given, $fields);
     }
 
     /**
