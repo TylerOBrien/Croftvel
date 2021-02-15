@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->boolean('is_enabled')->default(1);
             $table->datetime('last_active_at')->nullable();
+            $table->datetime('identified_at')->nullable();
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
