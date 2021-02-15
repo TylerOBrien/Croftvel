@@ -22,7 +22,7 @@ class Profile extends Model
     ];
     
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function floats()
     {
@@ -30,7 +30,7 @@ class Profile extends Model
     }
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function integers()
     {
@@ -38,7 +38,7 @@ class Profile extends Model
     }
     
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function strings()
     {
@@ -46,7 +46,7 @@ class Profile extends Model
     }
     
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function texts()
     {

@@ -12,7 +12,7 @@ class MetaInteger extends Model
     ];
     
     /**
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function meta()
     {

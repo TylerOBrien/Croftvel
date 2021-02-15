@@ -11,7 +11,7 @@ class Privilege extends Model
     ];
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function abilities()
     {

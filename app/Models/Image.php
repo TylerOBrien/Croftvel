@@ -42,7 +42,7 @@ class Image extends Model
     ];
 
     /**
-     * @return Image
+     * @return \App\Models\Image
      */
     static public function createFromFile(array $attributes, $file)
     {

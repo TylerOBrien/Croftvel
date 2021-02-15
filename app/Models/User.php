@@ -29,7 +29,7 @@ class User extends BaseUser
     ];
 
     /**
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function account()
     {
@@ -37,7 +37,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function identities()
     {
@@ -45,7 +45,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function privileges()
     {
@@ -54,7 +54,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function secrets()
     {

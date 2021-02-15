@@ -40,7 +40,7 @@ class File extends Model
     ];
 
     /**
-     * @return File
+     * @return \App\Models\File
      */
     static public function createFromFile(array $attributes, $file)
     {

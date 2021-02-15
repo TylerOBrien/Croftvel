@@ -40,7 +40,7 @@ class Video extends Model
     ];
 
     /**
-     * @return Video
+     * @return \App\Models\Video
      */
     static public function createFromFile(array $attributes, $file)
     {

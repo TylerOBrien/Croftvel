@@ -25,7 +25,7 @@ class Identity extends Model
     ];
 
     /**
-     * @return HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function oauth_token()
     {
@@ -33,7 +33,7 @@ class Identity extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
@@ -41,7 +41,7 @@ class Identity extends Model
     }
 
     /**
-     * @return HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function verification()
     {

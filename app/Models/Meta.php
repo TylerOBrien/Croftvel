@@ -22,7 +22,7 @@ class Meta extends Model
     ];
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function integers()
     {
@@ -30,7 +30,7 @@ class Meta extends Model
     }
 
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function strings()
     {

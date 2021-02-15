@@ -16,7 +16,7 @@ class Account extends Model
     ];
     
     /**
-     * @return HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users()
     {
