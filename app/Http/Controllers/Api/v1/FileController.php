@@ -69,7 +69,6 @@ class FileController extends Controller
 
         if ($given) {
             $file->updateFromFile($given, $fields);
-            unset($fields['file']);
         } else {
             $file->fill($fields)->save();
         }

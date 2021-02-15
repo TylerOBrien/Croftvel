@@ -69,7 +69,6 @@ class ImageController extends Controller
 
         if ($file) {
             $image->updateFromFile($file, $fields);
-            unset($fields['image']);
         } else {
             $image->fill($fields)->save();
         }
