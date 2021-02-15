@@ -25,17 +25,17 @@ class VerifyRecovery extends Mailable
      * 
      * @var string
      */
-    protected $code;
+    protected $plaintext_code;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $recipient, string $code)
+    public function __construct(User $recipient, string $plaintext_code)
     {
         $this->recipient = $recipient;
-        $this->code = $code;
+        $this->plaintext_code = $plaintext_code;
     }
 
     /**
@@ -48,6 +48,6 @@ class VerifyRecovery extends Mailable
         return $this->subject(trans('mail.recovery.verify-recovery.subject'))
                     ->markdown('mail.recovery.verify-recovery', [
                         'recipient' => $this->recipient,
-                        'code' => $this->code ]);
+                        'plaintext_code' => $this->plaintext_code ]);
     }
 }
