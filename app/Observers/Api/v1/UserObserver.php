@@ -36,8 +36,10 @@ class UserObserver
             event(new UserIdentified($user));
         }
 
-        if ($user->wasChanged('account_id') && $user->account_id) {
-            event(new UserAddedToAccount($user, $user->account));
+        if ($user->wasChanged('account_id')) {
+            if ($account = $user->account) {
+                event(new UserAddedToAccount($user, $account));
+            }
         }
     }
 }
