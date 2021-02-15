@@ -44,7 +44,7 @@ class SecretPolicy
      */
     public function store(User $user)
     {
-        return $user->hasAbility('store', Secret::class);
+       return true;
     }
 
     /**
