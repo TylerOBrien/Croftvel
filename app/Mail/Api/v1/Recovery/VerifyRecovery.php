@@ -16,7 +16,7 @@ class VerifyRecovery extends Mailable
     /**
      * @var \App\Models\User
      */
-    protected $user;
+    protected $recipient;
 
     /**
      * The plaintext recovery code.
@@ -30,9 +30,9 @@ class VerifyRecovery extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, string $code)
+    public function __construct(User $recipient, string $code)
     {
-        $this->user = $user;
+        $this->recipient = $recipient;
         $this->code = $code;
     }
 
@@ -45,7 +45,7 @@ class VerifyRecovery extends Mailable
     {
         return $this->subject(trans('mail.recovery.verify-recovery.subject'))
                     ->markdown('mail.recovery.verify-recovery', [
-                        'user' => $this->user,
+                        'recipient' => $this->recipient,
                         'code' => $this->code ]);
     }
 }

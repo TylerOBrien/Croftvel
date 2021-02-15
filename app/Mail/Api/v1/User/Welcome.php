@@ -18,16 +18,16 @@ class Welcome extends Mailable
      * 
      * @var \App\Models\User
      */
-    protected $user;
+    protected $recipient;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $recipient)
     {
-        $this->user = $user;
+        $this->recipient = $recipient;
     }
 
     /**
@@ -39,6 +39,6 @@ class Welcome extends Mailable
     {
         return $this->subject(trans('mail.user.welcome.subject'))
                     ->markdown('mail.user.welcome', [
-                        'user' => $this->user ]);
+                        'recipient' => $this->recipient ]);
     }
 }

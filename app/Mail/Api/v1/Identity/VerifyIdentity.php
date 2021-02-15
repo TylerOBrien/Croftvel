@@ -16,7 +16,7 @@ class VerifyIdentity extends Mailable
     /**
      * @var \App\Models\User
      */
-    protected $user;
+    protected $recipient;
 
     /**
      * The plaintext verification code.
@@ -30,9 +30,9 @@ class VerifyIdentity extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, string $plaintext_code)
+    public function __construct(User $recipient, string $plaintext_code)
     {
-        $this->user = $user;
+        $this->recipient = $recipient;
         $this->plaintext_code = $plaintext_code;
     }
 
@@ -45,7 +45,7 @@ class VerifyIdentity extends Mailable
     {
         return $this->subject(trans('mail.identity.verify-identity.subject'))
                     ->markdown('mail.identity.verify-identity', [
-                        'user' => $this->user,
+                        'recipient' => $this->recipient,
                         'plaintext_code' => $this->plaintext_code ]);
     }
 }

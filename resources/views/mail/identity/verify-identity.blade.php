@@ -1,8 +1,8 @@
 @component('mail::message')
 # Verify Identity
 
-@if ($user->full_name)
-  Hello, {{ $user->full_name }}.
+@if ($recipient->full_name)
+  Hello, {{ $recipient->full_name }}.
 @else
   Hello.
 @endif
