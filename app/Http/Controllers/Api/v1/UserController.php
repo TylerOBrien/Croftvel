@@ -79,7 +79,7 @@ class UserController extends Controller
         $user->fill($fields);
         $user->save();
 
-        return $user->only(array_keys($fields));
+        return $user;
     }
 
     /**
