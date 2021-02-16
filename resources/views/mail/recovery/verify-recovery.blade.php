@@ -1,11 +1,9 @@
 @component('mail::message')
-# Introduction
+# Recover Account
 
-The body of your message.
+We received a recovery request for your account.
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+Your secret code is {{ $plaintext_code }}.
 
 Thanks,<br>
 {{ config('app.name') }}
