@@ -2,7 +2,7 @@
 
 namespace App\Mail\Api\v1\Recovery;
 
-use App\Models\User;
+use App\Models\{ Recovery, User };
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,6 +21,13 @@ class VerifyRecovery extends Mailable
     protected $recipient;
 
     /**
+     * The recovery instance.
+     * 
+     * @var \App\Models\Recovery
+     */
+    protected $recovery;
+
+    /**
      * The plaintext recovery code.
      * 
      * @var string
@@ -32,9 +39,10 @@ class VerifyRecovery extends Mailable
      *
      * @return void
      */
-    public function __construct(User $recipient, string $plaintext_code)
+    public function __construct(User $recipient, Recovery $recovery, string $plaintext_code)
     {
         $this->recipient = $recipient;
+        $this->recovery = $recovery;
         $this->plaintext_code = $plaintext_code;
     }
 
@@ -48,6 +56,7 @@ class VerifyRecovery extends Mailable
         return $this->subject(trans('mail.recovery.verify-recovery.subject'))
                     ->markdown('mail.recovery.verify-recovery', [
                         'recipient' => $this->recipient,
+                        'recovery' => $this->recovery,
                         'plaintext_code' => $this->plaintext_code ]);
     }
 }

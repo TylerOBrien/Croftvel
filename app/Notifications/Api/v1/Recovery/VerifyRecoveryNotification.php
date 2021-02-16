@@ -3,7 +3,7 @@
 namespace App\Notifications\Api\v1\Recovery;
 
 use App\Mail\Api\v1\Recovery\VerifyRecovery;
-use App\Models\User;
+use App\Models\{ Recovery, User };
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,6 +12,13 @@ use Illuminate\Notifications\Notification;
 class VerifyRecoveryNotification extends Notification
 {
     use Queueable;
+
+    /**
+     * The newly created recovery instance.
+     * 
+     * @var \App\Models\Recovery
+     */
+    protected $recovery;
 
     /**
      * The plaintext recovery code.
@@ -25,8 +32,9 @@ class VerifyRecoveryNotification extends Notification
      *
      * @return void
      */
-    public function __construct(string $code)
+    public function __construct(Recovery $recovery, string $code)
     {
+        $this->recovery = $recovery;
         $this->code = $code;
     }
 
@@ -51,7 +59,7 @@ class VerifyRecoveryNotification extends Notification
      */
     public function toMail(User $notifiable)
     {
-        $mail = new VerifyRecovery($notifiable, $this->code);
+        $mail = new VerifyRecovery($notifiable, $this->recovery, $this->code);
         $mail->to($notifiable->email, $notifiable->full_name);
         $mail->from(config('mail.from.address'), config('mail.from.name'));
 
