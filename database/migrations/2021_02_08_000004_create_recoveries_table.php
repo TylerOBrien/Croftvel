@@ -17,7 +17,7 @@ class CreateRecoveriesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('identity_id')->nullable();
             $table->char('code', 64);
-            $table->datetime('used_at')->nullable();
+            $table->datetime('verified_at')->nullable();
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
