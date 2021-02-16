@@ -27,7 +27,7 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function oauth_token()
+    public function oauth()
     {
         return $this->hasOne(OAuthToken::class);
     }
