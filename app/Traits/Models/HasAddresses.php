@@ -27,7 +27,7 @@ trait HasAddress
     }
 
     /**
-     * @return \App\Modles\Address
+     * @return \App\Models\Address
      */
     public function updateOrCreateAddress(array $fields):Address
     {
