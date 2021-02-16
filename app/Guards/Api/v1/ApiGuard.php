@@ -5,7 +5,7 @@ namespace App\Guards\Api\v1;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Models\{ Identity, Secret };
 
-use Laravel\Sanctum\{ HasApiTokens, Sanctum };
+use Laravel\Sanctum\Sanctum;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
