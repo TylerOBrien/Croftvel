@@ -8,3 +8,5 @@ Route::apiResource('recoveries', RecoveryController::class);
 
 Route::post('tokens',  [ TokenController::class, 'store' ]);
 Route::post('users', [ UserController::class, 'store' ]);
+
+Route::put('identities/{identity}/recovery', [ IdentityController::class, 'recover' ]);
