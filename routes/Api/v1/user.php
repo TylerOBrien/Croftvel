@@ -9,6 +9,7 @@ Route::apiResource('abilities', AbilityController::class);
 Route::apiResource('addresses', AddressController::class);
 Route::apiResource('files', FileController::class);
 Route::apiResource('images', ImageController::class);
+Route::apiResource('privileges', PrivilegeController::class);
 Route::apiResource('secrets', SecretController::class);
 Route::apiResource('tokens', TokenController::class)->except('store');
 Route::apiResource('verifications', VerificationController::class);
