@@ -24,4 +24,20 @@ class OAuthAccessToken extends Model
     {
         return $this->belongsTo(Identity::class);
     }
+
+    /**
+     * @return string
+     */
+    public function getValueAttribute()
+    {
+        return decrypt($this->value);
+    }
+
+    /**
+     * @return void
+     */
+    public function setValueAttribute(string $value)
+    {
+        $this->attributes['value'] = encrypt($value);
+    }
 }
