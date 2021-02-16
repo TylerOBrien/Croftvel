@@ -2,35 +2,31 @@
 
 namespace App\Events\Api\v1\Recovery;
 
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Models\Recovery;
+
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class RecoveryVerified
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
+
+    /**
+     * The instance of the recovery that was just verified.
+     * 
+     * @var \App\Models\Recovery
+     */
+    public $recovery;
 
     /**
      * Create a new event instance.
+     * 
+     * @param  \App\Models\Recovery $recovery
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Recovery $recovery)
     {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('channel-name');
+        $this->recovery = $recovery;
     }
 }

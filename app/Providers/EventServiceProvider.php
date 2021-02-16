@@ -11,8 +11,8 @@ use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerif
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
 
-use App\Models\{ Identity, User };
-use App\Observers\Api\v1\{ IdentityObserver, UserObserver };
+use App\Models\{ Identity, Recovery, User };
+use App\Observers\Api\v1\{ IdentityObserver, RecoveryObserver, UserObserver };
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
 
@@ -53,6 +53,7 @@ class EventServiceProvider extends BaseEventServiceProvider
     public function boot()
     {
         Identity::observe(IdentityObserver::class);
+        Recovery::observe(RecoveryObserver::class);
         User::observe(UserObserver::class);
     }
 }
