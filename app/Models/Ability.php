@@ -9,7 +9,8 @@ class Ability extends Model
     protected $fillable = [
         'privilege_id',
         'name',
-        'model'
+        'model_type',
+        'model_id'
     ];
 
     /**
