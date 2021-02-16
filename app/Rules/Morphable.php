@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class Morphable implements Rule
 {
@@ -37,17 +38,13 @@ class Morphable implements Rule
      */
     protected function passesId($name, $value)
     {
-        $model = request("{$name}_type");
-
-        if (strpos($model, 'App\\Models\\') !== 0) {
-            $model = "App\\Models\\$model";
-        }
+        $model = Str::start(request("{$name}_type"), config('croft.models.namespace'));
 
         if (!class_exists($model)) {
             return false;
         }
 
-        return (bool) $model::whereId($value)->count();
+        return $model::whereId($value)->exists();
     }
 
     /**
@@ -59,11 +56,7 @@ class Morphable implements Rule
      */
     protected function passesType($name, $value)
     {
-        if (strpos($value, 'App\\Models\\') !== 0) {
-            $value = "App\\Models\\$value";
-        }
-
-        return class_exists($value);
+        return class_exists(Str::start($value, config('croft.models.namespace')));
     }
 
     /**
