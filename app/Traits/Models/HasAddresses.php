@@ -4,7 +4,7 @@ namespace App\Traits\Models;
 
 use App\Models\Address;
 
-trait HasAddress
+trait HasAddresses
 {
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
