@@ -30,7 +30,7 @@ class OAuthAccessToken extends Model
      */
     public function getValueAttribute()
     {
-        return decrypt($this->value);
+        return decrypt($this->attributes['value']);
     }
 
     /**
