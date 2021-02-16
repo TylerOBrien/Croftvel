@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 
 class Can implements Rule
 {
@@ -47,8 +48,10 @@ class Can implements Rule
             return false;
         }
 
+        $model_class = Str::start($this->target, config('croft.models.namespace'));
+
         return $user->can(
-            $this->ability, app("App\\Models\\{$this->target}")::find($value)
+            $this->ability, $model_class::find($value)
         );
     }
 
