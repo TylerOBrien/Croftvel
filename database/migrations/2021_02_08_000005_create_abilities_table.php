@@ -17,9 +17,12 @@ class CreateAbilitiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('privilege_id');
             $table->string('name');
-            $table->string('model');
+            $table->string('model_type');
+            $table->unsignedBigInteger('model_id')->nullable();
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
+
+            $table->index('model_id');
 
             $table->foreign('privilege_id')
                   ->references('id')->on('privileges')
