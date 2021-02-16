@@ -62,6 +62,6 @@ class Can implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return trans('validation.can');
     }
 }
