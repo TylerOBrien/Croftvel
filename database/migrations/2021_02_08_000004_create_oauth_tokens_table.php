@@ -18,7 +18,7 @@ class CreateOAuthAccessTokensTable extends Migration
             $table->unsignedBigInteger('identity_id');
             $table->string('scope');
             $table->string('type');
-            $table->string('value');
+            $table->text('value');
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
