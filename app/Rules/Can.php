@@ -23,6 +23,8 @@ class Can implements Rule
 
     /**
      * Create a new rule instance.
+     * 
+     * @param  array  $parameters
      *
      * @return void
      */
