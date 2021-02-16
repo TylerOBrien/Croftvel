@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, VerifyIdentity, DestroyIdentity };
+use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, VerifyIdentity, RecoverIdentity, DestroyIdentity };
 use App\Models\{ Identity, User };
 use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
@@ -84,6 +84,20 @@ class IdentityController extends Controller
     public function verify(Identity $identity, VerifyIdentity $request)
     {
         $identity->attemptVerify($request->validated());
+        return response()->json(null, 204);
+    }
+
+    /**
+     * Attempt to recover the specified identity.
+     * 
+     * @param  Identity  $identity
+     * @param  RecoverIdentity  $request
+     * 
+     * @return Response
+     */
+    public function recover(Identity $identity, RecoverIdentity $request)
+    {
+        $identity->attemptRecover($request->validated());
         return response()->json(null, 204);
     }
 
