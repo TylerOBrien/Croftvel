@@ -9,8 +9,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class User extends BaseUser
 {
@@ -77,7 +75,10 @@ class User extends BaseUser
             'name' => 'primary'
         ];
 
-        return $this->identities()->where($predicate)->first()->value ?? null;
+        return $this->identities()
+                    ->where($predicate)
+                    ->first()
+                    ->value ?? null;
     }
 
     /**
@@ -92,7 +93,10 @@ class User extends BaseUser
             'name' => 'primary'
         ];
 
-        return $this->identities()->where($predicate)->first()->value ?? null;
+        return $this->identities()
+                    ->where($predicate)
+                    ->first()
+                    ->value ?? null;
     }
 
     /**
@@ -100,7 +104,9 @@ class User extends BaseUser
      */
     public function getIsIdentifiedAttribute()
     {
-        return $this->identities()->whereNotNull('verified_at')->exists();
+        return $this->identities()
+                    ->whereNotNull('verified_at')
+                    ->exists();
     }
 
     /**
@@ -108,6 +114,8 @@ class User extends BaseUser
      */
     public function getTotalIdentitiesVerifiedAttribute()
     {
-        return $this->identities()->whereNotNull('verified_at')->count();
+        return $this->identities()
+                    ->whereNotNull('verified_at')
+                    ->count();
     }
 }
