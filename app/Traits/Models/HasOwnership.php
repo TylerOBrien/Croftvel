@@ -2,6 +2,8 @@
 
 namespace App\Traits\Models;
 
+use Illuminate\Support\Str;
+
 trait HasOwnership
 {
     /**
@@ -17,10 +19,6 @@ trait HasOwnership
      */
     public function setOwnerTypeAttribute(string $owner_type)
     {
-        if (strpos($owner_type, 'App\\Models\\') === 0) {
-            $this->attributes['owner_type'] = $owner_type;
-        } else {
-            $this->attributes['owner_type'] = "App\\Models\\$owner_type";
-        }
+        $this->attributes['owner_type'] = Str::start($owner_type, config('croft.models.namespace'));
     }
 }
