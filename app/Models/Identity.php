@@ -29,7 +29,7 @@ class Identity extends Model
      */
     public function oauth()
     {
-        return $this->hasOne(OAuthToken::class);
+        return $this->hasOne(OAuthAccessToken::class);
     }
 
     /**
