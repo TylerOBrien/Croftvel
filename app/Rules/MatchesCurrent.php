@@ -23,7 +23,7 @@ class MatchesCurrent implements Rule
             return false;
         }
 
-        $given = request()->input($name);
+        $given = request($name);
         $current = auth()->user()->attributes[$attribute];
 
         if ($attribute !== 'password') {

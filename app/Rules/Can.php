@@ -41,7 +41,7 @@ class Can implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = auth('croft')->parseToken(request());
+        $user = auth('croft')->parseToken();
 
         if (is_null($user)) {
             return false;
