@@ -73,6 +73,6 @@ class Morphable implements Rule
      */
     public function message()
     {
-        return 'The given morphable is not valid.';
+        return trans('validation.morphable');
     }
 }

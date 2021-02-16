@@ -14,6 +14,7 @@ return [
     ],
 
     'matches_current' => 'The current :attribute field does not match our records.',
+    'morphable' => 'The given morphable is not valid.',
 
     /*
     |--------------------------------------------------------------------------
