@@ -63,13 +63,9 @@ class Identity extends Model
     {
         if ($this->is_verified) {
             throw new AlreadyVerified;
-        }
-
-        if (!isset($fields['code'])) {
+        } else if (!isset($fields['code'])) {
             throw new MissingVerificationCode;
-        }
-
-        if ($this->verification->code !== hash('sha256', $fields['code'])) {
+        } else if ($this->verification->code !== hash('sha256', $fields['code'])) {
             throw new InvalidVerificationCode;
         }
 
@@ -78,10 +74,8 @@ class Identity extends Model
         if ($this->verification->created_at->diffInMinutes($now) > config('croft.verification.ttl')) {
             throw new ExpiredVerificationCode;
         }
-
-        $this->verified_at = $now;
         
-        return $this->save();
+        return $this->forceFill([ 'verified_at' => $now ])->save();
     }
 
     /**
