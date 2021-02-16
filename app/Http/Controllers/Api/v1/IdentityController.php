@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, VerifyIdentity, RecoverIdentity, DestroyIdentity };
+use App\Http\Resources\Api\v1\TokenResource;
 use App\Models\{ Identity, User };
 use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
@@ -82,7 +83,7 @@ class IdentityController extends Controller
      * @return Response
      */
     public function verify(Identity $identity, VerifyIdentity $request)
-    {
+{
         $identity->attemptVerify($request->validated());
         return response()->json(null, 204);
     }
@@ -97,8 +98,12 @@ class IdentityController extends Controller
      */
     public function recover(Identity $identity, RecoverIdentity $request)
     {
-        $identity->attemptRecover($request->validated());
-        return response()->json(null, 204);
+        $fields = $request->validated();
+        $user = $identity->attemptRecover($fields);
+        $pat = $user->createToken(config('croft.token.name'));
+        $token = new TokenResource($pat);
+
+        return compact('token', 'user');
     }
 
     /**

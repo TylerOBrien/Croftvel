@@ -85,7 +85,7 @@ class Identity extends Model
     }
 
     /**
-     * @return bool
+     * @return \App\Models\User|null
      */
     public function attemptRecover(array $fields)
     {
@@ -99,7 +99,9 @@ class Identity extends Model
             throw new ExpiredVerificationCode;
         }
 
-        return $this->recovery->forceFill([ 'verified_at' => $now ])->save();
+        $this->recovery->forceFill([ 'verified_at' => $now ])->save();
+
+        return $this->recovery->identity->user ?? null;
     }
 
     /**
