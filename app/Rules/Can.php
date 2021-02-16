@@ -48,11 +48,14 @@ class Can implements Rule
             return false;
         }
 
-        $model_class = Str::start($this->target, config('croft.models.namespace'));
+        $model_class_name = Str::start($this->target, config('croft.models.namespace'));
+        $instance = $model_class_name::find($value);
 
-        return $user->can(
-            $this->ability, $model_class::find($value)
-        );
+        if (is_null($instance)) {
+            return true;
+        }
+
+        return $user->can($this->ability, $instance);
     }
 
     /**
