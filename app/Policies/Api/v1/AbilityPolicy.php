@@ -44,6 +44,7 @@ class AbilityPolicy
      */
     public function store(User $user)
     {
+        return true;
         return $user->hasAbility('store', Ability::class);
     }
 

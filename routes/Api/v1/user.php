@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('accounts', AccountController::class);
+Route::apiResource('abilities', AbilityController::class);
 Route::apiResource('addresses', AddressController::class);
 Route::apiResource('files', FileController::class);
 Route::apiResource('images', ImageController::class);
