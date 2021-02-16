@@ -68,10 +68,6 @@ class Identity extends Model
         }
         
         call_user_func([ $this, "attemptVerifyBy$fields[type]" ], $fields['value']);
-
-        if ($this->verification->created_at->diffInMinutes(now()) > config('croft.verification.ttl')) {
-            throw new ExpiredVerificationCode;
-        }
         
         return $this->forceFill([ 'verified_at' => now() ])->save();
     }
@@ -83,6 +79,8 @@ class Identity extends Model
     {
         if ($this->verification->code !== hash('sha256', $code)) {
             throw new InvalidVerificationCode;
+        } else if ($this->verification->created_at->diffInMinutes(now()) > config('croft.verification.ttl')) {
+            throw new ExpiredVerificationCode;
         }
     }
 
