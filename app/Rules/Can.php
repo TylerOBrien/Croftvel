@@ -15,11 +15,11 @@ class Can implements Rule
     protected $ability;
 
     /**
-     * The name of the model/policy.
+     * The name of the model to check permissions against.
      * 
      * @var string
      */
-    protected $target;
+    protected $model_name;
 
     /**
      * Create a new rule instance.
@@ -29,7 +29,7 @@ class Can implements Rule
     public function __construct(array $parameters)
     {
         $this->ability = $parameters[0] ?? null;
-        $this->target = $parameters[1] ?? null;
+        $this->model_name = $parameters[1] ?? null;
     }
 
     /**
@@ -48,7 +48,7 @@ class Can implements Rule
             return false;
         }
 
-        $model_class_name = Str::start($this->target, config('croft.models.namespace'));
+        $model_class_name = Str::start($this->model_name, config('croft.models.namespace'));
         $instance = $model_class_name::find($value);
 
         if (is_null($instance)) {
