@@ -37,7 +37,7 @@ class Morphable implements Rule
      */
     protected function passesId($name, $value)
     {
-        $model = request()->input("{$name}_type");
+        $model = request("{$name}_type");
 
         if (strpos($model, 'App\\Models\\') !== 0) {
             $model = "App\\Models\\$model";
