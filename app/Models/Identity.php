@@ -33,6 +33,14 @@ class Identity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function recovery()
+    {
+        return $this->hasOne(Recovery::class)->orderBy('id', 'desc');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -74,6 +82,24 @@ class Identity extends Model
         $this->verified_at = $now;
         
         return $this->save();
+    }
+
+    /**
+     * @return bool
+     */
+    public function attemptRecover(array $fields)
+    {
+        if (($this->recovery->code ?? null) !== hash('sha256', $fields['code'])) {
+            throw new InvalidVerificationCode;
+        }
+
+        $now = now();
+
+        if ($this->recovery->created_at->diffInMinutes($now) > config('croft.recovery.ttl')) {
+            throw new ExpiredVerificationCode;
+        }
+
+        return $this->recovery->forceFill([ 'verified_at' => $now ])->save();
     }
 
     /**
