@@ -28,10 +28,11 @@ class Country implements Rule
 
         try {
             $iso->alpha3($value);
-            return true;
-        } catch (Exception $error) {}
+        } catch (Exception $error) {
+            return false;
+        }
 
-        return false;
+        return true;
     }
 
     /**
