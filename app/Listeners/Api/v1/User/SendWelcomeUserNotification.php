@@ -13,16 +13,6 @@ class SendWelcomeUserNotification implements ShouldQueue
     use InteractsWithQueue;
 
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  \App\Events\Api\v1\User\UserIdentified  $event
