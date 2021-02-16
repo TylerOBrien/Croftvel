@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OAuthToken extends Model
+class OAuthAccessToken extends Model
 {
     protected $hidden = [
         'value'
