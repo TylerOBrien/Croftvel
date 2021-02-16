@@ -27,9 +27,9 @@ trait HasAddress
     }
 
     /**
-     * @return \App\Models\Address
+     * @return \App\Models\Address|bool
      */
-    public function updateOrCreateAddress(array $fields):Address
+    public function updateOrCreateAddress(array $fields)
     {
         $predicate = [
             'name' => $fields['address']['name'],
