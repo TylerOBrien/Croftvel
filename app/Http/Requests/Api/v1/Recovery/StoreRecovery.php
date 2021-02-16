@@ -14,7 +14,8 @@ class StoreRecovery extends ApiRequest
      */
     public function __construct()
     {
-        $this->ability = 'store';
+            $this->ability = 'store';
+
         $this->model = Recovery::class;
     }
 
@@ -26,7 +27,9 @@ class StoreRecovery extends ApiRequest
     public function rules()
     {
         return [
-            'identity_id' => 'required|int|exists:identities,id'
+            'identity_id' => 'int|exists:identities,id',
+            'type' => 'required_with:value|string|in:email,mobile',
+            'value' => 'required_with:type|string'
         ];
     }
 }

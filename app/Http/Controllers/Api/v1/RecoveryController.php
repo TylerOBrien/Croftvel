@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Recovery\{ IndexRecovery, ShowRecovery, StoreRecovery, UpdateRecovery, DestroyRecovery };
-use App\Models\Recovery;
+use App\Models\{ Identity, Recovery };
 use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 
 class RecoveryController extends Controller
@@ -49,8 +49,10 @@ class RecoveryController extends Controller
     public function store(StoreRecovery $request)
     {
         $code = Recovery::makeUniqueString('code', config('croft.recovery.length'), 'sha256');
+        $identity_id = Identity::findByRequest($request)->id;
         $fields = array_merge($request->validated(), [
-            'code' => $code
+            'code' => $code,
+            'identity_id' => $identity_id
         ]);
 
         return Recovery::create($fields);
