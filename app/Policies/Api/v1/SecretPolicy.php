@@ -32,7 +32,7 @@ class SecretPolicy
      */
     public function show(User $user, Secret $secret)
     {
-        return $user->hasAbility('show', Secret::class);
+        return $user->hasAbility('show', Secret::class, $secret->id);
     }
 
     /**
@@ -57,7 +57,7 @@ class SecretPolicy
      */
     public function update(User $user, Secret $secret)
     {
-        return $user->hasAbility('update', Secret::class);
+        return $user->hasAbility('update', Secret::class, $secret->id);
     }
 
     /**
@@ -70,7 +70,7 @@ class SecretPolicy
      */
     public function attach(User $user, Secret $secret)
     {
-        return $user->hasAbility('attach', Secret::class);
+        return $user->hasAbility('attach', Secret::class, $secret->id);
     }
 
     /**
@@ -83,6 +83,6 @@ class SecretPolicy
      */
     public function destroy(User $user, Secret $secret)
     {
-        return $user->hasAbility('destroy', Secret::class);
+        return $user->hasAbility('destroy', Secret::class, $secret->id);
     }
 }
