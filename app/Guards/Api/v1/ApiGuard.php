@@ -175,14 +175,14 @@ class ApiGuard implements Guard
      */
     protected function parseCredentials(array $credentials)
     {
-        $identity = Identity::where($credentials['identity'])->limit(1)->first();
+        $identity = Identity::where($credentials['identity'])->first();
 
         if (is_null($identity)) {
             throw new InvalidCredentials;
         }
 
         $provider = $identity->user->secrets();
-        $secret = $provider->where('type', $credentials['secret']['type'])->limit(1)->first();
+        $secret = $provider->where('type', $credentials['secret']['type'])->first();
 
         return [ $identity, $secret ];
     }

@@ -144,6 +144,6 @@ class Identity extends Model
         $type = $request->input('type');
         $value = $request->input('value');
 
-        return self::where(compact('type', 'value'))->limit(1)->first();
+        return self::where(compact('type', 'value'))->first();
     }
 }

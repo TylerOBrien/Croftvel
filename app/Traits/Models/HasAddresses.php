@@ -36,7 +36,7 @@ trait HasAddress
             'owner_id' => $this->id,
             'owner_type' => self::class ];
 
-        $address = Address::where($predicate)->limit(1)->first();
+        $address = Address::where($predicate)->first();
 
         if ($address) {
             return $address->fill($fields['address'])->save();
