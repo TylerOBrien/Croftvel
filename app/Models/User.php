@@ -9,6 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class User extends BaseUser
@@ -67,18 +68,28 @@ class User extends BaseUser
     /**
      * @return bool
      */
-    public function hasAbility(string $ability, string $model)
+    public function hasAbility(string $ability, string $model_type, int $model_id = null)
     {
-        $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model'));
-        $query = DB::raw('
+        $model_type = Str::start($model_type, config('croft.models.namespace'));
+        $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model_type'));
+
+        if (is_null($model_id)) {
+            $model_id_clause = 'abilities.model_id IS NULL';
+        } else {
+            $bindings['model_id'] = $model_id;
+            $model_id_clause = '(abilities.model_id IS NULL OR abilities.model_id = :model_id)';
+        }
+
+        $query = DB::raw("
             SELECT EXISTS(SELECT *
             FROM abilities
             JOIN privileges ON privileges.id = abilities.privilege_id
             JOIN privilege_user ON privileges.id = privilege_user.privilege_id
             WHERE privilege_user.user_id = :user_id AND
-                (abilities.name = "*" OR abilities.name = :ability) AND
-                (abilities.model = "*" OR abilities.model = :model)
-            LIMIT 1) as `exists`;');
+                (abilities.name = '*' OR abilities.name = :ability) AND
+                (abilities.model_type = '*' OR abilities.model_type = :model_type) AND
+                $model_id_clause
+            LIMIT 1) as `exists`;");
 
         return (bool) DB::select($query, $bindings)[0]->exists ?? false;
     }
