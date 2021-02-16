@@ -15,7 +15,7 @@ class IdentityController extends Controller
     /**
      * Display a listing of the identity.
      * 
-     * @param IndexIdentity $request
+     * @param  IndexIdentity  $request
      *
      * @return Response
      */
@@ -30,8 +30,8 @@ class IdentityController extends Controller
     /**
      * Display the specified identity.
      * 
-     * @param Identity $identity
-     * @param ShowIdentity $request
+     * @param  Identity  $identity
+     * @param  ShowIdentity  $request
      *
      * @return Response
      */
@@ -43,7 +43,7 @@ class IdentityController extends Controller
     /**
      * Store a newly created identity in storage.
      * 
-     * @param StoreIdentity $request
+     * @param  StoreIdentity  $request
      *
      * @return Response
      */
@@ -59,8 +59,8 @@ class IdentityController extends Controller
     /**
      * Update the specified identity in storage.
      * 
-     * @param Identity $identity
-     * @param UpdateIdentity $request
+     * @param  Identity  $identity
+     * @param  UpdateIdentity  $request
      * 
      * @return Response
      */
@@ -77,8 +77,8 @@ class IdentityController extends Controller
     /**
      * Verify the specified identity.
      * 
-     * @param Identity $identity
-     * @param UpdateIdentity $request
+     * @param  Identity  $identity
+     * @param  UpdateIdentity  $request
      * 
      * @return Response
      */
@@ -109,8 +109,8 @@ class IdentityController extends Controller
     /**
      * Remove the specified identity from storage.
      * 
-     * @param Identity $identity
-     * @param DestroyIdentity $request
+     * @param  Identity  $identity
+     * @param  DestroyIdentity  $request
      *
      * @return Response
      */
