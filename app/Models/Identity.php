@@ -73,7 +73,7 @@ class Identity extends Model
     }
 
     /**
-     * @return bool
+     * @return void
      */
     protected function attemptVerifyByCode($code)
     {
@@ -85,7 +85,7 @@ class Identity extends Model
     }
 
     /**
-     * @return bool
+     * @return void
      */
     protected function attemptVerifyByToken($token)
     {
