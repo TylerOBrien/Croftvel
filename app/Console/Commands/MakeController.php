@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class MakeController extends GeneratorCommand
 {
-    protected $signature = 'make:croft-controller {name} {--type=} {--requests}';
+    protected $signature = 'make:croft-controller {name} {--type=} {--requests} {--policies}';
     protected $description = 'Create a controller.';
 
     /**
@@ -17,6 +17,10 @@ class MakeController extends GeneratorCommand
     public function handle()
     {
         $name = trim($this->argument('name'));
+
+        if ($this->option('policies')) {
+            Artisan::call('make:croft-policy', [ 'name' => $name ]);
+        }
 
         if ($this->option('requests')) {
             Artisan::call('make:croft-request', ['name' => $name, '--ability' => 'index']);
