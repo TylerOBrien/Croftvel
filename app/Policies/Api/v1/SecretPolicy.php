@@ -61,6 +61,19 @@ class SecretPolicy
     }
 
     /**
+     * Determine whether the user can attach resources to the secret.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Secret  $secret
+     * 
+     * @return mixed
+     */
+    public function attach(User $user, Secret $secret)
+    {
+        return $user->hasAbility('attach', Secret::class);
+    }
+
+    /**
      * Determine whether the user can delete the secret.
      *
      * @param  \App\Models\User  $user

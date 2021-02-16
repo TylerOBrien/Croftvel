@@ -28,7 +28,7 @@ class StoreSecret extends ApiRequest
         return array_merge(
             request()->route('user')
                 ? []
-                : [ 'user_id' => 'sometimes|int|exists:users,id' ],
+                : [ 'user_id' => 'sometimes|int|exists:users,id|can:attach,Secret' ],
             [
                 'type' => 'required|string|in:password,totp',
                 'value' => 'required|string|confirmed'
