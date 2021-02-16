@@ -6,8 +6,6 @@ use Illuminate\Contracts\Validation\Rule;
 
 class Morphable implements Rule
 {
-    protected $target;
-
     /**
      * Determine if the validation rule passes.
      *
