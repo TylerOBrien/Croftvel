@@ -31,7 +31,7 @@ class StoreSecret extends ApiRequest
                 : [ 'user_id' => 'sometimes|int|exists:users,id' ],
             [
                 'type' => 'required|string|in:password,totp',
-                'value' => 'required|string'
+                'value' => 'required|string|confirmed'
             ]
         );
     }
