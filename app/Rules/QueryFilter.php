@@ -7,12 +7,13 @@ use ReflectionClass;
 use App\Helpers\QueryFilterHelper;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Schema;
 
 class QueryFilter implements Rule
 {
     /**
-     * 
+     * The name of the model to apply the query filter to.
      * 
      * @var string
      */
@@ -58,7 +59,8 @@ class QueryFilter implements Rule
             }
         }
 
-        $table_name = app("App\\Models\\{$this->model_name}")->getTable();
+        $model_class_name = Str::start($this->model_name, config('croft.models.namespace'));
+        $table_name = app($model_class_name)->getTable();
         $column_names = Schema::getColumnListing($table_name);
 
         foreach ($value as $column => $_) {
