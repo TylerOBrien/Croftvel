@@ -93,4 +93,19 @@ class Identity extends Model
             $this->attributes['verified_at'] = $value;
         }
     }
+
+    /**
+     * @return \App\Models\Identity|null
+     */
+    static public function findByRequest($request)
+    {
+        if ($request->has('identity_id')) {
+            return self::find($request->input('identity_id'));
+        }
+
+        $type = $request->input('type');
+        $value = $request->input('value');
+
+        return self::where(compact('type', 'value'))->limit(1)->first();
+    }
 }
