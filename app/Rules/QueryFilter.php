@@ -43,9 +43,7 @@ class QueryFilter implements Rule
     {
         if (is_null($value)) {
             return true;
-        }
-
-        if (!is_array($value) || empty($value)) {
+        } else if (!is_array($value) || empty($value)) {
             return false;
         }
 
