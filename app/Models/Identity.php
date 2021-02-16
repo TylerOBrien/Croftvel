@@ -27,7 +27,7 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function oauth()
+    public function oauth_token()
     {
         return $this->hasOne(OAuthAccessToken::class);
     }
@@ -63,19 +63,37 @@ class Identity extends Model
     {
         if ($this->is_verified) {
             throw new AlreadyVerified;
-        } else if (!isset($fields['code'])) {
+        } else if (!isset($fields['value'])) {
             throw new MissingVerificationCode;
-        } else if ($this->verification->code !== hash('sha256', $fields['code'])) {
-            throw new InvalidVerificationCode;
         }
+        
+        call_user_func([ $this, "attemptVerifyBy$fields[type]" ], $fields['value']);
 
-        $now = now();
-
-        if ($this->verification->created_at->diffInMinutes($now) > config('croft.verification.ttl')) {
+        if ($this->verification->created_at->diffInMinutes(now()) > config('croft.verification.ttl')) {
             throw new ExpiredVerificationCode;
         }
         
-        return $this->forceFill([ 'verified_at' => $now ])->save();
+        return $this->forceFill([ 'verified_at' => now() ])->save();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function attemptVerifyByCode($code)
+    {
+        if ($this->verification->code !== hash('sha256', $code)) {
+            throw new InvalidVerificationCode;
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    protected function attemptVerifyByToken($token)
+    {
+        if (($this->oauth_token->value ?? null) !== $token) {
+            throw new InvalidVerificationCode;
+        }
     }
 
     /**

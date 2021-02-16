@@ -27,7 +27,8 @@ class VerifyIdentity extends ApiRequest
     public function rules()
     {
         return [
-            'code' => 'required|int|digits:' . config('croft.verification.length')
+            'type' => 'required|string|in:code,token',
+            'value' => 'required|string'
         ];
     }
 }
