@@ -58,15 +58,17 @@ trait HasUserAbilities
         }
 
         $query = DB::raw("
-            SELECT EXISTS(SELECT *
-            FROM abilities
-            JOIN privileges ON privileges.id = abilities.privilege_id
-            JOIN privilege_user ON privileges.id = privilege_user.privilege_id
-            WHERE privilege_user.user_id = :user_id AND
-                (abilities.name = '*' OR abilities.name = :ability) AND
-                (abilities.model_type = '*' OR abilities.model_type = :model_type) AND
-                $model_id_clause
-            LIMIT 1) as `exists`;");
+            SELECT EXISTS(
+                SELECT *
+                FROM abilities
+                JOIN privileges ON privileges.id = abilities.privilege_id
+                JOIN privilege_user ON privileges.id = privilege_user.privilege_id
+                WHERE privilege_user.user_id = :user_id AND
+                    (abilities.name = '*' OR abilities.name = :ability) AND
+                    (abilities.model_type = '*' OR abilities.model_type = :model_type) AND
+                    $model_id_clause
+                LIMIT 1
+            ) as `exists`;");
 
         return (bool) DB::select($query, $bindings)[0]->exists ?? false;
     }
