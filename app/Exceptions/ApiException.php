@@ -18,9 +18,9 @@ class ApiException extends Exception
      * 
      * @return void
      */
-    public function __construct(string $lang_file, int $http_code)
+    public function __construct(string $lang_file, int $http_code, array $attributes = [])
     {
-        $this->message = trans($lang_file);
+        $this->message = trans($lang_file, $attributes);
         $this->http_code = $http_code;
     }
 
