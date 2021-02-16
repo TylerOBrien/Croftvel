@@ -61,7 +61,7 @@ class Identity extends Model
      */
     public function attemptVerify(array $fields)
     {
-        if ($this->verified) {
+        if ($this->is_verified) {
             throw new AlreadyVerified;
         }
 
@@ -107,7 +107,7 @@ class Identity extends Model
     /**
      * @return bool
      */
-    public function getVerifiedAttribute()
+    public function getIsVerifiedAttribute()
     {
         return (bool) $this->verified_at;
     }
