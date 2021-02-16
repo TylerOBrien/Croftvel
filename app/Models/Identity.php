@@ -63,7 +63,7 @@ class Identity extends Model
     {
         if ($this->is_verified) {
             throw new AlreadyVerified;
-        } else if (!isset($fields['value'])) {
+        } else if (!isset($fields['type']) || !isset($fields['value'])) {
             throw new MissingVerificationCode;
         }
         
