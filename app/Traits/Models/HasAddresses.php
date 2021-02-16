@@ -7,7 +7,7 @@ use App\Models\Address;
 trait HasAddress
 {
     /**
-     * @return MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function addresses()
     {
@@ -15,7 +15,7 @@ trait HasAddress
     }
 
     /**
-     * @return Address
+     * @return \App\Models\Address
      */
     public function createAddress(array $fields):Address
     {
@@ -27,7 +27,7 @@ trait HasAddress
     }
 
     /**
-     * @return Address
+     * @return \App\Modles\Address
      */
     public function updateOrCreateAddress(array $fields):Address
     {
