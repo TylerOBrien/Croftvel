@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Events\Api\v1\User\UserCreated;
-use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles };
+use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities };
 
 use Laravel\Sanctum\HasApiTokens;
 
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class User extends BaseUser
 {
-    use Notifiable, HasApiTokens, HasEnabledState, HasFullName, HasProfiles;
+    use Notifiable, HasApiTokens, HasEnabledState, HasFullName, HasProfiles, HasUserAbilities;
 
     protected $appends = [
         'is_identified'
@@ -63,35 +63,6 @@ class User extends BaseUser
     public function secrets()
     {
         return $this->hasMany(Secret::class);
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasAbility(string $ability, string $model_type, int $model_id = null)
-    {
-        $model_type = Str::start($model_type, config('croft.models.namespace'));
-        $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model_type'));
-
-        if (is_null($model_id)) {
-            $model_id_clause = 'abilities.model_id IS NULL';
-        } else {
-            $bindings['model_id'] = $model_id;
-            $model_id_clause = '(abilities.model_id IS NULL OR abilities.model_id = :model_id)';
-        }
-
-        $query = DB::raw("
-            SELECT EXISTS(SELECT *
-            FROM abilities
-            JOIN privileges ON privileges.id = abilities.privilege_id
-            JOIN privilege_user ON privileges.id = privilege_user.privilege_id
-            WHERE privilege_user.user_id = :user_id AND
-                (abilities.name = '*' OR abilities.name = :ability) AND
-                (abilities.model_type = '*' OR abilities.model_type = :model_type) AND
-                $model_id_clause
-            LIMIT 1) as `exists`;");
-
-        return (bool) DB::select($query, $bindings)[0]->exists ?? false;
     }
 
     /**
