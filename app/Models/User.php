@@ -100,7 +100,7 @@ class User extends BaseUser
      */
     public function getIsIdentifiedAttribute()
     {
-        return (bool) $this->total_identities_verified;
+        return $this->identities()->whereNotNull('verified_at')->exists();
     }
 
     /**
