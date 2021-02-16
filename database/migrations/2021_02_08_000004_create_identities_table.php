@@ -16,12 +16,14 @@ class CreateIdentitiesTable extends Migration
         Schema::create('identities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->enum('type', [ 'email', 'mobile', 'oauth' ]);
             $table->string('value');
             $table->datetime('verified_at')->nullable();
             $table->datetime('created_at')->useCurrent();
             $table->datetime('updated_at')->nullable();
 
+            $table->index('name');
             $table->index('value');
 
             $table->foreign('user_id')
