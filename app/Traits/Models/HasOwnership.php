@@ -7,7 +7,9 @@ use Illuminate\Support\Str;
 trait HasOwnership
 {
     /**
-     * @return MorphTo
+     * Retrieve the owner of this resource.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function owner()
     {
@@ -15,6 +17,8 @@ trait HasOwnership
     }
 
     /**
+     * Ensure passed type has correct prefix and assign it.
+     * 
      * @return void
      */
     public function setOwnerTypeAttribute(string $owner_type)
