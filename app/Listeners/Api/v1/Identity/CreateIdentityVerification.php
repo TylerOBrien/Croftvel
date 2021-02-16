@@ -16,7 +16,7 @@ class CreateIdentityVerification
      */
     public function handle(IdentityCreated $event)
     {
-        if (!$event->identity->verified) {
+        if ($event->identity->type !== 'oauth' && !$event->identity->is_verified) {
             Verification::create([
                 'identity_id' => $event->identity->id,
                 'code' => Verification::makeUniqueInt('code', config('croft.verification.length'), 'sha256') ]);
