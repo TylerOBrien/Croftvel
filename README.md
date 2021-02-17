@@ -21,10 +21,12 @@ Controllers with basic endpoints included can be created with:
 php artisan make:croft-controller MyThing
 ```
 
-If the requests don't already exist the `requests` option can be passed to create them as well:
+Requests and policies can be created along with the controller:
 
 ```
 php artisan make:croft-controller MyThing --requests
+php artisan make:croft-controller MyThing --policies
+php artisan make:croft-controller MyThing --requests --policies
 ```
 
 ### Requests
@@ -47,7 +49,14 @@ php artisan make:croft-requests MyThing --ability=index,store,update
 
 ### Policies
 
+Preconfigured policies can be created with:
+
 ```
 php artisan make:croft-policy MyThing
+```
+
+If the resource has ownership properties the `owned` option can be used:
+
+```
 php artisan make:croft-policy MyThing --owned
 ```
