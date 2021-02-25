@@ -198,4 +198,15 @@ class ApiGuard implements Guard
     {
         $this->user = $user;
     }
+
+    /**
+     * Retrieve an instance of this ApiGuard. Intended to help avoid false-positive
+     * errors with linters.
+     * 
+     * @return ApiGuard
+     */
+    static public function getInstance() : ApiGuard
+    {
+        return auth('croft');
+    }
 }
