@@ -26,7 +26,10 @@ class StoreUser extends ApiRequest
     public function rules()
     {
         return [
-            'account_id' => 'sometimes|int|exists:accounts,id|can:attach,Account'
+            'account_id' => 'sometimes|int|exists:accounts,id|can:attach,Account',
+            'first_name' => 'nullable|string',
+            'middle_name' => 'nullable|string',
+            'last_name' => 'nullable|string'
         ];
     }
 }
