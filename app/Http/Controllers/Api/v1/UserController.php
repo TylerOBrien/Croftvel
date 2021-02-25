@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Guards\Api\v1\ApiGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\User\{ IndexUser, StoreUser, ShowUser, UpdateUser, RestoreUser, DestroyUser };
 use App\Http\Resources\Api\v1\TokenResource;
@@ -54,7 +55,7 @@ class UserController extends Controller
         if (array_key_exists('account_id', $fields)) {
             $account_id = intval($fields['account_id']);
         } else {
-            $account_id = auth('croft')->parseToken($request)->account->id ?? Account::create()->id;
+            $account_id = ApiGuard::getInstance()->parseToken($request)->account->id ?? Account::create()->id;
         }
 
         $user = User::create(array_merge(compact('account_id'), $fields));
