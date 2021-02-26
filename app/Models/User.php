@@ -9,6 +9,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends BaseUser
 {
@@ -117,5 +118,21 @@ class User extends BaseUser
         return $this->identities()
                     ->whereNotNull('verified_at')
                     ->count();
+    }
+
+    /**
+     * @return void
+     */
+    public function setPasswordAttribute(string $plaintext_password)
+    {
+        $this->attributes['password'] = Hash::make($plaintext_password);
+    }
+
+    /**
+     * @return void
+     */
+    public function setHashedPasswordAttribute(string $hashed_password)
+    {
+        $this->attributes['password'] = $hashed_password;
     }
 }
