@@ -58,7 +58,7 @@ class UserController extends Controller
             $account_id = ApiGuard::getInstance()->parseToken($request)->account->id ?? Account::create()->id;
         }
 
-        $user = User::create(array_merge(compact('account_id'), $fields));
+        $user = User::create(array_merge($fields, compact('account_id')));
         $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
 
