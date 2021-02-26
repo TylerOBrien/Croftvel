@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\Api\v1\Account;
+namespace App\Mail\Api\v1\User;
 
 use App\Models\{ Account, User };
 
