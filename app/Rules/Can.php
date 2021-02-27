@@ -2,6 +2,8 @@
 
 namespace App\Rules;
 
+use App\Guards\Api\v1\ApiGuard;
+
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
 
@@ -44,7 +46,7 @@ class Can implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = auth('croft')->parseToken();
+        $user = ApiGuard::getInstance()->parseToken();
 
         if (is_null($user)) {
             return false;
