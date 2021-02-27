@@ -22,16 +22,16 @@ Route::apiResource('users/{user}/secrets', SecretController::class)->only('index
 Route::put('identities/{identity}/verification', [ IdentityController::class, 'verify' ]);
 Route::apiResource('identities', IdentityController::class);
 
-Route::apiResource('metas/{meta}/integers', MetaIntegerController::class);
-Route::apiResource('metas/{meta}/strings', MetaStringController::class);
+Route::apiResource('metas.integers', MetaIntegerController::class);
+Route::apiResource('metas.strings', MetaStringController::class);
 Route::get('metas/{meta}/entries', [ MetaController::class, 'indexEntries' ]);
 Route::post('metas/{meta}/entries', [ MetaController::class, 'storeEntries' ]);
 Route::apiResource('metas', MetaController::class);
 
-Route::apiResource('profiles/{profile}/floats', ProfileFloatController::class);
-Route::apiResource('profiles/{profile}/integers', ProfileIntegerController::class);
-Route::apiResource('profiles/{profile}/strings', ProfileStringController::class);
-Route::apiResource('profiles/{profile}/texts', ProfileTextController::class);
+Route::apiResource('profiles.floats', ProfileFloatController::class);
+Route::apiResource('profiles.integers', ProfileIntegerController::class);
+Route::apiResource('profiles.strings', ProfileStringController::class);
+Route::apiResource('profiles.texts', ProfileTextController::class);
 Route::get('profiles/{profile}/entries', [ ProfileController::class, 'indexEntries' ]);
 Route::post('profiles/{profile}/entries', [ ProfileController::class, 'storeEntries' ]);
 Route::apiResource('profiles', ProfileController::class);
