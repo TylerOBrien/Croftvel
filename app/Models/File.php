@@ -12,6 +12,7 @@ class File extends Model
     use HasOwnership;
     use HasFileUpload { 
         createFromFile as protected createFromFileBase;
+        updateFromFile as protected updateFromFileBase;
     }
 
     protected $appends = [
@@ -52,6 +53,6 @@ class File extends Model
      */
     public function updateFromFile($file, array $attributes)
     {
-        return parent::updateFromFile($file, $attributes, config('croft.uploads.files.dir'));
+        return call_user_func([ $this, 'updateFromFileBase' ], $file, $attributes, config('croft.uploads.files.dir'));
     }
 }
