@@ -12,6 +12,7 @@ class Image extends Model
     use HasOwnership;
     use HasFileUpload { 
         createFromFile as protected createFromFileBase;
+        updateFromFile as protected updateFromFileBase;
     }
 
     protected $appends = [
@@ -64,6 +65,6 @@ class Image extends Model
         $attributes['width'] = $width;
         $attributes['height'] = $height;
 
-        return parent::updateFromFile($file, $attributes, config('croft.uploads.images.dir'));
+        return call_user_func([ $this, 'updateFromFileBase' ], $file, $attributes, config('croft.uploads.images.dir'));
     }
 }
