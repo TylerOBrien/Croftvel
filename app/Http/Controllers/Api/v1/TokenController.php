@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Guards\Api\v1\ApiGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Token\{ IndexToken, ShowToken, StoreToken, UpdateToken, DestroyToken };
 use App\Http\Resources\Api\v1\TokenResource;
@@ -50,7 +51,7 @@ class TokenController extends Controller
     public function store(StoreToken $request)
     {
         $fields = $request->validated();
-        $user = auth()->attempt($fields);
+        $user = ApiGuard::getInstance()->attempt($fields);
         $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
         $identity = $user->identities()
