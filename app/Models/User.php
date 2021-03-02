@@ -119,20 +119,4 @@ class User extends BaseUser
                     ->whereNotNull('verified_at')
                     ->count();
     }
-
-    /**
-     * @return void
-     */
-    public function setPasswordAttribute(string $plaintext_password)
-    {
-        $this->attributes['password'] = Hash::make($plaintext_password);
-    }
-
-    /**
-     * @return void
-     */
-    public function setHashedPasswordAttribute(string $hashed_password)
-    {
-        $this->attributes['password'] = $hashed_password;
-    }
 }
