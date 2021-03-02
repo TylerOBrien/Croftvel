@@ -33,13 +33,13 @@ class Secret extends Model
     static public function boot()
     {
         parent::boot();
-        self::creating(function($model) {
-            switch ($model->type) {
+        self::creating(function(Secret $secret) {
+            switch ($secret->type) {
             case 'password':
-                $model->value = Hash::make($model->value);
+                $secret->value = Hash::make($secret->value);
                 break;
             case 'totp':
-                $model->value = Crypt::encryptString($model->value);
+                $secret->value = Crypt::encryptString($secret->value);
                 break;
             }
         });
