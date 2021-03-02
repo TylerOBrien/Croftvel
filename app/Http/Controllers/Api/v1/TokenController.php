@@ -53,8 +53,11 @@ class TokenController extends Controller
         $user = auth()->attempt($fields);
         $pat = $user->createToken(config('croft.token.name'));
         $token = new TokenResource($pat);
+        $identity = $user->identities()
+                         ->whereValue($fields['identity']['value'])
+                         ->first();
 
-        return response()->json(compact('token', 'user'), 201);
+        return response()->json(compact('token', 'identity', 'user'), 201);
     }
 
     /**
