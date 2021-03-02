@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Guards\Api\v1\ApiGuard;
+
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -22,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->configureRateLimiting();
+        $this->bindLiteralMeRouteParam();
         $this->mapApiRoutes();
     }
 
@@ -57,6 +60,19 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
+    }
+
+    /**
+     * Bind a string literal 'me' in the given URI to the id of the currently
+     * authenticated user.
+     *
+     * @return void
+     */
+    protected function bindLiteralMeRouteParam()
+    {
+        Route::bind('user', function ($id) {
+            return $id === 'me' ? ApiGuard::getInstance()->user() : $id;
         });
     }
 }
