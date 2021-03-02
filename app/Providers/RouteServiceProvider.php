@@ -64,7 +64,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bind a string literal 'me' in the given URI to the id of the currently
+     * Implicitly convert all {user} params of 'me' to the currently
      * authenticated user.
      *
      * @return void
