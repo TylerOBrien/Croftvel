@@ -125,10 +125,6 @@ class ApiGuard implements Guard
      */
     public function attempt(array $credentials = [])
     {
-        if ($this->check()) {
-            die('uhoh');
-        }
-
         [ $identity, $secret ] = $this->parseCredentials($credentials);
 
         if (is_null($secret)) {
