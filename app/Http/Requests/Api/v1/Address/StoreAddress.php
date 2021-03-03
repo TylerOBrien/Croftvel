@@ -31,6 +31,7 @@ class StoreAddress extends ApiRequest
         return [
             'owner_id' => 'required|morphable',
             'owner_type' => 'required|morphable',
+            'name' => 'required|string',
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',

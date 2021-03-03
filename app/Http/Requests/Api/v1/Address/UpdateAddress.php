@@ -32,6 +32,7 @@ class UpdateAddress extends ApiRequest
         return [
             'owner_id' => 'required_with:owner_type|morphable',
             'owner_type' => 'required_with:owner_id|morphable',
+            'name' => 'string',
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',
