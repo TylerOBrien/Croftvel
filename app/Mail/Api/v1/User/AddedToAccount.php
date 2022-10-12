@@ -37,9 +37,9 @@ class AddedToAccount extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  User  $recipient
-     * @param  User  $user
-     * @param  Account  $account
+     * @param  \App\Models\User  $recipient
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Account  $account
      *
      * @return void
      */
