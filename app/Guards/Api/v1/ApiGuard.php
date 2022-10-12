@@ -2,10 +2,10 @@
 
 namespace App\Guards\Api\v1;
 
+use App\Events\Api\v1\Auth\AuthAttempted;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
-use App\Models\{ Identity, Secret };
-
-use Laravel\Sanctum\Sanctum;
+use App\Helpers\Auth\Credentials;
+use App\Models\{ PersonalAccessToken, Secret };
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -31,19 +31,31 @@ class ApiGuard implements Guard
      * Create a new API guard.
      *
      * @param  int  $expiration
-     * 
+     *
      * @return void
      */
-    public function __construct(int $expiration)
+    public function __construct(int $expiration = null)
     {
-        $this->expiration = $expiration;
+        $this->expiration = $expiration ?: config('croft.token.ttl');
+    }
+
+    /**
+     * Determines if the request contains a bearer token in the headers.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return bool
+     */
+    public function hasToken(Request $request = null) : bool
+    {
+        return (bool) ($request ?? request())->bearerToken();
     }
 
     /**
      * Retrieve the authenticated user for the incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * 
+     *
      * @return \App\Models\User
      */
     public function parseToken(Request $request = null)
@@ -61,7 +73,7 @@ class ApiGuard implements Guard
 
         $now = now();
         $expires_at = $now->subMinutes($this->expiration);
-        $pat = Sanctum::$personalAccessTokenModel::findToken($bearer_token);
+        $pat = PersonalAccessToken::findFromBearerToken($bearer_token);
 
         if (is_null($pat)) {
             return null;
@@ -69,16 +81,15 @@ class ApiGuard implements Guard
             return null;
         }
 
-        $this->user = $pat->tokenable->withAccessToken(
-            tap( $pat->forceFill(['last_used_at' => $now]) )->save()
-        );
+        $pat->forceFill([ 'last_used_at' => $now ])->save();
+        $pat->tokenable->forceFill([ 'last_active_at' => $now ])->save();
 
-        return $this->user;
+        return $this->user = $pat->tokenable->fresh();
     }
 
     /**
      * Determine if the current user is authenticated.
-     * 
+     *
      * @return bool
      */
     public function check()
@@ -88,7 +99,7 @@ class ApiGuard implements Guard
 
     /**
      * Determine if the current user is a guest.
-     * 
+     *
      * @return bool
      */
     public function guest()
@@ -98,7 +109,7 @@ class ApiGuard implements Guard
 
     /**
      * Get the currently authenticated user.
-     * 
+     *
      * @return \App\Models\User|null
      */
     public function user()
@@ -107,8 +118,18 @@ class ApiGuard implements Guard
     }
 
     /**
+     * Determine if the guard has a user instance.
+     *
+     * @return bool
+     */
+    public function hasUser()
+    {
+        return (bool) $this->user;
+    }
+
+    /**
      * Get the id of the currently authenticated user.
-     * 
+     *
      * @return mixed
      */
     public function id()
@@ -118,42 +139,45 @@ class ApiGuard implements Guard
 
     /**
      * Attempt to authenticate the user.
-     * 
-     * @param  array  $credentials
-     * 
+     *
+     * @param  array  $fields
+     *
      * @return \App\Models\User
      */
-    public function attempt(array $credentials = [])
+    public function attempt(array $fields = [])
     {
-        [ $identity, $secret ] = $this->parseCredentials($credentials);
+       $credentials = Credentials::fromFields($fields);
 
-        if (is_null($secret)) {
+        if (is_null($credentials->secret)) {
             //
         } else {
-            call_user_func([ $this, "bySecret{$secret->type}" ], $credentials, $secret);
+            call_user_func([ $this, "bySecret{$credentials->secret->type}" ], $fields, $credentials);
         }
 
-        return $this->user = $identity->user;
+        event(new AuthAttempted($credentials->identity, true));
+
+        return $this->user = $credentials->identity->user;
     }
 
     /**
      * Validate a user's credentials.
      *
-     * @param  array  $credentials
-     * 
+     * @param  array  $fields
+     *
      * @return bool
      */
-    public function validate(array $credentials = [])
+    public function validate(array $fields = [])
     {
-        return (bool) $this->attempt($credentials);
+        return (bool) $this->attempt($fields);
     }
 
     /**
      * @return void
      */
-    protected function bySecretPassword(array $credentials, Secret $secret)
+    protected function bySecretPassword(array $fields, Credentials $credentials)
     {
-        if (!Hash::check($credentials['secret']['value'], $secret->value)) {
+        if (!Hash::check($fields['secret']['value'], $credentials->secret->value)) {
+            event(new AuthAttempted($credentials->identity, false));
             throw new InvalidCredentials;
         }
     }
@@ -161,33 +185,16 @@ class ApiGuard implements Guard
     /**
      * @return void
      */
-    protected function bySecretTotp(array $credentials, Secret $secret)
+    protected function bySecretTotp(array $fields, Secret $secret)
     {
         //
-    }
-
-    /**
-     * @return array
-     */
-    protected function parseCredentials(array $credentials)
-    {
-        $identity = Identity::where($credentials['identity'])->first();
-
-        if (is_null($identity)) {
-            throw new InvalidCredentials;
-        }
-
-        $provider = $identity->user->secrets();
-        $secret = $provider->where('type', $credentials['secret']['type'])->first();
-
-        return [ $identity, $secret ];
     }
 
     /**
      * Set the currently authenticated user.
      *
      * @param  \App\Models\User  $user
-     * 
+     *
      * @return void
      */
     public function setUser($user)
@@ -198,7 +205,7 @@ class ApiGuard implements Guard
     /**
      * Retrieve an instance of this ApiGuard. Intended to help avoid false-positive
      * errors with linters.
-     * 
+     *
      * @return ApiGuard
      */
     static public function getInstance() : ApiGuard

@@ -3,26 +3,36 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Identity\IdentityCreated;
-use App\Exceptions\Api\v1\Identity\{ AlreadyVerified, ExpiredVerificationCode, InvalidVerificationCode, MissingVerificationCode };
+use App\Traits\Models\HasVerify;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Identity extends Model
 {
+    use HasVerify;
+
     protected $fillable = [
         'user_id',
         'name',
         'type',
-        'value'
+        'value',
     ];
 
     protected $casts = [
-        'verified_at' => 'datetime'
+        'verified_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [
-        'created' => IdentityCreated::class
+        'created' => IdentityCreated::class,
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function account()
+    {
+        return $this->user->account();
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -30,14 +40,6 @@ class Identity extends Model
     public function oauth_token()
     {
         return $this->hasOne(OAuthAccessToken::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function recovery()
-    {
-        return $this->hasOne(Recovery::class)->orderBy('id', 'desc');
     }
 
     /**
@@ -49,75 +51,9 @@ class Identity extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function verification()
-    {
-        return $this->hasOne(Verification::class)->orderBy('id', 'desc');
-    }
-
-    /**
      * @return bool
      */
-    public function attemptVerify(array $fields)
-    {
-        if ($this->is_verified) {
-            throw new AlreadyVerified;
-        } else if (!isset($fields['type']) || !isset($fields['value'])) {
-            throw new MissingVerificationCode;
-        }
-        
-        call_user_func([ $this, "attemptVerifyBy$fields[type]" ], $fields['value']);
-        
-        return $this->forceFill([ 'verified_at' => now() ])->save();
-    }
-
-    /**
-     * @return void
-     */
-    protected function attemptVerifyByCode($code)
-    {
-        if ($this->verification->code !== hash('sha256', $code)) {
-            throw new InvalidVerificationCode;
-        } else if ($this->verification->created_at->diffInMinutes(now()) > config('croft.verification.ttl')) {
-            throw new ExpiredVerificationCode;
-        }
-    }
-
-    /**
-     * @return void
-     */
-    protected function attemptVerifyByToken($token)
-    {
-        if (($this->oauth_token->value ?? null) !== $token) {
-            throw new InvalidVerificationCode;
-        }
-    }
-
-    /**
-     * @return \App\Models\User|null
-     */
-    public function attemptRecover(array $fields)
-    {
-        if (($this->recovery->code ?? null) !== hash('sha256', $fields['code'])) {
-            throw new InvalidVerificationCode;
-        }
-
-        $now = now();
-
-        if ($this->recovery->created_at->diffInMinutes($now) > config('croft.recovery.ttl')) {
-            throw new ExpiredVerificationCode;
-        }
-
-        $this->recovery->forceFill([ 'verified_at' => $now ])->save();
-
-        return $this->recovery->identity->user ?? null;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsVerifiedAttribute()
+    public function getIsVerifiedAttribute() : bool
     {
         return (bool) $this->verified_at;
     }
@@ -133,9 +69,36 @@ class Identity extends Model
     }
 
     /**
+     * Attempts to retrieve an instance of the Identity model defined in the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
      * @return \App\Models\Identity|null
      */
-    static public function findByRequest($request)
+    static public function findFromFields(array $fields) : Identity
+    {
+        if (isset($fields['identity_id'])) {
+            return self::find($fields['identity_id']);
+        }
+
+        $type = $fields['identity']['type'] ?? null;
+        $value = $fields['identity']['value'] ?? null;
+
+        if (!$type || !$value) {
+            return null;
+        }
+
+        return self::where(compact('type', 'value'))->first();
+    }
+
+    /**
+     * Attempts to retrieve an instance of the Identity model defined in the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     *
+     * @return \App\Models\Identity|null
+     */
+    static public function findFromRequest($request) : Identity
     {
         if ($request->has('identity_id')) {
             return self::find($request->input('identity_id'));
@@ -145,5 +108,23 @@ class Identity extends Model
         $value = $request->input('value');
 
         return self::where(compact('type', 'value'))->first();
+    }
+
+    /**
+     * Creates a new Identity model using the passed fields that are assumed
+     * to have come from a request (e.g. a register request).
+     *
+     * @param  \App\Models\User  $user
+     * @param  array  $fields
+     *
+     * @return \App\Models\Identity|null
+     */
+    static public function createFromRequestFields(User $user, array $fields) : Identity
+    {
+        return self::create([
+            'user_id' => $user->id,
+            'type' => $fields['identity']['type'],
+            'value' => $fields['identity']['value'],
+        ]);
     }
 }

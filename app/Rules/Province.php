@@ -17,12 +17,12 @@ class Province implements Rule
      * @var string
      */
     protected $country_code;
-    
+
     /**
      * Create a new rule.
      *
      * @param  array  $parameters
-     * 
+     *
      * @return bool
      */
     public function __construct(array $parameters)
@@ -35,10 +35,10 @@ class Province implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) : bool
     {
         try {
             $countries = new ISO3166;
@@ -62,7 +62,7 @@ class Province implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message() : string
     {
         return trans('validation.address.province');
     }

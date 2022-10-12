@@ -13,7 +13,7 @@ class AbilityController extends Controller
 
     /**
      * Display a listing of the abilities.
-     * 
+     *
      * @param  \App\Http\Requests\Api\v1\Ability\IndexAbility  $request
      *
      * @return \Illuminate\Http\Response
@@ -28,7 +28,7 @@ class AbilityController extends Controller
 
     /**
      * Display the specified ability.
-     * 
+     *
      * @param  \App\Models\Ability  $ability
      * @param  \App\Http\Requests\Api\v1\Ability\ShowAbility  $request
      *
@@ -41,7 +41,7 @@ class AbilityController extends Controller
 
     /**
      * Store a newly created ability in storage.
-     * 
+     *
      * @param  \App\Http\Requests\Api\v1\Ability\StoreAbility  $request
      *
      * @return \Illuminate\Http\Response
@@ -55,10 +55,10 @@ class AbilityController extends Controller
 
     /**
      * Update the specified ability in storage.
-     * 
+     *
      * @param  \App\Models\Ability  $ability
      * @param  \App\Http\Requests\Api\v1\Ability\UpdateAbility  $request
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Ability $ability, UpdateAbility $request)
@@ -73,7 +73,7 @@ class AbilityController extends Controller
 
     /**
      * Remove the specified ability from storage.
-     * 
+     *
      * @param  \App\Models\Ability  $ability
      * @param  \App\Http\Requests\Api\v1\Ability\DestroyAbility  $request
      *
@@ -82,6 +82,6 @@ class AbilityController extends Controller
     public function destroy(Ability $ability, DestroyAbility $request)
     {
         $ability->delete();
-        return response()->json(null, 204);
+        return response(null, 204);
     }
 }

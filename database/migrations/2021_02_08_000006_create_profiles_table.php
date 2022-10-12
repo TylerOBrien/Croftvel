@@ -17,8 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->morphs('owner');
             $table->string('name');
-            $table->datetime('created_at')->useCurrent();
-            $table->datetime('updated_at')->nullable();
+            $table->timestamps();
         });
     }
 

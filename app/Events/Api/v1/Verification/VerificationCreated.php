@@ -14,21 +14,21 @@ class VerificationCreated
 
     /**
      * The newly created verification instance.
-     * 
+     *
      * @var \App\Models\Verification
      */
     public $verification;
 
     /**
-     * The plaintext verification code.
-     * 
+     * The verification code in plaintext.
+     *
      * @var string
      */
     public $plaintext_code;
 
     /**
      * Create a new event instance.
-     * 
+     *
      * @param  \App\Models\Verification $verification
      *
      * @return void

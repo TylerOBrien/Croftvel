@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Exceptions\Auth\Api\v1\Auth;
+namespace App\Exceptions\Api\v1\Auth;
 
-use App\Exceptions\ApiException;
+use App\Exceptions\Api\ApiException;
 
 class InvalidToken extends ApiException
 {
     /**
      * Create a new exception.
-     * 
+     *
      * @return void
      */
     public function __construct()

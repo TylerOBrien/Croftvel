@@ -10,13 +10,13 @@ use App\Traits\Controllers\Api\v1\HasControllerHelpers;
 class VideoController extends Controller
 {
     use HasControllerHelpers;
-    
+
     /**
      * Display a listing of the video.
-     * 
-     * @param IndexVideo $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Video\IndexVideo $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexVideo $request)
     {
@@ -28,11 +28,11 @@ class VideoController extends Controller
 
     /**
      * Display the specified video.
-     * 
-     * @param Video $video
-     * @param ShowVideo $request
      *
-     * @return Response
+     * @param  \App\Models\Video $video
+     * @param  \App\Http\Requests\Api\v1\Video\ShowVideo $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function show(Video $video, ShowVideo $request)
     {
@@ -41,10 +41,10 @@ class VideoController extends Controller
 
     /**
      * Store a newly created video in storage.
-     * 
-     * @param StoreVideo $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Video\StoreVideo $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreVideo $request)
     {
@@ -56,11 +56,11 @@ class VideoController extends Controller
 
     /**
      * Update the specified video in storage.
-     * 
-     * @param Video $video
-     * @param UpdateVideo $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\Video $video
+     * @param  \App\Http\Requests\Api\v1\Video\UpdateVideo $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(Video $video, UpdateVideo $request)
     {
@@ -78,15 +78,15 @@ class VideoController extends Controller
 
     /**
      * Remove the specified video from storage.
-     * 
-     * @param Video $video
-     * @param DestroyVideo $request
      *
-     * @return Response
+     * @param  \App\Models\Video $video
+     * @param  \App\Http\Requests\Api\v1\Video\DestroyVideo $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Video $video, DestroyVideo $request)
     {
         $video->delete();
-        return response()->json(null, 204);
+        return response(null, 204);
     }
 }

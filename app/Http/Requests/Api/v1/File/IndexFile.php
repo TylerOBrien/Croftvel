@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\File;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\File;
+use App\Traits\Requests\Api\v1\HasRequestHelpers;
 
 class IndexFile extends ApiRequest
 {
+    use HasRequestHelpers;
+
     /**
      * Instantiate the request.
      *
@@ -25,8 +28,6 @@ class IndexFile extends ApiRequest
      */
     public function rules()
     {
-        return [
-            'filter' => 'query_filter:File'
-        ];
+        return $this->indexRules();
     }
 }

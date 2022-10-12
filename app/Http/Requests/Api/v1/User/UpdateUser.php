@@ -26,9 +26,6 @@ class UpdateUser extends ApiRequest
     {
         return [
             'account_id' => 'sometimes|int|exists:accounts,id',
-            'first_name' => 'nullable|string',
-            'middle_name' => 'nullable|string',
-            'last_name' => 'nullable|string'
         ];
     }
 }

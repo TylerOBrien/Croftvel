@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests\Api\v1\User;
 
-use App\Models\User;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\User;
 
 class StoreUser extends ApiRequest
 {
     /**
      * Create a new request.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -27,9 +27,6 @@ class StoreUser extends ApiRequest
     {
         return [
             'account_id' => 'sometimes|int|exists:accounts,id|can:attach,Account',
-            'first_name' => 'nullable|string',
-            'middle_name' => 'nullable|string',
-            'last_name' => 'nullable|string'
         ];
     }
 }

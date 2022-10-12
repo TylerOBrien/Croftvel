@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * This const is expected as part of the Laravel framework but is not actually used.
+     *
+     * @var string
+     */
     public const HOME = '/';
 
-    protected $namespace = 'App\Http\Controllers';
-
     /**
-     * Define your route model bindings, pattern filters, etc.
+     * Define your route model bindings, pattern filters, and other route configuration.
      *
      * @return void
      */
@@ -26,6 +29,19 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
         $this->bindLiteralMeRouteParam();
         $this->mapApiRoutes();
+    }
+
+    /**
+     * Implicitly convert all {user} params of 'me' to the currently
+     * authenticated user.
+     *
+     * @return void
+     */
+    protected function bindLiteralMeRouteParam()
+    {
+        Route::bind('user', function ($id) {
+            return $id === 'me' ? ApiGuard::getInstance()->user() : $id;
+        });
     }
 
     /**
@@ -40,13 +56,14 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(
             [
                 'prefix' => 'v1',
-                'domain' => config('croft.hosts.api')
+                'domain' => config('croft.hosts.api'),
             ],
             function() {
-                Route::middleware('croft.guest')
-                     ->group(base_path('routes/Api/v1/guest.php'));
-                Route::middleware('croft.user')
-                     ->group(base_path('routes/Api/v1/user.php'));
+                $hasToken = ApiGuard::getInstance()->hasToken();
+                $middlware = $hasToken ? 'croft.authenticated' : 'croft.guest';
+                $path = $hasToken ? 'routes/Api/v1/authenticated.php' : 'routes/Api/v1/guest.php';
+
+                Route::middleware($middlware)->group(base_path($path));
             }
         );
     }
@@ -59,20 +76,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
-    }
-
-    /**
-     * Implicitly convert all {user} params of 'me' to the currently
-     * authenticated user.
-     *
-     * @return void
-     */
-    protected function bindLiteralMeRouteParam()
-    {
-        Route::bind('user', function ($id) {
-            return $id === 'me' ? ApiGuard::getInstance()->user() : $id;
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

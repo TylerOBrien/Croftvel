@@ -14,15 +14,14 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->enum('disk', [ 'local', 'public', 's3' ]);
             $table->string('name');
             $table->string('filepath');
             $table->string('mimetype');
             $table->unsignedMediumInteger('filesize');
             $table->morphs('owner');
-            $table->datetime('created_at')->useCurrent();
-            $table->datetime('updated_at')->nullable();
+            $table->timestamps();
         });
     }
 

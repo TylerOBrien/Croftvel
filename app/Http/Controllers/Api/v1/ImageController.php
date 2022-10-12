@@ -13,10 +13,10 @@ class ImageController extends Controller
 
     /**
      * Display a listing of the images.
-     * 
-     * @param IndexImage $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Image\IndexImage  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexImage $request)
     {
@@ -28,11 +28,11 @@ class ImageController extends Controller
 
     /**
      * Display the specified image.
-     * 
-     * @param Image $image
-     * @param ShowImage $request
      *
-     * @return Response
+     * @param  \App\Models\Image  $image
+     * @param  \App\Http\Requests\Api\v1\Image\ShowImage  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function show(Image $image, ShowImage $request)
     {
@@ -41,10 +41,10 @@ class ImageController extends Controller
 
     /**
      * Store a newly created image in storage.
-     * 
-     * @param StoreImage $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Image\StoreImage  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreImage $request)
     {
@@ -56,11 +56,11 @@ class ImageController extends Controller
 
     /**
      * Update the specified image in storage.
-     * 
-     * @param Image $image
-     * @param UpdateImage $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\Image  $image
+     * @param  \App\Http\Requests\Api\v1\Image\UpdateImage  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(Image $image, UpdateImage $request)
     {
@@ -78,15 +78,15 @@ class ImageController extends Controller
 
     /**
      * Remove the specified image from storage.
-     * 
-     * @param Image $image
-     * @param DestroyImage $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\Image  $image
+     * @param  \App\Http\Requests\Api\v1\Image\DestroyImage  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Image $image, DestroyImage $request)
     {
         $image->delete();
-        return response()->json(null, 204);
+        return response(null, 204);
     }
 }

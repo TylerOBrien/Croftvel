@@ -6,24 +6,25 @@ use App\Events\Api\v1\Video\VideoCreated;
 use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class Video extends Model
 {
     use HasOwnership;
-    use HasFileUpload { 
+    use HasFileUpload {
         createFromFile as protected createFromFileBase;
         updateFromFile as protected updateFromFileBase;
     }
 
     protected $appends = [
-        'url'
+        'url',
     ];
 
     protected $hidden = [
         'disk',
         'filepath',
         'owner_id',
-        'owner_type'
+        'owner_type',
     ];
 
     protected $fillable = [
@@ -33,26 +34,37 @@ class Video extends Model
         'filepath',
         'filesize',
         'owner_id',
-        'owner_type'
+        'owner_type',
     ];
 
     protected $dispatchesEvents = [
-        'created' => VideoCreated::class
+        'created' => VideoCreated::class,
     ];
 
     /**
+     * @param  \Illuminate\Http\UploadedFile  $file
+     * @param  array  $attributes
+     *
      * @return \App\Models\Video
      */
-    static public function createFromFile($file, array $attributes)
+    static public function createFromFile(UploadedFile $file, array $attributes)
     {
-        return self::createFromFileBase($file, $attributes, config('croft.uploads.videos.dir'));
+        return self::createFromFileBase($file, $attributes, config('uploads.videos.dir'));
     }
 
     /**
+     * @param  \Illuminate\Http\UploadedFile  $file
+     * @param  array  $attributes
+     *
      * @return bool
      */
-    public function updateFromFile($file, array $attributes)
+    public function updateFromFile(UploadedFile $file, array $attributes) : bool
     {
-        return call_user_func([ $this, 'updateFromFileBase' ], $file, $attributes, config('croft.uploads.videos.dir'));
+        return call_user_func(
+            [ $this, 'updateFromFileBase' ],
+            $file,
+            $attributes,
+            config('uploads.videos.dir'),
+        );
     }
 }

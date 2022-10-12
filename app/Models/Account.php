@@ -12,9 +12,9 @@ class Account extends Model
     use HasEnabledState;
 
     protected $dispatchesEvents = [
-        'created' => AccountCreated::class
+        'created' => AccountCreated::class,
     ];
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

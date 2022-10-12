@@ -26,7 +26,7 @@ class StorePrivilege extends ApiRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:privileges,name'
+            'name' => 'required|string|unique:privileges,name',
         ];
     }
 }

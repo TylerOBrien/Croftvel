@@ -11,21 +11,21 @@ class Can implements Rule
 {
     /**
      * The name of the ability.
-     * 
+     *
      * @var string
      */
     protected $ability;
 
     /**
      * The name of the model to check permissions against.
-     * 
+     *
      * @var string
      */
     protected $model_name;
 
     /**
      * Create a new rule instance.
-     * 
+     *
      * @param  array  $parameters
      *
      * @return void
@@ -41,10 +41,10 @@ class Can implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) : bool
     {
         $user = ApiGuard::getInstance()->parseToken();
 
@@ -67,7 +67,7 @@ class Can implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message() : string
     {
         return trans('validation.can');
     }

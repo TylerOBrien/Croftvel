@@ -29,7 +29,7 @@ class StoreAbility extends ApiRequest
             'privilege_id' => 'required|int|exists:privileges,id',
             'name' => 'required|string',
             'model_id' => 'sometimes|required|morphable',
-            'model_type' => 'required|morphable'
+            'model_type' => 'required|morphable',
         ];
     }
 }

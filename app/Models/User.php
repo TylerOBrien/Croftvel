@@ -3,20 +3,17 @@
 namespace App\Models;
 
 use App\Events\Api\v1\User\UserCreated;
-use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities };
-
-use Laravel\Sanctum\HasApiTokens;
+use App\Traits\Models\{ HasEnabledState, HasFullName, HasUserAbilities };
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class User extends BaseUser
 {
-    use Notifiable, HasApiTokens, HasEnabledState, HasFullName, HasProfiles, HasUserAbilities;
+    use Notifiable, HasEnabledState, HasFullName, HasUserAbilities;
 
     protected $appends = [
-        'is_identified'
+        'is_identified',
     ];
 
     protected $fillable = [
@@ -24,11 +21,11 @@ class User extends BaseUser
         'first_name',
         'middle_name',
         'last_name',
-        'is_enabled'
+        'is_enabled',
     ];
 
     protected $dispatchesEvents = [
-        'created' => UserCreated::class
+        'created' => UserCreated::class,
     ];
 
     /**
@@ -65,42 +62,38 @@ class User extends BaseUser
     }
 
     /**
-     * Retreive the primary email address for this user.
-     * 
+     * Retreive the primary email address (if it exists) for this user.
+     *
      * @return string|null
      */
     public function getEmailAttribute()
     {
-        $predicate = [
-            'type' => 'email',
-            'name' => 'primary'
-        ];
-
-        return $this->identities()
-                    ->where($predicate)
-                    ->first()
-                    ->value ?? null;
+        return $this->identityAttribute('email');
     }
 
     /**
-     * Retreive the primary mobile number for this user.
-     * 
+     * Retreive the primary mobile number (if it exists) for this user.
+     *
      * @return string|null
      */
     public function getMobileAttribute()
     {
-        $predicate = [
-            'type' => 'mobile',
-            'name' => 'primary'
-        ];
-
-        return $this->identities()
-                    ->where($predicate)
-                    ->first()
-                    ->value ?? null;
+        return $this->identityAttribute('mobile');
     }
 
     /**
+     * Retreive the user's privilege model.
+     *
+     * @return Privilege|null
+     */
+    public function getPrivilegeAttribute()
+    {
+        return Privilege::whereName("user.$this->id")->first();
+    }
+
+    /**
+     * Return whether or not this user has been verified/identified.
+     *
      * @return bool
      */
     public function getIsIdentifiedAttribute()
@@ -111,6 +104,8 @@ class User extends BaseUser
     }
 
     /**
+     * Get the total number of identities that have been verified/identified.
+     *
      * @return int
      */
     public function getTotalIdentitiesVerifiedAttribute()
@@ -118,5 +113,34 @@ class User extends BaseUser
         return $this->identities()
                     ->whereNotNull('verified_at')
                     ->count();
+    }
+
+    /**
+     * Retreive the specified identity attribute.
+     *
+     * @param  string  $type  The type of identity (e.g. email or mobile) to lookup.
+     * @param  string  $name  The name of the identity.
+     *
+     * @return string|null
+     */
+    protected function identityAttribute(string $type, string $name = 'primary')
+    {
+        return $this->identities()
+                    ->where(compact('type', 'name'))
+                    ->first()
+                    ->value ?? null;
+    }
+
+    /**
+     * Create a new user model with as well as a new account that the new user
+     * will be associated with.
+     *
+     * @return \App\Models\User
+     */
+    static public function createWithAccount() : User
+    {
+        return self::create([
+            'account_id' => Account::create()->fresh()->id,
+        ]);
     }
 }

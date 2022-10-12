@@ -1,5 +1,5 @@
 @component('mail::message')
-# Verify Identity
+# Verify Email Address
 
 @if ($recipient->full_name)
   Hello, {{ $recipient->full_name }}.

@@ -10,14 +10,14 @@ class RecoveryObserver
     /**
      * Handle the Identity "updated" event.
      *
-     * @param  \App\Models\Identity  $recovery
-     * 
+     * @param  \App\Models\Recovery  $recovery
+     *
      * @return void
      */
     public function updated(Recovery $recovery)
     {
         if ($recovery->wasChanged('verified_at')) {
             event(new RecoveryVerified($recovery));
-        } 
+        }
     }
 }

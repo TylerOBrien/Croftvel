@@ -14,19 +14,19 @@ class QueryFilter implements Rule
 {
     /**
      * The name of the model to apply the query filter to.
-     * 
+     *
      * @var string
      */
     protected $model_name;
 
     /**
      * Create a new rule instance.
-     * 
-     * @param  Array  $parameters
+     *
+     * @param  array  $parameters
      *
      * @return void
      */
-    public function __construct(Array $parameters)
+    public function __construct(array $parameters)
     {
         $this->model_name = $parameters[0] ?? null;
     }
@@ -36,10 +36,10 @@ class QueryFilter implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) : bool
     {
         if (is_null($value)) {
             return true;
@@ -75,7 +75,7 @@ class QueryFilter implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message() : string
     {
         return trans('validation.query-filter');
     }

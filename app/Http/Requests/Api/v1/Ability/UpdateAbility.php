@@ -30,7 +30,7 @@ class UpdateAbility extends ApiRequest
             'privilege_id' => 'sometimes|int|exists:privileges,id',
             'name' => 'string',
             'model_id' => 'sometimes|morphable',
-            'model_type' => 'sometimes|morphable'
+            'model_type' => 'sometimes|morphable',
         ];
     }
 }

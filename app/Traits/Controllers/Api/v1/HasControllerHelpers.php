@@ -2,11 +2,17 @@
 
 namespace App\Traits\Controllers\Api\v1;
 
-use App\Helpers\QueryFilterHelper;
+use App\Helpers\Query\QueryFilterHelper;
+
+use Illuminate\Database\Eloquent\Builder;
 
 trait HasControllerHelpers
-{   
+{
     /**
+     * @param  Model  $model
+     * @param  string  $resource_name
+     * @param  string  $ability_name
+     *
      * @return Model
      */
     protected function loaded($model, string $resource_name, string $ability_name = null)
@@ -24,9 +30,14 @@ trait HasControllerHelpers
     }
 
     /**
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @param  array  $fields
+     * @param  string  $resource_name
+     * @param  string  $ability_name
+     *
      * @return Collection
      */
-    protected function filtered($query, array $fields, string $resource_name = null, string $ability_name = null)
+    protected function filtered(Builder $query, array $fields, string $resource_name = null, string $ability_name = null)
     {
         if (isset($fields['filter'])) {
             $query = QueryFilterHelper::handle($query, $fields['filter']);

@@ -2,47 +2,72 @@
 
 namespace App\Providers;
 
-use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerified };
-use App\Events\Api\v1\Recovery\RecoveryCreated;
-use App\Events\Api\v1\User\UserIdentified;
-use App\Events\Api\v1\Verification\VerificationCreated;
-
-use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerification, SendVerifyIdentityNotification };
-use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
-use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
-
+use App\Events\Api\v1\Auth\AuthAttempted;
 use App\Models\{ Identity, Recovery, User };
 use App\Observers\Api\v1\{ IdentityObserver, RecoveryObserver, UserObserver };
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as BaseEventServiceProvider;
+use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerificationCreated, IdentityVerified };
+use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerification, SendVerifyIdentityNotification };
 
-class EventServiceProvider extends BaseEventServiceProvider
+use App\Events\Api\v1\User\UserIdentified;
+use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
+
+use App\Events\Api\v1\User\UserCreated;
+use App\Listeners\Api\v1\User\CreateUserPrivilege;
+
+use App\Events\Api\v1\Recovery\RecoveryCreated;
+use App\Events\Api\v1\Recovery\RecoveryVerificationCreated;
+use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
+
+use App\Events\Api\v1\Verification\VerificationCreated;
+use App\Listeners\Api\v1\Auth\StoreAuthAttempt;
+use App\Listeners\Api\v1\Verification\DispatchCreateVerificationEvent;
+
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
+class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * The event to listener mappings for the application.
      *
-     * @var array
+     * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        IdentityCreated::class => [
-            CreateIdentityVerification::class
-        ],
-
-        IdentityVerified::class => [
-            CheckForFirstTimeVerify::class
-        ],
-
-        RecoveryCreated::class => [
-            SendVerifyRecoveryNotification::class
-        ],
-        
-        UserIdentified::class => [
-            SendWelcomeUserNotification::class
+        AuthAttempted::class => [
+            StoreAuthAttempt::class,
         ],
 
         VerificationCreated::class => [
-            SendVerifyIdentityNotification::class
-        ]
+            DispatchCreateVerificationEvent::class,
+        ],
+
+        IdentityCreated::class => [
+            CreateIdentityVerification::class,
+        ],
+
+        IdentityVerificationCreated::class => [
+            SendVerifyIdentityNotification::class,
+        ],
+
+        IdentityVerified::class => [
+            CheckForFirstTimeVerify::class,
+        ],
+
+        RecoveryCreated::class => [
+            SendVerifyRecoveryNotification::class,
+        ],
+
+        RecoveryVerificationCreated::class => [
+            SendVerifyRecoveryNotification::class,
+        ],
+
+        UserCreated::class => [
+            CreateUserPrivilege::class,
+        ],
+
+        UserIdentified::class => [
+            SendWelcomeUserNotification::class,
+        ],
     ];
 
     /**
@@ -55,5 +80,15 @@ class EventServiceProvider extends BaseEventServiceProvider
         Identity::observe(IdentityObserver::class);
         Recovery::observe(RecoveryObserver::class);
         User::observe(UserObserver::class);
+    }
+
+    /**
+     * Determine if events and listeners should be automatically discovered.
+     *
+     * @return bool
+     */
+    public function shouldDiscoverEvents()
+    {
+        return false;
     }
 }

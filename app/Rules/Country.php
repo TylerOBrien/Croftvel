@@ -15,10 +15,10 @@ class Country implements Rule
      *
      * @param  string  $attribute
      * @param  mixed   $value
-     * 
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) : bool
     {
         if (strlen($value) !== 3) {
             return false;
@@ -40,7 +40,7 @@ class Country implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message() : string
     {
         return trans('validation.address.country');
     }

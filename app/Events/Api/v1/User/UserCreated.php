@@ -2,6 +2,8 @@
 
 namespace App\Events\Api\v1\User;
 
+use App\Models\User;
+
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,13 +17,20 @@ class UserCreated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
+     * The user that was created.
+     *
+     * @var \App\Models\User
+     */
+    public $user;
+
+    /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**

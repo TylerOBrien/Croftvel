@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\v1;
 
 use App\Exceptions\Api\v1\Auth\Forbidden;
+use App\Guards\Api\v1\ApiGuard;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
@@ -35,28 +36,30 @@ class ApiRequest extends Request implements ValidatesWhenResolved
      * @var string
      */
     protected $model;
-    
+
     /**
-     * 
+     * The container instance.
      *
-     * @var 
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $container;
 
     /**
-     * 
+     * The validator instance.
      *
-     * @var 
+     * @var \Illuminate\Contracts\Validation\Validator
      */
     protected $validator;
 
     /**
+     * Check if the currently logged in user has been authorized to perform the request.
+     *
      * @return bool
      */
     public function authorize()
     {
-        $user = auth()->user();
-        $target = $this->binding ? request()->route($this->binding) : $this->model;
+        $user = ApiGuard::getInstance()->user();
+        $target = $this->binding ? $this->route($this->binding) : $this->model;
 
         if ($user && $this->ability) {
             return $user->can($this->ability, $target);
@@ -114,22 +117,31 @@ class ApiRequest extends Request implements ValidatesWhenResolved
             $this->ability,
             $this->binding
                 ? $this->route($this->binding)
-                : $this->model);
-    }
-
-    /**
-     * 
-     */
-    protected function createDefaultValidator(ValidationFactory $factory)
-    {
-        return $factory->make(
-            $this->validationData(), $this->container->call([$this, 'rules']),
-            $this->messages(), $this->attributes()
+                : $this->model
         );
     }
 
     /**
-     * 
+     * Create the default validator instance.
+     *
+     * @param  \Illuminate\Contracts\Validation\Factory  $factory
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function createDefaultValidator(ValidationFactory $factory)
+    {
+        return $factory->make(
+            $this->validationData(),
+            $this->container->call([ $this, 'rules' ]),
+            $this->messages(),
+            $this->attributes(),
+        );
+    }
+
+    /**
+     * Get the validator instance for the request.
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function getValidatorInstance()
     {
@@ -140,7 +152,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
         $factory = $this->container->make(ValidationFactory::class);
 
         if (method_exists($this, 'validator')) {
-            $validator = $this->container->call([$this, 'validator'], compact('factory'));
+            $validator = $this->container->call([ $this, 'validator' ], compact('factory'));
         } else {
             $validator = $this->createDefaultValidator($factory);
         }
@@ -155,7 +167,11 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * @return ApiRequest
+     * Set the container implementation.
+     *
+     * @param  \Illuminate\Contracts\Container\Container  $container
+     *
+     * @return $this
      */
     public function setContainer(Container $container)
     {
@@ -165,7 +181,11 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * @return ApiRequest
+     * Set the Validator instance.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     *
+     * @return $this
      */
     public function setValidator(Validator $validator)
     {

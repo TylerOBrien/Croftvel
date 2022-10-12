@@ -13,10 +13,10 @@ class FileController extends Controller
 
     /**
      * Display a listing of the file.
-     * 
-     * @param  IndexFile  $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\File\IndexFile  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function index(IndexFile $request)
     {
@@ -28,11 +28,11 @@ class FileController extends Controller
 
     /**
      * Display the specified file.
-     * 
-     * @param  File  $file
-     * @param  ShowFile  $request
      *
-     * @return Response
+     * @param  \App\Models\File  $file
+     * @param  \App\Http\Requests\Api\v1\File\ShowFile  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function show(File $file, ShowFile $request)
     {
@@ -41,10 +41,10 @@ class FileController extends Controller
 
     /**
      * Store a newly created file in storage.
-     * 
-     * @param  StoreFile  $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\File\StoreFile  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreFile $request)
     {
@@ -56,11 +56,11 @@ class FileController extends Controller
 
     /**
      * Update the specified file in storage.
-     * 
-     * @param  File  $file
-     * @param  UpdateFile  $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\File  $file
+     * @param  \App\Http\Requests\Api\v1\File\UpdateFile  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(File $file, UpdateFile $request)
     {
@@ -78,15 +78,15 @@ class FileController extends Controller
 
     /**
      * Remove the specified file from storage.
-     * 
-     * @param  File  $file
-     * @param  DestroyFile  $request
      *
-     * @return Response
+     * @param  \App\Models\File  $file
+     * @param  \App\Http\Requests\Api\v1\File\DestroyFile  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(File $file, DestroyFile $request)
     {
         $file->delete();
-        return response()->json(null, 204);
+        return response(null, 204);
     }
 }

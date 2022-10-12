@@ -2,6 +2,17 @@
 
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
+    |
+    */
+
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'forbidden' => 'Missing :ability:target permissions.',
@@ -11,10 +22,5 @@ return [
         'expired' => 'Expired token.',
         'missing' => 'Missing token.'
     ],
-    
-    'email-verification' => [
-        'missing' => 'Our records have no verification code for your account.',
-        'invalid' => 'The verification code does not match our records.',
-        'already-verified' => 'Your account has already been verified.'
-    ],
+
 ];

@@ -12,7 +12,7 @@ class Address extends Model
 
     protected $hidden = [
         'owner_id',
-        'owner_type'
+        'owner_type',
     ];
 
     protected $fillable = [
@@ -24,6 +24,6 @@ class Address extends Model
         'country',
         'postal_code',
         'owner_id',
-        'owner_type'
+        'owner_type',
     ];
 }

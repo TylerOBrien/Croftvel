@@ -12,10 +12,10 @@ class Morphable implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value) : bool
     {
         [ $column, $name ] = explode('_', strrev($attribute), 2);
 
@@ -33,10 +33,10 @@ class Morphable implements Rule
      * Determine if the validation rule passes.
      *
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    protected function passesId($name, $value)
+    protected function passesId($name, $value) : bool
     {
         $model = Str::start(request("{$name}_type"), config('croft.models.namespace'));
 
@@ -51,10 +51,10 @@ class Morphable implements Rule
      * Determine if the validation rule passes.
      *
      * @param  mixed  $value
-     * 
+     *
      * @return bool
      */
-    protected function passesType($name, $value)
+    protected function passesType($name, $value) : bool
     {
         return class_exists(Str::start($value, config('croft.models.namespace')));
     }
@@ -64,7 +64,7 @@ class Morphable implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message() : string
     {
         return trans('validation.morphable');
     }

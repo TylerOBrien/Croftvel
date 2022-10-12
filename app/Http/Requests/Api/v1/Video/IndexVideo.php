@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\Video;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Video;
+use App\Traits\Requests\Api\v1\HasRequestHelpers;
 
 class IndexVideo extends ApiRequest
 {
+    use HasRequestHelpers;
+
     /**
      * Instantiate the request.
      *
@@ -25,8 +28,6 @@ class IndexVideo extends ApiRequest
      */
     public function rules()
     {
-        return [
-            'filter' => 'query_filter:Video'
-        ];
+        return $this->indexRules();
     }
 }

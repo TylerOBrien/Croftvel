@@ -15,13 +15,15 @@ class Welcome extends Mailable
 
     /**
      * The recipient of the mail.
-     * 
+     *
      * @var \App\Models\User
      */
     protected $recipient;
 
     /**
      * Create a new message instance.
+     *
+     * @param  User  $recipient
      *
      * @return void
      */

@@ -3,32 +3,56 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Verification\VerificationCreated;
-use App\Traits\Models\{ HasUniqueCode, HasUniqueMaker };
+use App\Traits\Models\{ HasSecretCode, HasUniqueMaker };
 
 use Illuminate\Database\Eloquent\Model;
 
 class Verification extends Model
 {
-    use HasUniqueCode, HasUniqueMaker;
+    use HasSecretCode, HasUniqueMaker;
 
     protected $hidden = [
-        'code'
+        'code',
+        'verifiable_id',
+        'verifiable_type',
     ];
 
     protected $fillable = [
-        'identity_id',
-        'code'
+        'ability',
+        'code',
+        'verifiable_id',
+        'verifiable_type',
+    ];
+
+    protected $casts = [
+        'expires_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [
-        'created' => VerificationCreated::class
+        'created' => VerificationCreated::class,
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function identity()
+    public function verifiable()
     {
-        return $this->belongsTo(Identity::class);
+        return $this->morphTo();
+    }
+
+    /**
+     * Register creating handler to ensure that a code is created if one has
+     * not already been provided.
+     *
+     * @return void
+     */
+    static public function boot()
+    {
+        parent::boot();
+        self::creating(function(Verification $verification) {
+            if (!$verification->code) {
+                $verification->code = self::makeUniqueInt('code', config('croft.verification.length'));
+            }
+        });
     }
 }

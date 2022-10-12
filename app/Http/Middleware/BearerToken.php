@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-use App\Exceptions\Auth\Api\v1\Auth\InvalidToken;
+use App\Exceptions\Api\v1\Auth\InvalidToken;
+use App\Guards\Api\v1\ApiGuard;
 
 use Illuminate\Http\Request;
 
@@ -15,12 +16,12 @@ class BearerToken
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * 
+     *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->parseToken($request)) {
+        if (!ApiGuard::getInstance()->parseToken($request)) {
             throw new InvalidToken;
         }
 

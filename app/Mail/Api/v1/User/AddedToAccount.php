@@ -15,27 +15,31 @@ class AddedToAccount extends Mailable
 
     /**
      * The recipient of the mail.
-     * 
+     *
      * @var \App\Models\User
      */
     protected $recipient;
 
     /**
      * The user that was added to the account.
-     * 
+     *
      * @var \App\Models\User
      */
     protected $user;
 
     /**
      * The account to which the new user was added.
-     * 
+     *
      * @var \App\Models\Account
      */
     protected $account;
 
     /**
      * Create a new message instance.
+     *
+     * @param  User  $recipient
+     * @param  User  $user
+     * @param  Account  $account
      *
      * @return void
      */

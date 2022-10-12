@@ -2,18 +2,21 @@
 
 return [
 
-    'forgot' => [
-        'succeeded' => 'Password reset instructions have been delivered to your email.',
-        'failed' => 'Something went wrong. Please try again later.',
-        'throttled' => 'Too many forgot password attempts. Please try again later.',
-        'invalid-user' => 'An account with this email address does not exist.'
-    ],
+    /*
+    |--------------------------------------------------------------------------
+    | Password Reset Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are the default lines which match reasons
+    | that are given by the password broker for a password update attempt
+    | has failed, such as for an invalid token or invalid new password.
+    |
+    */
 
-    'reset' => [
-        'succeeded' => 'Your password has been changed.',
-        'failed' => 'Failed to reset password.',
-        'invalid-user' => 'The email and token don\'t match our records.',
-        'invalid-token' => 'Reset token is invalid or has expired.'
-    ],
+    'reset' => 'Your password has been reset!',
+    'sent' => 'We have emailed your password reset link!',
+    'throttled' => 'Please wait before retrying.',
+    'token' => 'This password reset token is invalid.',
+    'user' => "We can't find a user with that email address.",
 
 ];

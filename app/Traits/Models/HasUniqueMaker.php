@@ -7,13 +7,13 @@ use Illuminate\Support\Str;
 trait HasUniqueMaker
 {
     /**
-     * @param  string  $column
-     * @param  int  $digits
-     * @param  string  $hash_algo
-     * 
+     * @param  string  $column  The name of the column for the code.
+     * @param  int  $digits  The number of digits in the code.
+     * @param  string  $hash_algo  The name of the hashing algorithm to use.
+     *
      * @return int
      */
-    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null):int
+    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null) : int
     {
         $min = intval(str_repeat('1', $digits));
         $max = intval(str_repeat('9', $digits));
@@ -27,13 +27,13 @@ trait HasUniqueMaker
     }
 
     /**
-     * @param  string  $column
-     * @param  int  $length
-     * @param  string  $hash_algo
-     * 
+     * @param  string  $column  The name of the column for the code.
+     * @param  int  $length  The number of characters in the code.
+     * @param  string  $hash_algo  The name of the hashing algorithm to use.
+     *
      * @return string
      */
-    static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null):string
+    static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null) : string
     {
         do {
             $id = Str::random($length);

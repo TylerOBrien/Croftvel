@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\v1\User;
 
-use App\Models\User;
 use App\Http\Requests\Api\v1\ApiRequest;
+use App\Models\User;
 
 class RestoreUser extends ApiRequest
 {

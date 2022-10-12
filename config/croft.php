@@ -10,79 +10,92 @@ return [
     */
 
     'hosts' => [
-        'api' => env('APP_HOST_API')
+        'api' => env('APP_HOST_API'),
     ],
 
     /*
     |--------------------------------------------------------------------------
     | Security
     |--------------------------------------------------------------------------
-    | 
+    |
     */
 
     'token' => [
-        'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel'))
+        'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel')),
+        'ttl' => 10080, /* 7 days */
+        'length' => 40,
+        'hash_algo' => 'sha256',
     ],
 
     'recovery' => [
         'ttl' => 60,
-        'length' => 32
+        'length' => 12,
     ],
 
     'verification' => [
         'ttl' => 60,
-        'length' => 12
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Uploads
-    |--------------------------------------------------------------------------
-    | 
-    */
-
-    'uploads' => [
-        'files' => [
-            'disk' => 'public',
-            'dir' => 'files'
-        ],
-
-        'images' => [
-            'disk' => 'public',
-            'dir' => 'images'
-        ],
-
-        'videos' => [
-            'disk' => 'public',
-            'dir' => 'videos'
-        ],
-
-        'default' => [
-            'disk' => 'public',
-            'dir' => 'upload'
-        ]
+        'length' => 12,
+        'hash_algo' => 'sha256',
     ],
 
     /*
     |--------------------------------------------------------------------------
     | Models
     |--------------------------------------------------------------------------
-    | 
+    |
     */
 
     'models' => [
-        'namespace' => 'App\Models\\'
+        'namespace' => 'App\Models\\',
     ],
 
     /*
     |--------------------------------------------------------------------------
     | Enums
     |--------------------------------------------------------------------------
-    | 
+    |
     */
 
     'enum' => [
-        
+        'identity' => [
+            'type' => [
+                'email',
+                'mobile',
+                'oauth',
+            ],
+        ],
+
+        'profile_field' => [
+            'type' => [
+                'boolean',
+                'date',
+                'datetime',
+                'float',
+                'integer',
+                'time',
+            ],
+        ],
+
+        'secret' => [
+            'type' => [
+                'password',
+                'totp',
+            ],
+        ],
+
+        'verification' => [
+            'ability' => [
+                'store',
+                'recover',
+                'update',
+                'destroy',
+            ],
+
+            'type' => [
+                'code',
+                'token',
+            ],
+        ],
     ],
 
     /*
@@ -94,8 +107,8 @@ return [
 
     'responses' => [
         'key' => [
-            'message' => 'message'
-        ]
+            'message' => 'message',
+        ],
     ],
 
     /*
@@ -107,37 +120,9 @@ return [
     */
 
     'relationships' => [
-        'address' => [
-            'index' => [],
-            'show'  => [],
-            'store' => []
-        ],
-
-        'file' => [
-            'index' => [],
-            'show' => [],
-            'store' => []
-        ],
-
-        'image' => [
-            'index' => [],
-            'show' => [],
-            'store' => []
-        ],
-
-        'meta' => [
-            'index' => [],
-            'show'  => [],
-            'store' => []
-        ],
-
-        'user' => [
-            'index' => [],
-            'show' =>  [],
-            'store' => []
-        ]
+        //
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Response Attributes
@@ -147,35 +132,17 @@ return [
     */
 
     'attributes' => [
-        'address' => [
-            'index' => [],
-            'show'  => [],
-            'store' => []
-        ],
-
         'file' => [
             'index' => [ 'url' ],
             'show' => [ 'url' ],
-            'store' => [ 'url' ]
+            'store' => [ 'url' ],
         ],
 
         'image' => [
             'index' => [ 'url' ],
             'show' => [ 'url' ],
-            'store' => [ 'url' ]
+            'store' => [ 'url' ],
         ],
-
-        'meta' => [
-            'index' => [],
-            'show'  => [],
-            'store' => []
-        ],
-
-        'user' => [
-            'index' => [],
-            'show' => [],
-            'store' => []
-        ]
-    ]
+    ],
 
 ];

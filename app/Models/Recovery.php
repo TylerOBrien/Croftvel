@@ -3,25 +3,25 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Recovery\RecoveryCreated;
-use App\Traits\Models\{ HasUniqueCode, HasUniqueMaker };
+use App\Traits\Models\{ HasSecretCode, HasUniqueMaker };
 
 use Illuminate\Database\Eloquent\Model;
 
 class Recovery extends Model
 {
-    use HasUniqueCode, HasUniqueMaker;
-    
+    use HasSecretCode, HasUniqueMaker;
+
     protected $hidden = [
-        'code'
+        'code',
     ];
 
     protected $fillable = [
         'identity_id',
-        'code'
+        'code',
     ];
 
     protected $dispatchesEvents = [
-        'created' => RecoveryCreated::class
+        'created' => RecoveryCreated::class,
     ];
 
     /**

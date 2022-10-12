@@ -15,27 +15,31 @@ class RemovedFromAccount extends Mailable
 
     /**
      * The recipient of the mail.
-     * 
+     *
      * @var \App\Models\User
      */
     protected $recipient;
 
     /**
      * The user that was removed from the account.
-     * 
+     *
      * @var \App\Models\User
      */
     protected $user;
 
     /**
      * The account from which the user was removed.
-     * 
+     *
      * @var \App\Models\Account
      */
     protected $account;
 
     /**
      * Create a new message instance.
+     *
+     * @param  User  $recipient
+     * @param  User  $user
+     * @param  Account  $account
      *
      * @return void
      */

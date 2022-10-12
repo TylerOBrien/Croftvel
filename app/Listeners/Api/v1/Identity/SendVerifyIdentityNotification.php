@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Api\v1\Identity;
 
-use App\Events\Api\v1\Verification\VerificationCreated;
+use App\Events\Api\v1\Identity\IdentityVerificationCreated;
 use App\Notifications\Api\v1\Identity\VerifyIdentityNotification;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,13 +15,13 @@ class SendVerifyIdentityNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  \App\Events\Api\v1\Recovery\VerificationCreated  $event
-     * 
+     * @param  \App\Events\Api\v1\Recovery\IdentityVerificationCreated  $event
+     *
      * @return void
      */
-    public function handle(VerificationCreated $event)
+    public function handle(IdentityVerificationCreated $event)
     {
-        $event->verification->identity->user->notify(
+        $event->identity->user->notify(
             new VerifyIdentityNotification($event->plaintext_code)
         );
     }

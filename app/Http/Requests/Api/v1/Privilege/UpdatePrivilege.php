@@ -27,7 +27,7 @@ class UpdatePrivilege extends ApiRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|string|unique:privileges,name'
+            'name' => 'sometimes|string|unique:privileges,name',
         ];
     }
 }

@@ -9,14 +9,14 @@ class OAuthAccessToken extends Model
     protected $table = 'oauth_access_tokens';
 
     protected $hidden = [
-        'value'
+        'value',
     ];
 
     protected $fillable = [
         'identity_id',
         'scope',
         'type',
-        'value'
+        'value',
     ];
 
     /**
@@ -30,12 +30,14 @@ class OAuthAccessToken extends Model
     /**
      * @return string
      */
-    public function getValueAttribute()
+    public function getValueAttribute() : string
     {
         return decrypt($this->attributes['value']);
     }
 
     /**
+     * @param  string  $value
+     *
      * @return void
      */
     public function setValueAttribute(string $value)

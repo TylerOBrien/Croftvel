@@ -14,7 +14,7 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->enum('disk', [ 'local', 'public', 's3' ]);
             $table->string('name');
             $table->string('filepath');
@@ -23,8 +23,7 @@ class CreateImagesTable extends Migration
             $table->unsignedSmallInteger('height');
             $table->unsignedMediumInteger('filesize');
             $table->morphs('owner');
-            $table->datetime('created_at')->useCurrent();
-            $table->datetime('updated_at')->nullable();
+            $table->timestamps();
         });
     }
 

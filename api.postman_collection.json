@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "4569337a-98c1-4dbd-a150-a13a516310a6",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5805765"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "identity[type]",
+									"value": "email",
+									"description": "required|string|in:email,mobile",
+									"type": "text"
+								},
+								{
+									"key": "identity[value]",
+									"value": "hello@chopdawg.com",
+									"description": "required|string",
+									"type": "text"
+								},
+								{
+									"key": "secret[type]",
+									"value": "password",
+									"description": "required|string|in:password,token",
+									"type": "text"
+								},
+								{
+									"key": "secret[value]",
+									"value": "letmein123",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/users",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "identity[type]",
+									"value": "email",
+									"type": "text"
+								},
+								{
+									"key": "identity[value]",
+									"value": "hello@chopdawg.com",
+									"type": "text"
+								},
+								{
+									"key": "secret[type]",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "secret[value]",
+									"value": "letmein123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/tokens",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "identity[type]",
+									"value": "email",
+									"description": "required|string|in:email,mobile",
+									"type": "text"
+								},
+								{
+									"key": "identity[value]",
+									"value": "hello@chopdawg.com",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/recoveries",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"recoveries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Identity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "identity[type]",
+									"value": "email",
+									"type": "text"
+								},
+								{
+									"key": "identity[value]",
+									"value": "hello@chopdawg.com",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "code",
+									"description": "required|string|in:code,token",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "378394465381",
+									"description": "required|string",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/identities/verifications",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"identities",
+								"verifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Recovery",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "identity_id",
+									"value": "1",
+									"description": "required|integer|exists:Identities,id",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "code",
+									"description": "required|string|in:code,token",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "523195046223",
+									"description": "required|string",
+									"type": "text"
+								},
+								{
+									"key": "secret[type]",
+									"value": "password",
+									"description": "required|string|in:password,totp",
+									"type": "text"
+								},
+								{
+									"key": "secret[value]",
+									"value": "helloworld",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/recoveries/verifications",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"recoveries",
+								"verifications"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Index Images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiv1}}/images",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"images"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "1|6s2XVW4hftKlx42CYptm1JYhHeSCIPwqFwRdQ2nb",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"    key: 'X-Requested-With',",
+					"    value: 'XMLHttpRequest'",
+					"});",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "apiv1",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

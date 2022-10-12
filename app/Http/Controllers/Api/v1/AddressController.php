@@ -13,10 +13,10 @@ class AddressController extends Controller
 
     /**
      * Display a listing of the addresses.
-     * 
-     * @param IndexAddress $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Address\IndexAddress  $request
+     *
+     * @return  \Illuminate\Http\Response
      */
     public function index(IndexAddress $request)
     {
@@ -28,11 +28,11 @@ class AddressController extends Controller
 
     /**
      * Display the specified address.
-     * 
-     * @param Address $address
-     * @param ShowAddress $request
      *
-     * @return Response
+     * @param  \App\Models\Address  $address
+     * @param  \App\Http\Requests\Api\v1\Address\ShowAddress  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function show(Address $address, ShowAddress $request)
     {
@@ -41,10 +41,10 @@ class AddressController extends Controller
 
     /**
      * Store a newly created address in storage.
-     * 
-     * @param StoreAddress $request
      *
-     * @return Response
+     * @param  \App\Http\Requests\Api\v1\Address\StoreAddress  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function store(StoreAddress $request)
     {
@@ -55,11 +55,11 @@ class AddressController extends Controller
 
     /**
      * Update the specified address in storage.
-     * 
-     * @param Address $address
-     * @param UpdateAddress $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\Address  $address
+     * @param  \App\Http\Requests\Api\v1\Address\UpdateAddress  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function update(Address $address, UpdateAddress $request)
     {
@@ -68,20 +68,20 @@ class AddressController extends Controller
         $address->fill($fields);
         $address->save();
 
-        return $address->only(array_keys($fields));
+        return $address;
     }
 
     /**
      * Remove the specified address from storage.
-     * 
-     * @param Address $address
-     * @param DestroyAddress $request
-     * 
-     * @return Response
+     *
+     * @param  \App\Models\Address  $address
+     * @param  \App\Http\Requests\Api\v1\Address\DestroyAddress  $request
+     *
+     * @return \Illuminate\Http\Response
      */
     public function destroy(Address $address, DestroyAddress $request)
     {
         $address->delete();
-        return response()->json(null, 204);
+        return response(null, 204);
     }
 }

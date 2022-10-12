@@ -2,7 +2,7 @@
 
 namespace App\Exceptions\Api\v1\Auth;
 
-use App\Exceptions\ApiException;
+use App\Exceptions\Api\ApiException;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -11,10 +11,10 @@ class Forbidden extends ApiException
 {
     /**
      * Create a new exception.
-     * 
+     *
      * @param  string  $ability
      * @param  string|\Illuminate\Database\Eloquent\Model  $target
-     * 
+     *
      * @return void
      */
     public function __construct(string $ability, $target)

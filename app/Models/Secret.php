@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\{ Crypt, Hash };
 class Secret extends Model
 {
     protected $hidden = [
-        'value'
+        'value',
     ];
 
     protected $fillable = [
         'user_id',
         'type',
-        'value'
+        'value',
     ];
 
     /**
@@ -27,7 +27,7 @@ class Secret extends Model
 
     /**
      * Register creating handler to ensure secret is not stored in plaintext.
-     * 
+     *
      * @return void
      */
     static public function boot()
@@ -43,5 +43,23 @@ class Secret extends Model
                 break;
             }
         });
+    }
+
+    /**
+     * Creates a new Secret model using the passed fields that are assumed
+     * to have come from a request (e.g. a register request).
+     *
+     * @param  \App\Models\User  $user
+     * @param  array  $fields
+     *
+     * @return \App\Models\Secret|null
+     */
+    static public function createFromRequestFields(User $user, array $fields) : Secret
+    {
+        return self::create([
+            'user_id' => $user->id,
+            'type' => $fields['secret']['type'],
+            'value' => $fields['secret']['value'],
+        ]);
     }
 }

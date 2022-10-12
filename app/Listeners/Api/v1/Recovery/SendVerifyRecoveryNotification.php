@@ -2,7 +2,7 @@
 
 namespace App\Listeners\Api\v1\Recovery;
 
-use App\Events\Api\v1\Recovery\RecoveryCreated;
+use App\Events\Api\v1\Recovery\RecoveryVerificationCreated;
 use App\Notifications\Api\v1\Recovery\VerifyRecoveryNotification;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,14 +15,14 @@ class SendVerifyRecoveryNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @param  \App\Events\Api\v1\Recovery\RecoveryCreated  $event
-     * 
+     * @param  \App\Events\Api\v1\Recovery\RecoveryVerificationCreated  $event
+     *
      * @return void
      */
-    public function handle(RecoveryCreated $event)
+    public function handle(RecoveryVerificationCreated $event)
     {
-        $event->recovery->identity->user->notify(
-            new VerifyRecoveryNotification($event->recovery, $event->plaintext_code)
+        $event->identity->user->notify(
+            new VerifyRecoveryNotification($event->identity, $event->plaintext_code)
         );
     }
 }
