@@ -19,7 +19,7 @@ A pivot table associates `App\Models\Ability` and `App\Models\User`.
 Policies can be generated with the `make:croft-policy` command:
 
 ```
-php artisan make:croft-policy Feed/Post
+php artisan make:croft-policy Image
 ```
 
 ### Requests
@@ -27,21 +27,21 @@ php artisan make:croft-policy Feed/Post
 Requests with permissions already integrated can be created with the following commands:
 
 ```
-php artisan make:croft-request Feed/Post --ability=index
-php artisan make:croft-request Feed/Post --ability=show
-php artisan make:croft-request Feed/Post --ability=store
-php artisan make:croft-request Feed/Post --ability=update
-php artisan make:croft-request Feed/Post --ability=destroy
+php artisan make:croft-request Image --ability=index
+php artisan make:croft-request Image --ability=show
+php artisan make:croft-request Image --ability=store
+php artisan make:croft-request Image --ability=update
+php artisan make:croft-request Image --ability=destroy
 ```
 
 Multiple requests can be created at once with the `make:croft-requests` command:
 
 ```
-php artisan make:croft-requests Feed/Post --abilities=index,store,update
+php artisan make:croft-requests Image --abilities=index,store,update
 ```
 
 If the `--abilities` option is not given then all requests for index, show, store, update, and destroy will be created:
 
 ```
-php artisan make:croft-requests Feed/Post
+php artisan make:croft-requests Image
 ```
