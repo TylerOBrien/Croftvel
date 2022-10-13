@@ -42,6 +42,8 @@ class File extends Model
     ];
 
     /**
+     * Create a new File model from an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *
@@ -53,6 +55,8 @@ class File extends Model
     }
 
     /**
+     * Modify an existing File model using an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *

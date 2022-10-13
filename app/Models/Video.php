@@ -42,6 +42,8 @@ class Video extends Model
     ];
 
     /**
+     * Create a new Video model from an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *
@@ -53,6 +55,8 @@ class Video extends Model
     }
 
     /**
+     * Modify an existing Video model using an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *
