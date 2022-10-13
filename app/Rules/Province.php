@@ -48,11 +48,7 @@ class Province implements Rule
         }
 
         $iso31662 = [ strtoupper($alpha2), strtoupper($value) ];
-        $data = Subdivision::getSubdivisions($alpha2);
-
-        if (!$subdivisions = get_object_vars($data)) {
-            return false;
-        }
+        $subdivisions = Subdivision::getSubdivisions($alpha2);
 
         return in_array(implode('-', $iso31662), array_keys($subdivisions));
     }
