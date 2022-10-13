@@ -69,7 +69,7 @@ class Image extends Model
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile$file, array $attributes) : bool
+    public function updateFromFile(UploadedFile $file, array $attributes) : bool
     {
         [ $width, $height ] = getimagesize($file);
 
