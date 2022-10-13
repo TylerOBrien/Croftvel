@@ -20,9 +20,10 @@ trait HasAddresses
     public function createAddress(array $fields):Address
     {
         return Address::create(
-            array_merge($fields,
-                [ 'owner_id' => $this->id,
-                  'owner_type' => self::class ])
+            array_merge($fields, [
+                'owner_id' => $this->id,
+                'owner_type' => self::class,
+            ])
         );
     }
 
@@ -34,7 +35,8 @@ trait HasAddresses
         $predicate = [
             'name' => $fields['name'],
             'owner_id' => $this->id,
-            'owner_type' => self::class ];
+            'owner_type' => self::class,
+        ];
 
         $address = Address::where($predicate)->first();
 
