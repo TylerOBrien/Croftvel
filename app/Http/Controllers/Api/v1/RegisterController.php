@@ -18,7 +18,6 @@ class RegisterController extends Controller
     public function __invoke(Register $request)
     {
         $fields = $request->validated();
-
         $user = User::createWithAccount();
         $identity = Identity::createFromRequestFields($user, $fields);
         $secret = Secret::createFromRequestFields($user, $fields);
