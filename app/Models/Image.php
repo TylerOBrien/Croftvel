@@ -44,6 +44,8 @@ class Image extends Model
     ];
 
     /**
+     * Create a new Image model from an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *
@@ -60,6 +62,8 @@ class Image extends Model
     }
 
     /**
+     * Modify an existing Image model using an uploaded file.
+     *
      * @param  \Illuminate\Http\UploadedFile  $file
      * @param  array  $attributes
      *
