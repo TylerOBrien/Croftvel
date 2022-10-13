@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Api\v1;
 
-use App\Helpers\PersonalAccessTokenHelper;
+use App\Helpers\Token\PersonalAccessTokenHelper;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,7 +11,7 @@ class PersonalAccessTokenResource extends JsonResource
     /**
      * Instantiate the resource.
      *
-     * @param  \App\Helpers\PersonalAccessTokenHelper  $patHelper
+     * @param  \App\Helpers\Token\PersonalAccessTokenHelper  $patHelper
      *
      * @return void
      */
