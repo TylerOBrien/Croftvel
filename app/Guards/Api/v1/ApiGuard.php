@@ -21,6 +21,13 @@ class ApiGuard implements Guard
     protected $user;
 
     /**
+     * The identity the user used to authenticate.
+     *
+     * @var \App\Models\Identity
+     */
+    protected $identity;
+
+    /**
      * The number of minutes tokens should be allowed to remain valid.
      *
      * @var int
@@ -118,6 +125,16 @@ class ApiGuard implements Guard
     }
 
     /**
+     * Get the identity used by the currently authenticated user.
+     *
+     * @return \App\Models\Identity|null
+     */
+    public function identity()
+    {
+        return $this->identity ?? null;
+    }
+
+    /**
      * Determine if the guard has a user instance.
      *
      * @return bool
@@ -156,7 +173,10 @@ class ApiGuard implements Guard
 
         event(new AuthAttempted($credentials->identity, true));
 
-        return $this->user = $credentials->identity->user;
+        $this->identity = $credentials->identity;
+        $this->user = $credentials->identity->user;
+
+        return $this->user;
     }
 
     /**
