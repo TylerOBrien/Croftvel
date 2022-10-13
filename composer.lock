@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "757a318d937e28c700e975b1da090b49",
+    "content-hash": "3f3fd121340991bbd3e79b10af206f76",
     "packages": [
         {
             "name": "brick/math",
@@ -896,6 +896,48 @@
                 }
             ],
             "time": "2022-08-28T14:45:39+00:00"
+        },
+        {
+            "name": "l91/iso-3166-2",
+            "version": "v1.0.2",
+            "target-dir": "L91/ISO_3166_2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexander-schranz/iso-3166-2.git",
+                "reference": "0769f8b84f5329a26a792e4b1b191ca5cdd8ff70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexander-schranz/iso-3166-2/zipball/0769f8b84f5329a26a792e4b1b191ca5cdd8ff70",
+                "reference": "0769f8b84f5329a26a792e4b1b191ca5cdd8ff70",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "L91\\ISO_3166_2": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alex.schranz91@gmail.com"
+                }
+            ],
+            "description": "PHP Lib for ISO 3166-2",
+            "homepage": "https://https://github.com/alexander-schranz/iso-3166-2",
+            "support": {
+                "issues": "https://github.com/alexander-schranz/iso-3166-2/issues",
+                "source": "https://github.com/alexander-schranz/iso-3166-2/tree/v1.0.2"
+            },
+            "time": "2022-05-30T11:55:59+00:00"
         },
         {
             "name": "laravel/framework",
