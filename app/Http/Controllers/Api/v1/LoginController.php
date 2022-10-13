@@ -13,9 +13,9 @@ class LoginController extends Controller
     /**
      * Attempt to authenticate the guest using the given credentials.
      *
-     * @param  Login  $request
+     * @param  \App\Http\Requests\Api\v1\Auth\Login  $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function __invoke(Login $request)
     {
