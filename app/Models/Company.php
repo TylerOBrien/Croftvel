@@ -15,10 +15,10 @@ class Company extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \App\Models\Address
      */
-    public function location()
+    public function getLocationAttribute()
     {
-        return $this->addresses()->whereName('primary');
+        return $this->addresses()->whereName('primary')->first();
     }
 }
