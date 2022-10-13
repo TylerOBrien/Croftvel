@@ -2,9 +2,15 @@
 
 namespace App\Traits\Models;
 
-use App\Models\Image;
-
 trait HasLogo
 {
     use HasImages;
+
+    /**
+     * @return \App\Models\Image
+     */
+    public function getLogoAttribute()
+    {
+        return $this->images()->whereName('logo.primary.xl')->first();
+    }
 }
