@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasAddresses, HasProfiles;
+
+    protected $fillable = [
+        'name',
+    ];
 }
