@@ -7,7 +7,7 @@ use App\Models\Profile;
 trait HasProfiles
 {
     /**
-     * @return MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function profiles()
     {
