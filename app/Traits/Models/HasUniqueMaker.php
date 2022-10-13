@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 trait HasUniqueMaker
 {
     /**
+     * Generate a new integer value that is guaranteed to be a unique entry in storage.
+     *
      * @param  string  $column  The name of the column for the code.
      * @param  int  $digits  The number of digits in the code.
      * @param  string  $hash_algo  The name of the hashing algorithm to use.
@@ -27,6 +29,8 @@ trait HasUniqueMaker
     }
 
     /**
+     * Generate a new string value that is guaranteed to be a unique entry in storage.
+     *
      * @param  string  $column  The name of the column for the code.
      * @param  int  $length  The number of characters in the code.
      * @param  string  $hash_algo  The name of the hashing algorithm to use.
