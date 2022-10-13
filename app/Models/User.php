@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use App\Events\Api\v1\User\UserCreated;
-use App\Traits\Models\{ HasEnabledState, HasFullName, HasUserAbilities };
+use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities };
 
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 
 class User extends BaseUser
 {
-    use Notifiable, HasEnabledState, HasFullName, HasUserAbilities;
+    use Notifiable, HasEnabledState, HasFullName, HasUserAbilities, HasProfiles;
 
     protected $appends = [
         'is_identified',
