@@ -5,7 +5,7 @@ namespace App\Traits\Models;
 trait HasEnabledState
 {
     /**
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function enable()
     {
@@ -16,7 +16,7 @@ trait HasEnabledState
     }
 
     /**
-     * @return Model
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function disable()
     {
