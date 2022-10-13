@@ -26,4 +26,19 @@ class Address extends Model
         'owner_id',
         'owner_type',
     ];
+
+    /**
+     * Register creating handler to ensure that a name is set.
+     *
+     * @return void
+     */
+    static public function boot()
+    {
+        parent::boot();
+        self::creating(function(Address $address) {
+            if (!$address->name) {
+                $address->name = 'primary';
+            }
+        });
+    }
 }
