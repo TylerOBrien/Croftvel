@@ -12,9 +12,9 @@ class VerifyIdentityController extends Controller
     /**
      * Verify the ownership of an identity.
      *
-     * @param VerifyIdentity $request
+     * @param  \App\Http\Requests\Api\v1\Auth\VerifyIdentity $request
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function __invoke(VerifyIdentity $request)
     {
