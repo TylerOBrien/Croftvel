@@ -7,6 +7,8 @@ trait HasAddress
     /**
      * Get the store validation rules that apply to the request.
      *
+     * @param  string  $prefix  The optional prefix to add to the names of each field in the address.
+     *
      * @return array
      */
     protected function addressStoreRules(string $prefix = '') : array
@@ -22,7 +24,9 @@ trait HasAddress
     }
 
     /**
-     * Get the store validation rules that apply to the request.
+     * Get the update validation rules that apply to the request.
+     *
+     * @param  string  $prefix  The optional prefix to add to the names of each field in the address.
      *
      * @return array
      */
