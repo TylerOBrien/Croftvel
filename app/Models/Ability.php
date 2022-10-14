@@ -42,7 +42,7 @@ class Ability extends Model
         }
 
         foreach ($abilities as $ability) {
-            $instances[] = self::create([
+            self::create([
                 'name' => $ability,
                 'privilege_id' => $privilege->id,
                 'model_id' => is_string($resource) ? null : $resource->id,
