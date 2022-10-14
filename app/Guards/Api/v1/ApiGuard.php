@@ -226,7 +226,7 @@ class ApiGuard implements Guard
      * Retrieve an instance of this ApiGuard. Intended to help avoid false-positive
      * errors with linters.
      *
-     * @return ApiGuard
+     * @return \App\Guards\Api\v1\ApiGuard
      */
     static public function getInstance() : ApiGuard
     {
