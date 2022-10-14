@@ -16,4 +16,17 @@ return [
 
     'namespace' => 'App\Models\\',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default
+    |--------------------------------------------------------------------------
+    |
+    | Sensible default values for model attributes are defined here.
+    |
+    */
+
+    'default' => [
+        'name' => 'primary',
+    ],
+
 ];
