@@ -55,6 +55,8 @@ trait HasFileUpload
     }
 
     /**
+     * Deletes the file from file disk storage as well as database storage.
+     *
      * @return bool
      */
     public function delete() : bool
@@ -64,6 +66,8 @@ trait HasFileUpload
     }
 
     /**
+     * Retreives the full URL for this file.
+     *
      * @return string
      */
     public function getUrlAttribute() : string
