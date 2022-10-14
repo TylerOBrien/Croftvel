@@ -15,7 +15,7 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', [ 'Ok', 'Suspended' ])->default('Ok');
+            $table->enum('status', config('enum.account.status'))->default('Ok');
             $table->boolean('is_enabled')->default(1);
             $table->timestamps();
 

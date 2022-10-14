@@ -14,6 +14,13 @@ return [
     |
     */
 
+    'account' => [
+        'status' => [
+            'Ok',
+            'Suspended',
+        ],
+    ],
+
     'identity' => [
         'type' => [
             'email',
