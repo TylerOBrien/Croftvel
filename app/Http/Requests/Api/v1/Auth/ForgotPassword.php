@@ -20,7 +20,7 @@ class ForgotPassword extends ApiRequest
         }
 
         return [
-            'identity.type' => 'required|string|in:' . join(',', config('croft.enum.identity.type')),
+            'identity.type' => 'required|string|in:' . join(',', config('enum.identity.type')),
             'identity.value' => 'required|string' . $this->identityRule(),
         ];
     }

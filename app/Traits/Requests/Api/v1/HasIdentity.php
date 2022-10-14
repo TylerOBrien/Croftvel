@@ -21,7 +21,7 @@ trait HasIdentity
      */
     protected function identityTypeRule() : string
     {
-        return 'required|string|in:' . join(',', config('croft.enum.identity.type'));
+        return 'required|string|in:' . join(',', config('enum.identity.type'));
     }
 
     /**

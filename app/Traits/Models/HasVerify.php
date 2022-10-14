@@ -22,7 +22,7 @@ trait HasVerify
      */
     public function attemptVerify(string $ability, array $fields) : bool
     {
-        if (!in_array($ability, config('croft.enum.verification.ability'))) {
+        if (!in_array($ability, config('enum.verification.ability'))) {
             throw new InvalidVerificationAbility;
         }
 

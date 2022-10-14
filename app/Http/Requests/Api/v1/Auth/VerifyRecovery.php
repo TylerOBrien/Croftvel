@@ -17,9 +17,9 @@ class VerifyRecovery extends ApiRequest
     public function rules()
     {
         $rules = [
-            'type' => 'required|string|in:' . join(',', config('croft.enum.verification.type')),
+            'type' => 'required|string|in:' . join(',', config('enum.verification.type')),
             'value' => 'required|string',
-            'secret.type' => 'required|string|in:' . join(',', config('croft.enum.secret.type')),
+            'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
         ];
 

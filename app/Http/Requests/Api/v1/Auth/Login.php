@@ -19,7 +19,7 @@ class Login extends ApiRequest
         return [
             'identity.type' => $this->identityTypeRule(),
             'identity.value' => $this->identityValueRule(),
-            'secret.type' => 'required|string|in:' . join(',', config('croft.enum.secret.type')),
+            'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
         ];
     }

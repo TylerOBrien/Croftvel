@@ -17,7 +17,7 @@ class VerifyIdentity extends ApiRequest
     public function rules()
     {
         $rules = [
-            'type' => 'required|string|in:' . join(',', config('croft.enum.verification.type')),
+            'type' => 'required|string|in:' . join(',', config('enum.verification.type')),
             'value' => 'required|string',
         ];
 
