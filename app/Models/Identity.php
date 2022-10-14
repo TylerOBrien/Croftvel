@@ -130,7 +130,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function createFromRequestFields(User $user, array $fields) : Identity
+    static public function createFromFields(User $user, array $fields) : Identity
     {
         return self::create([
             'user_id' => $user->id,

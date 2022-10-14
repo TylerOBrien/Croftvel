@@ -54,7 +54,7 @@ class Secret extends Model
      *
      * @return \App\Models\Secret|null
      */
-    static public function createFromRequestFields(User $user, array $fields) : Secret
+    static public function createFromFields(User $user, array $fields) : Secret
     {
         return self::create([
             'user_id' => $user->id,

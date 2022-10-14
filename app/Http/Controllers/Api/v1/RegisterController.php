@@ -19,8 +19,8 @@ class RegisterController extends Controller
     {
         $fields = $request->validated();
         $user = User::createWithAccount();
-        $identity = Identity::createFromRequestFields($user, $fields);
-        $secret = Secret::createFromRequestFields($user, $fields);
+        $identity = Identity::createFromFields($user, $fields);
+        $secret = Secret::createFromFields($user, $fields);
 
         return compact('user', 'identity', 'secret');
     }
