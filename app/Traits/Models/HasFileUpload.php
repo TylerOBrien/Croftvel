@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\Storage;
 trait HasFileUpload
 {
     /**
-     * @param  \Illuminate\Http\UploadedFile  $file
-     * @param  array  $attributes
-     * @param  string  $dest
-     * @param  string  $disk
+     * Create a new instance of this model using the given uploaded file.
      *
-     * @return Model
+     * @param  \Illuminate\Http\UploadedFile  $file  The file uploaded by a user.
+     * @param  array  $attributes  The attributes to pass to the create function.
+     * @param  string|null  $dest  The filepath destination on the disk where the file will be saved.
+     * @param  string|null  $disk  The disk to use for storage.
+     *
+     * @return \Illuminate\Database\Eloquent\Model
      */
-    static public function createFromFile(UploadedFile $file, array $attributes, string $dest = null, string $disk = null)
+    static public function createFromFile(UploadedFile $file, array $attributes, string|null $dest = null, string|null $disk = null)
     {
         $dest = $dest ?? config('uploads.default.dest');
         $disk = $disk ?? config('uploads.default.disk');
@@ -28,13 +30,15 @@ trait HasFileUpload
     }
 
     /**
-     * @param  \Illuminate\Http\UploadedFile  $file
-     * @param  array  $attributes
-     * @param  string  $dest
+     * Modifies an existing instance of this model using the given uploaded file.
+     *
+     * @param  \Illuminate\Http\UploadedFile  $file  The file uploaded by a user.
+     * @param  array  $attributes  The attributes to pass to the create function.
+     * @param  string|null  $dest  The filepath destination on the disk where the file will be saved.
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile $file, array $attributes, string $dest = null) : bool
+    public function updateFromFile(UploadedFile $file, array $attributes, string|null $dest = null) : bool
     {
         $dest = $dest ?? config('uploads.default.dest');
 
