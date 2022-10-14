@@ -30,8 +30,8 @@ class VerifyIdentity extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Models\User  $recipient
-     * @param  string  $plaintext_code
+     * @param  \App\Models\User  $recipient  The user who needs to verify their identity.
+     * @param  string  $plaintext_code  The plaintext version of the code the user will use to verify.
      *
      * @return void
      */
