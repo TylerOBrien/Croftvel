@@ -75,7 +75,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         });
 
         Auth::extend('croft', function ($app, $name, array $config) {
-            return new ApiGuard(config('croft.token.ttl'));
+            return new ApiGuard(config('security.token.ttl'));
         });
     }
 }

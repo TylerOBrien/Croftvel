@@ -51,7 +51,7 @@ class Verification extends Model
         parent::boot();
         self::creating(function(Verification $verification) {
             if (!$verification->code) {
-                $verification->code = self::makeUniqueInt('code', config('croft.verification.length'));
+                $verification->code = self::makeUniqueInt('code', config('security.verification.length'));
             }
         });
     }

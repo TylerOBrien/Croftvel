@@ -43,7 +43,7 @@ class ApiGuard implements Guard
      */
     public function __construct(int $expiration = null)
     {
-        $this->expiration = $expiration ?: config('croft.token.ttl');
+        $this->expiration = $expiration ?: config('security.token.ttl');
     }
 
     /**

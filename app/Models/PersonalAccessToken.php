@@ -44,12 +44,12 @@ class PersonalAccessToken extends Model
      */
     static public function createForUser(User $user) : PersonalAccessTokenHelper
     {
-        $plaintext = Str::random(config('croft.token.length'));
+        $plaintext = Str::random(config('security.token.length'));
         $pat = self::create([
-            'name' => config('croft.token.name'),
+            'name' => config('security.token.name'),
             'tokenable_id' => $user->id,
             'tokenable_type' => User::class,
-            'token' => hash(config('croft.token.hash_algo'), $plaintext),
+            'token' => hash(config('security.token.hash_algo'), $plaintext),
             'abilities' => '["*"]',
         ]);
 
@@ -67,13 +67,13 @@ class PersonalAccessToken extends Model
     static public function findFromBearerToken(string $bearer)
     {
         if (strpos($bearer, '|') === false) {
-            return self::whereToken(hash(config('croft.token.hash_algo'), $bearer))->first();
+            return self::whereToken(hash(config('security.token.hash_algo'), $bearer))->first();
         }
 
         [ $id, $token ] = explode('|', $bearer, 2);
 
         if ($instance = self::find($id)) {
-            return hash_equals($instance->token, hash(config('croft.token.hash_algo'), $token)) ? $instance : null;
+            return hash_equals($instance->token, hash(config('security.token.hash_algo'), $token)) ? $instance : null;
         }
     }
 }
