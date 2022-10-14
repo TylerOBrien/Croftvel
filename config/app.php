@@ -45,6 +45,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Hosts
+    |--------------------------------------------------------------------------
+    |
+    | The domain names that are used by the application. These are used to
+    | ensure proper routing is used and to support multiple domain names being
+    | pointed to this application.
+    |
+    */
+
+    'hosts' => [
+        'api' => env('APP_HOST_API', 'localhost'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |
