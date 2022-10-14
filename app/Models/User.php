@@ -117,12 +117,14 @@ class User extends BaseUser
      * Retreive the specified identity attribute.
      *
      * @param  string  $type  The type of identity (e.g. email or mobile) to lookup.
-     * @param  string  $name  The name of the identity.
+     * @param  string|null  $name  The name of the identity.
      *
      * @return string|null
      */
-    protected function identityAttribute(string $type, string $name = 'primary') : string|null
+    protected function identityAttribute(string $type, string|null $name = null) : string|null
     {
+        $name = $name ?? config('models.default.name');
+
         return $this->identities()
                     ->where(compact('type', 'name'))
                     ->first()

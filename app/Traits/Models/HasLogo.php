@@ -15,12 +15,14 @@ trait HasLogo
      * Creates a new Image instance preconfigured to be able to represent a logo.
      *
      * @param  \Illuminate\Http\UploadedFile  $file  The image file uploaded by a user.
-     * @param  string  $name  The name of the logo.
+     * @param  string|null  $name  The name of the logo.
      *
      * @return \App\Models\Image
      */
-    public function createLogo(UploadedFile $file, string $name = 'primary') : Image
+    public function createLogo(UploadedFile $file, string|null $name = null) : Image
     {
+        $name = $name ?? config('models.default.name');
+
         return Image::createFromFile($file, [
             'name' => "logo.$name.xl",
             'owner_id' => $this->id,
