@@ -34,7 +34,7 @@ trait HasAddresses
      *
      * @return \App\Models\Address|bool
      */
-    public function updateOrCreateAddress(array $attributes) : Address|null
+    public function updateOrCreateAddress(array $attributes) : Address|bool
     {
         $predicate = [
             'name' => $attributes['name'],
