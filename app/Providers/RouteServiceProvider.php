@@ -56,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(
             [
                 'prefix' => 'v1',
-                'domain' => config('croft.hosts.api'),
+                'domain' => config('app.hosts.api'),
             ],
             function() {
                 $hasToken = ApiGuard::getInstance()->hasToken();
