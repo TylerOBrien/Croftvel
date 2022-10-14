@@ -74,7 +74,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
             return config('security.permissions.disabled') ?: null;
         });
 
-        Auth::extend('croft', function ($app, $name, array $config) {
+        Auth::extend(config('security.guard.name'), function ($app, $name, array $config) {
             return new ApiGuard(config('security.token.ttl'));
         });
     }

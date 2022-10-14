@@ -230,6 +230,6 @@ class ApiGuard implements Guard
      */
     static public function getInstance() : ApiGuard
     {
-        return auth('croft');
+        return auth(config('security.guard.name'));
     }
 }
