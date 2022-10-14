@@ -19,7 +19,7 @@ trait HasAddresses
      *
      * @return \App\Models\Address
      */
-    public function createAddress(array $attributes):Address
+    public function createAddress(array $attributes) : Address
     {
         return Address::create(
             array_merge($attributes, [
@@ -34,7 +34,7 @@ trait HasAddresses
      *
      * @return \App\Models\Address|bool
      */
-    public function updateOrCreateAddress(array $attributes)
+    public function updateOrCreateAddress(array $attributes) : Address|null
     {
         $predicate = [
             'name' => $attributes['name'],
