@@ -20,7 +20,7 @@ class Ownable implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = ApiGuard::getInstance()->parseToken();
+        $user = ApiGuard::get()->parseToken();
 
         if (is_null($user)) {
             return false;

@@ -20,7 +20,7 @@ class LoginController extends Controller
     public function __invoke(Login $request)
     {
         $fields = $request->validated();
-        $guard = ApiGuard::getInstance();
+        $guard = ApiGuard::get();
         $user = $guard->attempt($fields);
         $pat = PersonalAccessToken::createForUser($user);
         $token = new PersonalAccessTokenResource($pat);

@@ -46,7 +46,7 @@ class Can implements Rule
      */
     public function passes($attribute, $value) : bool
     {
-        $user = ApiGuard::getInstance()->parseToken();
+        $user = ApiGuard::get()->parseToken();
 
         if (is_null($user)) {
             return false;

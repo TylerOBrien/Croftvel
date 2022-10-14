@@ -58,7 +58,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
      */
     public function authorize()
     {
-        $user = ApiGuard::getInstance()->user();
+        $user = ApiGuard::get()->user();
         $target = $this->binding ? $this->route($this->binding) : $this->model;
 
         if ($user && $this->ability) {

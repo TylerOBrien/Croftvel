@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function bindLiteralMeRouteParam()
     {
         Route::bind('user', function ($id) {
-            return $id === 'me' ? ApiGuard::getInstance()->user() : $id;
+            return $id === 'me' ? ApiGuard::get()->user() : $id;
         });
     }
 
@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
                 'domain' => config('app.hosts.api'),
             ],
             function() {
-                $hasToken = ApiGuard::getInstance()->hasToken();
+                $hasToken = ApiGuard::get()->hasToken();
                 $middlware = $hasToken ? 'croft.authenticated' : 'croft.guest';
                 $path = $hasToken ? 'routes/Api/v1/authenticated.php' : 'routes/Api/v1/guest.php';
 
