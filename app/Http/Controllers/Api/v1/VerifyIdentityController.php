@@ -12,7 +12,7 @@ class VerifyIdentityController extends Controller
     /**
      * Verify the ownership of an identity.
      *
-     * @param  \App\Http\Requests\Api\v1\Auth\VerifyIdentity $request
+     * @param  \App\Http\Requests\Api\v1\Auth\VerifyIdentity  $request
      *
      * @return \Illuminate\Http\Response
      */
