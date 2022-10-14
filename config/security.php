@@ -49,4 +49,17 @@ return [
         'hash_algo' => 'sha256',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Permissions
+    |--------------------------------------------------------------------------
+    |
+    | Settings related to permissions/authorization.
+    |
+    */
+
+    'permissions' => [
+        'disabled' => env('SECURITY_PERMISSIONS_DISABLED', 0),
+    ],
+
 ];
