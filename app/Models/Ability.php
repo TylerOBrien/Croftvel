@@ -26,7 +26,7 @@ class Ability extends Model
      * to perform actions on a model.
      *
      * @param  \App\Models\User  $user  The user to grant a permission to.
-     * @param  \Illuminate\Database\Eloquent\Model  $resource  The resource the ability will apply to.
+     * @param  string|\Illuminate\Database\Eloquent\Model  $resource  The resource the ability will apply to.
      * @param  array|string  $abilities  The ability to allow for the user.
      *
      * @return void
@@ -55,7 +55,7 @@ class Ability extends Model
      * actions on models.
      *
      * @param  \App\Models\User  $user  The user to remove permission from.
-     * @param  \Illuminate\Database\Eloquent\Model  $resource  The resource the ability had been applied to.
+     * @param  string|\Illuminate\Database\Eloquent\Model  $resource  The resource the ability had been applied to.
      * @param  array|string  $abilities  The ability to remove from the user.
      *
      * @return void
@@ -69,12 +69,18 @@ class Ability extends Model
         }
 
         foreach ($abilities as $ability) {
-            self::where([
+            $model_id = is_string($resource) ? null : $resource->id;
+            $query = self::where([
                 'name' => $ability,
                 'privilege_id' => $privilege->id,
-                'model_id' => is_string($resource) ? null : $resource->id,
                 'model_type' => is_string($resource) ? $resource : $resource::class,
-            ])->delete();
+            ]);
+
+            if (is_null($model_id)) {
+                $query->whereNull('model_id')->delete();
+            } else {
+                $query->where('model_id', $model_id)->delete();
+            }
         }
     }
 }
