@@ -71,7 +71,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     public function register()
     {
         Gate::before(function() {
-            return config('croft.permissions.disabled') ?: null;
+            return config('security.permissions.disabled') ?: null;
         });
 
         Auth::extend('croft', function ($app, $name, array $config) {
