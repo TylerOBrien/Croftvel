@@ -18,7 +18,7 @@ class ProfileFieldValueCast implements CastsAttributes
      *
      * @return mixed
      */
-    public function get($model, $key, $value, $attributes)
+    public function get($model, string $key, $value, array $attributes)
     {
         switch ($model->type) {
         case 'integer':
@@ -46,7 +46,7 @@ class ProfileFieldValueCast implements CastsAttributes
      *
      * @return string
      */
-    public function set($model, $key, $value, $attributes)
+    public function set($model, string $key, $value, array $attributes)
     {
         return strval($value);
     }
