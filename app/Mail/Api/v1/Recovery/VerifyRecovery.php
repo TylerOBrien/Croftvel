@@ -25,7 +25,7 @@ class VerifyRecovery extends Mailable
      *
      * @var \App\Models\Identity
      */
-    protected $recovery;
+    protected $identity;
 
     /**
      * The plaintext recovery code.
