@@ -72,6 +72,6 @@ trait HasFileUpload
      */
     public function getUrlAttribute() : string
     {
-        return Storage::disk($this->disk)->url($this->filepath);
+        return Storage::disk($this->disk)->url($this->filepath); // Linter error here is a false positive.
     }
 }
