@@ -16,10 +16,8 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->enum('status', config('enum.account.status'))->default('Ok');
-            $table->boolean('is_enabled')->default(1);
+            $table->boolean('is_enabled')->default(1)->index();
             $table->timestamps();
-
-            $table->index('is_enabled');
         });
     }
 
