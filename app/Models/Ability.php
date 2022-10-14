@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\Api\v1\Account\{ AbilitiesGivenToUser, AbilitiesTakenFromUser };
+
 use Illuminate\Database\Eloquent\Model;
 
 class Ability extends Model
@@ -40,13 +42,15 @@ class Ability extends Model
         }
 
         foreach ($abilities as $ability) {
-            self::create([
+            $instances[] = self::create([
                 'name' => $ability,
                 'privilege_id' => $privilege->id,
                 'model_id' => is_string($resource) ? null : $resource->id,
                 'model_type' => is_string($resource) ? $resource : $resource::class,
             ]);
         }
+
+        event(new AbilitiesGivenToUser($user, $resource, $abilities));
     }
 
     /**
@@ -82,5 +86,7 @@ class Ability extends Model
                 $query->where('model_id', $model_id)->delete();
             }
         }
+
+        event(new AbilitiesTakenFromUser($user, $resource, $abilities));
     }
 }
