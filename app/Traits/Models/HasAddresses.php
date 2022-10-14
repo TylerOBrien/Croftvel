@@ -15,6 +15,9 @@ trait HasAddresses
     }
 
     /**
+     * Create a new address with this model instance being set as the owner. The
+     * given attributes will be passed to the Address::create function.
+     *
      * @param  array  $fields  The attributes to pass to the create function.
      *
      * @return \App\Models\Address
@@ -30,6 +33,15 @@ trait HasAddresses
     }
 
     /**
+     * Checks if an address matching the given attributes already exists. If so
+     * that existing instance will be modified. Otherwise a new address will be
+     * created with this model instance being set as the owner. The
+     * given attributes will be passed to the Address::create function.
+     *
+     * Will return true if modifying an existing address.
+     *
+     * Will return an instance of the Address model if creating a new address.
+     *
      * @param  array  $attributes  The attributes to pass to the create/update function.
      *
      * @return \App\Models\Address|bool
