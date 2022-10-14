@@ -21,6 +21,8 @@ class ProfileFieldValueCast implements CastsAttributes
     public function get($model, string $key, $value, array $attributes)
     {
         switch ($model->type) {
+        case 'string':
+            return $value;
         case 'integer':
             return (int) $value;
         case 'float':
