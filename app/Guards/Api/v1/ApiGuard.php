@@ -5,7 +5,7 @@ namespace App\Guards\Api\v1;
 use App\Events\Api\v1\Auth\AuthAttempted;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Helpers\Auth\Credentials;
-use App\Models\{ PersonalAccessToken, Secret };
+use App\Models\PersonalAccessToken;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
