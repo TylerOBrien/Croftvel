@@ -5,7 +5,7 @@ namespace App\Guards\Api\v1;
 use App\Events\Api\v1\Auth\AuthAttempted;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Helpers\Auth\Credentials;
-use App\Models\PersonalAccessToken;
+use App\Models\{ Identity, PersonalAccessToken, User };
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -65,7 +65,7 @@ class ApiGuard implements Guard
      *
      * @return \App\Models\User
      */
-    public function parseToken(Request $request = null)
+    public function parseToken(Request $request = null) : User|null
     {
         if ($this->check()) {
             return $this->user();
@@ -99,7 +99,7 @@ class ApiGuard implements Guard
      *
      * @return bool
      */
-    public function check()
+    public function check() : bool
     {
         return (bool) $this->user;
     }
@@ -109,7 +109,7 @@ class ApiGuard implements Guard
      *
      * @return bool
      */
-    public function guest()
+    public function guest() : bool
     {
         return is_null($this->user);
     }
@@ -119,7 +119,7 @@ class ApiGuard implements Guard
      *
      * @return \App\Models\User|null
      */
-    public function user()
+    public function user() : User|null
     {
         return $this->user ?? null;
     }
@@ -129,7 +129,7 @@ class ApiGuard implements Guard
      *
      * @return \App\Models\Identity|null
      */
-    public function identity()
+    public function identity() : Identity|null
     {
         return $this->identity ?? null;
     }
@@ -139,7 +139,7 @@ class ApiGuard implements Guard
      *
      * @return bool
      */
-    public function hasUser()
+    public function hasUser() : bool
     {
         return (bool) $this->user;
     }
@@ -147,9 +147,9 @@ class ApiGuard implements Guard
     /**
      * Get the id of the currently authenticated user.
      *
-     * @return mixed
+     * @return int|null
      */
-    public function id()
+    public function id() : int|null
     {
         return $this->user ? $this->user->getAuthIdentifier() : null;
     }
@@ -161,7 +161,7 @@ class ApiGuard implements Guard
      *
      * @return \App\Models\User
      */
-    public function attempt(array $fields = [])
+    public function attempt(array $fields = []) : User
     {
        $credentials = Credentials::fromFields($fields);
 
@@ -186,7 +186,7 @@ class ApiGuard implements Guard
      *
      * @return bool
      */
-    public function validate(array $fields = [])
+    public function validate(array $fields = []) : bool
     {
         return (bool) $this->attempt($fields);
     }
@@ -199,7 +199,7 @@ class ApiGuard implements Guard
      *
      * @return void
      */
-    protected function bySecretPassword(array $fields, Credentials $credentials)
+    protected function bySecretPassword(array $fields, Credentials $credentials) : void
     {
         if (!Hash::check($fields['secret']['value'], $credentials->secret->value)) {
             event(new AuthAttempted($credentials->identity, false));
@@ -215,7 +215,7 @@ class ApiGuard implements Guard
      *
      * @return void
      */
-    protected function bySecretTotp(array $fields, Credentials $credentials)
+    protected function bySecretTotp(array $fields, Credentials $credentials) : void
     {
         //
     }
@@ -227,7 +227,7 @@ class ApiGuard implements Guard
      *
      * @return void
      */
-    public function setUser($user)
+    public function setUser($user) : void
     {
         $this->user = $user;
     }
