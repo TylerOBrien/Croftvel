@@ -31,7 +31,7 @@ class ApiException extends Exception
     /**
      * Retrieve the error response.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function render()
     {
