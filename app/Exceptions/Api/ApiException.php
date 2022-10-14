@@ -35,7 +35,7 @@ class ApiException extends Exception
      */
     public function render()
     {
-        return response()->json(
+        return response(
             [
                 config('response.key.message') => $this->message,
             ],
