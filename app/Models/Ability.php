@@ -22,13 +22,16 @@ class Ability extends Model
     }
 
     /**
-     * @param  User  $user
-     * @param  array|string  $abilities
-     * @param  mixed  $resource
+     * Grant the user the defined ability/abilities. This will allow the user
+     * to perform actions on a model.
+     *
+     * @param  \App\Models\User  $user  The user to grant a permission to.
+     * @param  \Illuminate\Database\Eloquent\Model  $resource  The resource the ability will apply to.
+     * @param  array|string  $abilities  The ability to allow for the user.
      *
      * @return void
      */
-    static public function grant(User $user, $abilities, $resource)
+    static public function allow(User $user, $resource, array|string $abilities) : void
     {
         $privilege = $user->privilege;
 
