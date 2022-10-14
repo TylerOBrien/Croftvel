@@ -63,7 +63,7 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAuthAttemptsAttribute()
+    public function getAuthAttemptsAttribute() : \Illuminate\Database\Eloquent\Collection
     {
         return AuthAttempt::fromIdentity($this)->get();
     }
@@ -71,7 +71,7 @@ class Identity extends Model
     /**
      * @return void
      */
-    public function setVerifiedAtAttribute($value)
+    public function setVerifiedAtAttribute($value) : void
     {
         if (is_null($this->verified_at)) {
             $this->attributes['verified_at'] = $value;
