@@ -17,8 +17,8 @@ trait HasControllerHelpers
      */
     protected function loaded($model, string $resource_name, string $ability_name = null)
     {
-        $relationships_config = "croft.relationships.$resource_name";
-        $attributes_config = "croft.relationships.$resource_name";
+        $relationships_config = "response.relationships.$resource_name";
+        $attributes_config = "response.attributes.$resource_name";
 
         if ($ability_name) {
             $relationships_config .= ".$ability_name";
@@ -47,8 +47,8 @@ trait HasControllerHelpers
             return $query->get();
         }
 
-        $relationships_config = "croft.relationships.$resource_name";
-        $attributes_config = "croft.relationships.$resource_name";
+        $relationships_config = "response.relationships.$resource_name";
+        $attributes_config = "response.attributes.$resource_name";
 
         if ($ability_name) {
             $relationships_config .= ".$ability_name";

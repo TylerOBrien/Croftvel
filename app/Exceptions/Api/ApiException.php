@@ -37,7 +37,7 @@ class ApiException extends Exception
     {
         return response()->json(
             [
-                config('croft.responses.key.message') => $this->message,
+                config('response.key.message') => $this->message,
             ],
             $this->http_code,
         );
