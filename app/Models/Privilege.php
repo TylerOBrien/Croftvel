@@ -27,7 +27,9 @@ class Privilege extends Model
      */
     static public function createForUser(User $user) : Privilege
     {
-        $privilege = self::create([ 'name' => "user.$user->id" ]);
+        $privilege = self::create([
+            'name' => "user.$user->id",
+        ]);
 
         PrivilegeUser::create([
             'user_id' => $user->id,
