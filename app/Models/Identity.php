@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Identity\IdentityCreated;
+use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\HasVerify;
 
@@ -132,6 +133,14 @@ class Identity extends Model
      */
     static public function createFromFields(User $user, array $fields) : Identity
     {
+        if (!isset($fields['identity']) ||
+            !is_array($fields['identity']) ||
+            !isset($fields['identity']['type']) ||
+            !isset($fields['identity']['value']))
+        {
+            throw new InvalidCredentials;
+        }
+
         return self::create([
             'user_id' => $user->id,
             'type' => $fields['identity']['type'],
