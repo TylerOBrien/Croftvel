@@ -15,9 +15,9 @@ class Company extends Model
     ];
 
     /**
-     * @return \App\Models\Address
+     * @return \App\Models\Address|null
      */
-    public function getLocationAttribute()
+    public function getLocationAttribute() : Address|null
     {
         return $this->addresses()->whereName('primary')->first();
     }
