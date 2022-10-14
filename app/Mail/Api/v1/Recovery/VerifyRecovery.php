@@ -38,8 +38,8 @@ class VerifyRecovery extends Mailable
      * Create a new message instance.
      *
      * @param  \App\Models\User  $recipient  The user who will receive the email.
-     * @param  \App\Models\Identity  $identity
-     * @param  string  $plaintext_code
+     * @param  \App\Models\Identity  $identity  The identity that the user is attempting to recover.
+     * @param  string  $plaintext_code  The plaintext version of the code the user will use to verify.
      *
      * @return void
      */
