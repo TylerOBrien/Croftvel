@@ -37,7 +37,7 @@ class RemovedFromAccount extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Models\User  $recipient
+     * @param  \App\Models\User  $recipient  The user who will receive the email.
      * @param  \App\Models\User  $user
      * @param  \App\Models\Account  $account
      *

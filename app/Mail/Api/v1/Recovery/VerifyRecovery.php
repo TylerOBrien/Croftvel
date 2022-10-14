@@ -37,7 +37,7 @@ class VerifyRecovery extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Models\User  $recipient
+     * @param  \App\Models\User  $recipient  The user who will receive the email.
      * @param  \App\Models\Identity  $identity
      * @param  string  $plaintext_code
      *

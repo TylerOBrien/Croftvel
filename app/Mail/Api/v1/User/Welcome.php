@@ -23,7 +23,7 @@ class Welcome extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  \App\Models\User  $recipient
+     * @param  \App\Models\User  $recipient  The user who will receive the email.
      *
      * @return void
      */
