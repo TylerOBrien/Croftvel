@@ -49,7 +49,7 @@ class Video extends Model
      *
      * @return \App\Models\Video
      */
-    static public function createFromFile(UploadedFile $file, array $attributes)
+    static public function createFromFile(UploadedFile $file, array $attributes) : Video
     {
         return self::createFromFileBase($file, $attributes, config('uploads.video.dest'));
     }

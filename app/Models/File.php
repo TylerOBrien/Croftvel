@@ -49,7 +49,7 @@ class File extends Model
      *
      * @return \App\Models\File
      */
-    static public function createFromFile(UploadedFile $file, array $attributes)
+    static public function createFromFile(UploadedFile $file, array $attributes) : File
     {
         return self::createFromFileBase($file, $attributes, config('uploads.file.dest'));
     }

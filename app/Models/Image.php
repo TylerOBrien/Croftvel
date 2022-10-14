@@ -51,7 +51,7 @@ class Image extends Model
      *
      * @return \App\Models\Image
      */
-    static public function createFromFile(UploadedFile $file, array $attributes)
+    static public function createFromFile(UploadedFile $file, array $attributes) : Image
     {
         [ $width, $height ] = getimagesize($file);
 
