@@ -8,13 +8,16 @@
 /.vscode
 
 .DS_Store
+.storybook
 
 .env
 .env.backup
 .*.env
 .*.env.backup
 
+.cache
 .phpunit.result.cache
+__pycache__
 
 Homestead.json
 Homestead.yaml
