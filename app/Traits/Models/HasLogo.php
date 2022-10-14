@@ -2,17 +2,30 @@
 
 namespace App\Traits\Models;
 
-use App\Models\Image;
+use Illuminate\Support\Collection;
 
 trait HasLogo
 {
     use HasImages;
 
     /**
-     * @return \App\Models\Image|null
+     * @return \Illuminate\Support\Collection|null
      */
-    public function getLogoAttribute() : Image|null
+    public function getLogoAttribute() : Collection
     {
-        return $this->images()->whereName('logo.primary.xl')->first();
+        $images = $this->images()->where('name', 'like', 'logo.%.%')->get();
+        $logoVariants = collect([]);
+
+        foreach ($images as $image) {
+            [ $_, $name, $size ] = explode('.', $image->name);
+
+            if (!$logoVariants->has($name)) {
+                $logoVariants[$name] = collect([ $size => $image->url ]);
+            } else {
+                $logoVariants[$name][$size] = $image->url;
+            }
+        }
+
+        return $logoVariants;
     }
 }
