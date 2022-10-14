@@ -81,9 +81,9 @@ class Identity extends Model
     }
 
     /**
-     * Attempts to retrieve an instance of the Identity model defined in the request.
+     * Attempts to retrieve an instance of the Identity defined in the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  array  $fields  The request fields containing the raw credentials data.
      *
      * @return \App\Models\Identity|null
      */
