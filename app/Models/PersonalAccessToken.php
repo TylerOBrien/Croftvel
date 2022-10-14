@@ -42,7 +42,7 @@ class PersonalAccessToken extends Model
      *
      * @return PersonalAccessTokenHelper
      */
-    static public function createForUser(User $user) : PersonalAccessTokenHelper
+    static public function createForUser(User $user): PersonalAccessTokenHelper
     {
         $plaintext = Str::random(config('security.token.length'));
         $pat = self::create([
@@ -64,7 +64,7 @@ class PersonalAccessToken extends Model
      *
      * @return \App\Models\PersonalAccessToken|null
      */
-    static public function findFromBearerToken(string $bearer) : PersonalAccessToken|null
+    static public function findFromBearerToken(string $bearer): PersonalAccessToken|null
     {
         if (strpos($bearer, '|') === false) {
             return self::whereToken(hash(config('security.token.hash_algo'), $bearer))->first();

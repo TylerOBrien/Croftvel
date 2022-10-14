@@ -9,7 +9,7 @@ trait HasIdentity
      *
      * @return string
      */
-    protected function identityIdRule() : string
+    protected function identityIdRule(): string
     {
         return 'required|int|exists:identities,id';
     }
@@ -19,7 +19,7 @@ trait HasIdentity
      *
      * @return string
      */
-    protected function identityTypeRule() : string
+    protected function identityTypeRule(): string
     {
         return 'required|string|in:' . join(',', config('enum.identity.type'));
     }
@@ -30,7 +30,7 @@ trait HasIdentity
      *
      * @return string
      */
-    protected function identityValueRule() : string
+    protected function identityValueRule(): string
     {
         switch ($this->get('identity.type')) {
         case 'email':

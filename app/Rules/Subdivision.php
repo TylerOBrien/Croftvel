@@ -38,7 +38,7 @@ class Subdivision implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         try {
             $countries = new ISO3166;
@@ -58,7 +58,7 @@ class Subdivision implements Rule
      *
      * @return string
      */
-    public function message() : string
+    public function message(): string
     {
         return trans('validation.address.subdivision');
     }

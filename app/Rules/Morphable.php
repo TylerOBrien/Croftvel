@@ -15,7 +15,7 @@ class Morphable implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         [ $column, $name ] = explode('_', strrev($attribute), 2);
 
@@ -36,7 +36,7 @@ class Morphable implements Rule
      *
      * @return bool
      */
-    protected function passesId($name, $value) : bool
+    protected function passesId($name, $value): bool
     {
         $model = Str::start(request("{$name}_type"), config('models.namespace'));
 
@@ -54,7 +54,7 @@ class Morphable implements Rule
      *
      * @return bool
      */
-    protected function passesType($name, $value) : bool
+    protected function passesType($name, $value): bool
     {
         return class_exists(Str::start($value, config('models.namespace')));
     }
@@ -64,7 +64,7 @@ class Morphable implements Rule
      *
      * @return string
      */
-    public function message() : string
+    public function message(): string
     {
         return trans('validation.morphable');
     }

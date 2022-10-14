@@ -15,7 +15,7 @@ trait HasUniqueMaker
      *
      * @return int
      */
-    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null) : int
+    static public function makeUniqueInt(string $column, int $digits = 12, string $hash_algo = null): int
     {
         $min = intval(str_repeat('1', $digits));
         $max = intval(str_repeat('9', $digits));
@@ -37,7 +37,7 @@ trait HasUniqueMaker
      *
      * @return string
      */
-    static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null) : string
+    static public function makeUniqueString(string $column, int $length = 12, string $hash_algo = null): string
     {
         do {
             $id = Str::random($length);

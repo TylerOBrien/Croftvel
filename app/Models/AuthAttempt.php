@@ -29,7 +29,7 @@ class AuthAttempt extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    static public function fromIdentity(Identity $identity) : Builder
+    static public function fromIdentity(Identity $identity): Builder
     {
         return self::where('identity_type', $identity->type)
                    ->where('identity_value', $identity->value);

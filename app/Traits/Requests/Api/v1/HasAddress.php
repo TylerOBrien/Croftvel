@@ -11,7 +11,7 @@ trait HasAddress
      *
      * @return array
      */
-    protected function addressStoreRules(string $prefix = '') : array
+    protected function addressStoreRules(string $prefix = ''): array
     {
         return [
             "{$prefix}line1" => 'nullable|string',
@@ -30,7 +30,7 @@ trait HasAddress
      *
      * @return array
      */
-    protected function addressUpdateRules(string $prefix = '') : array
+    protected function addressUpdateRules(string $prefix = ''): array
     {
         return [
             "{$prefix}line1" => 'nullable|string',

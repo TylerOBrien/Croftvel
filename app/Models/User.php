@@ -66,7 +66,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    public function getEmailAttribute() : string|null
+    public function getEmailAttribute(): string|null
     {
         return $this->identityAttribute('email');
     }
@@ -76,7 +76,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    public function getMobileAttribute() : string|null
+    public function getMobileAttribute(): string|null
     {
         return $this->identityAttribute('mobile');
     }
@@ -86,7 +86,7 @@ class User extends BaseUser
      *
      * @return \App\Models\Privilege|null
      */
-    public function getPrivilegeAttribute() : Privilege|null
+    public function getPrivilegeAttribute(): Privilege|null
     {
         return Privilege::whereName("user.$this->id")->first();
     }
@@ -96,7 +96,7 @@ class User extends BaseUser
      *
      * @return bool
      */
-    public function getIsIdentifiedAttribute() : bool
+    public function getIsIdentifiedAttribute(): bool
     {
         return (bool) $this->identified_at;
     }
@@ -106,7 +106,7 @@ class User extends BaseUser
      *
      * @return int
      */
-    public function getTotalIdentitiesVerifiedAttribute() : int
+    public function getTotalIdentitiesVerifiedAttribute(): int
     {
         return $this->identities()
                     ->whereNotNull('verified_at')
@@ -121,7 +121,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    protected function identityAttribute(string $type, string|null $name = null) : string|null
+    protected function identityAttribute(string $type, string|null $name = null): string|null
     {
         $name = $name ?? config('models.default.name');
 
@@ -137,7 +137,7 @@ class User extends BaseUser
      *
      * @return \App\Models\User
      */
-    static public function createWithAccount() : User
+    static public function createWithAccount(): User
     {
         return self::create([
             'account_id' => Account::create()->id,

@@ -70,7 +70,7 @@ class Credentials implements Arrayable, Jsonable
      *
      * @return Credentials
      */
-    static public function fromFields(array $fields) : Credentials
+    static public function fromFields(array $fields): Credentials
     {
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||

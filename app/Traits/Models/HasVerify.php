@@ -20,7 +20,7 @@ trait HasVerify
      *
      * @return bool
      */
-    public function attemptVerify(string $ability, array $fields) : bool
+    public function attemptVerify(string $ability, array $fields): bool
     {
         if (!in_array($ability, config('enum.verification.ability'))) {
             throw new InvalidVerificationAbility;

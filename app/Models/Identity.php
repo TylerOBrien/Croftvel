@@ -55,7 +55,7 @@ class Identity extends Model
     /**
      * @return bool
      */
-    public function getIsVerifiedAttribute() : bool
+    public function getIsVerifiedAttribute(): bool
     {
         return (bool) $this->verified_at;
     }
@@ -63,7 +63,7 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAuthAttemptsAttribute() : Collection
+    public function getAuthAttemptsAttribute(): Collection
     {
         return AuthAttempt::fromIdentity($this)->get();
     }
@@ -71,7 +71,7 @@ class Identity extends Model
     /**
      * @return void
      */
-    public function setVerifiedAtAttribute($value) : void
+    public function setVerifiedAtAttribute($value): void
     {
         if (is_null($this->verified_at)) {
             $this->attributes['verified_at'] = $value;
@@ -87,7 +87,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function findFromFields(array $fields) : Identity
+    static public function findFromFields(array $fields): Identity
     {
         if (isset($fields['identity_id'])) {
             return self::find($fields['identity_id']);
@@ -110,7 +110,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function findFromRequest($request) : Identity
+    static public function findFromRequest($request): Identity
     {
         if ($request->has('identity_id')) {
             return self::find($request->input('identity_id'));
@@ -131,7 +131,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function createFromFields(User $user, array $fields) : Identity
+    static public function createFromFields(User $user, array $fields): Identity
     {
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||

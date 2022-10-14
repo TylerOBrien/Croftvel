@@ -30,7 +30,7 @@ class Secret extends Model
      *
      * @return void
      */
-    static public function boot() : void
+    static public function boot(): void
     {
         parent::boot();
         self::creating(function(Secret $secret) {
@@ -54,7 +54,7 @@ class Secret extends Model
      *
      * @return \App\Models\Secret
      */
-    static public function createFromFields(User $user, array $fields) : Secret
+    static public function createFromFields(User $user, array $fields): Secret
     {
         return self::create([
             'user_id' => $user->id,

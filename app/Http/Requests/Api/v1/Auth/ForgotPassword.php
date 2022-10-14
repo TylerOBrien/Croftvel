@@ -31,7 +31,7 @@ class ForgotPassword extends ApiRequest
      *
      * @return string
      */
-    protected function identityRule() : string
+    protected function identityRule(): string
     {
         switch (request('identity.type')) {
         case 'email':

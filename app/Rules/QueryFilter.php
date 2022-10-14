@@ -39,7 +39,7 @@ class QueryFilter implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         if (is_null($value)) {
             return true;
@@ -75,7 +75,7 @@ class QueryFilter implements Rule
      *
      * @return string
      */
-    public function message() : string
+    public function message(): string
     {
         return trans('validation.query-filter');
     }

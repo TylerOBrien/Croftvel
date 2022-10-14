@@ -38,7 +38,7 @@ trait HasFileUpload
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile $file, array $attributes, string|null $dest = null) : bool
+    public function updateFromFile(UploadedFile $file, array $attributes, string|null $dest = null): bool
     {
         $dest = $dest ?? config('uploads.default.dest');
 
@@ -59,7 +59,7 @@ trait HasFileUpload
      *
      * @return bool
      */
-    public function delete() : bool
+    public function delete(): bool
     {
         Storage::disk($this->disk)->delete($this->filepath);
         return parent::delete();
@@ -70,7 +70,7 @@ trait HasFileUpload
      *
      * @return string
      */
-    public function getUrlAttribute() : string
+    public function getUrlAttribute(): string
     {
         return Storage::disk($this->disk)->url($this->filepath); // Linter error here is a false positive.
     }

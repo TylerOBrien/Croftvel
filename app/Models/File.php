@@ -49,7 +49,7 @@ class File extends Model
      *
      * @return \App\Models\File
      */
-    static public function createFromFile(UploadedFile $file, array $fields) : File
+    static public function createFromFile(UploadedFile $file, array $fields): File
     {
         return self::createFromFileBase($file, $fields, config('uploads.file.dest'));
     }
@@ -62,7 +62,7 @@ class File extends Model
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile $file, array $fields) : bool
+    public function updateFromFile(UploadedFile $file, array $fields): bool
     {
         return call_user_func(
             [ $this, 'updateFromFileBase' ],

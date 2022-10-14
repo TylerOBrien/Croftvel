@@ -15,7 +15,7 @@ class MatchesCurrent implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         $name = "{$attribute}_current";
 
@@ -38,7 +38,7 @@ class MatchesCurrent implements Rule
      *
      * @return string
      */
-    public function message() : string
+    public function message(): string
     {
         return trans('validation.matches_current');
     }

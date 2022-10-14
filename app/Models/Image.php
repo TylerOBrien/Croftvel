@@ -51,7 +51,7 @@ class Image extends Model
      *
      * @return \App\Models\Image
      */
-    static public function createFromFile(UploadedFile $file, array $fields) : Image
+    static public function createFromFile(UploadedFile $file, array $fields): Image
     {
         [ $width, $height ] = getimagesize($file);
 
@@ -69,7 +69,7 @@ class Image extends Model
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile $file, array $fields) : bool
+    public function updateFromFile(UploadedFile $file, array $fields): bool
     {
         [ $width, $height ] = getimagesize($file);
 

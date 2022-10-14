@@ -44,7 +44,7 @@ class Can implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         $user = ApiGuard::get()->parseToken();
 
@@ -67,7 +67,7 @@ class Can implements Rule
      *
      * @return string
      */
-    public function message() : string
+    public function message(): string
     {
         return trans('validation.can');
     }

@@ -49,7 +49,7 @@ class Video extends Model
      *
      * @return \App\Models\Video
      */
-    static public function createFromFile(UploadedFile $file, array $fields) : Video
+    static public function createFromFile(UploadedFile $file, array $fields): Video
     {
         return self::createFromFileBase($file, $fields, config('uploads.video.dest'));
     }
@@ -62,7 +62,7 @@ class Video extends Model
      *
      * @return bool
      */
-    public function updateFromFile(UploadedFile $file, array $fields) : bool
+    public function updateFromFile(UploadedFile $file, array $fields): bool
     {
         return call_user_func(
             [ $this, 'updateFromFileBase' ],

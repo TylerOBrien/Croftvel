@@ -19,7 +19,7 @@ trait HasLogo
      *
      * @return \App\Models\Image
      */
-    public function createLogo(UploadedFile $file, string|null $name = null) : Image
+    public function createLogo(UploadedFile $file, string|null $name = null): Image
     {
         $name = $name ?? config('models.default.name');
 
@@ -33,7 +33,7 @@ trait HasLogo
     /**
      * @return \Illuminate\Support\Collection|null
      */
-    public function getLogoAttribute() : Collection
+    public function getLogoAttribute(): Collection
     {
         $images = $this->images()->where('name', 'like', 'logo.%.%')->get();
         $logoVariants = collect([]);
