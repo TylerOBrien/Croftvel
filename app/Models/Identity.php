@@ -59,6 +59,14 @@ class Identity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAuthAttemptsAttribute()
+    {
+        return AuthAttempt::fromIdentity($this)->get();
+    }
+
+    /**
      * @return void
      */
     public function setVerifiedAtAttribute($value)
