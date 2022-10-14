@@ -7,7 +7,7 @@ use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\HasVerify;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{ Collection, Model };
 
 class Identity extends Model
 {
@@ -63,7 +63,7 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getAuthAttemptsAttribute() : \Illuminate\Database\Eloquent\Collection
+    public function getAuthAttemptsAttribute() : Collection
     {
         return AuthAttempt::fromIdentity($this)->get();
     }
