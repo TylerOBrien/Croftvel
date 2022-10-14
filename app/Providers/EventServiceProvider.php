@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Models\{ Identity, Recovery, User };
-use App\Observers\Api\v1\{ IdentityObserver, RecoveryObserver, UserObserver };
+use App\Models\{ Identity, User };
+use App\Observers\Api\v1\{ IdentityObserver, UserObserver };
 
 use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerificationCreated, IdentityVerified };
 use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerification, SendVerifyIdentityNotification };
@@ -78,7 +78,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Identity::observe(IdentityObserver::class);
-        Recovery::observe(RecoveryObserver::class);
         User::observe(UserObserver::class);
     }
 
