@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\Address;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Address;
-use App\Traits\Requests\Api\v1\HasOwnership;
+use App\Traits\Requests\Api\v1\{ HasAddress, HasOwnership };
 
 class StoreAddress extends ApiRequest
 {
-    use HasOwnership;
+    use HasAddress, HasOwnership;
 
     /**
      * Instantiate the request.
@@ -28,16 +28,12 @@ class StoreAddress extends ApiRequest
      */
     public function rules()
     {
-        return [
-            'owner_id' => 'required|morphable',
-            'owner_type' => 'required|morphable',
-            'name' => 'required|string',
-            'line1' => 'nullable|string',
-            'line2' => 'nullable|string',
-            'city' => 'nullable|string',
-            'subdivision' => 'required|subdivision:' . request('country'),
-            'country' => 'required|country',
-            'postal_code' => 'nullable|string'
-        ];
+        return array_merge($this->addressStoreRules(),
+            [
+                'name' => 'required|string',
+                'owner_id' => 'required|morphable',
+                'owner_type' => 'required|morphable',
+            ],
+        );
     }
 }
