@@ -66,7 +66,7 @@ class Credentials implements Arrayable, Jsonable
      * Attempts to parse the given identity and secret fields to determine the
      * correct Identity and Secret model instances to instantiate.
      *
-     * @param  array  $fields
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
      *
      * @return Credentials
      */
