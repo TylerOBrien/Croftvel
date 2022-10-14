@@ -15,7 +15,7 @@ class CreateAuthAttemptsTable extends Migration
     {
         Schema::create('auth_attempts', function (Blueprint $table) {
             $table->id();
-            $table->enum('identity_type', config('croft.enum.identity.type'));
+            $table->enum('identity_type', config('enum.identity.type'));
             $table->string('identity_value');
             $table->boolean('is_success');
             $table->timestamps();

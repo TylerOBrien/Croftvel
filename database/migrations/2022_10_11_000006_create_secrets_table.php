@@ -16,7 +16,7 @@ class CreateSecretsTable extends Migration
         Schema::create('secrets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->enum('type', config('croft.enum.secret.type'));
+            $table->enum('type', config('enum.secret.type'));
             $table->string('value');
             $table->timestamps();
 

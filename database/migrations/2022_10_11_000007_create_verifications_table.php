@@ -16,7 +16,7 @@ class CreateVerificationsTable extends Migration
         Schema::create('verifications', function (Blueprint $table) {
             $table->id();
             $table->morphs('verifiable');
-            $table->enum('ability', config('croft.enum.verification.ability'));
+            $table->enum('ability', config('enum.verification.ability'));
             $table->char('code', 64)->unique();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();

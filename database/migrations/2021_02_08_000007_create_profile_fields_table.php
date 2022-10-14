@@ -16,7 +16,7 @@ class CreateProfileFieldsTable extends Migration
         Schema::create('profile_fields', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('profile_id');
-            $table->enum('type', config('croft.enum.profile_field.type'));
+            $table->enum('type', config('enum.profile_field.type'));
             $table->string('name');
             $table->text('value');
             $table->timestamps();

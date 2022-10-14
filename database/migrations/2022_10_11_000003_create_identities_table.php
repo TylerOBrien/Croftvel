@@ -17,7 +17,7 @@ class CreateIdentitiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name')->default('primary')->index();
-            $table->enum('type', config('croft.enum.identity.type'));
+            $table->enum('type', config('enum.identity.type'));
             $table->string('value')->index();
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();
