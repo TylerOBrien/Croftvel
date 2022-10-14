@@ -106,7 +106,7 @@ class User extends BaseUser
      *
      * @return int
      */
-    public function getTotalIdentitiesVerifiedAttribute()
+    public function getTotalIdentitiesVerifiedAttribute() : int
     {
         return $this->identities()
                     ->whereNotNull('verified_at')
@@ -121,7 +121,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    protected function identityAttribute(string $type, string $name = 'primary')
+    protected function identityAttribute(string $type, string $name = 'primary') : string|null
     {
         return $this->identities()
                     ->where(compact('type', 'name'))
