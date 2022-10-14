@@ -32,18 +32,18 @@ class ApiGuard implements Guard
      *
      * @var int
      */
-    protected $expiration;
+    protected $ttl;
 
     /**
      * Create a new API guard.
      *
-     * @param  int  $expiration
+     * @param  int  $ttl  The number of minutes an auth token will be valid for.
      *
      * @return void
      */
-    public function __construct(int $expiration = null)
+    public function __construct(int $ttl = null)
     {
-        $this->expiration = $expiration ?: config('security.token.ttl');
+        $this->ttl = $ttl ?: config('security.token.ttl');
     }
 
     /**
@@ -79,12 +79,12 @@ class ApiGuard implements Guard
         }
 
         $now = now();
-        $expires_at = $now->subMinutes($this->expiration);
+        $expires_at = $now->subMinutes($this->ttl);
         $pat = PersonalAccessToken::findFromBearerToken($bearer_token);
 
         if (is_null($pat)) {
             return null;
-        } else if ($this->expiration && $pat->created_at->lte($expires_at)) {
+        } else if ($this->ttl && $pat->created_at->lte($expires_at)) {
             return null;
         }
 
