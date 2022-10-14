@@ -71,6 +71,10 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     public function register()
     {
         Gate::before(function() {
+            if (!config('app.debug')) {
+                return null;
+            }
+
             return config('security.permissions.disabled') ?: null;
         });
 
