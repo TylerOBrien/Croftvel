@@ -37,7 +37,7 @@ class UserObserver
         }
 
         if ($user->wasChanged('account_id')) {
-            if ($account = $user->account) {
+            if ($account = $user->account) { // Check if account exists. Could be null.
                 event(new UserAddedToAccount($user, $account));
             }
         }
