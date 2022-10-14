@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Api\v1\Account;
+namespace App\Events\Api\v1\Ability;
 
 use App\Models\User;
 

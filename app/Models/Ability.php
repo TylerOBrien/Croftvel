@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\Api\v1\Account\{ AbilitiesGivenToUser, AbilitiesTakenFromUser };
+use App\Events\Api\v1\Ability\{ AbilitiesGivenToUser, AbilitiesTakenFromUser };
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,7 +33,7 @@ class Ability extends Model
      *
      * @return void
      */
-    static public function allow(User $user, $resource, array|string $abilities) : void
+    static public function allow(User $user, string|\Illuminate\Database\Eloquent\Model $resource, array|string $abilities) : void
     {
         $privilege = $user->privilege;
 
