@@ -11,13 +11,13 @@ class UserObserver
      * Handle the user "updating" event.
      *
      * @param  \App\Models\User  $user
-     * 
+     *
      * @return void
      */
     public function updating(User $user)
     {
-        if ($user->isDirty('account_id')) {
-            if ($account = $user->fresh()->account) {
+        if ($user->isDirty('account_id')) { // Account id is being changed.
+            if ($account = $user->fresh()->account) { // Get instance of previous account.
                 event(new UserRemovedFromAccount($user, $account));
             }
         }
@@ -27,7 +27,7 @@ class UserObserver
      * Handle the user "updated" event.
      *
      * @param  \App\Models\User  $user
-     * 
+     *
      * @return void
      */
     public function updated(User $user)
