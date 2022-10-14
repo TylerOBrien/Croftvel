@@ -61,6 +61,7 @@ class AddedToAccount extends Mailable
                     ->markdown('mail.user.added-to-account', [
                         'recipient' => $this->recipient,
                         'user' => $this->user,
-                        'account' => $this->account ]);
+                        'account' => $this->account,
+                    ]);
     }
 }

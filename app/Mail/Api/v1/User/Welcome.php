@@ -41,6 +41,7 @@ class Welcome extends Mailable
     {
         return $this->subject(trans('mail.user.welcome.subject'))
                     ->markdown('mail.user.welcome', [
-                        'recipient' => $this->recipient ]);
+                        'recipient' => $this->recipient,
+                    ]);
     }
 }

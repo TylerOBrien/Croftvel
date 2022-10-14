@@ -61,6 +61,7 @@ class RemovedFromAccount extends Mailable
                     ->markdown('mail.user.removed-from-account', [
                         'recipient' => $this->recipient,
                         'user' => $this->user,
-                        'account' => $this->account ]);
+                        'account' => $this->account,
+                    ]);
     }
 }
