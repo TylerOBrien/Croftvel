@@ -9,10 +9,10 @@ use App\Traits\Requests\Api\v1\HasOwnership;
 class StoreAddress extends ApiRequest
 {
     use HasOwnership;
-    
+
     /**
      * Instantiate the request.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -35,7 +35,7 @@ class StoreAddress extends ApiRequest
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',
-            'province' => 'required|province:' . request('country'),
+            'subdivision' => 'required|subdivision:' . request('country'),
             'country' => 'required|country',
             'postal_code' => 'nullable|string'
         ];

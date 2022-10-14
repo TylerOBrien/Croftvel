@@ -12,7 +12,7 @@ class UpdateAddress extends ApiRequest
 
     /**
      * Instantiate the request.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -36,8 +36,8 @@ class UpdateAddress extends ApiRequest
             'line1' => 'nullable|string',
             'line2' => 'nullable|string',
             'city' => 'nullable|string',
-            'province' => 'required_with:country|province:' . request('country'),
-            'country' => 'required_with:province|country',
+            'subdivision' => 'required_with:country|subdivision:' . request('country'),
+            'country' => 'required_with:subdivision|country',
             'postal_code' => 'nullable|string'
         ];
     }

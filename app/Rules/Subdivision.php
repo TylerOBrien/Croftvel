@@ -4,15 +4,15 @@ namespace App\Rules;
 
 use Exception;
 
-use L91\ISO_3166_2\Subdivision;
+use L91\ISO_3166_2\Subdivision as L91Subdivision;
 use League\ISO3166\ISO3166;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class Province implements Rule
+class Subdivision implements Rule
 {
     /**
-     * The country code this province is expected to belong to.
+     * The country code this state/province is expected to belong to.
      *
      * @var string
      */
@@ -48,7 +48,7 @@ class Province implements Rule
         }
 
         $iso31662 = [ strtoupper($alpha2), strtoupper($value) ];
-        $subdivisions = Subdivision::getSubdivisions($alpha2);
+        $subdivisions = L91Subdivision::getSubdivisions($alpha2);
 
         return in_array(implode('-', $iso31662), array_keys($subdivisions));
     }
@@ -60,6 +60,6 @@ class Province implements Rule
      */
     public function message() : string
     {
-        return trans('validation.address.province');
+        return trans('validation.address.subdivision');
     }
 }

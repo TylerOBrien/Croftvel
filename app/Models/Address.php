@@ -20,7 +20,7 @@ class Address extends Model
         'line1',
         'line2',
         'city',
-        'province',
+        'subdivision',
         'country',
         'postal_code',
         'owner_id',

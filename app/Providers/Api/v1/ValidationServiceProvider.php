@@ -6,13 +6,13 @@ use App\Rules\{
     Can,
     Country,
     IsOrCan,
-    Province,
     MatchesCurrent,
     Morphable,
     Ownable,
     PhoneNumber,
     QueryFilter,
     QuerySorter,
+    Subdivision,
 };
 
 use Illuminate\Support\ServiceProvider;
@@ -61,8 +61,8 @@ class ValidationServiceProvider extends ServiceProvider
             return (new Country)->passes($attribute, $value);
         });
 
-        Validator::extendImplicit('province', function($attribute, $value, $parameter, $validator) {
-            return (new Province($parameter))->passes($attribute, $value);
+        Validator::extendImplicit('subdivision', function($attribute, $value, $parameter, $validator) {
+            return (new Subdivision($parameter))->passes($attribute, $value);
         });
 
         Validator::extendImplicit('phone_number', function($attribute, $value, $parameter, $validator) {

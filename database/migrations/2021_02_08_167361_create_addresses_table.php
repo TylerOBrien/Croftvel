@@ -19,7 +19,7 @@ class CreateAddressesTable extends Migration
             $table->string('line1')->nullable();
             $table->string('line2')->nullable();
             $table->string('city')->nullable();
-            $table->char('province', 2)->index();
+            $table->char('subdivision', 2)->index();
             $table->char('country', 3)->index();
             $table->string('postal_code')->nullable();
             $table->float('lat', 8, 5)->nullable();
