@@ -15,7 +15,6 @@ use App\Listeners\Api\v1\User\SendWelcomeUserNotification;
 use App\Events\Api\v1\User\UserCreated;
 use App\Listeners\Api\v1\User\CreateUserPrivilege;
 
-use App\Events\Api\v1\Recovery\RecoveryCreated;
 use App\Events\Api\v1\Recovery\RecoveryVerificationCreated;
 use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 
@@ -51,10 +50,6 @@ class EventServiceProvider extends ServiceProvider
 
         IdentityVerified::class => [
             CheckForFirstTimeVerify::class,
-        ],
-
-        RecoveryCreated::class => [
-            SendVerifyRecoveryNotification::class,
         ],
 
         RecoveryVerificationCreated::class => [
