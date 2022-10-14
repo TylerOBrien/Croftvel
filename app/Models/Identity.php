@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Identity\IdentityCreated;
+use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\HasVerify;
 
 use Illuminate\Database\Eloquent\Model;
@@ -73,6 +74,8 @@ class Identity extends Model
     {
         if (is_null($this->verified_at)) {
             $this->attributes['verified_at'] = $value;
+        } else {
+            throw new IdentityAlreadyVerified;
         }
     }
 
