@@ -57,7 +57,7 @@ class QueryFilter implements Rule
             }
         }
 
-        $model_class_name = Str::start($this->model_name, config('croft.models.namespace'));
+        $model_class_name = Str::start($this->model_name, config('models.namespace'));
         $table_name = app($model_class_name)->getTable();
         $column_names = Schema::getColumnListing($table_name);
 

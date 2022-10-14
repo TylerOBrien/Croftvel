@@ -21,7 +21,7 @@ class MakeRequest extends GeneratorCommand
         $replace['DummyBinding'] = Str::snake($name);
         $replace['DummyRequest'] = $this->getRequestName();
         $replace['DummyModel'] = $name;
-        $replace['DummyPath'] = config('croft.models.namespace') . $this->getSubDirectory();
+        $replace['DummyPath'] = config('models.namespace') . $this->getSubDirectory();
 
         // If there is no subdir given then remove the '\' character at the
         // end to prevent '\\' from being written.

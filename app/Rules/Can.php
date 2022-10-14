@@ -52,7 +52,7 @@ class Can implements Rule
             return false;
         }
 
-        $model_class_name = Str::start($this->model_name, config('croft.models.namespace'));
+        $model_class_name = Str::start($this->model_name, config('models.namespace'));
         $instance = $model_class_name::find($value);
 
         if (is_null($instance)) {

@@ -25,6 +25,6 @@ trait HasOwnership
      */
     public function setOwnerTypeAttribute(string $owner_type)
     {
-        $this->attributes['owner_type'] = Str::start($owner_type, config('croft.models.namespace'));
+        $this->attributes['owner_type'] = Str::start($owner_type, config('models.namespace'));
     }
 }

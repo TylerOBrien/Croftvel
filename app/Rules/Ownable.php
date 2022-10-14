@@ -28,7 +28,7 @@ class Ownable implements Rule
 
         [ $morphable_name, ] = explode('_', $attribute);
 
-        $model_name = Str::start(request("{$morphable_name}_type"), config('croft.models.namespace'));
+        $model_name = Str::start(request("{$morphable_name}_type"), config('models.namespace'));
         $model_id = intval(request("{$morphable_name}_id"));
 
         if ($model_name === User::class && $model_id === $user->id) {

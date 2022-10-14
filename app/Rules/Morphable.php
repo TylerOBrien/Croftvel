@@ -38,7 +38,7 @@ class Morphable implements Rule
      */
     protected function passesId($name, $value) : bool
     {
-        $model = Str::start(request("{$name}_type"), config('croft.models.namespace'));
+        $model = Str::start(request("{$name}_type"), config('models.namespace'));
 
         if (!class_exists($model)) {
             return false;
@@ -56,7 +56,7 @@ class Morphable implements Rule
      */
     protected function passesType($name, $value) : bool
     {
-        return class_exists(Str::start($value, config('croft.models.namespace')));
+        return class_exists(Str::start($value, config('models.namespace')));
     }
 
     /**

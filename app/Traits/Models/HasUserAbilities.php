@@ -47,7 +47,7 @@ trait HasUserAbilities
      */
     protected function hasDatabaseAbility(string $ability, string $model_type, int $model_id = null)
     {
-        $model_type = Str::start($model_type, config('croft.models.namespace'));
+        $model_type = Str::start($model_type, config('models.namespace'));
         $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model_type'));
 
         if (is_null($model_id)) {

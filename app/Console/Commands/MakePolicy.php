@@ -28,7 +28,7 @@ class MakePolicy extends GeneratorCommand
 
         $replace['DummyPolicy'] = $this->getPolicyName();
         $replace['DummyModel'] = $name;
-        $replace['DummyPath'] = config('croft.models.namespace') . $path;
+        $replace['DummyPath'] = config('models.namespace') . $path;
         $replace['DummyBinding'] = Str::snake($name);
         $replace['DummyPluralBinding'] = Str::snake(Str::plural($name));
         $replace['DummyBindingId'] = Str::snake($name) . '_id';
