@@ -66,7 +66,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    public function getEmailAttribute()
+    public function getEmailAttribute() : string|null
     {
         return $this->identityAttribute('email');
     }
@@ -76,7 +76,7 @@ class User extends BaseUser
      *
      * @return string|null
      */
-    public function getMobileAttribute()
+    public function getMobileAttribute() : string|null
     {
         return $this->identityAttribute('mobile');
     }
@@ -84,9 +84,9 @@ class User extends BaseUser
     /**
      * Retreive the user's privilege model.
      *
-     * @return Privilege|null
+     * @return \App\Models\Privilege|null
      */
-    public function getPrivilegeAttribute()
+    public function getPrivilegeAttribute() : Privilege|null
     {
         return Privilege::whereName("user.$this->id")->first();
     }
