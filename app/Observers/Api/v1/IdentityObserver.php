@@ -14,7 +14,7 @@ class IdentityObserver
      *
      * @return void
      */
-    public function updated(Identity $identity)
+    public function updated(Identity $identity) : void
     {
         if ($identity->verified_at && $identity->wasChanged('verified_at')) {
             event(new IdentityVerified($identity));

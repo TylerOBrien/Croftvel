@@ -64,7 +64,7 @@ class PersonalAccessToken extends Model
      *
      * @return \App\Models\PersonalAccessToken|null
      */
-    static public function findFromBearerToken(string $bearer)
+    static public function findFromBearerToken(string $bearer) : PersonalAccessToken|null
     {
         if (strpos($bearer, '|') === false) {
             return self::whereToken(hash(config('security.token.hash_algo'), $bearer))->first();

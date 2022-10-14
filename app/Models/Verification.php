@@ -46,7 +46,7 @@ class Verification extends Model
      *
      * @return void
      */
-    static public function boot()
+    static public function boot() : void
     {
         parent::boot();
         self::creating(function(Verification $verification) {
