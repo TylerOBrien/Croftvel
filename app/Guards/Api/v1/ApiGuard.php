@@ -236,6 +236,19 @@ class ApiGuard implements Guard
      * Retrieve an instance of this ApiGuard. Intended to help avoid false
      * positive errors with linters.
      *
+     * This is an alias of the ApiGuard::getInstance() function.
+     *
+     * @return \App\Guards\Api\v1\ApiGuard
+     */
+    static public function get() : ApiGuard
+    {
+        return self::getInstance();
+    }
+
+    /**
+     * Retrieve an instance of this ApiGuard. Intended to help avoid false
+     * positive errors with linters.
+     *
      * @return \App\Guards\Api\v1\ApiGuard
      */
     static public function getInstance() : ApiGuard
