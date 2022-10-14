@@ -96,11 +96,9 @@ class User extends BaseUser
      *
      * @return bool
      */
-    public function getIsIdentifiedAttribute()
+    public function getIsIdentifiedAttribute() : bool
     {
-        return $this->identities()
-                    ->whereNotNull('verified_at')
-                    ->exists();
+        return (bool) $this->identified_at;
     }
 
     /**
