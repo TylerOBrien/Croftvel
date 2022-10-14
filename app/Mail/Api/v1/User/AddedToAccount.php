@@ -38,8 +38,8 @@ class AddedToAccount extends Mailable
      * Create a new message instance.
      *
      * @param  \App\Models\User  $recipient  The user who will receive the email.
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Account  $account
+     * @param  \App\Models\User  $user  The user that was added to the account.
+     * @param  \App\Models\Account  $account  The account to which the new user was added.
      *
      * @return void
      */
