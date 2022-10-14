@@ -5,6 +5,7 @@ namespace App\Events\Api\v1\Ability;
 use App\Models\User;
 
 use Illuminate\Broadcasting\{ InteractsWithSockets, PrivateChannel };
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -47,7 +48,7 @@ class AbilitiesGivenToUser
      *
      * @return void
      */
-    public function __construct(User $user, $resource, array $abilities)
+    public function __construct(User $user, string|Model $resource, array $abilities)
     {
         $this->user = $user;
         $this->resource = $resource;

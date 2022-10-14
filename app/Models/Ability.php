@@ -33,7 +33,7 @@ class Ability extends Model
      *
      * @return void
      */
-    static public function allow(User $user, string|\Illuminate\Database\Eloquent\Model $resource, array|string $abilities) : void
+    static public function allow(User $user, string|Model $resource, array|string $abilities) : void
     {
         $privilege = $user->privilege;
 
@@ -64,7 +64,7 @@ class Ability extends Model
      *
      * @return void
      */
-    static public function disallow(User $user, $resource, array|string $abilities) : void
+    static public function disallow(User $user, string|Model $resource, array|string $abilities) : void
     {
         $privilege = $user->privilege;
 
