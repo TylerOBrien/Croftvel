@@ -58,7 +58,7 @@ class Image extends Model
         $attributes['width'] = $width;
         $attributes['height'] = $height;
 
-        return self::createFromFileBase($file, $attributes, config('uploads.images.dir'));
+        return self::createFromFileBase($file, $attributes, config('uploads.image.dest'));
     }
 
     /**
@@ -80,7 +80,7 @@ class Image extends Model
             [ $this, 'updateFromFileBase' ],
             $file,
             $attributes,
-            config('uploads.images.dir'),
+            config('uploads.image.dest'),
         );
     }
 }

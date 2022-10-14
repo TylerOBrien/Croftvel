@@ -51,7 +51,7 @@ class File extends Model
      */
     static public function createFromFile(UploadedFile $file, array $attributes)
     {
-        return self::createFromFileBase($file, $attributes, config('uploads.files.dir'));
+        return self::createFromFileBase($file, $attributes, config('uploads.file.dest'));
     }
 
     /**
@@ -68,7 +68,7 @@ class File extends Model
             [ $this, 'updateFromFileBase' ],
             $file,
             $attributes,
-            config('uploads.files.dir'),
+            config('uploads.file.dest'),
         );
     }
 }

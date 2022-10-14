@@ -13,22 +13,22 @@ return [
 
     'default' => [
         'disk' => 'public',
-        'dir' => 'upload',
+        'dest' => 'upload',
     ],
 
     'files' => [
         'disk' => 'public',
-        'dir' => 'files',
+        'dest' => 'files',
     ],
 
     'images' => [
         'disk' => 'public',
-        'dir' => 'images',
+        'dest' => 'images',
     ],
 
     'videos' => [
         'disk' => 'public',
-        'dir' => 'videos',
+        'dest' => 'videos',
     ],
 
 ];

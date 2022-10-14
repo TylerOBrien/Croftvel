@@ -17,7 +17,7 @@ trait HasFileUpload
      */
     static public function createFromFile(UploadedFile $file, array $attributes, string $dest = null, string $disk = null)
     {
-        $dest = $dest ?? config('uploads.default.dir');
+        $dest = $dest ?? config('uploads.default.dest');
         $disk = $disk ?? config('uploads.default.disk');
 
         $filesize = filesize($file);
@@ -36,7 +36,7 @@ trait HasFileUpload
      */
     public function updateFromFile(UploadedFile $file, array $attributes, string $dest = null) : bool
     {
-        $dest = $dest ?? config('uploads.default.dir');
+        $dest = $dest ?? config('uploads.default.dest');
 
         $storage = Storage::disk($this->disk);
         $storage->delete($this->filepath);
