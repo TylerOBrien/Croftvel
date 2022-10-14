@@ -140,7 +140,7 @@ class User extends BaseUser
     static public function createWithAccount() : User
     {
         return self::create([
-            'account_id' => Account::create()->fresh()->id,
+            'account_id' => Account::create()->id,
         ]);
     }
 }
