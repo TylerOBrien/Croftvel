@@ -17,7 +17,7 @@ trait HasAddress
             "{$prefix}line1" => 'nullable|string',
             "{$prefix}line2" => 'nullable|string',
             "{$prefix}city" => 'nullable|string',
-            "{$prefix}subdivision" => 'required|string|subdivision',
+            "{$prefix}subdivision" => 'required|string|subdivision' . request('country'),
             "{$prefix}country" => 'required|string|country',
             "{$prefix}postal_code" => 'nullable|string'
         ];
@@ -36,7 +36,7 @@ trait HasAddress
             "{$prefix}line1" => 'nullable|string',
             "{$prefix}line2" => 'nullable|string',
             "{$prefix}city" => 'nullable|string',
-            "{$prefix}subdivision" => 'string|subdivision',
+            "{$prefix}subdivision" => 'string|subdivision' . request('country'),
             "{$prefix}country" => 'string|country',
             "{$prefix}postal_code" => 'nullable|string'
         ];
