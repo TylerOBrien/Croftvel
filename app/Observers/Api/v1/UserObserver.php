@@ -14,7 +14,7 @@ class UserObserver
      *
      * @return void
      */
-    public function updating(User $user)
+    public function updating(User $user) : void
     {
         if ($user->isDirty('account_id')) { // Account id is being changed.
             if ($account = $user->fresh()->account) { // Get instance of previous account.
@@ -30,7 +30,7 @@ class UserObserver
      *
      * @return void
      */
-    public function updated(User $user)
+    public function updated(User $user) : void
     {
         if ($user->wasChanged('identified_at')) {
             event(new UserIdentified($user));
