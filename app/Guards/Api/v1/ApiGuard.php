@@ -182,7 +182,7 @@ class ApiGuard implements Guard
     /**
      * Validate a user's credentials.
      *
-     * @param  array  $fields
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
      *
      * @return bool
      */
@@ -192,6 +192,11 @@ class ApiGuard implements Guard
     }
 
     /**
+     * Attempts to validate the fields data against the known password.
+     *
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
+     * @param  Credentials  $credentials  Instances of the models referred to by the raw credentials data.
+     *
      * @return void
      */
     protected function bySecretPassword(array $fields, Credentials $credentials)
@@ -203,6 +208,10 @@ class ApiGuard implements Guard
     }
 
     /**
+     * Attempts to validate the fields data against the TOTP.
+     *
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
+     *
      * @return void
      */
     protected function bySecretTotp(array $fields, Secret $secret)
