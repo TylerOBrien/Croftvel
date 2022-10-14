@@ -157,7 +157,7 @@ class ApiGuard implements Guard
     /**
      * Attempt to authenticate the user.
      *
-     * @param  array  $fields
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
      *
      * @return \App\Models\User
      */
