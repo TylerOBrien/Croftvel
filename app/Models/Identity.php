@@ -126,8 +126,8 @@ class Identity extends Model
      * Creates a new Identity model using the passed fields that are assumed
      * to have come from a request (e.g. a register request).
      *
-     * @param  \App\Models\User  $user
-     * @param  array  $fields
+     * @param  \App\Models\User  $user  The user to associate the new Identity with.
+     * @param  array  $fields  The request fields containing the raw credentials data.
      *
      * @return \App\Models\Identity|null
      */
