@@ -4,17 +4,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Responses
+    | Keys
     |--------------------------------------------------------------------------
     |
-    | Settings that apply to all types of responses, including failures/errors.
+    | Values that will be used as key values in the array that will be created
+    | for the response.
     |
     */
 
-    'responses' => [
-        'key' => [
-            'message' => 'message',
-        ],
+    'key' => [
+        'message' => 'message',
     ],
 
     /*
