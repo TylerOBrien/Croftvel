@@ -211,10 +211,11 @@ class ApiGuard implements Guard
      * Attempts to validate the fields data against the TOTP.
      *
      * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
+     * @param  Credentials  $credentials  Instances of the models referred to by the raw credentials data.
      *
      * @return void
      */
-    protected function bySecretTotp(array $fields, Secret $secret)
+    protected function bySecretTotp(array $fields, Credentials $credentials)
     {
         //
     }
