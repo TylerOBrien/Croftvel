@@ -21,9 +21,7 @@ class BearerToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!ApiGuard::get()->parseToken($request)) {
-            throw new InvalidToken;
-        }
+        ApiGuard::get()->parseToken($request);
 
         return $next($request);
     }
