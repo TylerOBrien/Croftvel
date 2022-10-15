@@ -42,11 +42,11 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'croft.guest' => [
+        'api.guest' => [
             'api',
         ],
 
-        'croft.authenticated' => [
+        'api.authenticated' => [
             'bearer.token',
             'identity.verified',
             'account.status.allowed',
