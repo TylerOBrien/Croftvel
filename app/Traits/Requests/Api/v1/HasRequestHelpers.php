@@ -16,7 +16,7 @@ trait HasRequestHelpers
         return [
             'filter' => 'query_filter:' . ($model_name_override ?? $this->model),
             'sort' => 'query_sorter:' . ($model_name_override ?? $this->model),
-            'limit' => 'int|between:1,' . config('croft.queries.maxLimit'),
+            'limit' => 'int|between:1,' . config('queries.max.limit'),
             'offset' => 'int|min:0',
         ];
     }
