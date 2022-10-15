@@ -13,6 +13,10 @@ class Identity extends Model
 {
     use HasTypeValue, HasVerify;
 
+    protected $appends = [
+        'is_verified',
+    ];
+
     protected $fillable = [
         'user_id',
         'name',
