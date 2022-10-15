@@ -27,6 +27,21 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class EventServiceProvider extends ServiceProvider
 {
     /**
+     * The model to observer mappings for the application.
+     *
+     * @var array<class-string, array<int, class-string>>
+     */
+    protected $observers = [
+        Identity::class => [
+            IdentityObserver::class,
+        ],
+
+        User::class => [
+            UserObserver::class,
+        ],
+    ];
+
+    /**
      * The event to listener mappings for the application.
      *
      * @var array<class-string, array<int, class-string>>
@@ -72,8 +87,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Identity::observe(IdentityObserver::class);
-        User::observe(UserObserver::class);
+        //
     }
 
     /**
