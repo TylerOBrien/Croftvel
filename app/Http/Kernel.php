@@ -49,6 +49,7 @@ class Kernel extends HttpKernel
         'croft.authenticated' => [
             'bearer.token',
             'identity.verified',
+            'account.status.allowed',
             'api',
         ],
     ];
