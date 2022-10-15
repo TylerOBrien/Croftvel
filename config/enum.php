@@ -29,6 +29,15 @@ return [
         ],
     ],
 
+    'oauth' => [
+        'provider' => [
+            'facebook',
+            'twitter',
+            'github',
+            'google',
+        ],
+    ],
+
     'profile_field' => [
         'type' => [
             'boolean',
