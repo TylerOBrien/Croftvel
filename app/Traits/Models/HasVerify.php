@@ -20,7 +20,7 @@ trait HasVerify
      *
      * @return bool
      */
-    public function attemptVerify(string $ability, array $fields): bool
+    public function verify(string $ability, array $fields): bool
     {
         if (!in_array($ability, config('enum.verification.ability'))) {
             throw new InvalidVerificationAbility;
@@ -46,7 +46,7 @@ trait HasVerify
         }
 
         call_user_func(
-            [ $this, "attemptVerifyBy$fields[type]" ],
+            [ $this, "verifyBy$fields[type]" ],
             $verification,
             $fields['value'],
         );
@@ -60,7 +60,7 @@ trait HasVerify
      *
      * @return void
      */
-    protected function attemptVerifyByCode(Verification $verification, string $plaintext_code)
+    protected function verifyByCode(Verification $verification, string $plaintext_code)
     {
         $plaintext_code = str_replace(['-', '.', ' '], '', $plaintext_code);
         $hashed_code = hash(config('security.verification.hash_algo'), $plaintext_code);
@@ -76,7 +76,7 @@ trait HasVerify
      *
      * @return void
      */
-    protected function attemptVerifyByToken(Verification $verification, string $token)
+    protected function verifyByToken(Verification $verification, string $token)
     {
         if (($this->oauth_token->value ?? null) !== $token) {
             throw new InvalidVerificationCode;

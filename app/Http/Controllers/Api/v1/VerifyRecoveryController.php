@@ -25,7 +25,7 @@ class VerifyRecoveryController extends Controller
             throw new IdentityNotFound;
         }
 
-        $identity->attemptVerify('recover', $fields); // Will throw error if fails.
+        $identity->verify('recover', $fields); // Will throw error if fails.
 
         return response(null, 204);
     }

@@ -25,7 +25,7 @@ class VerifyIdentityController extends Controller
             throw new IdentityNotFound;
         }
 
-        $identity->attemptVerify('store', $fields); // Will throw error if fails.
+        $identity->verify('store', $fields); // Will throw error if fails.
 
         return response(null, 204);
     }
