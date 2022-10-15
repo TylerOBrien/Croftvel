@@ -39,7 +39,7 @@ trait HasOwnership
      * be used.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $owner  The resource that owns the model instance to be found.
-     * @param  string  $name  The name of the model instance to be found.
+     * @param  string|null  $name  The name of the model instance to be found.
      *
      * @return self|null
      */
