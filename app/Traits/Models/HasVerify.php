@@ -3,6 +3,7 @@
 namespace App\Traits\Models;
 
 use App\Models\Verification;
+use App\Exceptions\Api\v1\Verification\MissingHashAlgo;
 use App\Exceptions\Api\v1\Verify\{
     AlreadyVerified,
     ExpiredVerificationCode,
@@ -68,8 +69,12 @@ trait HasVerify
      */
     protected function verifyByCode(Verification $verification, string $plaintext_code): void
     {
+        if (is_null($verification->hash_algo)) {
+            throw new MissingHashAlgo;
+        }
+
         $plaintext_code = str_replace(['-', '.', ' '], '', $plaintext_code);
-        $hashed_code = hash($verification->hash_algo ?? config('security.verification.hash_algo'), $plaintext_code);
+        $hashed_code = hash($verification->hash_algo, $plaintext_code);
 
         if (!hash_equals($verification->code, $hashed_code)) {
             throw new InvalidVerificationCode;
