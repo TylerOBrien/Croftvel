@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
             function() {
                 $hasToken = ApiGuard::get()->hasToken();
                 $middlware = 'api.' . ($hasToken ? 'authenticated' : 'guest');
-                $path = $hasToken ? 'authenticated.php' : 'routes/Api/v1/guest.php';
+                $path = 'routes/Api/v1/' . ($hasToken ? 'authenticated.php' : 'guest.php');
 
                 Route::middleware($middlware)->group(base_path($path));
             }
