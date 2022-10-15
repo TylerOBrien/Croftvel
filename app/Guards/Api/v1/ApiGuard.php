@@ -3,7 +3,7 @@
 namespace App\Guards\Api\v1;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Exceptions\Api\v1\Auth\InvalidCredentials;
+use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingToken };
 use App\Helpers\Auth\Credentials;
 use App\Models\{ Identity, PersonalAccessToken, User };
 
@@ -75,7 +75,7 @@ class ApiGuard implements Guard
         $bearer_token = $request->bearerToken();
 
         if (is_null($bearer_token)) {
-            return null;
+            throw new MissingToken;
         }
 
         $now = now();
@@ -83,9 +83,9 @@ class ApiGuard implements Guard
         $pat = PersonalAccessToken::findFromBearerToken($bearer_token);
 
         if (is_null($pat)) {
-            return null;
+            throw new InvalidToken;
         } else if ($this->ttl && $pat->created_at->lte($expires_at)) {
-            return null;
+            throw new ExpiredToken;
         }
 
         $pat->forceFill([ 'last_used_at' => $now ])->save();
