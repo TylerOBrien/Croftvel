@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\v1;
 
 use App\Exceptions\Api\v1\Auth\Forbidden;
+use App\Exceptions\Api\v1\Validation\InvalidRequestDefaults;
 use App\Guards\Api\v1\ApiGuard;
 
 use Illuminate\Contracts\Container\Container;
@@ -107,6 +108,10 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     {
         $fields = $this->validator->validated();
         $defaults = $this->defaults ?? [];
+
+        if (!is_array($defaults)) {
+            throw new InvalidRequestDefaults;
+        }
 
         foreach ($defaults as $key => $value) {
             if (!isset($fields[$key])) {
