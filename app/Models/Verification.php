@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Verification\VerificationCreated;
+use App\Exceptions\Api\v1\Verification\MissingHashAlgo;
 use App\Traits\Models\{ HasSecretCode, HasUniqueMaker };
 
 use Illuminate\Database\Eloquent\Model;
@@ -42,6 +43,24 @@ class Verification extends Model
     }
 
     /**
+     * Generate a new unique verification code.
+     *
+     * @return int
+     */
+    public function generate(): int
+    {
+        if (is_null($this->hash_algo)) {
+            throw new MissingHashAlgo;
+        }
+
+        return self::makeUniqueInt(
+            'code',
+            config('security.verification.length'),
+            $this->hash_algo,
+        );
+    }
+
+    /**
      * Register creating handler to ensure that a code is created if one has
      * not already been provided.
      *
@@ -56,11 +75,7 @@ class Verification extends Model
             }
 
             if (is_null($verification->code)) {
-                $verification->code = self::makeUniqueInt(
-                    'code',
-                    config('security.verification.length'),
-                    $verification->hash_algo,
-                );
+                $verification->code = $verification->generate();
             }
         });
     }
