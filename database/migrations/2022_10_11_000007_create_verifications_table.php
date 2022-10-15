@@ -18,6 +18,7 @@ class CreateVerificationsTable extends Migration
             $table->morphs('verifiable');
             $table->enum('ability', config('enum.verification.ability'));
             $table->char('code', 64)->unique();
+            $table->string('hash_algo');
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
