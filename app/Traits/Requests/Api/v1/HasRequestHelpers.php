@@ -7,11 +7,11 @@ trait HasRequestHelpers
     /**
      * Get the store validation rules for an index request.
      *
-     * @param  string  $model_name_override
+     * @param  string|null  $model_name_override
      *
      * @return array
      */
-    protected function indexRules(string $model_name_override = null): array
+    protected function indexRules(string|null $model_name_override = null): array
     {
         return [
             'filter' => 'query_filter:' . ($model_name_override ?? $this->model),
