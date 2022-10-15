@@ -14,6 +14,8 @@ class User extends BaseUser
     use Notifiable, HasFactory, HasEnabledState, HasFullName, HasUserAbilities, HasProfiles;
 
     protected $appends = [
+        'full_name',
+        'full_name_reverse',
         'is_identified',
     ];
 
