@@ -9,11 +9,11 @@ trait HasUserAbilities
 {
     /**
      * Check if the user instance has the given ability.
-     * 
+     *
      * @param  string  $ability
      * @param  string  $model_type
      * @param  int  $model_id
-     * 
+     *
      * @return bool
      */
     public function hasAbility(string $ability, string $model_type, int $model_id = null)
@@ -24,11 +24,11 @@ trait HasUserAbilities
 
     /**
      * Check if the user instance has the given ability.
-     * 
+     *
      * @param  string  $ability
      * @param  string  $model_type
      * @param  int  $model_id
-     * 
+     *
      * @return bool
      */
     protected function hasTokenAbility(string $ability, string $model_type, int $model_id = null)
@@ -38,14 +38,14 @@ trait HasUserAbilities
 
     /**
      * Check if the user instance has the given ability defined in storage.
-     * 
+     *
      * @param  string  $ability
      * @param  string  $model_type
-     * @param  int  $model_id
-     * 
+     * @param  int|null  $model_id
+     *
      * @return bool
      */
-    protected function hasDatabaseAbility(string $ability, string $model_type, int $model_id = null)
+    protected function hasDatabaseAbility(string $ability, string $model_type, int|null $model_id = null): bool
     {
         $model_type = Str::start($model_type, config('models.namespace'));
         $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model_type'));
