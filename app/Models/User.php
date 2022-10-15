@@ -7,6 +7,7 @@ use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilit
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Date;
 
 class User extends BaseUser
 {
@@ -22,6 +23,11 @@ class User extends BaseUser
         'middle_name',
         'last_name',
         'is_enabled',
+    ];
+
+    protected $casts = [
+        'last_active_at' => 'datetime',
+        'identified_at' => 'datetime',
     ];
 
     protected $dispatchesEvents = [
