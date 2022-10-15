@@ -18,7 +18,7 @@ class UserObserver
     {
         if ($user->isDirty('account_id')) { // Account id is being changed.
             if ($account = $user->fresh()->account) { // Get instance of previous account.
-                event(new UserRemovedFromAccount($user, $account));
+                UserRemovedFromAccount::dispatch($user, $account);
             }
         }
     }
@@ -33,12 +33,12 @@ class UserObserver
     public function updated(User $user): void
     {
         if ($user->wasChanged('identified_at')) {
-            event(new UserIdentified($user));
+            UserIdentified::dispatch($user);
         }
 
         if ($user->wasChanged('account_id')) {
             if ($account = $user->account) { // Check if account exists. Could be null.
-                event(new UserAddedToAccount($user, $account));
+                UserAddedToAccount::dispatch($user, $account);
             }
         }
     }

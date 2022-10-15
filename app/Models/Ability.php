@@ -50,7 +50,7 @@ class Ability extends Model
             ]);
         }
 
-        event(new AbilitiesGivenToUser($user, $resource, $abilities));
+        AbilitiesGivenToUser::dispatch($user, $resource, $abilities);
     }
 
     /**
@@ -87,6 +87,6 @@ class Ability extends Model
             }
         }
 
-        event(new AbilitiesTakenFromUser($user, $resource, $abilities));
+        AbilitiesTakenFromUser::dispatch($user, $resource, $abilities);
     }
 }

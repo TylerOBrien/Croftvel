@@ -171,7 +171,7 @@ class ApiGuard implements Guard
             call_user_func([ $this, "bySecret{$credentials->secret->type}" ], $fields, $credentials);
         }
 
-        event(new AuthAttempted($credentials->identity, true));
+        AuthAttempted::dispatch($credentials->identity, true);
 
         $this->identity = $credentials->identity;
         $this->user = $credentials->identity->user;
@@ -202,7 +202,7 @@ class ApiGuard implements Guard
     protected function bySecretPassword(array $fields, Credentials $credentials): void
     {
         if (!Hash::check($fields['secret']['value'], $credentials->secret->value)) {
-            event(new AuthAttempted($credentials->identity, false));
+            AuthAttempted::dispatch($credentials->identity, false);
             throw new InvalidCredentials;
         }
     }

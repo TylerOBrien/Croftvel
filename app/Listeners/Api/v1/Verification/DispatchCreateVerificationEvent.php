@@ -41,10 +41,10 @@ class DispatchCreateVerificationEvent implements ShouldQueue
     {
         switch ($event->verification->ability) {
         case 'store':
-            event(new IdentityVerificationCreated($event->verification->verifiable, $event->plaintext_code));
+            IdentityVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code);
             break;
         case 'recover':
-            event(new RecoveryVerificationCreated($event->verification->verifiable, $event->plaintext_code));
+            RecoveryVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code);
             break;
         }
     }
