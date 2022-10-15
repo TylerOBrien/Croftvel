@@ -12,11 +12,11 @@ trait HasUserAbilities
      *
      * @param  string  $ability
      * @param  string  $model_type
-     * @param  int  $model_id
+     * @param  int|null  $model_id
      *
      * @return bool
      */
-    public function hasAbility(string $ability, string $model_type, int $model_id = null)
+    public function hasAbility(string $ability, string $model_type, int|null $model_id = null): bool
     {
         return $this->hasTokenAbility($ability, $model_type, $model_id) &&
                $this->hasDatabaseAbility($ability, $model_type, $model_id);
@@ -27,11 +27,11 @@ trait HasUserAbilities
      *
      * @param  string  $ability
      * @param  string  $model_type
-     * @param  int  $model_id
+     * @param  int|null  $model_id
      *
      * @return bool
      */
-    protected function hasTokenAbility(string $ability, string $model_type, int $model_id = null)
+    protected function hasTokenAbility(string $ability, string $model_type, int|null $model_id = null): bool
     {
         return true;
     }
