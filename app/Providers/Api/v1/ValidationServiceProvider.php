@@ -21,6 +21,22 @@ use Illuminate\Support\Facades\Validator;
 class ValidationServiceProvider extends ServiceProvider
 {
     /**
+     * @var array<string, class-string>
+     */
+    protected $rules = [
+        'can' => Can::class,
+        'is_or_can' => IsOrCan::class,
+        'matches_current' => MatchesCurrent::class,
+        'morphable' => Morphable::class,
+        'ownable' => Ownable::class,
+        'country' => Country::class,
+        'subdivision' => Subdivision::class,
+        'phone_number' => PhoneNumber::class,
+        'query_filter' => QueryFilter::class,
+        'query_sorter' => QuerySorter::class,
+    ];
+
+    /**
      * Register services.
      *
      * @return void
@@ -37,44 +53,10 @@ class ValidationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extendImplicit('can', function($attribute, $value, $parameters, $validator) {
-            return (new Can($parameters))->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('is_or_can', function($attribute, $value, $parameters, $validator) {
-            return (new IsOrCan($parameters))->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('matches_current', function($attribute, $value, $parameter, $validator) {
-            return (new MatchesCurrent)->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('morphable', function($attribute, $value, $parameter, $validator) {
-            return (new Morphable)->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('ownable', function($attribute, $value, $parameter, $validator) {
-            return (new Ownable)->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('country', function($attribute, $value, $parameter, $validator) {
-            return (new Country)->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('subdivision', function($attribute, $value, $parameter, $validator) {
-            return (new Subdivision($parameter))->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('phone_number', function($attribute, $value, $parameter, $validator) {
-            return (new PhoneNumber)->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('query_filter', function($attribute, $value, $parameters) {
-            return (new QueryFilter($parameters))->passes($attribute, $value);
-        });
-
-        Validator::extendImplicit('query_sorter', function($attribute, $value, $parameters) {
-            return (new QuerySorter($parameters))->passes($attribute, $value);
-        });
+        foreach ($this->rules as $rule => $class) {
+            Validator::extendImplicit($rule, function ($attribute, $value, $parameters, $validator) use ($class) {
+                return (new $class($parameters))->passes($attribute, $value);
+            });
+        }
     }
 }
