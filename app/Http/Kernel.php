@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'bearer.token' => \App\Http\Middleware\Api\v1\BearerToken::class,
         'identity.verified' => \App\Http\Middleware\Api\v1\IdentityIsVerified::class,
+        'account.status.allowed' => \App\Http\Middleware\Api\v1\AccountStatusIsAllowed::class,
     ];
 }
