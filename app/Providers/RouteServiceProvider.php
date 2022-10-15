@@ -55,13 +55,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group(
             [
-                'prefix' => 'v1',
-                'domain' => config('app.hosts.api'),
+                'prefix' => config('api.version'),
+                'domain' => config('api.hosts.' . config('api.version')),
             ],
             function() {
                 $hasToken = ApiGuard::get()->hasToken();
                 $middlware = 'api.' . ($hasToken ? 'authenticated' : 'guest');
-                $path = 'routes/Api/v1/' . ($hasToken ? 'authenticated.php' : 'guest.php');
+                $path = 'routes/Api/' . config('api.version') .'/' . ($hasToken ? 'authenticated.php' : 'guest.php');
 
                 Route::middleware($middlware)->group(base_path($path));
             }
