@@ -63,7 +63,8 @@ class RouteServiceProvider extends ServiceProvider
                 $middlware = 'api.' . ($hasToken ? 'authenticated' : 'guest');
                 $path = 'routes/Api/' . config('api.version') .'/' . ($hasToken ? 'authenticated.php' : 'guest.php');
 
-                Route::middleware($middlware)->group(base_path($path));
+                Route::middleware($middlware)
+                     ->group(base_path($path));
             }
         );
     }
