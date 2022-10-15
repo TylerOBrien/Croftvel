@@ -64,7 +64,7 @@ trait HasVerify
     {
         $plaintext_code = str_replace(['-', '.', ' '], '', $plaintext_code);
 
-        if (!hash_equals($verification->code, hash('sha256', $plaintext_code))) {
+        if (!hash_equals($verification->code, hash(config('security.verification.hash_algo'), $plaintext_code))) {
             throw new InvalidVerificationCode;
         }
     }
