@@ -223,7 +223,7 @@ class ApiGuard implements Guard
     /**
      * Set the currently authenticated user.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $user  The instance representing the currently authenticated user.
      *
      * @return void
      */
