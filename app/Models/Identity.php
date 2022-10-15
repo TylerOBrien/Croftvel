@@ -110,7 +110,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function findFromRequest($request): Identity
+    static public function findFromRequest($request): Identity|null
     {
         if ($request->has('identity_id')) {
             return self::find($request->input('identity_id'));
