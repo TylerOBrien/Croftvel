@@ -22,10 +22,10 @@ trait HasAddresses
      *
      * @return \App\Models\Address
      */
-    public function createAddress(array $attributes): Address
+    public function createAddress(array $fields): Address
     {
         return Address::create(
-            array_merge($attributes, [
+            array_merge($fields, [
                 'owner_id' => $this->id,
                 'owner_type' => self::class,
             ])
@@ -42,14 +42,14 @@ trait HasAddresses
      *
      * Will return an instance of the Address model if creating a new address.
      *
-     * @param  array  $attributes  The attributes to pass to the create/update function.
+     * @param  array  $fields  The attributes to pass to the create/update function.
      *
      * @return \App\Models\Address|bool
      */
-    public function updateOrCreateAddress(array $attributes): Address|bool
+    public function updateOrCreateAddress(array $fields): Address|bool
     {
         $predicate = [
-            'name' => $attributes['name'],
+            'name' => $fields['name'],
             'owner_id' => $this->id,
             'owner_type' => self::class,
         ];
@@ -57,9 +57,9 @@ trait HasAddresses
         $address = Address::where($predicate)->first();
 
         if ($address) {
-            return $address->fill($attributes)->save();
+            return $address->fill($fields)->save();
         }
 
-        return $this->createAddress($attributes);
+        return $this->createAddress($fields);
     }
 }
