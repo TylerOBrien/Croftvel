@@ -20,6 +20,7 @@ class Verification extends Model
     protected $fillable = [
         'ability',
         'code',
+        'hash_algo',
         'verifiable_id',
         'verifiable_type',
     ];
@@ -49,9 +50,17 @@ class Verification extends Model
     static public function boot(): void
     {
         parent::boot();
-        self::creating(function(Verification $verification) {
-            if (!$verification->code) {
-                $verification->code = self::makeUniqueInt('code', config('security.verification.length'));
+        self::creating(function (Verification $verification) {
+            if (is_null($verification->hash_algo)) {
+                $verification->hash_algo = config('security.verification.hash_algo');
+            }
+
+            if (is_null($verification->code)) {
+                $verification->code = self::makeUniqueInt(
+                    'code',
+                    config('security.verification.length'),
+                    $verification->hash_algo,
+                );
             }
         });
     }
