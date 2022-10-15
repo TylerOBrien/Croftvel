@@ -71,7 +71,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     public function register()
     {
         Gate::before(function() {
-            if (!config('app.debug')) {
+            if (app()->isProduction()) {
                 return null;
             }
 
