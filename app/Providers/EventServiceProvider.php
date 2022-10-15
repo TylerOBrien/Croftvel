@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Models\{ Address, Identity, User };
-use App\Observers\Api\v1\{ AddressObserver, IdentityObserver, UserObserver };
+use App\Models\{ Address, Company, Identity, User };
+use App\Observers\Api\v1\{ AddressObserver, CompanyObserver, IdentityObserver, UserObserver };
 
 use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerificationCreated, IdentityVerified };
 use App\Listeners\Api\v1\Identity\{ CheckForFirstTimeVerify, CreateIdentityVerification, SendVerifyIdentityNotification };
@@ -34,6 +34,10 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Address::class => [
             AddressObserver::class,
+        ],
+
+        Company::class => [
+            CompanyObserver::class,
         ],
 
         Identity::class => [
