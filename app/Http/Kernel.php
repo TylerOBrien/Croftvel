@@ -51,6 +51,7 @@ class Kernel extends HttpKernel
             'identity.verified',
             'account.enabled',
             'account.status.allowed',
+            'user.enabled',
             'api',
         ],
     ];
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'identity.verified' => \App\Http\Middleware\Api\v1\IdentityIsVerified::class,
         'account.enabled' => \App\Http\Middleware\Api\v1\AccountIsEnabled::class,
         'account.status.allowed' => \App\Http\Middleware\Api\v1\AccountStatusIsAllowed::class,
+        'user.enabled' => \App\Http\Middleware\Api\v1\UserIsEnabled::class,
     ];
 }
