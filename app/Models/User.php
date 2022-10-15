@@ -7,7 +7,6 @@ use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilit
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Date;
 
 class User extends BaseUser
 {
