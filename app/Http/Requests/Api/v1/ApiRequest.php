@@ -38,6 +38,13 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     protected $model;
 
     /**
+     * The default field values to use if they were not given in the request.
+     *
+     * @var array<string, mixed>
+     */
+    protected $defaults;
+
+    /**
      * The container instance.
      *
      * @var \Illuminate\Contracts\Container\Container
@@ -97,7 +104,16 @@ class ApiRequest extends Request implements ValidatesWhenResolved
      */
     public function validated()
     {
-        return $this->validator->validated();
+        $fields = $this->validator->validated();
+        $defaults = $this->defaults ?? [];
+
+        foreach ($defaults as $key => $value) {
+            if (!isset($fields[$key])) {
+                $fields[$key] = $value;
+            }
+        }
+
+        return $fields;
     }
 
     /**
