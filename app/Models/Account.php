@@ -14,6 +14,7 @@ class Account extends Model
 
     protected $casts = [
         'status' => AccountStatus::class,
+        'is_enabled' => 'boolean',
     ];
 
     protected $dispatchesEvents = [
