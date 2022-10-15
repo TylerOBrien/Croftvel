@@ -37,11 +37,11 @@ class ApiGuard implements Guard
     /**
      * Create a new API guard.
      *
-     * @param  int  $ttl  The number of minutes an auth token will be valid for.
+     * @param  int|null  $ttl  The number of minutes an auth token will be valid for.
      *
      * @return void
      */
-    public function __construct(int $ttl = null)
+    public function __construct(int|null $ttl = null)
     {
         $this->ttl = $ttl ?: config('security.token.ttl');
     }
@@ -49,11 +49,11 @@ class ApiGuard implements Guard
     /**
      * Determines if the request contains a bearer token in the headers.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request|null  $request
      *
      * @return bool
      */
-    public function hasToken(Request $request = null): bool
+    public function hasToken(Request|null $request = null): bool
     {
         return (bool) ($request ?? request())->bearerToken();
     }
@@ -61,11 +61,11 @@ class ApiGuard implements Guard
     /**
      * Retrieve the authenticated user for the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request|null  $request
      *
      * @return \App\Models\User
      */
-    public function parseToken(Request $request = null): User|null
+    public function parseToken(Request|null $request = null): User|null
     {
         if ($this->check()) {
             return $this->user();
