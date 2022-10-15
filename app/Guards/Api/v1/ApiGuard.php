@@ -82,6 +82,7 @@ class ApiGuard implements Guard
         }
 
         $pat->forceFill([ 'last_used_at' => $now ])->save();
+        $pat->tokenable->user->forceFill([ 'last_active_at' => $now ])->save();
 
         $this->identity = $pat->tokenable;
 
