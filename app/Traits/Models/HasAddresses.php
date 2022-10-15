@@ -48,13 +48,7 @@ trait HasAddresses
      */
     public function updateOrCreateAddress(array $fields): Address|bool
     {
-        $predicate = [
-            'name' => $fields['name'],
-            'owner_id' => $this->id,
-            'owner_type' => self::class,
-        ];
-
-        $address = Address::where($predicate)->first();
+        $address = Address::findFromOwner($this, $fields['name']);
 
         if ($address) {
             return $address->fill($fields)->save();
