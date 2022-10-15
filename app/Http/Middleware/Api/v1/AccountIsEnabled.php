@@ -21,9 +21,9 @@ class AccountIsEnabled
      */
     public function handle(Request $request, Closure $next)
     {
-        $account = ApiGuard::get()->user()?->account;
+        $user = ApiGuard::get()->user();
 
-        if (!$account?->is_enabled) {
+        if (!$user?->account?->is_enabled) {
             throw new AccountDisabled;
         }
 
