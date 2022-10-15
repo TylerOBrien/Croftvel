@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'bearer.token' => \App\Http\Middleware\BearerToken::class,
-        'identity.verified' => \App\Http\Middleware\IdentityIsVerified::class,
+        'bearer.token' => \App\Http\Middleware\Api\v1\BearerToken::class,
+        'identity.verified' => \App\Http\Middleware\Api\v1\IdentityIsVerified::class,
     ];
 }

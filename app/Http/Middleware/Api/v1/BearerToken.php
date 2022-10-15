@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Api\v1;
 
 use Closure;
 
-use App\Exceptions\Api\v1\Identity\IdentityNotVerified;
+use App\Exceptions\Api\v1\Auth\InvalidToken;
 use App\Guards\Api\v1\ApiGuard;
 
 use Illuminate\Http\Request;
 
-class IdentityIsVerified
+class BearerToken
 {
     /**
      * Handle an incoming request.
@@ -21,8 +21,8 @@ class IdentityIsVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!ApiGuard::get()->parseToken($request)->is_identified) {
-            throw new IdentityNotVerified;
+        if (!ApiGuard::get()->parseToken($request)) {
+            throw new InvalidToken;
         }
 
         return $next($request);
