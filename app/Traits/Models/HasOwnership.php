@@ -35,6 +35,9 @@ trait HasOwnership
      * is unique. If there are multiple rows with the same name and owner then
      * only the first row found will be returned.
      *
+     * If a name is not specified then the default name set in the config will
+     * be used.
+     *
      * @param  \Illuminate\Database\Eloquent\Model  $owner  The resource that owns the model instance to be found.
      * @param  string  $name  The name of the model instance to be found.
      *
