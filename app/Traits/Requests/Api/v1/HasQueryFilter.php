@@ -2,7 +2,7 @@
 
 namespace App\Traits\Requests\Api\v1;
 
-trait HasRequestHelpers
+trait HasQueryFilter
 {
     /**
      * Get the store validation rules for an index request.

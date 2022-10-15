@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\Privilege;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Privilege;
-use App\Traits\Requests\Api\v1\HasRequestHelpers;
+use App\Traits\Requests\Api\v1\HasQueryFilter;
 
 class IndexPrivilege extends ApiRequest
 {
-    use HasRequestHelpers;
+    use HasQueryFilter;
 
     /**
      * Create a new request.

@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\User;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\User;
-use App\Traits\Requests\Api\v1\HasRequestHelpers;
+use App\Traits\Requests\Api\v1\HasQueryFilter;
 
 class IndexUser extends ApiRequest
 {
-    use HasRequestHelpers;
+    use HasQueryFilter;
 
     /**
      * Instantiate the request.

@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\Address;
 
 use App\Models\Address;
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Traits\Requests\Api\v1\HasRequestHelpers;
+use App\Traits\Requests\Api\v1\HasQueryFilter;
 
 class IndexAddress extends ApiRequest
 {
-    use HasRequestHelpers;
+    use HasQueryFilter;
 
     /**
      * Instantiate the request.

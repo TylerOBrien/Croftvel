@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\Ability;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Ability;
-use App\Traits\Requests\Api\v1\HasRequestHelpers;
+use App\Traits\Requests\Api\v1\HasQueryFilter;
 
 class IndexAbility extends ApiRequest
 {
-    use HasRequestHelpers;
+    use HasQueryFilter;
 
     /**
      * Create a new request.

@@ -4,11 +4,11 @@ namespace App\Http\Requests\Api\v1\Image;
 
 use App\Models\Image;
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Traits\Requests\Api\v1\HasRequestHelpers;
+use App\Traits\Requests\Api\v1\HasQueryFilter;
 
 class IndexImage extends ApiRequest
 {
-    use HasRequestHelpers;
+    use HasQueryFilter;
 
     /**
      * Instantiate the request.
