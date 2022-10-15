@@ -21,7 +21,9 @@ class IdentityIsVerified
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!ApiGuard::get()->parseToken($request)->is_identified) {
+        $user = ApiGuard::get()->user();
+
+        if (!$user || !$user->is_identified) {
             throw new IdentityNotVerified;
         }
 
