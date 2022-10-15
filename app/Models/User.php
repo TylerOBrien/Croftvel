@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\Api\v1\User\UserCreated;
 use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities };
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
