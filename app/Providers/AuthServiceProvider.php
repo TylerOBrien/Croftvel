@@ -79,7 +79,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         });
 
         Auth::extend(config('security.guard.name'), function ($app, $name, array $config) {
-            return new ApiGuard(config('security.token.ttl'));
+            return new ApiGuard(config('security.bearer.ttl'));
         });
     }
 }

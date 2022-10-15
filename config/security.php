@@ -17,14 +17,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Token
+    | Bearer
     |--------------------------------------------------------------------------
     |
-    | Settings related to user authentication tokens.
+    | Settings for the Bearer token provided in the HTTP header.
     |
     */
 
-    'token' => [
+    'bearer' => [
         'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel')),
         'ttl' => env('SECURITY_TOKEN_TTL', 10080), /* 7 days */
         'length' => env('SECURITY_TOKEN_LENGTH', 40),
