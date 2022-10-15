@@ -63,8 +63,9 @@ trait HasVerify
     protected function attemptVerifyByCode(Verification $verification, string $plaintext_code)
     {
         $plaintext_code = str_replace(['-', '.', ' '], '', $plaintext_code);
+        $hashed_code = hash(config('security.verification.hash_algo'), $plaintext_code);
 
-        if (!hash_equals($verification->code, hash(config('security.verification.hash_algo'), $plaintext_code))) {
+        if (!hash_equals($verification->code, $hashed_code)) {
             throw new InvalidVerificationCode;
         }
     }
