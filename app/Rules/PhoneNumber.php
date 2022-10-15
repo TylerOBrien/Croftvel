@@ -37,6 +37,6 @@ class PhoneNumber implements Rule
      */
     public function message(): string
     {
-        return 'The phone number entered is not valid.';
+        return trans('validation.phone_number');
     }
 }
