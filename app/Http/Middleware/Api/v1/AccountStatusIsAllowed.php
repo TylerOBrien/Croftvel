@@ -24,7 +24,7 @@ class AccountStatusIsAllowed
     {
         $user = ApiGuard::get()->user();
 
-        switch ($user->account ?? null) {
+        switch ($user?->account?->status) {
         case AccountStatus::Suspended:
             throw new AccountSuspended;
         }
