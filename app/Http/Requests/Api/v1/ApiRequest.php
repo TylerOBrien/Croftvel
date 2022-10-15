@@ -73,7 +73,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
             return $user->can($this->ability, $target);
         }
 
-        return true;
+        return true; // Either no user or no ability, meaning nothing is being done, so we can authorize.
     }
 
     /**
