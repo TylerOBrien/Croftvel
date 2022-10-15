@@ -5,13 +5,13 @@ namespace App\Models;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
-use App\Traits\Models\HasVerify;
+use App\Traits\Models\{ HasTypeValue, HasVerify };
 
 use Illuminate\Database\Eloquent\{ Collection, Model };
 
 class Identity extends Model
 {
-    use HasVerify;
+    use HasTypeValue, HasVerify;
 
     protected $fillable = [
         'user_id',
