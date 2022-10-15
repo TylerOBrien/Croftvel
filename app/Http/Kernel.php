@@ -48,10 +48,10 @@ class Kernel extends HttpKernel
 
         'api.authenticated' => [
             'bearer.token',
-            'identity.verified',
             'account.enabled',
             'account.status.allowed',
             'user.enabled',
+            'identity.verified',
             'api',
         ],
     ];
