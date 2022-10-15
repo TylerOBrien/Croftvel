@@ -125,7 +125,11 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
+     * Handle the failed request authorization.
+     *
      * @return void
+     *
+     * @throws \App\Exceptions\Api\v1\Auth\Forbidden
      */
     protected function failedAuthorization()
     {
