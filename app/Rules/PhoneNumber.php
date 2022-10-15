@@ -21,9 +21,10 @@ class PhoneNumber implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         return strlen($value) >= 10 &&
                preg_match('%^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$%i', $value);
@@ -34,7 +35,7 @@ class PhoneNumber implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'The phone number entered is not valid.';
     }
