@@ -31,6 +31,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | OAuth
+    |--------------------------------------------------------------------------
+    |
+    | Settings for OAuth services.
+    |
+    */
+
     'github' => [
         'type' => 'oauth',
         'client_id' => env('GITHUB_CLIENT_ID'),
