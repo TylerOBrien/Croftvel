@@ -48,7 +48,11 @@ trait HasUserAbilities
     protected function hasDatabaseAbility(string $ability, string $model_type, int|null $model_id = null): bool
     {
         $model_type = Str::start($model_type, config('models.namespace'));
-        $bindings = array_merge([ 'user_id' => $this->id ], compact('ability', 'model_type'));
+        $bindings = [
+            'ability' => $ability,
+            'model_type' => $model_type,
+            'user_id' => $this->id,
+        ];
 
         if (is_null($model_id)) {
             $model_id_clause = 'abilities.model_id IS NULL';
