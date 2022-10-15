@@ -12,7 +12,7 @@ return [
     */
 
     'guard' => [
-        'name' => 'croft',
+        'name' => env('SECURITY_GUARD_NAME', 'croft'),
     ],
 
     /*

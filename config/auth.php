@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'croft',
+        'guard' => env('SECURITY_GUARD_NAME', 'croft'),
     ],
 
     /*
@@ -42,7 +42,7 @@ return [
         ],
 
         'croft' => [
-            'driver' => 'croft',
+            'driver' => env('SECURITY_GUARD_NAME', 'croft'),
             'provider' => 'users',
             'hash' => false,
         ],
