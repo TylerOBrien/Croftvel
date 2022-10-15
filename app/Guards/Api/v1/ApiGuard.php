@@ -14,13 +14,6 @@ use Illuminate\Support\Facades\Hash;
 class ApiGuard implements Guard
 {
     /**
-     * The currently authenticated user.
-     *
-     * @var \App\Models\User
-     */
-    protected $user;
-
-    /**
      * The identity the user used to authenticate.
      *
      * @var \App\Models\Identity
@@ -47,7 +40,7 @@ class ApiGuard implements Guard
     }
 
     /**
-     * Determines if the request contains a bearer token in the headers.
+     * Determines if the request contains a Bearer token in the HTTP headers.
      *
      * @param  \Illuminate\Http\Request|null  $request
      *
@@ -59,28 +52,28 @@ class ApiGuard implements Guard
     }
 
     /**
-     * Retrieve the authenticated user for the incoming request.
+     * Retrieve the authenticated identity for the incoming request.
      *
      * @param  \Illuminate\Http\Request|null  $request
      *
-     * @return \App\Models\User
+     * @return \App\Models\Identity
      */
-    public function parseToken(Request|null $request = null): User|null
+    public function parseToken(Request|null $request = null): Identity|null
     {
         if ($this->check()) {
-            return $this->user();
+            return $this->identity();
         }
 
         $request = $request ?? request();
-        $bearer_token = $request->bearerToken();
+        $bearer = $request->bearerToken();
 
-        if (is_null($bearer_token)) {
+        if (is_null($bearer)) {
             throw new MissingToken;
         }
 
         $now = now();
         $expires_at = $now->subMinutes($this->ttl);
-        $pat = PersonalAccessToken::findFromBearerToken($bearer_token);
+        $pat = PersonalAccessToken::findFromBearer($bearer);
 
         if (is_null($pat)) {
             throw new InvalidToken;
@@ -89,69 +82,10 @@ class ApiGuard implements Guard
         }
 
         $pat->forceFill([ 'last_used_at' => $now ])->save();
-        $pat->tokenable->forceFill([ 'last_active_at' => $now ])->save();
 
-        return $this->user = $pat->tokenable->fresh();
-    }
+        $this->identity = $pat->tokenable;
 
-    /**
-     * Determine if the current user is authenticated.
-     *
-     * @return bool
-     */
-    public function check(): bool
-    {
-        return (bool) $this->user;
-    }
-
-    /**
-     * Determine if the current user is a guest.
-     *
-     * @return bool
-     */
-    public function guest(): bool
-    {
-        return is_null($this->user);
-    }
-
-    /**
-     * Get the currently authenticated user.
-     *
-     * @return \App\Models\User|null
-     */
-    public function user(): User|null
-    {
-        return $this->user ?? null;
-    }
-
-    /**
-     * Get the identity used by the currently authenticated user.
-     *
-     * @return \App\Models\Identity|null
-     */
-    public function identity(): Identity|null
-    {
-        return $this->identity ?? null;
-    }
-
-    /**
-     * Determine if the guard has a user instance.
-     *
-     * @return bool
-     */
-    public function hasUser(): bool
-    {
-        return (bool) $this->user;
-    }
-
-    /**
-     * Get the id of the currently authenticated user.
-     *
-     * @return int|null
-     */
-    public function id(): int|null
-    {
-        return $this->user ? $this->user->getAuthIdentifier() : null;
+        return $this->identity;
     }
 
     /**
@@ -159,9 +93,9 @@ class ApiGuard implements Guard
      *
      * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
      *
-     * @return \App\Models\User
+     * @return \App\Models\Identity
      */
-    public function attempt(array $fields = []): User
+    public function attempt(array $fields = []): Identity
     {
        $credentials = Credentials::fromFields($fields);
 
@@ -174,9 +108,8 @@ class ApiGuard implements Guard
         AuthAttempted::dispatch($credentials->identity, true);
 
         $this->identity = $credentials->identity;
-        $this->user = $credentials->identity->user;
 
-        return $this->user;
+        return $this->identity;
     }
 
     /**
@@ -221,7 +154,67 @@ class ApiGuard implements Guard
     }
 
     /**
-     * Set the currently authenticated user.
+     * Determine if the current user is authenticated.
+     *
+     * @return bool
+     */
+    public function check(): bool
+    {
+        return (bool) $this->identity;
+    }
+
+    /**
+     * Determine if the current user is a guest.
+     *
+     * @return bool
+     */
+    public function guest(): bool
+    {
+        return is_null($this->identity);
+    }
+
+    /**
+     * Get the currently authenticated user.
+     *
+     * @return \App\Models\User|null
+     */
+    public function user(): User|null
+    {
+        return $this->identity?->user;
+    }
+
+    /**
+     * Get the identity used by the currently authenticated user.
+     *
+     * @return \App\Models\Identity|null
+     */
+    public function identity(): Identity|null
+    {
+        return $this->identity ?? null;
+    }
+
+    /**
+     * Determine if the guard has a user instance.
+     *
+     * @return bool
+     */
+    public function hasUser(): bool
+    {
+        return (bool) $this->identity?->user;
+    }
+
+    /**
+     * Get the id of the currently authenticated user.
+     *
+     * @return int|null
+     */
+    public function id(): int|null
+    {
+        return $this->identity?->user?->getAuthIdentifier() ?? null;
+    }
+
+    /**
+     * This function isn't used and is implemented to satisfy the Guard interface.
      *
      * @param  \App\Models\User  $user  The instance representing the currently authenticated user.
      *
@@ -229,7 +222,7 @@ class ApiGuard implements Guard
      */
     public function setUser($user): void
     {
-        $this->user = $user;
+        // Intentionally left blank.
     }
 
     /**

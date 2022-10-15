@@ -36,19 +36,20 @@ class PersonalAccessToken extends Model
     }
 
     /**
-     * Create a new token that the given user will be able to use to authenticate.
+     * Create a new token that the given user identity will be able to use to
+     * authenticate.
      *
-     * @param  User  $user  The user who will own the token.
+     * @param  \App\Models\Identity  $identity  The identity that will own the token.
      *
      * @return PersonalAccessTokenHelper
      */
-    static public function createForUser(User $user): PersonalAccessTokenHelper
+    static public function createForIdentity(Identity $identity): PersonalAccessTokenHelper
     {
         $plaintext = Str::random(config('security.token.length'));
         $pat = self::create([
             'name' => config('security.token.name'),
-            'tokenable_id' => $user->id,
-            'tokenable_type' => User::class,
+            'tokenable_id' => $identity->id,
+            'tokenable_type' => Identity::class,
             'token' => hash(config('security.token.hash_algo'), $plaintext),
             'abilities' => '["*"]',
         ]);
@@ -60,20 +61,28 @@ class PersonalAccessToken extends Model
      * Attempt to retrieve an instance of the PersonalAccessToken based on the
      * given bearer token value.
      *
-     * @param  string  $bearer  The bearer token.
+     * Will return null if the PersonalAccessToken cannot be found.
+     *
+     * @param  string  $bearer  The Bearer string provided in the HTTP header.
      *
      * @return \App\Models\PersonalAccessToken|null
      */
-    static public function findFromBearerToken(string $bearer): PersonalAccessToken|null
+    static public function findFromBearer(string $bearer): PersonalAccessToken|null
     {
         if (strpos($bearer, '|') === false) {
-            return self::whereToken(hash(config('security.token.hash_algo'), $bearer))->first();
+            $hashed_token = hash(config('security.token.hash_algo'), $bearer);
+            return self::where('token', $hashed_token)->first();
         }
 
-        [ $id, $token ] = explode('|', $bearer, 2);
+        [ $model_id, $plaintext_token ] = explode('|', $bearer, 2);
 
-        if ($instance = self::find($id)) {
-            return hash_equals($instance->token, hash(config('security.token.hash_algo'), $token)) ? $instance : null;
+        if ($instance = self::find($model_id)) {
+            $hashed_token = hash(config('security.token.hash_algo'), $plaintext_token);
+            if (hash_equals($instance->token, $hashed_token)) {
+                return $instance;
+            }
         }
+
+        return null;
     }
 }
