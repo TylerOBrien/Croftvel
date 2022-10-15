@@ -87,7 +87,7 @@ class Identity extends Model
      *
      * @return \App\Models\Identity|null
      */
-    static public function findFromFields(array $fields): Identity
+    static public function findFromFields(array $fields): Identity|null
     {
         if (isset($fields['identity_id'])) {
             return self::find($fields['identity_id']);
