@@ -59,11 +59,12 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     protected $validator;
 
     /**
-     * Check if the currently logged in user has been authorized to perform the request.
+     * Check if the currently authenticated user has been authorized to perform
+     * the request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         $user = ApiGuard::get()->user();
         $target = $this->binding ? $this->route($this->binding) : $this->model;
