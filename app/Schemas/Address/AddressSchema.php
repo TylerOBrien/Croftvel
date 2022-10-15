@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Schemas\Api\v1\Address;
+namespace App\Schemas\Address;
 
 use App\Schemas\Schema;
 

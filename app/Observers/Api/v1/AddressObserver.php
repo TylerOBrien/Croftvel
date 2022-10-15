@@ -3,7 +3,7 @@
 namespace App\Observers\Api\v1;
 
 use App\Models\Address;
-use App\Schemas\Api\v1\Address\AddressSchema;
+use App\Schemas\Address\AddressSchema;
 
 class AddressObserver
 {
