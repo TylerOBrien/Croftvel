@@ -76,7 +76,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function attributes()
     {
@@ -84,7 +84,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function messages()
     {
@@ -92,7 +92,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>
      */
     public function rules()
     {
