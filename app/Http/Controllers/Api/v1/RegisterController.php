@@ -11,7 +11,7 @@ class RegisterController extends Controller
     /**
      * Create a new account for a guest.
      *
-     * @param  \App\Http\Requests\Api\v1\Auth\Register $request
+     * @param  \App\Http\Requests\Api\v1\Auth\Register  $request
      *
      * @return \Illuminate\Http\Response
      */
