@@ -59,7 +59,7 @@ class Secret extends Model
     {
         return self::create([
             'user_id' => $identity->user->id,
-            'type' => $identity->is_oauth ? SecretType::OAuth : $fields['secret']['type'],
+            'type' => $fields['secret']['type'],
             'value' =>  $identity->is_oauth ? OAuthDriver::user($identity)->token : $fields['secret']['value'],
         ]);
     }
