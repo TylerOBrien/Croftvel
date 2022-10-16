@@ -13,7 +13,7 @@ class OAuthDriver
      *
      * @param  string  $provider  The name of the OAuth provider.
      *
-     * @return FacebookProvider|GithubProvider|GoogleProvider
+     * @return \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider
      */
     static public function get(string $provider): FacebookProvider|GithubProvider|GoogleProvider
     {
