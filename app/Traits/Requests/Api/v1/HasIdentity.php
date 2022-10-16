@@ -2,6 +2,8 @@
 
 namespace App\Traits\Requests\Api\v1;
 
+use App\Enums\OAuth\OAuthProvider;
+
 trait HasIdentity
 {
     /**
@@ -12,6 +14,10 @@ trait HasIdentity
         $request = request();
 
         if ($request->input('identity.type') === 'oauth') {
+            if ($request->input('identity.provider') === OAuthProvider::Twitter->value) {
+                session()->put('code_verifier', $request->input('code_verifier'));
+            }
+
             $request->merge([
                 'code' => $request->input('secret.value'),
             ]);
