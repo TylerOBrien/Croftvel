@@ -9,6 +9,7 @@ use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\{ HasTypeValue, HasVerify };
 
 use Illuminate\Database\Eloquent\{ Collection, Model };
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Identity extends Model
 {
@@ -60,6 +61,16 @@ class Identity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function isOauth(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->type === IdentityType::OAuth,
+        );
+    }
+
+    /**
      * @return bool
      */
     public function getIsVerifiedAttribute(): bool
@@ -73,14 +84,6 @@ class Identity extends Model
     public function getAuthAttemptsAttribute(): Collection
     {
         return AuthAttempt::fromIdentity($this)->get();
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsOauthAttribute(): bool
-    {
-        return $this->type === IdentityType::OAuth;
     }
 
     /**
