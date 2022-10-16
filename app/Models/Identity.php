@@ -116,14 +116,16 @@ class Identity extends Model
             return self::find($fields['identity_id']);
         }
 
-        $type = $fields['identity']['type'] ?? null;
-        $value = $fields['identity']['value'] ?? null;
+        $predicate = [
+            'type' => $fields['identity']['type'] ?? null,
+            'value' => $fields['identity']['value'] ?? null,
+        ];
 
-        if (is_null($type) || is_null($value)) {
+        if (is_null($predicate['type']) || is_null($predicate['value'])) {
             return null;
         }
 
-        return self::where(compact('type', 'value'))->first();
+        return self::where($predicate)->first();
     }
 
     /**
