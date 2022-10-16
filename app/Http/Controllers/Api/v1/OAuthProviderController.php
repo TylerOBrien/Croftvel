@@ -27,6 +27,10 @@ class OAuthProviderController extends Controller
      */
     public function show(string $provider, ShowOAuthProvider $request)
     {
+        if ($provider === 'twitter') {
+            session()->flush();
+        }
+
         $driver = OAuthDriver::get($provider)->stateless();
         $resource = new OAuthProviderResource($driver);
 
