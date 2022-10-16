@@ -89,16 +89,6 @@ class Identity extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function authAttempts(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => AuthAttempt::fromIdentity($this)->get(),
-        );
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
     public function isOauth(): Attribute
     {
         return Attribute::make(
