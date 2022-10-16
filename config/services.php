@@ -17,13 +17,13 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/github/user',
+        'redirect' => env('GITHUB_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/github/user',
     ],
 
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => env('GOOGLE_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/google/user',
+        'redirect' => env('GOOGLE_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/google/user',
     ],
 
     'mailgun' => [
@@ -49,7 +49,7 @@ return [
         'oauth' => 2,
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => env('TWITTER_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/twitter/user',
+        'redirect' => env('TWITTER_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/twitter/user',
     ],
 
 ];
