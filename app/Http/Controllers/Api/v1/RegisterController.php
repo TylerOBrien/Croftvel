@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\Register;
-use App\Models\{ Identity, Secret, User };
+use App\Http\Resources\Api\v1\PersonalAccessTokenResource;
+use App\Models\{ Identity, PersonalAccessToken, Secret, User };
 
 class RegisterController extends Controller
 {
@@ -20,13 +21,15 @@ class RegisterController extends Controller
         $fields = $request->validated();
         $user = User::createWithAccount();
         $identity = Identity::createFromFields($user, $fields);
+        $pat = PersonalAccessToken::createForIdentity($identity);
+        $token = new PersonalAccessTokenResource($pat);
 
-        if ($identity->type === 'oauth') {
+        if ($identity->is_oauth) {
             $secret = Secret::createFromOAuthIdentity($identity);
         } else {
             $secret = Secret::createFromFields($user, $fields);
         }
 
-        return compact('user', 'identity', 'secret');
+        return compact('token', 'user', 'identity', 'secret');
     }
 }

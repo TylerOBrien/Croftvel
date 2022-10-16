@@ -16,7 +16,7 @@ class CreateOAuthUser
      */
     public function handle(IdentityCreated $event)
     {
-        if ($event->identity->type === 'oauth') {
+        if ($event->identity->is_oauth) {
             OAuthUser::create($event->identity);
         }
     }
