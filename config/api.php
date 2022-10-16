@@ -11,11 +11,11 @@ return [
     |
     */
 
-    'version' => env('API_VERSION', 'v1'),
+    'version' => 'v' . env('API_VERSION', '1'),
 
     /*
     |--------------------------------------------------------------------------
-    | API Hosts
+    | API Domain Names
     |--------------------------------------------------------------------------
     |
     | The domain names that are used by the API. These are used to
@@ -24,8 +24,8 @@ return [
     |
     */
 
-    'hosts' => [
-        'v1' => env('API_HOST_V1', env('API_HOST', 'localhost')),
+    'domains' => [
+        'v1' => env('API_DOMAIN_V1', env('API_DOMAIN', 'localhost')),
     ],
 
 ];

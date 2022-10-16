@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(
             [
                 'prefix' => config('api.version'),
-                'domain' => config('api.hosts.' . config('api.version')),
+                'domain' => config('api.domains.' . config('api.version')),
             ],
             function() {
                 $hasToken = ApiGuard::get()->hasToken();
