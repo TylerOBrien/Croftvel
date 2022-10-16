@@ -2,12 +2,7 @@
 
 namespace App\Support\OAuth;
 
-use Laravel\Socialite\Two\{
-    FacebookProvider,
-    GithubProvider,
-    GoogleProvider,
-    TwitterProvider,
-};
+use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, TwitterProvider };
 
 class OAuthProvider
 {
