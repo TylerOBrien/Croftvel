@@ -10,17 +10,44 @@ class Login extends OAuthRequest
     use HasIdentity;
 
     /**
+     * Instantiate the request.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $request = request();
+
+        if ($request->input('identity.type') === 'oauth') {
+            $request->merge([
+                'code' => $request->input('secret.value'),
+            ]);
+        }
+
+        parent::__construct();
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules()
     {
-        return [
+        if ($this->input('identity.type') === 'oauth') {
+            $rules = [
+                'identity.provider' => $this->identityProviderRule(),
+            ];
+        } else {
+            $rules = [
+                'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
+                'identity.value' => $this->identityValueRule(),
+            ];
+        }
+
+        return array_merge($rules, [
             'identity.type' => $this->identityTypeRule(),
-            'identity.value' => $this->identityValueRule(),
-            'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
-        ];
+        ]);
     }
 }
