@@ -54,6 +54,7 @@ return [
         'type' => [
             'password',
             'totp',
+            'token',
         ],
     ],
 
