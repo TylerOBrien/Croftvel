@@ -9,7 +9,8 @@ class GoogleUser extends Model
     protected $fillable = [
         'identity_id',
         'google_id',
-        'nickname',
+        'given_name',
+        'family_name',
         'email',
         'profile_image_url',
     ];
