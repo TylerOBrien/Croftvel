@@ -16,23 +16,23 @@ class Schema
     protected $attributes;
 
     /**
-     * The option value that can be used to change how the rules are generated.
+     * The options value that can be used to change how the rules are generated.
      *
      * @var int
      */
-    protected $option;
+    protected $options;
 
     /**
      * Instantiates this schema.
      *
-     * @param  int  $option  The option value to use.
+     * @param  int  $options  The options value to use.
      *
      * @return void
      */
-    public function __construct(int $option = 0)
+    public function __construct(int $options = 0)
     {
         $this->attributes = [];
-        $this->option = $option;
+        $this->options = $options;
     }
 
     /**
@@ -79,13 +79,13 @@ class Schema
      * schema instance only exists to call the validate function.
      *
      * @param  array<string, mixed>  $attributes  The attributes to validate.
-     * @param  int  $option  The option value to pass to the schema constructor.
+     * @param  int  $options  The options value to pass to the schema constructor.
      *
      * @return array<string, mixed>
      */
-    static public function validated(array $attributes, int $option = 0): array
+    static public function validated(array $attributes, int $options = 0): array
     {
-        return (new static($option))->validate($attributes);
+        return (new static($options))->validate($attributes);
     }
 
     /**
@@ -93,13 +93,13 @@ class Schema
      * attribute values.
      *
      * @param  array<string, mixed>  $attributes  The attributes to generate rules for.
-     * @param  int  $option  The option value to pass to the schema constructor.
+     * @param  int  $options  The options value to pass to the schema constructor.
      *
      * @return array<string, string>
      */
-    static public function getRules(array $attributes, int $option = 0): array
+    static public function getRules(array $attributes, int $options = 0): array
     {
-        $instance = new static($option);
+        $instance = new static($options);
         $instance->attributes = $attributes;
 
         return $instance->rules();

@@ -17,7 +17,7 @@ class CredentialsSchema extends Schema
      */
     public function rules(): array
     {
-        switch ($this->option) {
+        switch ($this->options) {
         case self::IDENTITY_AND_SECRET:
             return array_merge($this->identityRules(), $this->secretRules());
         case self::IDENTITY_ONLY:
