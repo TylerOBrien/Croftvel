@@ -13,6 +13,24 @@ use Laravel\Socialite\Two\{
 class OAuthProvider
 {
     /**
+     * Generate an array containing properties for all OAuth providers.
+     *
+     * @return array
+     */
+    static public function all(): array
+    {
+        $providers = [];
+
+        foreach (OAuthProviderEnum::cases() as $provider) {
+            $providers[] = [
+                'name' => $provider->value,
+            ];
+        }
+
+        return $providers;
+    }
+
+    /**
      * Attempts to retrieve the string-based name of the given OAuth provider.
      * Will return null if the appropriate name cannot be found.
      *

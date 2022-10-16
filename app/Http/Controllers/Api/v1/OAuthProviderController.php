@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\OAuth\{ IndexOAuthProvider, ShowOAuthProvider };
 use App\Http\Resources\Api\v1\OAuth\OAuthProviderResource;
-use App\Support\OAuth\OAuthDriver;
+use App\Support\OAuth\{ OAuthDriver, OAuthProvider };
 
 class OAuthProviderController extends Controller
 {
@@ -18,7 +18,7 @@ class OAuthProviderController extends Controller
      */
     public function index(IndexOAuthProvider $request)
     {
-        return response(config('enum.oauth.provider'), 200);
+        return response(OAuthProvider::all(), 200);
     }
 
     /**
