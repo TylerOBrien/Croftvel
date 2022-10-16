@@ -43,7 +43,7 @@ class Credentials implements Arrayable, Jsonable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'identity' => $this->identity,
@@ -58,7 +58,7 @@ class Credentials implements Arrayable, Jsonable
      *
      * @return string
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return json_encode($this->toArray(), $options);
     }
