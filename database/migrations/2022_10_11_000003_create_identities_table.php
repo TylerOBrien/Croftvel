@@ -19,7 +19,7 @@ class CreateIdentitiesTable extends Migration
             $table->string('name')->default('primary');
             $table->enum('type', config('enum.identity.type'));
             $table->enum('provider', config('enum.oauth.provider'))->nullable();
-            $table->string('value')->nullable();
+            $table->string('value');
             $table->timestamp('verified_at')->nullable();
             $table->timestamps();
 
