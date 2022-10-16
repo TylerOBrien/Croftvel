@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('oauth/providers/{provider}', [ OAuthController::class, 'provider' ]);
-Route::get('oauth/providers/{provider}/user', [ OAuthController::class, 'user' ]);
+Route::get('oauth/providers/{provider}', [ OAuthProviderController::class, 'show' ]);
+Route::get('oauth/providers/{provider}/user', function () {
+    return request()->all();
+});
 
 Route::post('identities/verifications', VerifyIdentityController::class);
 Route::post('recoveries', ForgotPasswordController::class);
