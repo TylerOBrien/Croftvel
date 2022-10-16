@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Events\Api\v1\Token\PersonalAccessTokenCreated;
-use App\Helpers\Token\PersonalAccessTokenHelper;
+use App\Support\Token\TokenPlaintextPair;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -41,9 +41,9 @@ class PersonalAccessToken extends Model
      *
      * @param  \App\Models\Identity  $identity  The identity that will own the token.
      *
-     * @return PersonalAccessTokenHelper
+     * @return TokenPlaintextPair
      */
-    static public function createForIdentity(Identity $identity): PersonalAccessTokenHelper
+    static public function createForIdentity(Identity $identity): TokenPlaintextPair
     {
         $plaintext = Str::random(config('security.bearer.length'));
         $pat = self::create([
@@ -54,7 +54,7 @@ class PersonalAccessToken extends Model
             'abilities' => '["*"]',
         ]);
 
-        return new PersonalAccessTokenHelper($pat, $plaintext);
+        return new TokenPlaintextPair($pat, $plaintext);
     }
 
     /**
