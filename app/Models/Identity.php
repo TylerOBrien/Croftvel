@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
-use App\Exceptions\Api\v1\Auth\MalformedCredentialsFields;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Schemas\Credentials\CredentialsSchema;
