@@ -2,6 +2,8 @@
 
 namespace App\Support\Auth;
 
+use App\Enums\Identity\IdentityType;
+use App\Enums\Secret\SecretType;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Models\ { Identity, Secret };
 use App\Schemas\Credentials\CredentialsSchema;
@@ -61,6 +63,28 @@ class Credentials implements Arrayable, Jsonable
     public function toJson($options = 0): string
     {
         return json_encode($this->toArray(), $options);
+    }
+
+    /**
+     * Generates a well-formed fields array for the given email and password.
+     *
+     * @param  string  $email  The user's email address.
+     * @param  string  $password  The user's password.
+     *
+     * @return array<string, array<string, string>>
+     */
+    static public function toEmailFields(string $email, string $password): array
+    {
+        return [
+            'identity' => [
+                'type' => IdentityType::Email->value,
+                'value' => $email,
+            ],
+            'secret' => [
+                'type' => SecretType::Password->value,
+                'value' => $password,
+            ],
+        ];
     }
 
     /**
