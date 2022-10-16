@@ -8,9 +8,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | The valid values for all enum columns in the database. These are used
-    | during create migrations, so the side-effects of modifying existing values
-    | must be considered otherwise there will be a risk of truncated data in
-    | the database.
+    | during table creation migrations, so the side-effects of modifying
+    | enum settings that are already in use must be considered otherwise there
+    | will be a risk of truncated data in the database.
     |
     */
 
