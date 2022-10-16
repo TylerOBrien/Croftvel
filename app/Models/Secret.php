@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Support\OAuth\OAuthDriver;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\{ Crypt, Hash };
 
@@ -59,7 +61,24 @@ class Secret extends Model
         return self::create([
             'user_id' => $user->id,
             'type' => $fields['secret']['type'],
-            'value' => $fields['secret']['value'],
+            'value' =>  $fields['secret']['value'],
+        ]);
+    }
+
+    /**
+     * @param  \App\Models\Identity  $identity
+     *
+     * @return \App\Models\Secret
+     */
+    static public function createFromOAuthIdentity(Identity $identity): Secret
+    {
+        $provider = $identity->provider;
+        $oauth_user = OAuthDriver::get($provider)->stateless()->user();
+
+        return self::create([
+            'user_id' => $identity->user->id,
+            'type' => 'code',
+            'value' =>  $oauth_user->token,
         ]);
     }
 }
