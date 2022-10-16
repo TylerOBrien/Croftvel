@@ -33,9 +33,9 @@ class OAuthProvider
     {
         $providers = [];
 
-        foreach (OAuthProviderEnum::cases() as $provider) {
+        foreach (self::$enums as $class => $enum) {
             $providers[] = [
-                'name' => $provider->value,
+                'name' => $enum->value,
             ];
         }
 
