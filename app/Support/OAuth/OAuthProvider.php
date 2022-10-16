@@ -7,7 +7,6 @@ use Laravel\Socialite\Two\{
     FacebookProvider,
     GithubProvider,
     GoogleProvider,
-    LinkedInProvider,
     TwitterProvider,
 };
 
@@ -20,7 +19,6 @@ class OAuthProvider
         FacebookProvider::class => OAuthProviderEnum::Facebook,
         GithubProvider::class => OAuthProviderEnum::GitHub,
         GoogleProvider::class => OAuthProviderEnum::Google,
-        LinkedInProvider::class => OAuthProviderEnum::LinkedIn,
         TwitterProvider::class => OAuthProviderEnum::Twitter,
     ];
 
@@ -46,11 +44,11 @@ class OAuthProvider
      * Attempts to retrieve the string-based name of the given OAuth provider.
      * Will return null if the appropriate name cannot be found.
      *
-     * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|LinkedInProvider|TwitterProvider  $driver  The driver to get the name of.
+     * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider  $driver  The driver to get the name of.
      *
      * @return string|null
      */
-    static public function name(FacebookProvider|GithubProvider|GoogleProvider|LinkedInProvider|TwitterProvider $driver): string|null
+    static public function name(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver): string|null
     {
         return self::enum($driver)?->value;
     }
@@ -59,11 +57,11 @@ class OAuthProvider
      * Attempts to retrieve the PHP enum for the given OAuth provider.
      * Will return null if the appropriate name cannot be found.
      *
-     * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|LinkedInProvider|TwitterProvider  $driver  The driver to get the name of.
+     * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider  $driver  The driver to get the name of.
      *
      * @return \App\Enums\OAuth\OAuthProvider|null
      */
-    static public function enum(FacebookProvider|GithubProvider|GoogleProvider|LinkedInProvider|TwitterProvider $driver): OAuthProviderEnum|null
+    static public function enum(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver): OAuthProviderEnum|null
     {
         foreach (self::$enums as $class => $enum) {
             if ($driver instanceof $class) {
