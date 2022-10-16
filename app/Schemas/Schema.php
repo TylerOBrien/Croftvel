@@ -46,7 +46,7 @@ class Schema
      * Generates the rules that will be used for validation. Intended to be
      * overridden by a class extending the base Schema class.
      *
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
     public function rules(): array
     {
@@ -73,7 +73,7 @@ class Schema
      *
      * @param  array<string, mixed>  $attributes  The attributes to generate rules for.
      *
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
     static public function getRules(array $attributes): array
     {
