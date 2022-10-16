@@ -25,6 +25,16 @@ trait HasIdentity
     }
 
     /**
+     * Generate the rule for the identity.provider field.
+     *
+     * @return string
+     */
+    protected function identityProviderRule(): string
+    {
+        return 'required|string|in:' . join(',', config('enum.oauth.provider'));
+    }
+
+    /**
      * Generate the appropriate rule string for the identity.value based on the
      * given identity type.
      *
