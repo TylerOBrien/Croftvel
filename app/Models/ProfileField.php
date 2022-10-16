@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Casts\Api\v1\ProfileFieldValueCast;
 use App\Enums\Profile\ProfileFieldType;
+
 use Illuminate\Database\Eloquent\Model;
 
 class ProfileField extends Model
