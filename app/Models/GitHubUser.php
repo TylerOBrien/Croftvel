@@ -9,11 +9,11 @@ class GitHubUser extends Model
     protected $table = 'github_users';
 
     protected $fillable = [
-        'identity_id',
         'github_id',
-        'login',
+        'identity_id',
         'email',
-        'avatar_url',
+        'nickname',
+        'profile_image_url',
     ];
 
     /**
