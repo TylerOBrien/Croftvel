@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\v1\Auth;
 
 use App\Http\Requests\Api\v1\OAuthRequest;
+use App\Schemas\Credentials\CredentialsSchema;
 use App\Traits\Requests\Api\v1\HasIdentity;
 
 class Login extends OAuthRequest
@@ -28,20 +29,6 @@ class Login extends OAuthRequest
      */
     public function rules()
     {
-        if ($this->input('identity.type') === 'oauth') {
-            $rules = [
-                'identity.provider' => $this->identityProviderRule(),
-            ];
-        } else {
-            $rules = [
-                'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
-                'identity.value' => $this->identityValueRule(),
-            ];
-        }
-
-        return array_merge($rules, [
-            'identity.type' => $this->identityTypeRule(),
-            'secret.value' => 'required|string',
-        ]);
+        return CredentialsSchema::getRules($this->all());
     }
 }
