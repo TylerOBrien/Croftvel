@@ -46,6 +46,16 @@ class Identity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function authAttempts(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => AuthAttempt::fromIdentity($this)->get(),
+        );
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function oauth_token()
@@ -72,19 +82,13 @@ class Identity extends Model
     }
 
     /**
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getIsVerifiedAttribute(): bool
+    public function isVerified(): Attribute
     {
-        return (bool) $this->verified_at;
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getAuthAttemptsAttribute(): Collection
-    {
-        return AuthAttempt::fromIdentity($this)->get();
+        return Attribute::make(
+            get: fn () => (bool) $this->verified_at,
+        );
     }
 
     /**
