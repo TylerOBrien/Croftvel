@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\Secret\SecretType;
+use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
@@ -79,7 +79,7 @@ class Identity extends Model
      */
     public function getIsOauthAttribute(): bool
     {
-        return $this->type === SecretType::OAuth;
+        return $this->type === IdentityType::OAuth;
     }
 
     /**
@@ -150,12 +150,12 @@ class Identity extends Model
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||
             !isset($fields['identity']['type']) ||
-            (!isset($fields['identity']['value']) && $fields['identity']['type'] !== SecretType::OAuth->value))
+            (!isset($fields['identity']['value']) && $fields['identity']['type'] !== IdentityType::OAuth->value))
         {
             throw new InvalidCredentials;
         }
 
-        if ($fields['identity']['type'] === SecretType::OAuth->value) {
+        if ($fields['identity']['type'] === IdentityType::OAuth->value) {
             $additional = [ 'provider' => $fields['identity']['provider'] ];
         } else {
             $additional = [];
