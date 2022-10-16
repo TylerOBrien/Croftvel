@@ -56,14 +56,6 @@ class Identity extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function oauth_token()
-    {
-        return $this->hasOne(OAuthAccessToken::class);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
