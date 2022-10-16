@@ -27,7 +27,7 @@ class Login extends OAuthRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return CredentialsSchema::getRules($this->all());
     }
