@@ -16,13 +16,7 @@ class Login extends OAuthRequest
      */
     public function __construct()
     {
-        $request = request();
-
-        if ($request->input('identity.type') === 'oauth') {
-            $request->merge([
-                'code' => $request->input('secret.value'),
-            ]);
-        }
+        $this->mergeSecretIntoOAuthCode();
 
         parent::__construct();
     }
