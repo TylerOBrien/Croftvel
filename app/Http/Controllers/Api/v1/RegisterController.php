@@ -30,6 +30,6 @@ class RegisterController extends Controller
             $secret = Secret::createFromFields($user, $fields);
         }
 
-        return compact('token', 'user', 'identity', 'secret');
+        return response(compact('token', 'user', 'identity', 'secret'), 201);
     }
 }
