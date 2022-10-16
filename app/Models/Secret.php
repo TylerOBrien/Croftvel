@@ -38,7 +38,7 @@ class Secret extends Model
     public function setValueAttribute(string $value)
     {
         switch ($this->type) {
-        case 'password':
+        case SecretType::Password:
             $this->attributes['value'] = Hash::make($value);
             break;
         default:
