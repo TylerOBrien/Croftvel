@@ -26,6 +26,12 @@ return [
         'redirect' => env('GOOGLE_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/google/user',
     ],
 
+    'linkedin' => [
+        'domain' => env('LINKEDIN_CLIENT_ID'),
+        'secret' => env('LINKEDIN_CLIENT_SECRET'),
+        'redirect' => env('LINKEDIN_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/github/user',
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
