@@ -10,6 +10,109 @@
 			"name": "Auth",
 			"item": [
 				{
+					"name": "OAuth",
+					"item": [
+						{
+							"name": "Index.OAuthProvider",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiv1}}/oauth/providers",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"oauth",
+										"providers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show.OAuthProvider",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiv1}}/oauth/providers/:provider",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"oauth",
+										"providers",
+										":provider"
+									],
+									"variable": [
+										{
+											"key": "provider",
+											"value": "github"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show.OAuthUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apiv1}}/oauth/providers/:provider/user?code=0336d195ffc0c00d14f9",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"oauth",
+										"providers",
+										":provider",
+										"user"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "0336d195ffc0c00d14f9"
+										}
+									],
+									"variable": [
+										{
+											"key": "provider",
+											"value": "github"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
 					"name": "Register",
 					"item": [
 						{
@@ -23,25 +126,25 @@
 										{
 											"key": "identity[type]",
 											"value": "email",
-											"description": "required|string|in:email,mobile,oauth",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[value]",
 											"value": "{{email}}",
-											"description": "required|string",
+											"description": "required|email",
 											"type": "text"
 										},
 										{
 											"key": "secret[type]",
 											"value": "password",
-											"description": "required|string|in:password,token",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
 											"value": "letmein123",
-											"description": "required|string",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -97,6 +200,91 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Register.OAuth.Google",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required|string|in:email,mobile,oauth",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "google",
+											"description": "required|string|in:facebook,github,google,twitter",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "4/0ARtbsJpniZ7iVFzLS8KkuA3-tOPtgPgMW-ZRz6NRYlsDPI4zg7TxxUZf3WMOg2yMT4VVcg",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register.OAuth.Twitter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required|string|in:email,mobile,oauth",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "twitter",
+											"description": "required|string|in:facebook,github,google,twitter",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "Rkl0RXRiMWtjM0lmNURhY19vVWNrZFFMWUpUZWs0aUh5VGp6dmVob1NZS2lFOjE2NjU5NDg5NTU4NDc6MTowOmFjOjE",
+											"description": "required|string",
+											"type": "text"
+										},
+										{
+											"key": "code_verifier",
+											"value": "homBmwyQNQPR2vHPIN4Hiw6UeVF53Il6AlevLHSbsLemS0RzVVQYNw4LKIO8o8ZzBCFdGU7svNbUeBzZmZBW5b4IGbdzRq2z",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -114,21 +302,25 @@
 										{
 											"key": "identity[type]",
 											"value": "email",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[value]",
 											"value": "{{email}}",
+											"description": "required|email",
 											"type": "text"
 										},
 										{
 											"key": "secret[type]",
 											"value": "password",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
 											"value": "letmein123",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -476,91 +668,6 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "OAuth",
-			"item": [
-				{
-					"name": "Show.OAuthProvider",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{apiv1}}/oauth/providers/:provider",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"oauth",
-								"providers",
-								":provider"
-							],
-							"variable": [
-								{
-									"key": "provider",
-									"value": "github"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Show.OAuthUser",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{apiv1}}/oauth/providers/:provider/user?code=0336d195ffc0c00d14f9",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"oauth",
-								"providers",
-								":provider",
-								"user"
-							],
-							"query": [
-								{
-									"key": "code",
-									"value": "0336d195ffc0c00d14f9"
-								}
-							],
-							"variable": [
-								{
-									"key": "provider",
-									"value": "github"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "noauth"
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
 				}
 			]
 		}
