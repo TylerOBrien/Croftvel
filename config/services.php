@@ -20,6 +20,12 @@ return [
         'redirect' => env('GITHUB_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/github/user',
     ],
 
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/google/user',
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
