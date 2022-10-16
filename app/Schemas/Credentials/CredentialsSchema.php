@@ -17,7 +17,16 @@ class CredentialsSchema extends Schema
      */
     public function rules(): array
     {
-        return array_merge($this->identityRules(), $this->secretRules());
+        switch ($this->option) {
+        case self::IDENTITY_AND_SECRET:
+            return array_merge($this->identityRules(), $this->secretRules());
+        case self::IDENTITY_ONLY:
+            return $this->identityRules();
+        case self::SECRET_ONLY:
+            return $this->secretRules();
+        default:
+            // todo: handle option not found error
+        }
     }
 
     /**
