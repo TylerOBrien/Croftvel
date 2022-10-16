@@ -43,6 +43,9 @@ class Schema
     }
 
     /**
+     * Generates the rules that will be used for validation. Intended to be
+     * overridden by a class extending the base Schema class.
+     *
      * @return array<string, mixed>
      */
     public function rules(): array
