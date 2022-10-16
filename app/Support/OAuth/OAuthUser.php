@@ -2,7 +2,7 @@
 
 namespace App\Support\OAuth;
 
-use App\Models\{ GitHubUser, TwitterUser, Identity };
+use App\Models\{ GitHubUser, GoogleUser, TwitterUser, Identity };
 
 use Laravel\Socialite\Two\User as SocialiteUser;
 
@@ -11,15 +11,17 @@ class OAuthUser
     /**
      * @param  \App\Models\Identity  $identity
      *
-     * @return \App\Models\GitHubUser|TwitterUser
+     * @return \App\Models\GitHubUser|GoogleUser|TwitterUser
      */
-    static public function create(Identity $identity): GitHubUser|TwitterUser
+    static public function create(Identity $identity): GitHubUser|GoogleUser|TwitterUser
     {
         $fields = OAuthDriver::get($identity->provider)->stateless()->user();
 
         switch ($identity->provider) {
         case 'github':
             return self::createGitHub($identity, $fields);
+        case 'google':
+            return self::createGoogle($identity, $fields);
         case 'twitter':
             return self::createTwitter($identity, $fields);
         }
@@ -39,6 +41,22 @@ class OAuthUser
             'avatar_url' => $fields->avatar,
             'login' => $fields->nickname,
             'email' => $fields->email,
+        ]);
+    }
+
+    /**
+     * @param  \App\Models\Identity  $identity
+     * @param  \Laravel\Socialite\Two\User  $fields
+     *
+     * @return \App\Models\GoogleUser
+     */
+    static public function createGoogle(Identity $identity, SocialiteUser $fields): GoogleUser
+    {
+        return GoogleUser::create([
+            'identity_id' => $identity->id,
+            'google_id' => $fields->id,
+            'nickname' => $fields->nickname,
+            'profile_image_url' => $fields->avatar,
         ]);
     }
 
