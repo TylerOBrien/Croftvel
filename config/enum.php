@@ -22,11 +22,7 @@ return [
     ],
 
     'identity' => [
-        'type' => [
-            'email',
-            'mobile',
-            'oauth',
-        ],
+        'type' => array_map(fn ($case) => $case->value, \App\Enums\Identity\IdentityType::cases()),
     ],
 
     'oauth' => [
@@ -51,11 +47,7 @@ return [
     ],
 
     'secret' => [
-        'type' => [
-            'oauth',
-            'password',
-            'totp',
-        ],
+        'type' => array_map(fn ($case) => $case->value, \App\Enums\Secret\SecretType::cases()),
     ],
 
     'verification' => [
