@@ -14,13 +14,19 @@ class Register extends ApiRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
+        if ($this->input('identity.type') === 'oauth') {
+            $oauth_rules = [ 'identity.provider' => $this->identityProviderRule() ];
+        } else {
+            $oauth_rules = [];
+        }
+
+        return array_merge($oauth_rules, [
             'identity.type' => $this->identityTypeRule(),
             'identity.value' => $this->identityValueRule(),
             'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
-        ];
+        ]);
     }
 }
