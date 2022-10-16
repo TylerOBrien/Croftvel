@@ -29,7 +29,7 @@ return [
     'linkedin' => [
         'domain' => env('LINKEDIN_CLIENT_ID'),
         'secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect' => env('LINKEDIN_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/github/user',
+        'redirect' => env('LINKEDIN_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/linkedin/user',
     ],
 
     'mailgun' => [
