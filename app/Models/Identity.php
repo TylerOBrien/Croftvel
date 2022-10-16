@@ -74,6 +74,14 @@ class Identity extends Model
     }
 
     /**
+     * @return bool
+     */
+    public function getIsOauthAttribute(): bool
+    {
+        return $this->type === 'oauth';
+    }
+
+    /**
      * @return void
      */
     public function setVerifiedAtAttribute($value): void
