@@ -8,6 +8,9 @@ use Illuminate\Validation\ValidationException;
 class Schema
 {
     /**
+     * The attributes that were just validated against. Will have no value
+     * until the validate function is called.
+     *
      * @var array<string, mixed>
      */
     protected $attributes;
