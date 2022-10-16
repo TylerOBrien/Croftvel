@@ -10,6 +10,24 @@ class Register extends OAuthRequest
     use HasIdentity;
 
     /**
+     * Instantiate the request.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $request = request();
+
+        if ($request->input('identity.type') === 'oauth') {
+            $request->merge([
+                'code' => $request->input('secret.value'),
+            ]);
+        }
+
+        parent::__construct();
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
