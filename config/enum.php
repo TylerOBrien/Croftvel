@@ -15,10 +15,7 @@ return [
     */
 
     'account' => [
-        'status' => [
-            'Ok',
-            'Suspended',
-        ],
+        'status' => array_map(fn ($case) => $case->value, \App\Enums\Account\AccountStatus::cases()),
     ],
 
     'identity' => [
