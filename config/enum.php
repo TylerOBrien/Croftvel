@@ -35,17 +35,8 @@ return [
     ],
 
     'verification' => [
-        'ability' => [
-            'store',
-            'recover',
-            'update',
-            'destroy',
-        ],
-
-        'type' => [
-            'code',
-            'token',
-        ],
+        'ability' => array_map(fn ($case) => $case->value, \App\Enums\Verification\VerificationAbility::cases()),
+        'type' => array_map(fn ($case) => $case->value, \App\Enums\Verification\VerificationType::cases()),
     ],
 
 ];
