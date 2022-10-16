@@ -46,6 +46,14 @@ class Identity extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
     public function authAttempts(): Attribute
@@ -53,14 +61,6 @@ class Identity extends Model
         return Attribute::make(
             get: fn () => AuthAttempt::fromIdentity($this)->get(),
         );
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**
