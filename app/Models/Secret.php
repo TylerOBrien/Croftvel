@@ -28,23 +28,18 @@ class Secret extends Model
     }
 
     /**
-     * Register creating handler to ensure secret is not stored in plaintext.
-     *
      * @return void
      */
-    static public function boot(): void
+    public function setValueAttribute(string $value)
     {
-        parent::boot();
-        self::creating(function(Secret $secret) {
-            switch ($secret->type) {
-            case 'password':
-                $secret->value = Hash::make($secret->value);
-                break;
-            case 'totp':
-                $secret->value = Crypt::encryptString($secret->value);
-                break;
-            }
-        });
+        switch ($this->type) {
+        case 'password':
+            $this->attributes['value'] = Hash::make($value);
+            break;
+        default:
+            $this->attributes['value'] = Crypt::encryptString($value);
+            break;
+        }
     }
 
     /**
