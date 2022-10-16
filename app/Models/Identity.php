@@ -153,20 +153,11 @@ class Identity extends Model
      */
     static public function findFromRequest($request): Identity|null
     {
-        if ($request->has('identity_id')) {
-            return self::find($request->input('identity_id'));
-        }
-
-        $predicate = [
+        return self::findFromFields([
+            'identity_id' => $request->input('identity_id'),
             'type' => $request->input('type'),
             'value' => $request->input('value'),
-        ];
-
-        if (is_null($predicate['type']) || is_null($predicate['value'])) {
-            return null;
-        }
-
-        return self::where($predicate)->first();
+        ]);
     }
 
     /**
