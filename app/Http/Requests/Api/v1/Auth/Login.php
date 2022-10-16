@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\v1\Auth;
 
-use App\Http\Requests\Api\v1\ApiRequest;
+use App\Http\Requests\Api\v1\OAuthRequest;
 use App\Traits\Requests\Api\v1\HasIdentity;
 
-class Login extends ApiRequest
+class Login extends OAuthRequest
 {
     use HasIdentity;
 
