@@ -36,6 +36,19 @@ class Identity extends Model
         'provider',
     ];
 
+    protected $visible = [
+        'is_oauth',
+        'is_verified',
+        'user_id',
+        'name',
+        'type',
+        'value',
+        'provider',
+        'verified_at',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $casts = [
         'type' => IdentityType::class,
         'verified_at' => 'datetime',
