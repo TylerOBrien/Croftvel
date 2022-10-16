@@ -9,7 +9,7 @@ class GitHubUser extends Model
     protected $table = 'github_users';
 
     protected $fillable = [
-        'user_id',
+        'identity_id',
         'github_id',
         'login',
         'email',
@@ -19,8 +19,8 @@ class GitHubUser extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function identity()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Identity::class);
     }
 }

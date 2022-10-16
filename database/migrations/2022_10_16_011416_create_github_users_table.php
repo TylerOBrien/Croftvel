@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('github_users', function (Blueprint $table) {
             $table->unsignedBigInteger('github_id')->primary();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('identity_id');
             $table->string('login');
             $table->string('email');
             $table->string('avatar_url')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
+            $table->foreign('identity_id')
+                  ->references('id')->on('identities')
                   ->onDelete('cascade')
                   ->onUpdate('restrict');
         });
