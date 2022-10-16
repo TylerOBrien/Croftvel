@@ -3,6 +3,7 @@
 namespace App\Schemas\Credentials;
 
 use App\Enums\Identity\IdentityType;
+use App\Enums\Secret\SecretType;
 use App\Schemas\Schema;
 
 class CredentialsSchema extends Schema
@@ -18,7 +19,7 @@ class CredentialsSchema extends Schema
             'identity.value' => $this->identityValueRule(),
             'identity.provider' => 'required_if:identity.type,' . IdentityType::OAuth->value . '|string|in:' . join(',', config('enum.oauth.provider')),
             'secret' => 'required|array',
-            'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
+            'secret.type' => $this->secretTypeRule(),
             'secret.value' => 'required|string',
         ];
     }
@@ -38,6 +39,28 @@ class CredentialsSchema extends Schema
             break;
         case IdentityType::Mobile->value:
             $rule .= '|phone_number';
+            break;
+        }
+
+        return $rule;
+    }
+
+    /**
+     * Generate the rule string for the secret.type field.
+     *
+     * @return string
+     */
+    protected function secretTypeRule(): string
+    {
+        $rule = 'required|string';
+
+        switch ($this->attributes['identity']['type'] ?? null) {
+        case IdentityType::Email->value:
+        case IdentityType::Mobile->value:
+            $rule .= '|in:' . SecretType::Password->value . ',' . SecretType::TOTP->value;
+            break;
+        case IdentityType::OAuth->value:
+            $rule .= '|in:' . SecretType::OAuth->value;
             break;
         }
 
