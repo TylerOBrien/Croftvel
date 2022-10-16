@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('twitter_users', function (Blueprint $table) {
             $table->unsignedBigInteger('twitter_id')->primary();
             $table->unsignedBigInteger('identity_id');
-            $table->string('nickname')->nullable();
             $table->string('email')->nullable();
+            $table->string('name')->nullable();
+            $table->string('nickname')->nullable();
             $table->string('profile_image_url')->nullable();
             $table->timestamps();
 
