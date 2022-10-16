@@ -16,7 +16,7 @@ class Register extends OAuthRequest
      */
     public function __construct()
     {
-        $this->mergeSecretIntoOAuthCode();
+        $this->prepareOAuthIfGiven();
 
         parent::__construct();
     }

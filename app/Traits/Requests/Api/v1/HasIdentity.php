@@ -10,7 +10,7 @@ trait HasIdentity
     /**
      * @return void
      */
-    protected function mergeSecretIntoOAuthCode(): void
+    protected function prepareOAuthIfGiven(): void
     {
         $request = request();
 
