@@ -2,8 +2,6 @@
 
 namespace App\Support\OAuth;
 
-use App\Enums\OAuth\OAuthProvider as OAuthProviderEnum;
-
 use Laravel\Socialite\Two\{
     FacebookProvider,
     GithubProvider,
@@ -17,10 +15,10 @@ class OAuthProvider
      * @var array<string, \App\Enums\OAuth\OAuthProvider>
      */
     static protected $enums = [
-        FacebookProvider::class => OAuthProviderEnum::Facebook,
-        GithubProvider::class => OAuthProviderEnum::GitHub,
-        GoogleProvider::class => OAuthProviderEnum::Google,
-        TwitterProvider::class => OAuthProviderEnum::Twitter,
+        FacebookProvider::class => \App\Enums\OAuth\OAuthProvider::Facebook,
+        GithubProvider::class => \App\Enums\OAuth\OAuthProvider::GitHub,
+        GoogleProvider::class => \App\Enums\OAuth\OAuthProvider::Google,
+        TwitterProvider::class => \App\Enums\OAuth\OAuthProvider::Twitter,
     ];
 
     /**
@@ -62,7 +60,7 @@ class OAuthProvider
      *
      * @return \App\Enums\OAuth\OAuthProvider|null
      */
-    static public function enum(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver): OAuthProviderEnum|null
+    static public function enum(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver): \App\Enums\OAuth\OAuthProvider|null
     {
         foreach (self::$enums as $class => $enum) {
             if ($driver instanceof $class) {
