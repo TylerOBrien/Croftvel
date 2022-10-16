@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Enum;
+namespace App\Support;
 
 class Enum
 {
