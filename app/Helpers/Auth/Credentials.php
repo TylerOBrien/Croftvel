@@ -92,7 +92,12 @@ class Credentials implements Arrayable, Jsonable
         }
 
         $provider = $identity->user->secrets();
-        $secret = $provider->where('type', $fields['secret']['type'])->first();
+
+        if ($identity->is_oauth) {
+            $secret = $provider->where('type', IdentityType::OAuth->value)->first();
+        } else {
+            $secret = $provider->where('type', $fields['secret']['type'])->first();
+        }
 
         return new Credentials($identity, $secret);
     }
