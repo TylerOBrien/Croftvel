@@ -16,6 +16,7 @@ class Identity extends Model
     use HasTypeValue, HasVerify;
 
     protected $appends = [
+        'is_oauth',
         'is_verified',
     ];
 
