@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TwitterUser extends Model
 {
-    protected $table = 'twitter_users';
-
     protected $fillable = [
         'identity_id',
         'twitter_id',
