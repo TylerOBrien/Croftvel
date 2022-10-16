@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('google_users', function (Blueprint $table) {
-            $table->unsignedBigInteger('google_id')->primary();
+            $table->string('google_id')->primary();
             $table->unsignedBigInteger('identity_id');
             $table->string('nickname')->nullable();
             $table->string('email')->nullable();
