@@ -3,7 +3,7 @@
 namespace App\Guards\Api\v1;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingToken };
+use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingSecret, MissingToken };
 use App\Helpers\Auth\Credentials;
 use App\Models\{ Identity, PersonalAccessToken, User };
 
@@ -98,13 +98,13 @@ class ApiGuard implements Guard
      */
     public function attempt(array $fields = []): Identity
     {
-       $credentials = Credentials::fromFields($fields);
+        $credentials = Credentials::fromFields($fields);
 
         if (is_null($credentials->secret)) {
-            //
-        } else {
-            call_user_func([ $this, "bySecret{$credentials->secret->type}" ], $fields, $credentials);
+            throw new MissingSecret;
         }
+
+        call_user_func([ $this, "bySecret{$credentials->secret->type}" ], $fields, $credentials);
 
         AuthAttempted::dispatch($credentials->identity, true);
 
