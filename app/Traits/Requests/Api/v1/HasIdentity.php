@@ -5,6 +5,20 @@ namespace App\Traits\Requests\Api\v1;
 trait HasIdentity
 {
     /**
+     * @return void
+     */
+    protected function mergeSecretIntoOAuthCode(): void
+    {
+        $request = request();
+
+        if ($request->input('identity.type') === 'oauth') {
+            $request->merge([
+                'code' => $request->input('secret.value'),
+            ]);
+        }
+    }
+
+    /**
      * Generate the rule for the identity_id field.
      *
      * @return string
