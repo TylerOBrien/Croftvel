@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\Enum;
+
 return [
 
     /*
@@ -15,28 +17,28 @@ return [
     */
 
     'account' => [
-        'status' => array_map(fn ($case) => $case->value, \App\Enums\Account\AccountStatus::cases()),
+        'status' => Enum::values(\App\Enums\Account\AccountStatus::class),
     ],
 
     'identity' => [
-        'type' => array_map(fn ($case) => $case->value, \App\Enums\Identity\IdentityType::cases()),
+        'type' => Enum::values(\App\Enums\Identity\IdentityType::class),
     ],
 
     'oauth' => [
-        'provider' => array_map(fn ($case) => $case->value, \App\Enums\OAuth\OAuthProvider::cases()),
+        'provider' => Enum::values(\App\Enums\OAuth\OAuthProvider::class),
     ],
 
     'profile_field' => [
-        'type' => array_map(fn ($case) => $case->value, \App\Enums\Profile\ProfileFieldType::cases()),
+        'type' => Enum::values(\App\Enums\Profile\ProfileFieldType::class),
     ],
 
     'secret' => [
-        'type' => array_map(fn ($case) => $case->value, \App\Enums\Secret\SecretType::cases()),
+        'type' => Enum::values(\App\Enums\Secret\SecretType::class),
     ],
 
     'verification' => [
-        'ability' => array_map(fn ($case) => $case->value, \App\Enums\Verification\VerificationAbility::cases()),
-        'type' => array_map(fn ($case) => $case->value, \App\Enums\Verification\VerificationType::cases()),
+        'ability' => Enum::values(\App\Enums\Verification\VerificationAbility::class),
+        'type' => Enum::values(\App\Enums\Verification\VerificationType::class),
     ],
 
 ];
