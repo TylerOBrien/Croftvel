@@ -8,12 +8,19 @@ use Illuminate\Validation\ValidationException;
 class Schema
 {
     /**
+     * @var array<string, mixed>
+     */
+    protected $attributes;
+
+    /**
      * @return array<string, mixed>
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function validate(array $attributes): array
     {
+        $this->attributes = $attributes;
+
         $validator = Validator::make($attributes, $this->rules());
         $valid = $validator->validated();
 
