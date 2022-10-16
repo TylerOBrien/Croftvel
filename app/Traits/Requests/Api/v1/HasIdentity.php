@@ -16,7 +16,7 @@ trait HasIdentity
 
         if ($request->input('identity.type') === IdentityType::OAuth->value) {
             if ($request->input('identity.provider') === OAuthProvider::Twitter->value) {
-                session()->put('code_verifier', $request->input('code_verifier'));
+                $request->session()->put('code_verifier', $request->input('code_verifier'));
             }
 
             $request->merge([
