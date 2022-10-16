@@ -44,7 +44,7 @@ return [
         'type' => 'oauth',
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('APP_URL_API') . '/v1/oauth/providers/github/user',
+        'redirect' => env('GITHUB_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/github/user',
     ],
 
 ];
