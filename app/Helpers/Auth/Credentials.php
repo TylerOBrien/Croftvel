@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Auth;
 
+use App\Enums\Identity\IdentityType;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Models\ { Identity, Secret };
 
@@ -75,10 +76,10 @@ class Credentials implements Arrayable, Jsonable
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||
             !isset($fields['identity']['type']) ||
-            ( !isset($fields['identity']['value']) && $fields['identity']['type'] !== 'oauth' ) ||
+            ( !isset($fields['identity']['value']) && $fields['identity']['type'] !== IdentityType::OAuth->value ) ||
             !isset($fields['secret']) ||
             !is_array($fields['secret']) ||
-            !isset($fields['secret']['type']) ||
+            ( !isset($fields['secret']['type']) && $fields['identity']['type'] !== IdentityType::OAuth->value ) ||
             !isset($fields['secret']['value']))
         {
             throw new InvalidCredentials;
