@@ -8,6 +8,20 @@ use App\Models\Identity;
 class IdentityObserver
 {
     /**
+     * Handle the Identity "creating" event.
+     *
+     * @param  \App\Models\Identity  $identity
+     *
+     * @return void
+     */
+    public function creating(Identity $identity): void
+    {
+        if ($identity->type === 'oauth') {
+            $identity->verified_at = now();
+        }
+    }
+
+    /**
      * Handle the Identity "updated" event.
      *
      * @param  \App\Models\Identity  $identity
