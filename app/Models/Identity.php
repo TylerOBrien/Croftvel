@@ -125,7 +125,7 @@ class Identity extends Model
     /**
      * Attempts to retrieve an instance of the Identity defined in the request.
      *
-     * @param  array  $fields  The request fields containing the raw credentials data.
+     * @param  array  $fields  The raw credentials data.
      *
      * @return \App\Models\Identity|null
      */
@@ -162,7 +162,7 @@ class Identity extends Model
      * to have come from a request (e.g. a register request).
      *
      * @param  \App\Models\User  $user  The user to associate the new Identity with.
-     * @param  array  $fields  The request fields containing the raw credentials data.
+     * @param  array  $fields  The raw credentials data.
      *
      * @return \App\Models\Identity|null
      */
