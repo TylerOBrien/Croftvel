@@ -12,7 +12,7 @@ class OAuthProviderController extends Controller
     /**
      * Respond with a listing of OAuth providers.
      *
-     * @param  \App\Http\Requests\Api\v1\OAuth\ShowOAuthProvider  $request
+     * @param  \App\Http\Requests\Api\v1\OAuth\IndexOAuthProvider  $request
      *
      * @return \Illuminate\Http\Response
      */
