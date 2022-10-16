@@ -52,7 +52,7 @@ return [
 
     'secret' => [
         'type' => [
-            'code',
+            'oauth',
             'password',
             'totp',
         ],

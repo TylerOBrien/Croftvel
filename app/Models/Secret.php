@@ -72,7 +72,7 @@ class Secret extends Model
 
         return self::create([
             'user_id' => $identity->user->id,
-            'type' => 'code',
+            'type' => 'oauth',
             'value' =>  $oauth_user->token,
         ]);
     }
