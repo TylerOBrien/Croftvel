@@ -20,7 +20,12 @@ class RegisterController extends Controller
         $fields = $request->validated();
         $user = User::createWithAccount();
         $identity = Identity::createFromFields($user, $fields);
-        $secret = Secret::createFromFields($user, $fields);
+
+        if ($identity->type === 'oauth') {
+            $secret = Secret::createFromOAuthIdentity($identity);
+        } else {
+            $secret = Secret::createFromFields($user, $fields);
+        }
 
         return compact('user', 'identity', 'secret');
     }
