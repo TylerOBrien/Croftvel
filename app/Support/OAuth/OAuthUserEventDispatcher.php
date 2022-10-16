@@ -18,18 +18,17 @@ class OAuthUserEventDispatcher
 {
     /**
      * @param  mixed  $driver  The Socialite provider.
-     * @param  mixed  $user  The user identified by the OAuth provider.
      *
      * @return void
      */
-    static public function dispatch($driver, $user): void
+    static public function dispatch($driver): void
     {
         if ($driver instanceof FacebookProvider) {
-            FacebookUserIdentified::dispatch($driver, $user);
+            FacebookUserIdentified::dispatch($driver);
         } else if ($driver instanceof GoogleProvider) {
-            GoogleUserIdentified::dispatch($driver, $user);
+            GoogleUserIdentified::dispatch($driver);
         } else if ($driver instanceof GithubProvider) {
-            GitHubUserIdentified::dispatch($driver, $user);
+            GitHubUserIdentified::dispatch($driver);
         }
     }
 }
