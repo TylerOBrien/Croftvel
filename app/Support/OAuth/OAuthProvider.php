@@ -13,6 +13,16 @@ use Laravel\Socialite\Two\{
 class OAuthProvider
 {
     /**
+     * @var array<string, \App\Enums\OAuth\OAuthProvider>
+     */
+    static protected $enums = [
+        FacebookProvider::class => OAuthProviderEnum::Facebook,
+        GithubProvider::class => OAuthProviderEnum::GitHub,
+        GoogleProvider::class => OAuthProviderEnum::Google,
+        TwitterProvider::class => OAuthProviderEnum::Twitter,
+    ];
+
+    /**
      * Generate an array containing properties for all OAuth providers.
      *
      * @return array
@@ -49,24 +59,14 @@ class OAuthProvider
      *
      * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider  $driver  The driver to get the name of.
      *
-     * @return OAuthProviderEnum|null
+     * @return \App\Enums\OAuth\OAuthProvider|null
      */
     static public function enum(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver): OAuthProviderEnum|null
     {
-        if ($driver instanceof FacebookProvider) {
-            return OAuthProviderEnum::Facebook;
-        }
-
-        if ($driver instanceof GithubProvider) {
-            return OAuthProviderEnum::GitHub;
-        }
-
-        if ($driver instanceof GoogleProvider) {
-            return OAuthProviderEnum::Google;
-        }
-
-        if ($driver instanceof TwitterProvider) {
-            return OAuthProviderEnum::Twitter;
+        foreach (self::$enums as $class => $enum) {
+            if ($driver instanceof $class) {
+                return $enum;
+            }
         }
 
         return null;
