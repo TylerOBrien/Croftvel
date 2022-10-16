@@ -17,11 +17,11 @@ use Laravel\Socialite\Two\{
 class OAuthUserEventDispatcher
 {
     /**
-     * @param  mixed  $driver  The Socialite provider.
+     * @param  FacebookProvider|GoogleProvider|GithubProvider  $driver  The Socialite provider.
      *
      * @return void
      */
-    static public function dispatch($driver): void
+    static public function dispatch(FacebookProvider|GoogleProvider|GithubProvider $driver): void
     {
         if ($driver instanceof FacebookProvider) {
             FacebookUserIdentified::dispatch($driver);
