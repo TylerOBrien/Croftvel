@@ -2,10 +2,9 @@
 
 namespace App\Support\Auth;
 
-use App\Enums\Identity\IdentityType;
-use App\Exceptions\Api\v1\Auth\{ InvalidCredentials, MalformedCredentialsFields };
+use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Models\ { Identity, Secret };
-
+use App\Schemas\Credentials\CredentialsSchema;
 use Illuminate\Contracts\Support\{ Arrayable, Jsonable };
 
 class Credentials implements Arrayable, Jsonable
@@ -73,18 +72,7 @@ class Credentials implements Arrayable, Jsonable
      */
     static public function fromFields(array $fields): Credentials
     {
-        if (!isset($fields['identity']) ||
-            !is_array($fields['identity']) ||
-            !isset($fields['identity']['type']) ||
-            ( !isset($fields['identity']['value']) && $fields['identity']['type'] !== IdentityType::OAuth->value ) ||
-            !isset($fields['secret']) ||
-            !is_array($fields['secret']) ||
-            ( !isset($fields['secret']['type']) && $fields['identity']['type'] !== IdentityType::OAuth->value ) ||
-            !isset($fields['secret']['value']))
-        {
-            throw new MalformedCredentialsFields;
-        }
-
+        $fields = CredentialsSchema::validated($fields);
         $identity = Identity::where($fields['identity'])->first();
 
         if (is_null($identity)) {
@@ -92,8 +80,7 @@ class Credentials implements Arrayable, Jsonable
         }
 
         $provider = $identity->user->secrets();
-        $type = $identity->is_oauth ? IdentityType::OAuth->value : $fields['secret']['type'];
-        $secret = $provider->where('type', $type)->first();
+        $secret = $provider->where('type', $fields['secret']['type'])->first();
 
         if (is_null($secret)) {
             throw new InvalidCredentials;
