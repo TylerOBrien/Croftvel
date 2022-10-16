@@ -37,4 +37,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'twitter' => [
+        'key' => env('TWITTER_API_KEY'),
+        'secret' => env('TWITTER_API_SECRET'),
+        'oauth' => 2,
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_OAUTH_URL', env('OAUTH_URL', 'http://localhost')) . '/v1/oauth/providers/twitter/user',
+    ],
+
 ];
