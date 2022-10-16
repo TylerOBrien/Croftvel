@@ -20,6 +20,7 @@ use App\Listeners\Api\v1\Recovery\SendVerifyRecoveryNotification;
 
 use App\Events\Api\v1\Verification\VerificationCreated;
 use App\Listeners\Api\v1\Auth\StoreAuthAttempt;
+use App\Listeners\Api\v1\OAuth\CreateOAuthUser;
 use App\Listeners\Api\v1\Verification\DispatchCreateVerificationEvent;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -65,6 +66,7 @@ class EventServiceProvider extends ServiceProvider
 
         IdentityCreated::class => [
             CreateIdentityVerification::class,
+            CreateOAuthUser::class,
         ],
 
         IdentityVerificationCreated::class => [
