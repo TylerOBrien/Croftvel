@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Verification\{ VerificationAbility, VerificationType };
 use App\Events\Api\v1\Verification\VerificationCreated;
 use App\Exceptions\Api\v1\Verification\MissingHashAlgo;
 use App\Traits\Models\{ HasSecretCode, HasUniqueMaker };
@@ -27,6 +28,8 @@ class Verification extends Model
     ];
 
     protected $casts = [
+        'type' => VerificationType::class,
+        'ability' => VerificationAbility::class,
         'expires_at' => 'datetime',
     ];
 
