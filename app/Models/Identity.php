@@ -6,6 +6,7 @@ use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Exceptions\Api\v1\Auth\MalformedCredentialsFields;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
+use App\Schemas\Credentials\CredentialsSchema;
 use App\Traits\Models\{ HasTypeValue, HasVerify };
 
 use Illuminate\Database\Eloquent\Model;
@@ -128,20 +129,14 @@ class Identity extends Model
      */
     static public function findFromFields(array $fields): Identity|null
     {
+        $option = CredentialsSchema::IDENTITY_ONLY;
+        $fields = CredentialsSchema::validated($fields, $option);
+
         if (isset($fields['identity_id'])) {
             return self::find($fields['identity_id']);
         }
 
-        $predicate = [
-            'type' => $fields['identity']['type'] ?? null,
-            'value' => $fields['identity']['value'] ?? null,
-        ];
-
-        if (is_null($predicate['type']) || is_null($predicate['value'])) {
-            return null;
-        }
-
-        return self::where($predicate)->first();
+        return self::where($fields['identity'])->first();
     }
 
     /**
