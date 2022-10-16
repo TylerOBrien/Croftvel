@@ -6,11 +6,13 @@ use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Exceptions\Api\v1\Auth\MalformedCredentialsFields;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
+use App\Http\Requests\Api\v1\ApiRequest;
 use App\Schemas\Credentials\CredentialsSchema;
 use App\Traits\Models\{ HasTypeValue, HasVerify };
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Http\Request;
 
 class Identity extends Model
 {
@@ -142,11 +144,11 @@ class Identity extends Model
     /**
      * Attempts to retrieve an instance of the Identity model defined in the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request|\App\Http\Requests\Api\v1\ApiRequest  $request
      *
      * @return \App\Models\Identity|null
      */
-    static public function findFromRequest($request): Identity|null
+    static public function findFromRequest(Request|ApiRequest $request): Identity|null
     {
         return self::findFromFields([
             'identity_id' => $request->input('identity_id'),
