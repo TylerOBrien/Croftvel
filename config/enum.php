@@ -52,9 +52,9 @@ return [
 
     'secret' => [
         'type' => [
+            'code',
             'password',
             'totp',
-            'token',
         ],
     ],
 
