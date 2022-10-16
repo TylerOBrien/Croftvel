@@ -41,7 +41,7 @@ class VerifyIdentityNotification extends Notification
      */
     public function via(User $notifiable)
     {
-        return ['mail'];
+        return $notifiable->email ? ['mail'] : [];
     }
 
     /**
