@@ -105,7 +105,7 @@ class ApiGuard implements Guard
             throw new MissingSecret;
         }
 
-        call_user_func([ $this, "bySecret{$credentials->secret->type}" ], $fields, $credentials);
+        call_user_func([ $this, "bySecret{$credentials->secret->type->value}" ], $fields, $credentials);
 
         AuthAttempted::dispatch($credentials->identity, true);
 
@@ -132,7 +132,7 @@ class ApiGuard implements Guard
      *
      * @return void
      */
-    protected function bySecretCode(array $fields, Credentials $credentials): void
+    protected function bySecretOAuth(array $fields, Credentials $credentials): void
     {
         if (!$credentials->identity->is_oauth) {
             throw new NotOAuthIdentity;
