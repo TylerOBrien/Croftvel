@@ -168,24 +168,14 @@ class Identity extends Model
      */
     static public function createFromFields(User $user, array $fields): Identity
     {
-        if (!isset($fields['identity']) ||
-            !is_array($fields['identity']) ||
-            !isset($fields['identity']['type']) ||
-            (!isset($fields['identity']['value']) && $fields['identity']['type'] !== IdentityType::OAuth->value))
-        {
-            throw new MalformedCredentialsFields;
-        }
+        $option = CredentialsSchema::IDENTITY_ONLY;
+        $fields = CredentialsSchema::validated($fields, $option);
 
-        if ($fields['identity']['type'] === IdentityType::OAuth->value) {
-            $additional = [ 'provider' => $fields['identity']['provider'] ];
-        } else {
-            $additional = [];
-        }
-
-        return self::create(array_merge($additional, [
+        return self::create([
             'user_id' => $user->id,
             'type' => $fields['identity']['type'],
             'value' => $fields['identity']['value'] ?? null,
-        ]));
+            'provider' => $fields['identity']['provider'] ?? null,
+        ]);
     }
 }
