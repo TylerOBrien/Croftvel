@@ -3,7 +3,7 @@
 namespace App\Support\Auth;
 
 use App\Enums\Identity\IdentityType;
-use App\Exceptions\Api\v1\Auth\InvalidCredentials;
+use App\Exceptions\Api\v1\Auth\{ InvalidCredentials, MalformedCredentialsFields };
 use App\Models\ { Identity, Secret };
 
 use Illuminate\Contracts\Support\{ Arrayable, Jsonable };
@@ -82,7 +82,7 @@ class Credentials implements Arrayable, Jsonable
             ( !isset($fields['secret']['type']) && $fields['identity']['type'] !== IdentityType::OAuth->value ) ||
             !isset($fields['secret']['value']))
         {
-            throw new InvalidCredentials;
+            throw new MalformedCredentialsFields;
         }
 
         $identity = Identity::where($fields['identity'])->first();
