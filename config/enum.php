@@ -23,7 +23,7 @@ return [
     ],
 
     'oauth' => [
-        'type' => array_map(fn ($case) => $case->value, \App\Enums\OAuth\OAuthProvider::cases()),
+        'provider' => array_map(fn ($case) => $case->value, \App\Enums\OAuth\OAuthProvider::cases()),
     ],
 
     'profile_field' => [
