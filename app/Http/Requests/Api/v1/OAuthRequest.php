@@ -17,21 +17,21 @@ class OAuthRequest extends ApiRequest
      */
     public function __construct()
     {
-        $provider = request()->route('provider');
+        if ($provider = request()->route('provider')) {
+            if (!in_array($provider, config('enum.oauth.provider'))) {
+                throw new ProviderNotFound;
+            }
 
-        if (!in_array($provider, config('enum.oauth.provider'))) {
-            throw new ProviderNotFound;
-        }
-
-        if (request()->has('code')) {
-            try {
-                OAuthDriver::get($provider)->stateless()->user();
-            } catch (ClientException $exception) {
-                switch ($exception->getResponse()->getStatusCode()) {
-                case 401:
-                    throw new InvalidToken;
-                default:
-                    throw $exception;
+            if (request()->has('code')) {
+                try {
+                    OAuthDriver::get($provider)->stateless()->user();
+                } catch (ClientException $exception) {
+                    switch ($exception->getResponse()->getStatusCode()) {
+                    case 401:
+                        throw new InvalidToken;
+                    default:
+                        throw $exception;
+                    }
                 }
             }
         }
