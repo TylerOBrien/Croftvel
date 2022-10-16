@@ -18,6 +18,7 @@ class IdentityObserver
     {
         if ($identity->type === 'oauth') {
             $identity->verified_at = now();
+            $identity->user->forceFill([ 'identified_at' => now() ])->save();
         }
     }
 
