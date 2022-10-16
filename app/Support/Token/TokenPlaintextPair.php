@@ -6,7 +6,7 @@ use App\Models\PersonalAccessToken;
 
 use Illuminate\Contracts\Support\{ Arrayable, Jsonable };
 
-class PlaintextTokenPair implements Arrayable, Jsonable
+class TokenPlaintextPair implements Arrayable, Jsonable
 {
     /**
      * The access token instance.
