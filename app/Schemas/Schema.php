@@ -54,6 +54,20 @@ class Schema
     }
 
     /**
+     * Helper function to quickly run the validator against the given attributes
+     * and have only the validated fields returned. Intended to be used if the
+     * schema instance only exists to call the validate function.
+     *
+     * @param  array<string, mixed>  $attributes  The attributes to validate.
+     *
+     * @return array<string, mixed>
+     */
+    static public function validated(array $attributes): array
+    {
+        return (new static)->validate($attributes);
+    }
+
+    /**
      * Generates the rules that will be used if validation is run for the given
      * attribute values.
      *
