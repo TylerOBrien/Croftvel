@@ -3,6 +3,7 @@
 namespace App\Support\OAuth;
 
 use App\Enums\OAuth\OAuthProvider as OAuthProviderEnum;
+
 use Laravel\Socialite\Two\{
     FacebookProvider,
     GithubProvider,
