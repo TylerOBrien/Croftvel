@@ -75,7 +75,7 @@ class Credentials implements Arrayable, Jsonable
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||
             !isset($fields['identity']['type']) ||
-            !isset($fields['identity']['value']) ||
+            ( !isset($fields['identity']['value']) && $fields['identity']['type'] !== 'oauth' ) ||
             !isset($fields['secret']) ||
             !is_array($fields['secret']) ||
             !isset($fields['secret']['type']) ||
