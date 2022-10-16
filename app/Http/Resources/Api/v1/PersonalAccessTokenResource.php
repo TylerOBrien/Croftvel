@@ -27,7 +27,7 @@ class PersonalAccessTokenResource extends JsonResource
      *
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'value' => 'Bearer ' .  $this->pat->id . '|' . $this->plaintext,
