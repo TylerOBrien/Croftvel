@@ -55,6 +55,8 @@ class OAuthUser
         return GoogleUser::create([
             'identity_id' => $identity->id,
             'google_id' => $fields->id,
+            'email' => $fields->email,
+            'name' => $fields->name,
             'nickname' => $fields->nickname,
             'profile_image_url' => $fields->avatar,
         ]);
@@ -71,6 +73,8 @@ class OAuthUser
         return TwitterUser::create([
             'identity_id' => $identity->id,
             'twitter_id' => $fields->id,
+            'email' => $fields->email,
+            'name' => $fields->name,
             'nickname' => $fields->nickname,
             'profile_image_url' => $fields->avatar,
         ]);
