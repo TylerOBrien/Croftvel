@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('github_users', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('github_id')->primary();
             $table->unsignedBigInteger('user_id');
-            $table->string('github_id')->unique();
+            $table->string('login');
             $table->string('email');
+            $table->string('avatar_url')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
