@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\v1;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Session\Middleware\StartSession;
 
 Route::group(
     [
         'middleware' => [
-            \Illuminate\Session\Middleware\StartSession::class,
+            StartSession::class,
         ],
     ],
     function () {
