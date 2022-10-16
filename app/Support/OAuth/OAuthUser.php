@@ -38,9 +38,9 @@ class OAuthUser
         return GitHubUser::create([
             'identity_id' => $identity->id,
             'github_id' => $fields->id,
-            'avatar_url' => $fields->avatar,
-            'login' => $fields->nickname,
             'email' => $fields->email,
+            'nickname' => $fields->nickname,
+            'profile_image_url' => $fields->avatar,
         ]);
     }
 
@@ -56,8 +56,8 @@ class OAuthUser
             'identity_id' => $identity->id,
             'google_id' => $fields->id,
             'email' => $fields->email,
-            'name' => $fields->name,
-            'nickname' => $fields->nickname,
+            'given_name' => $fields->user['given_name'],
+            'family_name' => $fields->user['family_name'],
             'profile_image_url' => $fields->avatar,
         ]);
     }
