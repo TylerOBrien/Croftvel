@@ -27,15 +27,7 @@ return [
     ],
 
     'profile_field' => [
-        'type' => [
-            'boolean',
-            'date',
-            'datetime',
-            'float',
-            'integer',
-            'string',
-            'time',
-        ],
+        'type' => array_map(fn ($case) => $case->value, \App\Enums\Profile\ProfileFieldType::cases()),
     ],
 
     'secret' => [
