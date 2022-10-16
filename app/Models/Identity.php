@@ -27,6 +27,7 @@ class Identity extends Model
     ];
 
     protected $casts = [
+        'type' => IdentityType::class,
         'verified_at' => 'datetime',
     ];
 
