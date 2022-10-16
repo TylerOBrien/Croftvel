@@ -17,11 +17,32 @@ class CredentialsSchema extends Schema
      */
     public function rules(): array
     {
+        return array_merge($this->identityRules(), $this->secretRules());
+    }
+
+    /**
+     * Generate the rule string for the identity field.
+     *
+     * @return array<string, string>
+     */
+    public function identityRules(): array
+    {
         return [
             'identity' => 'required|array',
             'identity.type' => 'required|string|in:' . join(',', config('enum.identity.type')),
             'identity.value' => $this->identityValueRule(),
             'identity.provider' => 'required_if:identity.type,' . IdentityType::OAuth->value . '|string|in:' . join(',', config('enum.oauth.provider')),
+        ];
+    }
+
+    /**
+     * Generate the rule string for the secret field.
+     *
+     * @return array<string, string>
+     */
+    public function secretRules(): array
+    {
+        return [
             'secret' => 'required|array',
             'secret.type' => $this->secretTypeRule(),
             'secret.value' => 'required|string',
