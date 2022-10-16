@@ -4,7 +4,7 @@ namespace App\Exceptions\Api\v1\OAuth;
 
 use App\Exceptions\Api\ApiException;
 
-class InvalidToken extends ApiException
+class InvalidCode extends ApiException
 {
     /**
      * Create a new exception.
@@ -13,6 +13,6 @@ class InvalidToken extends ApiException
      */
     public function __construct()
     {
-        parent::__construct('oauth.token.invalid', 422);
+        parent::__construct('oauth.code.invalid', 422);
     }
 }
