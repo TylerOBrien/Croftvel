@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
-use App\Exceptions\Api\v1\Auth\InvalidCredentials;
+use App\Exceptions\Api\v1\Auth\MalformedCredentialsFields;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\{ HasTypeValue, HasVerify };
 
@@ -153,7 +153,7 @@ class Identity extends Model
             !isset($fields['identity']['type']) ||
             (!isset($fields['identity']['value']) && $fields['identity']['type'] !== IdentityType::OAuth->value))
         {
-            throw new InvalidCredentials;
+            throw new MalformedCredentialsFields;
         }
 
         if ($fields['identity']['type'] === IdentityType::OAuth->value) {
