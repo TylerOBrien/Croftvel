@@ -141,10 +141,16 @@ class Identity extends Model
             return self::find($request->input('identity_id'));
         }
 
-        $type = $request->input('type');
-        $value = $request->input('value');
+        $predicate = [
+            'type' => $request->input('type'),
+            'value' => $request->input('value'),
+        ];
 
-        return self::where(compact('type', 'value'))->first();
+        if (is_null($predicate['type']) || is_null($predicate['value'])) {
+            return null;
+        }
+
+        return self::where($predicate)->first();
     }
 
     /**
