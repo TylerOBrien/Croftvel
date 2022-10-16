@@ -5,6 +5,7 @@ namespace App\Support\Auth;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
 use App\Models\ { Identity, Secret };
 use App\Schemas\Credentials\CredentialsSchema;
+
 use Illuminate\Contracts\Support\{ Arrayable, Jsonable };
 
 class Credentials implements Arrayable, Jsonable
