@@ -119,7 +119,7 @@ class Identity extends Model
         $type = $fields['identity']['type'] ?? null;
         $value = $fields['identity']['value'] ?? null;
 
-        if (!$type || !$value) {
+        if (is_null($type) || is_null($value)) {
             return null;
         }
 
