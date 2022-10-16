@@ -8,7 +8,7 @@ use App\Exceptions\Api\v1\Auth\MalformedCredentialsFields;
 use App\Exceptions\Api\v1\Identity\IdentityAlreadyVerified;
 use App\Traits\Models\{ HasTypeValue, HasVerify };
 
-use Illuminate\Database\Eloquent\{ Collection, Model };
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Identity extends Model
