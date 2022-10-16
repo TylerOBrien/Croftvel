@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Secret\SecretType;
 use App\Support\OAuth\OAuthDriver;
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,10 @@ class Secret extends Model
         'user_id',
         'type',
         'value',
+    ];
+
+    protected $casts = [
+        'type' => SecretType::class,
     ];
 
     /**
