@@ -10,6 +10,8 @@ use App\Support\OAuth\OAuthDriver;
 class OAuthProviderController extends Controller
 {
     /**
+     * Respond with a listing of OAuth providers.
+     *
      * @param  \App\Http\Requests\Api\v1\OAuth\ShowOAuthProvider  $request
      *
      * @return \Illuminate\Http\Response
@@ -20,6 +22,8 @@ class OAuthProviderController extends Controller
     }
 
     /**
+     * Respond with a single OAuth provider resource.
+     *
      * @param  string  $provider
      * @param  \App\Http\Requests\Api\v1\OAuth\ShowOAuthProvider  $request
      *
