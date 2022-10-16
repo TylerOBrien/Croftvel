@@ -13,6 +13,7 @@ Route::group(
     function () {
         Route::post('tokens', LoginController::class);
         Route::post('users', RegisterController::class);
+        Route::get('oauth/providers', [ OAuthProviderController::class, 'index' ]);
         Route::get('oauth/providers/{provider}', [ OAuthProviderController::class, 'show' ]);
         Route::get('oauth/providers/{provider}/user', function () {
             return request()->all();
