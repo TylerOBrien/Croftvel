@@ -23,12 +23,7 @@ return [
     ],
 
     'oauth' => [
-        'provider' => [
-            'facebook',
-            'twitter',
-            'github',
-            'google',
-        ],
+        'type' => array_map(fn ($case) => $case->value, \App\Enums\OAuth\OAuthProvider::cases()),
     ],
 
     'profile_field' => [
