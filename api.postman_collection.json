@@ -25,7 +25,7 @@
 								},
 								{
 									"key": "identity[value]",
-									"value": "hello@chopdawg.com",
+									"value": "{{email}}",
 									"description": "required|string",
 									"type": "text"
 								},
@@ -110,7 +110,7 @@
 								},
 								{
 									"key": "identity[value]",
-									"value": "hello@chopdawg.com",
+									"value": "{{email}}",
 									"type": "text"
 								},
 								{
@@ -193,7 +193,7 @@
 								},
 								{
 									"key": "identity[value]",
-									"value": "hello@chopdawg.com",
+									"value": "{{email}}",
 									"description": "required|string",
 									"type": "text"
 								}
@@ -226,7 +226,7 @@
 								},
 								{
 									"key": "identity[value]",
-									"value": "hello@chopdawg.com",
+									"value": "{{email}}",
 									"type": "text"
 								},
 								{
@@ -582,6 +582,11 @@
 	"variable": [
 		{
 			"key": "apiv1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "email",
 			"value": "",
 			"type": "string"
 		}
