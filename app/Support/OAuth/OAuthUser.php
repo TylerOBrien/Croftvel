@@ -15,7 +15,7 @@ class OAuthUser
      */
     static public function create(Identity $identity): GitHubUser|GoogleUser|TwitterUser
     {
-        $fields = OAuthDriver::get($identity->provider)->stateless()->user();
+        $fields = OAuthDriver::user($identity->provider);
 
         switch ($identity->provider) {
         case 'github':
