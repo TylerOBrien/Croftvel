@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('google_id')->primary();
             $table->unsignedBigInteger('identity_id');
             $table->string('email')->nullable();
-            $table->string('name')->nullable();
+            $table->string('given_name')->nullable();
+            $table->string('family_name')->nullable();
             $table->text('profile_image_url')->nullable();
             $table->timestamps();
 
