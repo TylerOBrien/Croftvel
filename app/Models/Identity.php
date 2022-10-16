@@ -22,6 +22,7 @@ class Identity extends Model
         'name',
         'type',
         'value',
+        'provider',
     ];
 
     protected $casts = [
@@ -140,7 +141,7 @@ class Identity extends Model
         if (!isset($fields['identity']) ||
             !is_array($fields['identity']) ||
             !isset($fields['identity']['type']) ||
-            !isset($fields['identity']['value']))
+            (!isset($fields['identity']['value']) && $fields['identity']['type'] !== 'oauth'))
         {
             throw new InvalidCredentials;
         }
@@ -148,7 +149,7 @@ class Identity extends Model
         return self::create([
             'user_id' => $user->id,
             'type' => $fields['identity']['type'],
-            'value' => $fields['identity']['value'],
+            'value' => $fields['identity']['value'] ?? null,
         ]);
     }
 }
