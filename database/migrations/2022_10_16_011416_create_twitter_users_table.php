@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('twitter_users', function (Blueprint $table) {
-            $table->unsignedBigInteger('twitter_id')->primary();
+            $table->string('twitter_id')->primary();
             $table->unsignedBigInteger('identity_id');
             $table->string('email')->nullable();
             $table->string('name')->nullable();
