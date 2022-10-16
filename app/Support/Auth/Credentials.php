@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers\Auth;
+namespace App\Support\Auth;
 
 use App\Enums\Identity\IdentityType;
 use App\Exceptions\Api\v1\Auth\InvalidCredentials;
