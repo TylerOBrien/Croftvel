@@ -35,14 +35,18 @@ class Register extends OAuthRequest
     public function rules(): array
     {
         if ($this->input('identity.type') === 'oauth') {
-            $rules = [ 'identity.provider' => $this->identityProviderRule() ];
+            $rules = [
+                'identity.provider' => $this->identityProviderRule(),
+            ];
         } else {
-            $rules = [ 'identity.value' => $this->identityValueRule() ];
+            $rules = [
+                'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
+                'identity.value' => $this->identityValueRule(),
+            ];
         }
 
         return array_merge($rules, [
             'identity.type' => $this->identityTypeRule(),
-            'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
         ]);
     }
