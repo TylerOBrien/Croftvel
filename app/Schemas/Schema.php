@@ -41,4 +41,20 @@ class Schema
     {
         return [];
     }
+
+    /**
+     * Generates the rules that will be used if validation is run for the given
+     * attribute values.
+     *
+     * @param  array  $attributes  The attributes to generate rules for.
+     *
+     * @return array<string, mixed>
+     */
+    static public function getRules(array $attributes): array
+    {
+        $instance = new static;
+        $instance->attributes = $attributes;
+
+        return $instance->rules();
+    }
 }
