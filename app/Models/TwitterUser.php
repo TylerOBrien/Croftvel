@@ -9,8 +9,9 @@ class TwitterUser extends Model
     protected $fillable = [
         'identity_id',
         'twitter_id',
-        'nickname',
         'email',
+        'name',
+        'nickname',
         'profile_image_url',
     ];
 
