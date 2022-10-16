@@ -102,7 +102,7 @@ class Identity extends Model
     public function isOauth(): Attribute
     {
         return Attribute::make(
-            get: fn ($_, $attributes) => $attributes['type'] === IdentityType::OAuth,
+            get: fn () => $this->type === IdentityType::OAuth,
         );
     }
 
@@ -112,7 +112,7 @@ class Identity extends Model
     public function isVerified(): Attribute
     {
         return Attribute::make(
-            get: fn ($_, $attributes) => (bool) $attributes['verified_at'],
+            get: fn () => (bool) $this->verified_at,
         );
     }
 
