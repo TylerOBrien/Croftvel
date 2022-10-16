@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->configureRateLimiting();
         $this->bindLiteralMeRouteParam();
@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bindLiteralMeRouteParam()
+    protected function bindLiteralMeRouteParam(): void
     {
         Route::bind('user', function ($id) {
             return $id === 'me' ? ApiGuard::get()->user() : $id;
@@ -50,7 +50,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::group(
             [
@@ -73,7 +73,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function configureRateLimiting()
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
