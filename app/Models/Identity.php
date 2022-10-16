@@ -146,10 +146,16 @@ class Identity extends Model
             throw new InvalidCredentials;
         }
 
-        return self::create([
+        if ($fields['identity']['type'] === 'oauth') {
+            $additional = [ 'provider' => $fields['identity']['provider'] ];
+        } else {
+            $additional = [];
+        }
+
+        return self::create(array_merge($additional, [
             'user_id' => $user->id,
             'type' => $fields['identity']['type'],
             'value' => $fields['identity']['value'] ?? null,
-        ]);
+        ]));
     }
 }
