@@ -37,6 +37,7 @@ class CredentialsSchema extends Schema
     public function identityRules(): array
     {
         return [
+            'identity_id' => 'int|min:1',
             'identity' => 'required|array',
             'identity.type' => 'required|string|in:' . join(',', config('enum.identity.type')),
             'identity.value' => $this->identityValueRule(),
