@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Api\v1;
 
-use App\Helpers\Token\PersonalAccessTokenHelper;
+use App\Support\Token\TokenPlaintextPair;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,13 +11,13 @@ class PersonalAccessTokenResource extends JsonResource
     /**
      * Instantiate the resource.
      *
-     * @param  \App\Helpers\Token\PersonalAccessTokenHelper  $patHelper
+     * @param  \App\Support\Token\TokenPlaintextPair  $pair
      *
      * @return void
      */
-    public function __construct(PersonalAccessTokenHelper $patHelper)
+    public function __construct(TokenPlaintextPair $pair)
     {
-        parent::__construct($patHelper);
+        parent::__construct($pair);
     }
 
     /**
