@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
                 'prefix' => config('api.version'),
                 'domain' => config('api.domains.' . config('api.version')),
             ],
-            function() {
+            function () {
                 $hasToken = ApiGuard::get()->hasToken();
                 $middlware = 'api.' . ($hasToken ? 'authenticated' : 'guest');
                 $path = 'routes/Api/' . config('api.version') .'/' . ($hasToken ? 'authenticated.php' : 'guest.php');
