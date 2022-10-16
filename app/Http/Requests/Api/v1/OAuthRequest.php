@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\v1;
 
-use App\Exceptions\Api\v1\OAuth\{ InvalidToken, ProviderNotFound };
+use App\Exceptions\Api\v1\OAuth\{ InvalidCode, ProviderNotFound };
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Support\OAuth\OAuthDriver;
 
@@ -17,7 +17,10 @@ class OAuthRequest extends ApiRequest
      */
     public function __construct()
     {
-        if ($provider = request()->route('provider')) {
+        $request = request();
+        $provider = $request->route('provider') ?? $request->input('identity.provider');
+
+        if ($provider) {
             if (!in_array($provider, config('enum.oauth.provider'))) {
                 throw new ProviderNotFound;
             }
@@ -28,7 +31,7 @@ class OAuthRequest extends ApiRequest
                 } catch (ClientException $exception) {
                     switch ($exception->getResponse()->getStatusCode()) {
                     case 401:
-                        throw new InvalidToken;
+                        throw new InvalidCode;
                     default:
                         throw $exception;
                     }
