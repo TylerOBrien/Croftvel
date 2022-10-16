@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('identity_id');
             $table->string('email')->nullable();
             $table->string('name')->nullable();
-            $table->string('nickname')->nullable();
             $table->text('profile_image_url')->nullable();
             $table->timestamps();
 
