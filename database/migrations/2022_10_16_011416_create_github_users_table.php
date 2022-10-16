@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('github_users', function (Blueprint $table) {
             $table->unsignedBigInteger('github_id')->primary();
             $table->unsignedBigInteger('identity_id');
-            $table->string('login');
-            $table->string('email');
-            $table->string('avatar_url')->nullable();
+            $table->string('email')->nullable();
+            $table->string('nickname')->nullable();
+            $table->string('profile_image_url')->nullable();
             $table->timestamps();
 
             $table->foreign('identity_id')
