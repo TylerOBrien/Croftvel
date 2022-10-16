@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\v1\Auth;
 
-use App\Http\Requests\Api\v1\ApiRequest;
+use App\Http\Requests\Api\v1\OAuthRequest;
 use App\Traits\Requests\Api\v1\HasIdentity;
 
-class Register extends ApiRequest
+class Register extends OAuthRequest
 {
     use HasIdentity;
 
@@ -17,14 +17,13 @@ class Register extends ApiRequest
     public function rules(): array
     {
         if ($this->input('identity.type') === 'oauth') {
-            $oauth_rules = [ 'identity.provider' => $this->identityProviderRule() ];
+            $rules = [ 'identity.provider' => $this->identityProviderRule() ];
         } else {
-            $oauth_rules = [];
+            $rules = [ 'identity.value' => $this->identityValueRule() ];
         }
 
-        return array_merge($oauth_rules, [
+        return array_merge($rules, [
             'identity.type' => $this->identityTypeRule(),
-            'identity.value' => $this->identityValueRule(),
             'secret.type' => 'required|string|in:' . join(',', config('enum.secret.type')),
             'secret.value' => 'required|string',
         ]);
