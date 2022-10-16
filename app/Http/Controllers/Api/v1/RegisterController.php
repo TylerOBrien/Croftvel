@@ -23,12 +23,7 @@ class RegisterController extends Controller
         $identity = Identity::createFromFields($user, $fields);
         $pat = PersonalAccessToken::createForIdentity($identity);
         $token = new PersonalAccessTokenResource($pat);
-
-        if ($identity->is_oauth) {
-            $secret = Secret::createFromOAuthIdentity($identity);
-        } else {
-            $secret = Secret::createFromFields($user, $fields);
-        }
+        $secret = Secret::createFromIdentity($identity, $fields);
 
         return response(compact('token', 'user', 'identity', 'secret'), 201);
     }

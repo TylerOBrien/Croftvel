@@ -48,37 +48,19 @@ class Secret extends Model
     }
 
     /**
-     * Creates a new Secret model using the passed fields that are assumed
-     * to have come from a request (e.g. a register request).
+     * Create a new secret instance for the given identity.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Identity  $identity
      * @param  array  $fields
      *
      * @return \App\Models\Secret
      */
-    static public function createFromFields(User $user, array $fields): Secret
+    static public function createFromIdentity(Identity $identity, array $fields): Secret
     {
-        return self::create([
-            'user_id' => $user->id,
-            'type' => $fields['secret']['type'],
-            'value' =>  $fields['secret']['value'],
-        ]);
-    }
-
-    /**
-     * @param  \App\Models\Identity  $identity
-     *
-     * @return \App\Models\Secret
-     */
-    static public function createFromOAuthIdentity(Identity $identity): Secret
-    {
-        $provider = $identity->provider;
-        $oauth_user = OAuthDriver::get($provider)->stateless()->user();
-
         return self::create([
             'user_id' => $identity->user->id,
-            'type' => SecretType::OAuth,
-            'value' =>  $oauth_user->token,
+            'type' => $identity->is_oauth ? SecretType::OAuth : $fields['secret']['type'],
+            'value' =>  $identity->is_oauth ? OAuthDriver::user($identity)->token : $fields['secret']['value'],
         ]);
     }
 }
