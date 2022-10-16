@@ -10,303 +10,323 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Register.Email",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "email",
-									"description": "required|string|in:email,mobile,oauth",
-									"type": "text"
+					"name": "Register",
+					"item": [
+						{
+							"name": "Register.Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "email",
+											"description": "required|string|in:email,mobile,oauth",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{email}}",
+											"description": "required|string",
+											"type": "text"
+										},
+										{
+											"key": "secret[type]",
+											"value": "password",
+											"description": "required|string|in:password,token",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "letmein123",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
 								},
-								{
-									"key": "identity[value]",
-									"value": "{{email}}",
-									"description": "required|string",
-									"type": "text"
-								},
-								{
-									"key": "secret[type]",
-									"value": "password",
-									"description": "required|string|in:password,token",
-									"type": "text"
-								},
-								{
-									"key": "secret[value]",
-									"value": "letmein123",
-									"description": "required|string",
-									"type": "text"
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{apiv1}}/users",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"users"
-							]
+						{
+							"name": "Register.OAuth.GitHub",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required|string|in:email,mobile,oauth",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "github",
+											"description": "required|string|in:facebook,github,google,twitter",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "77652f46fe268b4b3d66",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Register.OAuth.GitHub",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "oauth",
-									"description": "required|string|in:email,mobile,oauth",
-									"type": "text"
+					"name": "Login",
+					"item": [
+						{
+							"name": "Login.Email",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "email",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{email}}",
+											"type": "text"
+										},
+										{
+											"key": "secret[type]",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "letmein123",
+											"type": "text"
+										}
+									]
 								},
-								{
-									"key": "identity[provider]",
-									"value": "github",
-									"description": "required|string|in:facebook,github,google,twitter",
-									"type": "text"
-								},
-								{
-									"key": "secret[value]",
-									"value": "77652f46fe268b4b3d66",
-									"description": "required|string",
-									"type": "text"
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{apiv1}}/users",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"users"
-							]
+						{
+							"name": "Login.OAuth.GitHub",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required|string|in:email,mobile,oauth",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "github",
+											"description": "required|string|in:facebook,github,google,twitter",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "49a714b6c192594856eb",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Login.Email",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "email",
-									"type": "text"
+					"name": "Recover",
+					"item": [
+						{
+							"name": "Forgot.Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "email",
+											"description": "required|string|in:email,mobile",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{email}}",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
 								},
-								{
-									"key": "identity[value]",
-									"value": "{{email}}",
-									"type": "text"
-								},
-								{
-									"key": "secret[type]",
-									"value": "password",
-									"type": "text"
-								},
-								{
-									"key": "secret[value]",
-									"value": "letmein123",
-									"type": "text"
+								"url": {
+									"raw": "{{apiv1}}/recoveries",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"recoveries"
+									]
 								}
-							]
-						},
-						"url": {
-							"raw": "{{apiv1}}/tokens",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"tokens"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Login.OAuth.GitHub",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "oauth",
-									"description": "required|string|in:email,mobile,oauth",
-									"type": "text"
+					"name": "Verify",
+					"item": [
+						{
+							"name": "Verify.Identity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "email",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{email}}",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "code",
+											"description": "required|string|in:code,token",
+											"type": "text"
+										},
+										{
+											"key": "value",
+											"value": "932-952-882-123",
+											"description": "required|string",
+											"type": "text"
+										}
+									]
 								},
-								{
-									"key": "identity[provider]",
-									"value": "github",
-									"description": "required|string|in:facebook,github,google,twitter",
-									"type": "text"
-								},
-								{
-									"key": "secret[value]",
-									"value": "49a714b6c192594856eb",
-									"description": "required|string",
-									"type": "text"
+								"url": {
+									"raw": "{{apiv1}}/identities/verifications",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"identities",
+										"verifications"
+									]
 								}
-							]
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{apiv1}}/tokens",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"tokens"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Forgot.Password",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "email",
-									"description": "required|string|in:email,mobile",
-									"type": "text"
+						{
+							"name": "Verify.Recovery",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity_id",
+											"value": "1",
+											"description": "required|integer|exists:Identities,id",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "code",
+											"description": "required|string|in:code,token",
+											"type": "text"
+										},
+										{
+											"key": "value",
+											"value": "523195046223",
+											"description": "required|string",
+											"type": "text"
+										},
+										{
+											"key": "secret[type]",
+											"value": "password",
+											"description": "required|string|in:password,totp",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "helloworld",
+											"type": "text"
+										}
+									]
 								},
-								{
-									"key": "identity[value]",
-									"value": "{{email}}",
-									"description": "required|string",
-									"type": "text"
+								"url": {
+									"raw": "{{apiv1}}/recoveries/verifications",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"recoveries",
+										"verifications"
+									]
 								}
-							]
-						},
-						"url": {
-							"raw": "{{apiv1}}/recoveries",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"recoveries"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Verify.Identity",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity[type]",
-									"value": "email",
-									"type": "text"
-								},
-								{
-									"key": "identity[value]",
-									"value": "{{email}}",
-									"type": "text"
-								},
-								{
-									"key": "type",
-									"value": "code",
-									"description": "required|string|in:code,token",
-									"type": "text"
-								},
-								{
-									"key": "value",
-									"value": "932-952-882-123",
-									"description": "required|string",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{apiv1}}/identities/verifications",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"identities",
-								"verifications"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Verify.Recovery",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "identity_id",
-									"value": "1",
-									"description": "required|integer|exists:Identities,id",
-									"type": "text"
-								},
-								{
-									"key": "type",
-									"value": "code",
-									"description": "required|string|in:code,token",
-									"type": "text"
-								},
-								{
-									"key": "value",
-									"value": "523195046223",
-									"description": "required|string",
-									"type": "text"
-								},
-								{
-									"key": "secret[type]",
-									"value": "password",
-									"description": "required|string|in:password,totp",
-									"type": "text"
-								},
-								{
-									"key": "secret[value]",
-									"value": "helloworld",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{apiv1}}/recoveries/verifications",
-							"host": [
-								"{{apiv1}}"
-							],
-							"path": [
-								"recoveries",
-								"verifications"
-							]
-						}
-					},
-					"response": []
+					]
 				}
 			],
 			"auth": {
@@ -380,7 +400,7 @@
 								},
 								{
 									"key": "value",
-									"value": "hello+again@chopdawg.com",
+									"value": "{{email.secondary}}",
 									"description": "required|string",
 									"type": "text"
 								},
@@ -587,6 +607,11 @@
 		},
 		{
 			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "email.secondary",
 			"value": "",
 			"type": "string"
 		}
