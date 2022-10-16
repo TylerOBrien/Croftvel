@@ -9,7 +9,7 @@ use App\Schemas\Schema;
 class CredentialsSchema extends Schema
 {
     /**
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
     public function rules(): array
     {
