@@ -17,7 +17,14 @@ Route::group(
         Route::get('oauth/providers', [ OAuthProviderController::class, 'index' ]);
         Route::get('oauth/providers/{provider}', [ OAuthProviderController::class, 'show' ]);
         Route::get('oauth/providers/{provider}/user', function () {
-            return request()->all();
+            $out = [
+                'session' => session()->all(),
+                'request' => request()->all(),
+            ];
+
+            session()->flush();
+
+            return $out;
         });
     }
 );
