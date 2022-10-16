@@ -17,7 +17,7 @@ class CreateSecretsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->enum('type', config('enum.secret.type'));
-            $table->string('value');
+            $table->text('value');
             $table->timestamps();
 
             $table->foreign('user_id')
