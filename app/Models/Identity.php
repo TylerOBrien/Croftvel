@@ -15,6 +15,12 @@ class Identity extends Model
 {
     use HasTypeValue, HasVerify;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $appends = [
         'is_oauth',
         'is_verified',
@@ -37,6 +43,12 @@ class Identity extends Model
         'created' => IdentityCreated::class,
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -52,6 +64,12 @@ class Identity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
@@ -94,6 +112,12 @@ class Identity extends Model
             throw new IdentityAlreadyVerified;
         }
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Attempts to retrieve an instance of the Identity defined in the request.
