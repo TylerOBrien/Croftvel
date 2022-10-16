@@ -3,9 +3,10 @@
 namespace App\Guards\Api\v1;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingSecret, MissingToken };
+use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingOAuthProvider, MissingSecret, MissingToken, NotOAuthIdentity };
 use App\Helpers\Auth\Credentials;
 use App\Models\{ Identity, PersonalAccessToken, User };
+use App\Support\OAuth\OAuthDriver;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -123,6 +124,25 @@ class ApiGuard implements Guard
     public function validate(array $fields = []): bool
     {
         return (bool) $this->attempt($fields);
+    }
+
+    /**
+     * @param  array  $fields  The fields containing the raw credentials data, typically from a request.
+     * @param  Credentials  $credentials  Instances of the models referred to by the raw credentials data.
+     *
+     * @return void
+     */
+    protected function bySecretCode(array $fields, Credentials $credentials): void
+    {
+        if (!$credentials->identity->is_oauth) {
+            throw new NotOAuthIdentity;
+        }
+
+        if (!$credentials->identity->provider) {
+            throw new MissingOAuthProvider;
+        }
+
+        OAuthDriver::get($credentials->identity->provider)->stateless()->user();
     }
 
     /**
