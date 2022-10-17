@@ -15,6 +15,6 @@ return [
     |
     */
 
-    'bypass' => env('PERMISSIONS_BYPASS_ENABLED', 0),
+    'bypass' => (bool) env('PERMISSIONS_BYPASS_ENABLED', 0),
 
 ];
