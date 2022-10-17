@@ -43,7 +43,7 @@ php artisan make:croft-controller ModelName
 ```
 
 The option `--requests` can be used to geneate the request classes and implement
-them into the generated controller:
+them into the controller:
 
 ```
 php artisan make:croft-controller ModelName --requests
