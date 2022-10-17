@@ -761,6 +761,30 @@
 					"response": []
 				},
 				{
+					"name": "Show.Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiv1}}/images/:image_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"images",
+								":image_id"
+							],
+							"variable": [
+								{
+									"key": "image_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Store.Image",
 					"request": {
 						"method": "POST",
@@ -797,6 +821,79 @@
 							],
 							"path": [
 								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update.Image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "profile.photo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/tyler/StockPhotos/pexels-kaique-rocha-775201.jpg"
+								},
+								{
+									"key": "owner_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "owner_type",
+									"value": "User",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/images/:image_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"images",
+								":image_id"
+							],
+							"variable": [
+								{
+									"key": "image_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy.Image",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiv1}}/images/:image_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"images",
+								":image_id"
+							],
+							"variable": [
+								{
+									"key": "image_id",
+									"value": "1"
+								}
 							]
 						}
 					},
