@@ -14,7 +14,11 @@ use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, Tw
 class OAuthDriver
 {
     /**
-     * @param  \App\Models\Identity  $identity
+     * Retrieves the OAuth token for the identity. This is only useable during
+     * the initial authentication with the OAuth provider when the user is
+     * either registering or logging in.
+     *
+     * @param  \App\Models\Identity  $identity  The identity to get the token for.
      *
      * @return string
      */
@@ -28,7 +32,11 @@ class OAuthDriver
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
+     * Retrieves the Socialite user instance for the given identity. This is
+     * only useable during he initial authentication with the OAuth provider
+     * when the user is either registering or logging in.
+     *
+     * @param  \App\Models\Identity  $identity  The identity to get the Socialite user instance for.
      *
      * @return \Laravel\Socialite\Two\User
      */
