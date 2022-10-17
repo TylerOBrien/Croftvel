@@ -2,6 +2,7 @@
 
 namespace App\Traits\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,13 +32,13 @@ trait HasFileUpload
     */
 
     /**
-     * Retreives the full URL for this file.
-     *
-     * @return string
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getUrlAttribute(): string
+    public function url(): Attribute
     {
-        return Storage::disk($this->disk)->url($this->filepath); // Linter error here is a false positive.
+        return Attribute::make(
+            get: fn () => Storage::disk($this->disk)->url($this->filepath) // Linter error here is a false positive.
+        );
     }
 
     /*
