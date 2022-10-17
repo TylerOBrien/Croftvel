@@ -63,12 +63,12 @@ class PersonalAccessToken extends Model
      */
     static public function createForIdentity(Identity $identity): TokenPlaintextPair
     {
-        $plaintext = Str::random(config('security.bearer.length'));
+        $plaintext = Str::random(config('api.bearer.length'));
         $pat = self::create([
-            'name' => config('security.bearer.name'),
+            'name' => config('api.bearer.name'),
             'tokenable_id' => $identity->id,
             'tokenable_type' => Identity::class,
-            'token' => hash(config('security.bearer.hash_algo'), $plaintext),
+            'token' => hash(config('api.bearer.hash_algo'), $plaintext),
             'abilities' => '["*"]',
         ]);
 
@@ -88,14 +88,14 @@ class PersonalAccessToken extends Model
     static public function findFromBearer(string $bearer): PersonalAccessToken|null
     {
         if (strpos($bearer, '|') === false) {
-            $hashed_token = hash(config('security.bearer.hash_algo'), $bearer);
+            $hashed_token = hash(config('api.bearer.hash_algo'), $bearer);
             return self::where('token', $hashed_token)->first();
         }
 
         [ $model_id, $plaintext_token ] = explode('|', $bearer, 2);
 
         if ($instance = self::find($model_id)) {
-            $hashed_token = hash(config('security.bearer.hash_algo'), $plaintext_token);
+            $hashed_token = hash(config('api.bearer.hash_algo'), $plaintext_token);
             if (hash_equals($instance->token, $hashed_token)) {
                 return $instance;
             }

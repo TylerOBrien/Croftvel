@@ -31,7 +31,7 @@ class PersonalAccessTokenResource extends JsonResource
     {
         return [
             'value' => 'Bearer ' .  $this->pat->id . '|' . $this->plaintext,
-            'ttl' => config('security.bearer.ttl'),
+            'ttl' => config('api.bearer.ttl'),
             'ttl_type' => 'minute',
             'created_at' => $this->pat->created_at,
         ];
