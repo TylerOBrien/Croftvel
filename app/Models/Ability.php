@@ -14,6 +14,15 @@ class Ability extends Model
     |--------------------------------------------------------------------------
     */
 
+    protected $visible = [
+        'name',
+        'privilege_id',
+        'model_id',
+        'model_type',
+        'created_at',
+        'updated_at',
+    ];
+
     protected $fillable = [
         'privilege_id',
         'name',
