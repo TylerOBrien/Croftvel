@@ -16,9 +16,9 @@ trait HasUserAbilities
     /**
      * Check if the user instance has the given ability.
      *
-     * @param  string  $ability
-     * @param  string  $model_type
-     * @param  int|null  $model_id
+     * @param  string  $ability  The ability to check for the existence of.
+     * @param  string  $model_type  The string version of the model class name the ability will apply to.
+     * @param  int|null  $model_id  The primary key of the model instance the ability will apply to.
      *
      * @return bool
      */
@@ -31,9 +31,9 @@ trait HasUserAbilities
     /**
      * Check if the user instance has the given ability.
      *
-     * @param  string  $ability
-     * @param  string  $model_type
-     * @param  int|null  $model_id
+     * @param  string  $ability  The ability to check for the existence of.
+     * @param  string  $model_type  The string version of the model class name the ability will apply to.
+     * @param  int|null  $model_id  The primary key of the model instance the ability will apply to.
      *
      * @return bool
      */
@@ -45,9 +45,9 @@ trait HasUserAbilities
     /**
      * Check if the user instance has the given ability defined in storage.
      *
-     * @param  string  $ability
-     * @param  string  $model_type
-     * @param  int|null  $model_id
+     * @param  string  $ability  The ability to check for the existence of.
+     * @param  string  $model_type  The string version of the model class name the ability will apply to.
+     * @param  int|null  $model_id  The primary key of the model instance the ability will apply to.
      *
      * @return bool
      */
