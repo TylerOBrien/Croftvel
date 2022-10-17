@@ -6,11 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class FacebookUser extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'facebook_id',
         'identity_id',
         'email',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
