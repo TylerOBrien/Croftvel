@@ -8,7 +8,10 @@ use App\Models\{ AppleUser, FacebookUser, GitHubUser, GoogleUser, TwitterUser, I
 class OAuthUser
 {
     /**
-     * @param  \App\Models\Identity  $identity
+     * Create a new instance of the appropriate OAuth user model based on the
+     * OAuth provider for the given identity.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
      *
      * @return \App\Models\AppleUser|FacebookUser|GitHubUser|GoogleUser|TwitterUser
      */
@@ -31,8 +34,10 @@ class OAuthUser
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
-     * @param  \Laravel\Socialite\Two\User  $fields
+     * Create a new AppleUser instance.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
+     * @param  \Laravel\Socialite\Two\User  $fields  The Socialite user data instance.
      *
      * @return \App\Models\AppleUser
      */
@@ -46,8 +51,10 @@ class OAuthUser
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
-     * @param  \Laravel\Socialite\Two\User  $fields
+     * Create a new FacebookUser instance.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
+     * @param  \Laravel\Socialite\Two\User  $fields  The Socialite user data instance.
      *
      * @return \App\Models\FacebookUser
      */
@@ -63,8 +70,10 @@ class OAuthUser
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
-     * @param  \Laravel\Socialite\Two\User  $fields
+     * Create a new GitHubUser instance.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
+     * @param  \Laravel\Socialite\Two\User  $fields  The Socialite user data instance.
      *
      * @return \App\Models\GitHubUser
      */
@@ -80,8 +89,10 @@ class OAuthUser
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
-     * @param  \Laravel\Socialite\Two\User  $fields
+     * Create a new GoogleUser instance.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
+     * @param  \Laravel\Socialite\Two\User  $fields  The Socialite user data instance.
      *
      * @return \App\Models\GoogleUser
      */
@@ -98,8 +109,10 @@ class OAuthUser
     }
 
     /**
-     * @param  \App\Models\Identity  $identity
-     * @param  \Laravel\Socialite\Two\User  $fields
+     * Create a new TwitterUser instance.
+     *
+     * @param  \App\Models\Identity  $identity  The OAuth-based identity instance.
+     * @param  \Laravel\Socialite\Two\User  $fields  The Socialite user data instance.
      *
      * @return \App\Models\TwitterUser
      */
