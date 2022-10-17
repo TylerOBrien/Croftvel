@@ -17,7 +17,7 @@ Route::group(
         Route::get('oauth/providers', [ OAuthProviderController::class, 'index' ]);
         Route::get('oauth/providers/{provider}', [ OAuthProviderController::class, 'show' ]);
         Route::get('oauth/providers/{provider}/user', [ OAuthProviderController::class, 'user' ]);
-    }
+    },
 );
 
 Route::post('identities/verifications', VerifyIdentityController::class);
