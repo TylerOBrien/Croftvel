@@ -55,22 +55,34 @@ class Query
      */
     static protected function process(Builder $query, string $column, array $given_constraints): Builder
     {
-        $keys = array_keys($given_constraints);
+        $given_constraint_names = array_keys($given_constraints);
 
-        if (empty($keys)) {
+        if (empty($given_constraint_names)) {
             return $query;
         }
 
-        $values = array_values($given_constraints);
+        $constraints_to_apply = []; // The constraints that will be applied to the query.
 
-        if (in_array(self::MIN, $keys) && in_array(self::MAX, $keys)) {
-            return self::between($query, $column, $values);
+        // Before looping over allowed constraints check for both MIN and MAX
+        // which implicitly means BETWEEN. If so also remove the MIN and MAX
+        // keys so they are not handled a second time in the loop below.
+
+        if (in_array(self::MIN, $given_constraint_names)) {
+            if (in_array(self::MAX, $given_constraint_names)) {
+                $constraints_to_apply[] = ['between', [ $given_constraints['min'], $given_constraints['max'] ]];
+                unset($given_constraint_names[array_search(self::MIN, $given_constraint_names)]);
+                unset($given_constraint_names[array_search(self::MAX, $given_constraint_names)]);
+            }
         }
 
-        foreach (self::$constraints as $allowed_constraint) {
-            if (in_array($allowed_constraint, $keys)) {
-                return self::$allowed_constraint($query, $column, $values);
+        foreach (self::$constraints as $allowed_constraint_name) {
+            if (in_array($allowed_constraint_name, $given_constraint_names)) {
+                $constraints_to_apply[] = [$allowed_constraint_name, $given_constraints[$allowed_constraint_name]];
             }
+        }
+
+        foreach ($constraints_to_apply as [ $name, $value ]) {
+            $query = self::$name($query, $column, $value);
         }
 
         return $query;
