@@ -70,8 +70,8 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      */
     public function register()
     {
-        Auth::extend(config('security.guard.name'), function ($app, $name, array $config) {
-            return new ApiGuard(config('security.bearer.ttl'));
+        Auth::extend(config('api.guard.name'), function ($app, $name, array $config) {
+            return new ApiGuard(config('api.bearer.ttl'));
         });
 
         Gate::before(function () {
