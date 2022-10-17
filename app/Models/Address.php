@@ -16,9 +16,17 @@ class Address extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $hidden = [
-        'owner_id',
-        'owner_type',
+    protected $visible = [
+        'id',
+        'name',
+        'line1',
+        'line2',
+        'city',
+        'subdivision',
+        'country',
+        'postal_code',
+        'created_at',
+        'updated_at',
     ];
 
     protected $fillable = [
