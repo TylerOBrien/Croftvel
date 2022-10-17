@@ -36,6 +36,7 @@ class User extends BaseUser
     protected $casts = [
         'last_active_at' => 'datetime',
         'identified_at' => 'datetime',
+        'is_enabled' => 'boolean',
     ];
 
     protected $dispatchesEvents = [
