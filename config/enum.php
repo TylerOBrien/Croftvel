@@ -9,10 +9,11 @@ return [
     | Enums
     |--------------------------------------------------------------------------
     |
-    | The valid values for all enum columns in the database. These are used
-    | during table creation migrations, so the side-effects of modifying
-    | enum settings that are already in use must be considered otherwise there
-    | will be a risk of truncated data in the database.
+    | The values for all enum columns in the database.
+    |
+    | These are used in table creation migrations, so the side-effects of
+    | modifying enum settings that are already in use must be considered
+    | otherwise there will be a risk of truncated data in the database.
     |
     */
 
