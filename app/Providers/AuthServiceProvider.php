@@ -73,7 +73,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
         Auth::extend(config('api.guard.name'), fn () => new ApiGuard);
 
         if (!app()->isProduction()) {
-            Gate::before(fn () => config('security.permissions.disabled') ?: null);
+            Gate::before(fn () => config('permissions.bypass') ?: null);
         }
     }
 }
