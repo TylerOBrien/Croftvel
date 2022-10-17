@@ -88,6 +88,10 @@ class EventServiceProvider extends ServiceProvider
         UserIdentified::class => [
             SendWelcomeUserNotification::class,
         ],
+
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            \SocialiteProviders\Apple\AppleExtendSocialite::class.'@handle',
+        ],
     ];
 
     /**
