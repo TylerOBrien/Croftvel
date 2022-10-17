@@ -4,6 +4,7 @@ namespace App\Support\OAuth;
 
 use App\Enums\Identity\IdentityType;
 use App\Exceptions\Api\v1\Identity\IdentityIsntOAuth;
+use App\Exceptions\Api\v1\OAuth\ProviderNotFound;
 use App\Models\Identity;
 
 use Laravel\Socialite\Facades\Socialite;
@@ -60,6 +61,10 @@ class OAuthDriver
      */
     static public function get(string $provider): AppleProvider|FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
     {
+        if (!in_array($provider, config('enum.oauth.provider'))) {
+            throw new ProviderNotFound(500);
+        }
+
         return Socialite::driver($provider);
     }
 }
