@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('apple_users', function (Blueprint $table) {
-            $table->string('apple_id')->primary();
+            $table->id();
+            $table->string('apple_id');
             $table->unsignedBigInteger('identity_id');
             $table->string('email')->nullable();
             $table->timestamps();
