@@ -28,7 +28,7 @@ class OAuthDriver
      */
     static public function user(Identity $identity): \Laravel\Socialite\Two\User
     {
-        return OAuthDriver::get($identity->provider)->stateless()->user();
+        return self::get($identity->provider)->stateless()->user();
     }
 
     /**
