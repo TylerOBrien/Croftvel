@@ -2,6 +2,7 @@
 
 namespace App\Support\OAuth;
 
+use App\Enums\OAuth\OAuthProvider;
 use App\Models\{ FacebookUser, GitHubUser, GoogleUser, TwitterUser, Identity };
 
 use Laravel\Socialite\Two\User as SocialiteUser;
@@ -18,13 +19,13 @@ class OAuthUser
         $fields = OAuthDriver::user($identity);
 
         switch ($identity->provider) {
-        case 'facebook':
+        case OAuthProvider::Facebook:
             return self::createFacebook($identity, $fields);
-        case 'github':
+        case OAuthProvider::GitHub:
             return self::createGitHub($identity, $fields);
-        case 'google':
+        case OAuthProvider::Google:
             return self::createGoogle($identity, $fields);
-        case 'twitter':
+        case OAuthProvider::Twitter:
             return self::createTwitter($identity, $fields);
         }
     }
