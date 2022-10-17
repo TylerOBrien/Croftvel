@@ -4,9 +4,12 @@ namespace App\Http\Requests\Api\v1\Company;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\Company;
+use App\Traits\Requests\Api\v1\HasAddress;
 
 class StoreCompany extends ApiRequest
 {
+    use HasAddress;
+
     /**
      * Create a new request.
      *
@@ -25,8 +28,11 @@ class StoreCompany extends ApiRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required|string|unique:companies,name',
-        ];
+        return array_merge(
+            $this->addressStoreRules('address.'),
+            [
+                'name' => 'required|string|unique:companies,name',
+            ],
+        );
     }
 }
