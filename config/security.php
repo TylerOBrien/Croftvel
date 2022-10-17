@@ -26,9 +26,9 @@ return [
 
     'bearer' => [
         'name' => env('APP_TOKEN_NAME', env('APP_NAME', 'Laravel')),
-        'ttl' => env('SECURITY_TOKEN_TTL', 10080),
-        'ttl_type' => env('SECURITY_TOKEN_TTL_TYPE', 'minute'), // 10080 minutes = 7 days
-        'length' => env('SECURITY_TOKEN_LENGTH', 40), // bytes
+        'ttl' => env('SECURITY_BEARER_TTL', 10080),
+        'ttl_type' => env('SECURITY_BEARER_TTL_TYPE', 'minute'), // 10080 minutes = 7 days
+        'length' => env('SECURITY_BEARER_LENGTH', 40), // bytes
         'hash_algo' => 'sha256',
     ],
 
