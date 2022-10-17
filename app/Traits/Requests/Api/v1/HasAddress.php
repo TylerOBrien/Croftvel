@@ -9,7 +9,7 @@ trait HasAddress
      *
      * @param  string  $prefix  The optional prefix to add to the names of each field in the address.
      *
-     * @return array
+     * @return array<string, string>
      */
     protected function addressStoreRules(string $prefix = ''): array
     {
@@ -28,7 +28,7 @@ trait HasAddress
      *
      * @param  string  $prefix  The optional prefix to add to the names of each field in the address.
      *
-     * @return array
+     * @return array<string, string>
      */
     protected function addressUpdateRules(string $prefix = ''): array
     {
