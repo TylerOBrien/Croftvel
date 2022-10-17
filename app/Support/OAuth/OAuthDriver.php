@@ -61,7 +61,7 @@ class OAuthDriver
      *
      * @param  string  $provider  The name of the OAuth provider.
      *
-     * @return \SocialiteProviders\Apple\Provider|\Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
+     * @return \SocialiteProviders\Apple\Provider|\Laravel\Socialite\Two\FacebookProvider|\Laravel\Socialite\Two\GithubProvider|\Laravel\Socialite\Two\GoogleProvider|\Laravel\Socialite\Two\TwitterProvider
      *
      * @throws \App\Exceptions\Api\v1\OAuth\ProviderNotFound
      */
