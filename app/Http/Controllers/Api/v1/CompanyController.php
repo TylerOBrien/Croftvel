@@ -49,8 +49,13 @@ class CompanyController extends Controller
     public function store(StoreCompany $request)
     {
         $fields = $request->validated();
+        $company = Company::create($fields);
 
-        return Company::create($fields);
+        if (isset($fields['address'])) {
+            $company->addresses()->create($fields['address']);
+        }
+
+        return $company;
     }
 
     /**
