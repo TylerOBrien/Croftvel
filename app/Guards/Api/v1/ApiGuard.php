@@ -48,7 +48,7 @@ class ApiGuard implements Guard
      * Create a new API guard.
      *
      * @param  int|null  $ttl  How long the auth token will be valid for.
-     * @param  string|null  $ttl  The unit of time used by the ttl.
+     * @param  string|null  $ttl_type  The unit of time used by the ttl.
      *
      * @return void
      */
