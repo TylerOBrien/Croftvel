@@ -39,7 +39,7 @@ trait HasUserAbilities
      */
     protected function hasTokenAbility(string $ability, string $model_type, int|null $model_id = null): bool
     {
-        return true;
+        return true; // Currently not implemented so just return true.
     }
 
     /**
