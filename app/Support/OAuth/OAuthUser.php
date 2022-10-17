@@ -3,7 +3,7 @@
 namespace App\Support\OAuth;
 
 use App\Enums\OAuth\OAuthProvider;
-use App\Models\{ FacebookUser, GitHubUser, GoogleUser, TwitterUser, Identity };
+use App\Models\{ AppleUser, FacebookUser, GitHubUser, GoogleUser, TwitterUser, Identity };
 
 class OAuthUser
 {
@@ -17,6 +17,8 @@ class OAuthUser
         $fields = OAuthDriver::user($identity);
 
         switch ($identity->provider) {
+        case OAuthProvider::Apple:
+            return self::createApple($identity, $fields);
         case OAuthProvider::Facebook:
             return self::createFacebook($identity, $fields);
         case OAuthProvider::GitHub:
@@ -26,6 +28,21 @@ class OAuthUser
         case OAuthProvider::Twitter:
             return self::createTwitter($identity, $fields);
         }
+    }
+
+    /**
+     * @param  \App\Models\Identity  $identity
+     * @param  \Laravel\Socialite\Two\User  $fields
+     *
+     * @return \App\Models\AppleUser
+     */
+    static public function createApple(Identity $identity, \Laravel\Socialite\Two\User $fields): AppleUser
+    {
+        return AppleUser::create([
+            'identity_id' => $identity->id,
+            'apple_id' => $fields->id,
+            'email' => $fields->email,
+        ]);
     }
 
     /**
