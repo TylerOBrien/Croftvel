@@ -48,7 +48,7 @@ class Subdivision implements Rule
         }
 
         $iso31662 = [ strtoupper($alpha2), strtoupper($value) ];
-        $subdivisions = L91Subdivision::getSubdivisions($alpha2);
+        $subdivisions = get_object_vars(L91Subdivision::getSubdivisions($alpha2)); // Linter error is a false positive.
 
         return in_array(implode('-', $iso31662), array_keys($subdivisions));
     }
