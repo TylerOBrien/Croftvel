@@ -6,7 +6,8 @@ Authorization/Permissions is controlled by the `App\Models\Privilege` and `App\M
 
 The `App\Models\Privilege` model is a name given to a collection of abilities.
 
-The `App\Models\Ability` model defines an action by name as well as the model that the action will be affecting. The affected model is defined using its fully qualified class name (e.g. `App\Models\Profile\UserGallery`) or a wildcard (i.e. `*`). Along with the model a specific id can be given to resrict the action to a single resource, or a wildcard can be given.
+The `App\Models\Ability` model defines an action by name as well as the model that the action will be affecting. The affected model is defined using its fully qualified class name (e.g. `App\Models\Profile\UserGallery`) or a wildcard (i.e. `*`). Along with the model a specific id can be given to resrict the action to a single resource, or a `NULL` value can be given for the id which will allow
+the ability on all resources.
 
 A `hasMany` relationship exists between `App\Models\Privilege` and `App\Models\Ability`.
 
