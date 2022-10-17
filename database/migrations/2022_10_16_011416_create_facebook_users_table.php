@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('facebook_id')->primary();
             $table->unsignedBigInteger('identity_id');
             $table->string('email')->nullable();
+            $table->string('name')->nullable();
+            $table->string('profile_image_url')->nullable();
             $table->timestamps();
 
             $table->foreign('identity_id')
