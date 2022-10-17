@@ -15,16 +15,12 @@ class CreateOAuthAccessTokensTable extends Migration
     {
         Schema::create('oauth_access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('identity_id');
+            $table->string('oauth_user_type')->index();
+            $table->unsignedBigInteger('oauth_user_id')->nullable()->index();
             $table->string('scope');
             $table->string('type');
             $table->text('value');
             $table->timestamps();
-
-            $table->foreign('identity_id')
-                  ->references('id')->on('identities')
-                  ->onDelete('cascade')
-                  ->onUpdate('restrict');
         });
     }
 
