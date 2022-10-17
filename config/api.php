@@ -7,7 +7,7 @@ return [
     | Version
     |--------------------------------------------------------------------------
     |
-    | The current primary version of the API being used.
+    | The current primary version of the API.
     |
     */
 
