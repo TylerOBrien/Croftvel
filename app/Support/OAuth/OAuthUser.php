@@ -10,9 +10,9 @@ class OAuthUser
     /**
      * @param  \App\Models\Identity  $identity
      *
-     * @return \App\Models\FacebookUser|GitHubUser|GoogleUser|TwitterUser
+     * @return \App\Models\AppleUser|FacebookUser|GitHubUser|GoogleUser|TwitterUser
      */
-    static public function create(Identity $identity): FacebookUser|GitHubUser|GoogleUser|TwitterUser
+    static public function create(Identity $identity): AppleUser|FacebookUser|GitHubUser|GoogleUser|TwitterUser
     {
         $fields = OAuthDriver::user($identity);
 
