@@ -17,7 +17,9 @@ class CreateOAuthUser
     public function handle(IdentityCreated $event)
     {
         if ($event->identity->is_oauth) {
-            OAuthUser::create($event->identity);
+            if (request()->has('secret.value')) { // Check if there is an OAuth code for this identity before trying to use it.
+                OAuthUser::create($event->identity);
+            }
         }
     }
 }
