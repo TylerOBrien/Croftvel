@@ -29,8 +29,8 @@ class Credentials implements Arrayable, Jsonable
     /**
      * Instantiate the helper.
      *
-     * @param  \App\Models\Identity  $identity
-     * @param  \App\Models\Secret  $secret
+     * @param  \App\Models\Identity  $identity  The identity instance.
+     * @param  \App\Models\Secret  $secret  The secret instance.
      *
      * @return void
      */
