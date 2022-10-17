@@ -8,12 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ability extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'privilege_id',
         'name',
         'model_id',
         'model_type',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -22,6 +34,12 @@ class Ability extends Model
     {
         return $this->belongsTo(Privilege::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Grant the user the defined ability/abilities. This will allow the user
