@@ -4,6 +4,8 @@ namespace App\Support\OAuth;
 
 use App\Models\Identity;
 
+use SocialiteProviders\Apple\Provider as AppleProvider;
+
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, TwitterProvider };
 
@@ -35,9 +37,9 @@ class OAuthDriver
      *
      * @param  string  $provider  The name of the OAuth provider.
      *
-     * @return \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
+     * @return \SocialiteProviders\Apple\Provider|\Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
      */
-    static public function get(string $provider): FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
+    static public function get(string $provider): AppleProvider|FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
     {
         return Socialite::driver($provider);
     }
