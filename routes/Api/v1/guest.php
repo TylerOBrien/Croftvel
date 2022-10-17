@@ -16,16 +16,7 @@ Route::group(
         Route::post('users', RegisterController::class);
         Route::get('oauth/providers', [ OAuthProviderController::class, 'index' ]);
         Route::get('oauth/providers/{provider}', [ OAuthProviderController::class, 'show' ]);
-        Route::get('oauth/providers/{provider}/user', function () {
-            $out = [
-                'session' => session()->all(),
-                'request' => request()->all(),
-            ];
-
-            session()->flush();
-
-            return $out;
-        });
+        Route::get('oauth/providers/{provider}/user', [ OAuthProviderController::class, 'user' ]);
     }
 );
 
