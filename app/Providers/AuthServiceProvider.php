@@ -60,7 +60,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
     }
@@ -68,7 +68,7 @@ class AuthServiceProvider extends BaseAuthServiceProvider
     /**
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         Auth::extend(config('api.guard.name'), function ($app, $name, array $config) {
             return new ApiGuard(config('api.bearer.ttl'));
