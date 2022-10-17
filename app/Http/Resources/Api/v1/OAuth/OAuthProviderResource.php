@@ -6,6 +6,8 @@ use App\Support\OAuth\OAuthProvider;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use SocialiteProviders\Apple\Provider as AppleProvider;
+
 use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, TwitterProvider };
 
 class OAuthProviderResource extends JsonResource
@@ -20,11 +22,11 @@ class OAuthProviderResource extends JsonResource
     /**
      * Instantiate the resource.
      *
-     * @param  \Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider  $driver
+     * @param  \SocialiteProviders\Apple\Provider|\Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider  $driver
      *
      * @return array
      */
-    public function __construct(FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver)
+    public function __construct(AppleProvider|FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider $driver)
     {
         $this->provider = OAuthProvider::enum($driver);
 
