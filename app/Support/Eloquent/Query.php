@@ -20,6 +20,8 @@ class Query
         self::ISNT,
         self::IS_NULL,
         self::ISNT_NULL,
+        self::LESS,
+        self::GREATER,
         self::MIN,
         self::MAX,
     ];
