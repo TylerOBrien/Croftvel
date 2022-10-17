@@ -45,7 +45,7 @@ trait HasLogo
     */
 
     /**
-     * Creates a new Image instance preconfigured to be able to represent a logo.
+     * Create a new Image instance preconfigured to represent a logo.
      *
      * @param  \Illuminate\Http\UploadedFile  $file  The image file uploaded by a user.
      * @param  string|null  $name  The name of the logo.
