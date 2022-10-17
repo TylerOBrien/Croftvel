@@ -7,6 +7,45 @@ use Illuminate\Support\Facades\Storage;
 
 trait HasFileUpload
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Overrides
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Deletes the file from file disk storage as well as database storage.
+     *
+     * @return bool
+     */
+    public function delete(): bool
+    {
+        Storage::disk($this->disk)->delete($this->filepath);
+        return parent::delete();
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Retreives the full URL for this file.
+     *
+     * @return string
+     */
+    public function getUrlAttribute(): string
+    {
+        return Storage::disk($this->disk)->url($this->filepath); // Linter error here is a false positive.
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Create a new instance of this model using the given uploaded file.
      *
@@ -52,26 +91,5 @@ trait HasFileUpload
         $this->fill(array_merge($attributes, compact('filesize', 'filepath', 'mimetype')));
 
         return $this->save();
-    }
-
-    /**
-     * Deletes the file from file disk storage as well as database storage.
-     *
-     * @return bool
-     */
-    public function delete(): bool
-    {
-        Storage::disk($this->disk)->delete($this->filepath);
-        return parent::delete();
-    }
-
-    /**
-     * Retreives the full URL for this file.
-     *
-     * @return string
-     */
-    public function getUrlAttribute(): string
-    {
-        return Storage::disk($this->disk)->url($this->filepath); // Linter error here is a false positive.
     }
 }
