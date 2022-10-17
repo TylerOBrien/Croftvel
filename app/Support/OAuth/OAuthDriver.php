@@ -22,6 +22,8 @@ class OAuthDriver
      * @param  \App\Models\Identity  $identity  The identity to get the token for.
      *
      * @return string
+     *
+     * @throws \App\Exceptions\Api\v1\OAuth\IdentityIsntOAuth
      */
     static public function token(Identity $identity): string
     {
@@ -40,6 +42,8 @@ class OAuthDriver
      * @param  \App\Models\Identity  $identity  The identity to get the Socialite user instance for.
      *
      * @return \Laravel\Socialite\Two\User
+     *
+     * @throws \App\Exceptions\Api\v1\OAuth\IdentityIsntOAuth
      */
     static public function user(Identity $identity): \Laravel\Socialite\Two\User
     {
@@ -58,6 +62,8 @@ class OAuthDriver
      * @param  string  $provider  The name of the OAuth provider.
      *
      * @return \SocialiteProviders\Apple\Provider|\Laravel\Socialite\Two\FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
+     *
+     * @throws \App\Exceptions\Api\v1\OAuth\ProviderNotFound
      */
     static public function get(string $provider): AppleProvider|FacebookProvider|GithubProvider|GoogleProvider|TwitterProvider
     {
