@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OAuthAccessToken extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $table = 'oauth_access_tokens';
 
     protected $hidden = [
@@ -20,6 +26,12 @@ class OAuthAccessToken extends Model
         'value',
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
@@ -27,6 +39,12 @@ class OAuthAccessToken extends Model
     {
         return $this->morphTo();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return string
