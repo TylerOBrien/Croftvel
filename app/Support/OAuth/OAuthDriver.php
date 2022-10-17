@@ -6,10 +6,10 @@ use App\Enums\Identity\IdentityType;
 use App\Exceptions\Api\v1\Identity\IdentityIsntOAuth;
 use App\Models\Identity;
 
-use SocialiteProviders\Apple\Provider as AppleProvider;
-
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, TwitterProvider };
+
+use SocialiteProviders\Apple\Provider as AppleProvider;
 
 class OAuthDriver
 {
