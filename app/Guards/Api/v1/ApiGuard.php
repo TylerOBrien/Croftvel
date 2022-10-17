@@ -46,7 +46,7 @@ class ApiGuard implements Guard
      */
     public function __construct(int|null $ttl = null)
     {
-        $this->ttl = $ttl ?: config('security.bearer.ttl');
+        $this->ttl = $ttl ?: config('api.bearer.ttl');
     }
 
     /**
