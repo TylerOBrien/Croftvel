@@ -2,6 +2,8 @@
 
 namespace App\Support\OAuth;
 
+use App\Enums\Identity\IdentityType;
+use App\Exceptions\Api\v1\Identity\IdentityIsntOAuth;
 use App\Models\Identity;
 
 use SocialiteProviders\Apple\Provider as AppleProvider;
@@ -18,6 +20,10 @@ class OAuthDriver
      */
     static public function token(Identity $identity): string
     {
+        if ($identity->type !== IdentityType::OAuth) {
+            throw new IdentityIsntOAuth;
+        }
+
         return self::user($identity)->token;
     }
 
@@ -28,6 +34,10 @@ class OAuthDriver
      */
     static public function user(Identity $identity): \Laravel\Socialite\Two\User
     {
+        if ($identity->type !== IdentityType::OAuth) {
+            throw new IdentityIsntOAuth;
+        }
+
         return self::get($identity->provider)->stateless()->user();
     }
 
