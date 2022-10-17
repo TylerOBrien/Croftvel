@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Ability\{ IndexAbility, ShowAbility, StoreAbility, UpdateAbility, DestroyAbility };
 use App\Models\Ability;
-use App\Traits\Controllers\Api\v1\HasControllerHelpers;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class AbilityController extends Controller
 {
-    use HasControllerHelpers;
+    use HasQueryFilter;
 
     /**
      * Display a listing of the abilities.

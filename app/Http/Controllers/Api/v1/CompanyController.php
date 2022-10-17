@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Company\{ IndexCompany, ShowCompany, StoreCompany, UpdateCompany, DestroyCompany };
 use App\Models\Company;
-use App\Traits\Controllers\Api\v1\HasControllerHelpers;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class CompanyController extends Controller
 {
-    use HasControllerHelpers;
+    use HasQueryFilter;
 
     /**
      * Display a listing of the companies.

@@ -6,11 +6,11 @@ use App\Guards\Api\v1\ApiGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Identity\{ IndexIdentity, ShowIdentity, StoreIdentity, UpdateIdentity, DestroyIdentity };
 use App\Models\Identity;
-use App\Traits\Controllers\Api\v1\HasControllerHelpers;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class IdentityController extends Controller
 {
-    use HasControllerHelpers;
+    use HasQueryFilter;
 
     /**
      * Display a listing of the identities.

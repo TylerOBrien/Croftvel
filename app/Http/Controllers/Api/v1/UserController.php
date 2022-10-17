@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\User\{ IndexUser, ShowUser, StoreUser, UpdateUser, DestroyUser };
 use App\Models\User;
-use App\Traits\Controllers\Api\v1\HasControllerHelpers;
+use App\Traits\Controllers\Api\v1\HasQueryFilter;
 
 class UserController extends Controller
 {
-    use HasControllerHelpers;
+    use HasQueryFilter;
 
     /**
      * Display a listing of the users.
