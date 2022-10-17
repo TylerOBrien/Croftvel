@@ -4,8 +4,7 @@ namespace App\Traits\Controllers\Api\v1;
 
 use App\Support\Query;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\{ Builder, Collection };
 
 trait HasQueryFilter
 {
