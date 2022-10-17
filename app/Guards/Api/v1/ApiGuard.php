@@ -24,29 +24,38 @@ use Illuminate\Support\Facades\Hash;
 class ApiGuard implements Guard
 {
     /**
-     * The identity the user used to authenticate.
+     * The identity the user authenticated with.
      *
      * @var \App\Models\Identity
      */
     protected $identity;
 
     /**
-     * The number of minutes tokens should be allowed to remain valid.
+     * How long the auth token will be valid for.
      *
      * @var int
      */
     protected $ttl;
 
     /**
+     * The unit of time used by the ttl.
+     *
+     * @var string
+     */
+    protected $ttl_type;
+
+    /**
      * Create a new API guard.
      *
-     * @param  int|null  $ttl  The number of minutes an auth token will be valid for.
+     * @param  int|null  $ttl  How long the auth token will be valid for.
+     * @param  string|null  $ttl  The unit of time used by the ttl.
      *
      * @return void
      */
-    public function __construct(int|null $ttl = null)
+    public function __construct(int|null $ttl = null, string|null $ttl_type = null)
     {
         $this->ttl = $ttl ?: config('api.bearer.ttl');
+        $this->ttl_type = $ttl_type ?: config('api.bearer.ttl_type');
     }
 
     /**
