@@ -57,6 +57,8 @@ class OAuthUser
             'identity_id' => $identity->id,
             'facebook_id' => $fields->id,
             'email' => $fields->email,
+            'name' => $fields->name,
+            'profile_image_url' => $fields->avatar,
         ]);
     }
 
