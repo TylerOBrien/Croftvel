@@ -3,10 +3,19 @@
 namespace App\Guards\Api\v1;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Exceptions\Api\v1\Auth\{ ExpiredToken, InvalidCredentials, InvalidToken, MissingOAuthProvider, MissingSecret, MissingToken, NotOAuthIdentity };
 use App\Models\{ Identity, PersonalAccessToken, User };
 use App\Support\Auth\Credentials;
 use App\Support\OAuth\OAuthDriver;
+
+use App\Exceptions\Api\v1\Auth\{
+    ExpiredToken,
+    InvalidCredentials,
+    InvalidToken,
+    MissingOAuthProvider,
+    MissingSecret,
+    MissingToken,
+    NotOAuthIdentity,
+};
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
