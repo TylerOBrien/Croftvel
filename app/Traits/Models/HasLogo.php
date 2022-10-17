@@ -54,10 +54,8 @@ trait HasLogo
      */
     public function createLogo(UploadedFile $file, string|null $name = null): Image
     {
-        $name = $name ?? config('models.default.name');
-
         return Image::createFromFile($file, [
-            'name' => "logo.$name.xl",
+            'name' => 'logo'.($name ?? config('models.default.name')).'xl',
             'owner_id' => $this->id,
             'owner_type' => $this::class,
         ]);
