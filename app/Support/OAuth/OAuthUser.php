@@ -5,8 +5,6 @@ namespace App\Support\OAuth;
 use App\Enums\OAuth\OAuthProvider;
 use App\Models\{ FacebookUser, GitHubUser, GoogleUser, TwitterUser, Identity };
 
-use Laravel\Socialite\Two\User as SocialiteUser;
-
 class OAuthUser
 {
     /**
@@ -36,7 +34,7 @@ class OAuthUser
      *
      * @return \App\Models\FacebookUser
      */
-    static public function createFacebook(Identity $identity, SocialiteUser $fields): FacebookUser
+    static public function createFacebook(Identity $identity, \Laravel\Socialite\Two\User $fields): FacebookUser
     {
         return FacebookUser::create([
             'identity_id' => $identity->id,
@@ -51,7 +49,7 @@ class OAuthUser
      *
      * @return \App\Models\GitHubUser
      */
-    static public function createGitHub(Identity $identity, SocialiteUser $fields): GitHubUser
+    static public function createGitHub(Identity $identity, \Laravel\Socialite\Two\User $fields): GitHubUser
     {
         return GitHubUser::create([
             'identity_id' => $identity->id,
@@ -68,7 +66,7 @@ class OAuthUser
      *
      * @return \App\Models\GoogleUser
      */
-    static public function createGoogle(Identity $identity, SocialiteUser $fields): GoogleUser
+    static public function createGoogle(Identity $identity, \Laravel\Socialite\Two\User $fields): GoogleUser
     {
         return GoogleUser::create([
             'identity_id' => $identity->id,
@@ -86,7 +84,7 @@ class OAuthUser
      *
      * @return \App\Models\TwitterUser
      */
-    static public function createTwitter(Identity $identity, SocialiteUser $fields): TwitterUser
+    static public function createTwitter(Identity $identity, \Laravel\Socialite\Two\User $fields): TwitterUser
     {
         return TwitterUser::create([
             'identity_id' => $identity->id,
