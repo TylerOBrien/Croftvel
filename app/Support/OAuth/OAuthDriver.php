@@ -5,13 +5,7 @@ namespace App\Support\OAuth;
 use App\Models\Identity;
 
 use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Two\{
-    User as SocialiteUser,
-    FacebookProvider,
-    GithubProvider,
-    GoogleProvider,
-    TwitterProvider,
-};
+use Laravel\Socialite\Two\{ FacebookProvider, GithubProvider, GoogleProvider, TwitterProvider };
 
 class OAuthDriver
 {
@@ -30,7 +24,7 @@ class OAuthDriver
      *
      * @return \Laravel\Socialite\Two\User
      */
-    static public function user(Identity $identity): SocialiteUser
+    static public function user(Identity $identity): \Laravel\Socialite\Two\User
     {
         return OAuthDriver::get($identity->provider)->stateless()->user();
     }
