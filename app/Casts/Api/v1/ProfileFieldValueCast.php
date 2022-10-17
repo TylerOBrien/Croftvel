@@ -2,6 +2,8 @@
 
 namespace App\Casts\Api\v1;
 
+use App\Enums\Profile\ProfileFieldType;
+
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
@@ -21,19 +23,19 @@ class ProfileFieldValueCast implements CastsAttributes
     public function get($model, string $key, $value, array $attributes)
     {
         switch ($model->type) {
-        case 'string':
+        case ProfileFieldType::String:
             return $value;
-        case 'integer':
+        case ProfileFieldType::Integer:
             return (int) $value;
-        case 'float':
+        case ProfileFieldType::Float:
             return (float) $value;
-        case 'boolean':
+        case ProfileFieldType::Boolean:
             return (bool) $value;
-        case 'date':
+        case ProfileFieldType::Date:
             return Date::instance(Carbon::createFromFormat('Y-m-d', $value)->startOfDay());
-        case 'time':
+        case ProfileFieldType::Time:
             return Date::instance(Carbon::createFromFormat('H:i:s.u', $value)->startOfDay());
-        case 'datetime':
+        case ProfileFieldType::DateTime:
             return Date::instance(Carbon::createFromFormat('Y-m-d H:i:s.u', $value)->startOfDay());
         }
     }
