@@ -12,6 +12,12 @@ class Account extends Model
 {
     use HasEnabledState;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $casts = [
         'status' => AccountStatus::class,
         'is_enabled' => 'boolean',
@@ -20,6 +26,12 @@ class Account extends Model
     protected $dispatchesEvents = [
         'created' => AccountCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

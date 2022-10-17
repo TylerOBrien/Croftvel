@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class TwitterUser extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'identity_id',
         'twitter_id',
@@ -14,6 +20,12 @@ class TwitterUser extends Model
         'nickname',
         'profile_image_url',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

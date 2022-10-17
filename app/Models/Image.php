@@ -16,6 +16,12 @@ class Image extends Model
         updateFromFile as protected updateFromFileBase;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $appends = [
         'url',
     ];
@@ -42,6 +48,12 @@ class Image extends Model
     protected $dispatchesEvents = [
         'created' => ImageCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Create a new Image model from an uploaded file.

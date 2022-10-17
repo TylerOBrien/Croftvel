@@ -10,6 +10,12 @@ use Illuminate\Support\Str;
 
 class PersonalAccessToken extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'name',
         'token',
@@ -27,6 +33,12 @@ class PersonalAccessToken extends Model
         'created' => PersonalAccessTokenCreated::class,
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
@@ -34,6 +46,12 @@ class PersonalAccessToken extends Model
     {
         return $this->morphTo();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Create a new token that the given user identity will be able to use to

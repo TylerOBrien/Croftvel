@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\{ Builder, Model };
 
 class AuthAttempt extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'identity_type',
         'identity_value',
@@ -21,6 +27,12 @@ class AuthAttempt extends Model
     protected $dispatchesEvents = [
         'created' => AuthAttemptCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Builds a query constraining all AuthAttempt rows to the passed Identity.

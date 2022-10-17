@@ -9,6 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileField extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'profile_id',
         'type',
@@ -20,6 +26,12 @@ class ProfileField extends Model
         'type' => ProfileFieldType::class,
         'value' => ProfileFieldValueCast::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

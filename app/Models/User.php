@@ -13,6 +13,12 @@ class User extends BaseUser
 {
     use Notifiable, HasFactory, HasEnabledState, HasFullName, HasUserAbilities, HasProfiles;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $appends = [
         'full_name',
         'full_name_reverse',
@@ -35,6 +41,12 @@ class User extends BaseUser
     protected $dispatchesEvents = [
         'created' => UserCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -68,6 +80,12 @@ class User extends BaseUser
     {
         return $this->hasMany(Secret::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Retreive the primary email address (if it exists) for this user.
@@ -120,6 +138,12 @@ class User extends BaseUser
                     ->whereNotNull('verified_at')
                     ->count();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Retreive the specified identity attribute.

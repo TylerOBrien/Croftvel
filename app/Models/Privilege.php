@@ -6,9 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Privilege extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'name',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -17,6 +29,12 @@ class Privilege extends Model
     {
         return $this->hasMany(Ability::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Creates a new privilege and associates it with the given user.

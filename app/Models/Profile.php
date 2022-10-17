@@ -11,6 +11,12 @@ class Profile extends Model
 {
     use HasOwnership;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $hidden = [
         'owner_id',
         'owner_type',
@@ -22,6 +28,12 @@ class Profile extends Model
         'name',
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -29,6 +41,12 @@ class Profile extends Model
     {
         return $this->hasMany(ProfileField::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Support\Collection

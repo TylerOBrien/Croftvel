@@ -13,6 +13,12 @@ class Verification extends Model
 {
     use HasSecretCode, HasUniqueMaker;
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $hidden = [
         'code',
         'verifiable_id',
@@ -37,6 +43,12 @@ class Verification extends Model
         'created' => VerificationCreated::class,
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
@@ -44,6 +56,12 @@ class Verification extends Model
     {
         return $this->morphTo();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generate a new unique verification code.

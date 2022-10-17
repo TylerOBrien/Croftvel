@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class GitHubUser extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $table = 'github_users';
 
     protected $fillable = [
@@ -15,6 +21,12 @@ class GitHubUser extends Model
         'nickname',
         'profile_image_url',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

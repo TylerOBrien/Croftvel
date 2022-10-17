@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\{ Crypt, Hash };
 
 class Secret extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $hidden = [
         'value',
     ];
@@ -24,6 +30,12 @@ class Secret extends Model
         'type' => SecretType::class,
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -31,6 +43,12 @@ class Secret extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return void
@@ -46,6 +64,12 @@ class Secret extends Model
             break;
         }
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Create a new secret instance for the given identity.

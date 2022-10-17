@@ -16,6 +16,12 @@ class Video extends Model
         updateFromFile as protected updateFromFileBase;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $appends = [
         'url',
     ];
@@ -40,6 +46,12 @@ class Video extends Model
     protected $dispatchesEvents = [
         'created' => VideoCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Create a new Video model from an uploaded file.

@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class GoogleUser extends Model
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Properties
+    |--------------------------------------------------------------------------
+    */
+
     protected $fillable = [
         'identity_id',
         'google_id',
@@ -14,6 +20,12 @@ class GoogleUser extends Model
         'email',
         'profile_image_url',
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
