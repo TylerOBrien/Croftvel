@@ -18,9 +18,9 @@ return [
     | API Domain Names
     |--------------------------------------------------------------------------
     |
-    | The domain names that are used by the API. These are used to
-    | ensure proper routing is used and to support multiple domain names being
-    | pointed to this API.
+    | The domain names that are used by the API. These exist to ensure proper
+    | routing is used and to support multiple domain names being pointed to
+    | this API.
     |
     */
 
