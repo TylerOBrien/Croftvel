@@ -41,7 +41,7 @@ return [
             'hash' => false,
         ],
 
-        'croft' => [
+        env('API_GUARD_NAME', 'croft') => [
             'driver' => env('API_GUARD_NAME', 'croft'),
             'provider' => 'users',
             'hash' => false,
