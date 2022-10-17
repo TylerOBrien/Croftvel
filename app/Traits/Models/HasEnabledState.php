@@ -4,6 +4,12 @@ namespace App\Traits\Models;
 
 trait HasEnabledState
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Model
      */

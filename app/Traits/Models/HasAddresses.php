@@ -6,6 +6,12 @@ use App\Models\Address;
 
 trait HasAddresses
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -13,6 +19,12 @@ trait HasAddresses
     {
         return $this->morphMany(Address::class, 'owner');
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Create Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Create a new address with this model instance being set as the owner. The
