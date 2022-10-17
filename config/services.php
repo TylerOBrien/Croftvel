@@ -14,6 +14,12 @@ return [
     |
     */
 
+    'apple' => [
+        'client_id' => env('APPLE_CLIENT_ID'),
+        'client_secret' => env('APPLE_CLIENT_SECRET'),
+        'redirect' => env('APPLE_OAUTH_PROVIDER_URL', env('OAUTH_PROVIDERS_URL', 'http://localhost')) . '/apple/user',
+    ],
+
     'facebook' => [
         'client_id' => env('FACEBOOK_APP_ID'),
         'client_secret' => env('FACEBOOK_APP_SECRET'),
