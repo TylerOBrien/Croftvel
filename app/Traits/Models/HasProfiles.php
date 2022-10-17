@@ -6,6 +6,12 @@ use App\Models\Profile;
 
 trait HasProfiles
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

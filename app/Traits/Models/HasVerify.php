@@ -15,6 +15,12 @@ use App\Exceptions\Api\v1\Verify\{
 
 trait HasVerify
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Attempts to verify this model against the given ability name and
      * verification code field data. This will throw an error if any check

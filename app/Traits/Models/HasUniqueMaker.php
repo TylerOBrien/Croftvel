@@ -6,6 +6,12 @@ use Illuminate\Support\Str;
 
 trait HasUniqueMaker
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Generate a new integer value that is guaranteed to be a unique entry in storage.
      *

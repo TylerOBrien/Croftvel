@@ -4,12 +4,24 @@ namespace App\Traits\Models;
 
 trait HasSecretCode
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Member Variables
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * The plaintext code that is saved before being hashed.
      *
      * @var string
      */
     public $temporary_plaintext_code;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Utility
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Retrieve the current plaintext code. After retrieval the code will be
@@ -23,6 +35,12 @@ trait HasSecretCode
         unset($this->temporary_plaintext_code);
         return $code;
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Hash the plaintext code and assign it.

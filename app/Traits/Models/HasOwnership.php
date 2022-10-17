@@ -7,6 +7,12 @@ use Illuminate\Support\Str;
 
 trait HasOwnership
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Retrieve the owner of this resource.
      *
@@ -16,6 +22,12 @@ trait HasOwnership
     {
         return $this->morphTo();
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attributes
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Ensure passed type has correct prefix and assign it.
@@ -28,6 +40,12 @@ trait HasOwnership
     {
         $this->attributes['owner_type'] = Str::start($owner_type, config('models.namespace'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Attempts to retrieve an instance of this model that has the given name

@@ -4,6 +4,12 @@ namespace App\Traits\Models;
 
 trait HasTypeValue
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Returns an array with keys for this model's type and value.
      *

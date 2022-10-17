@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 trait HasUserAbilities
 {
+    /*
+    |--------------------------------------------------------------------------
+    | Helpers
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Check if the user instance has the given ability.
      *
