@@ -28,7 +28,7 @@ class OAuthDriver
     static public function token(Identity $identity): string
     {
         if ($identity->type !== IdentityType::OAuth) {
-            throw new IdentityIsntOAuth;
+            throw new IdentityIsntOAuth(500);
         }
 
         return self::user($identity)->token;
@@ -48,7 +48,7 @@ class OAuthDriver
     static public function user(Identity $identity): \Laravel\Socialite\Two\User
     {
         if ($identity->type !== IdentityType::OAuth) {
-            throw new IdentityIsntOAuth;
+            throw new IdentityIsntOAuth(500);
         }
 
         return self::get($identity->provider)->stateless()->user();
