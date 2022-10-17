@@ -34,12 +34,27 @@ A pivot table associates `App\Models\Ability` and `App\Models\User`.
 
 # Custom Artisan Commands
 
+### Controllers
+
+Controllers can be generated with the `make:croft-controller` command:
+
+```
+php artisan make:croft-controller ModelName
+```
+
+The option `--requests` can be used to geneate the request classes and implement
+them into the generated controller:
+
+```
+php artisan make:croft-controller ModelName --requests
+```
+
 ### Policies
 
 Policies can be generated with the `make:croft-policy` command:
 
 ```
-php artisan make:croft-policy Image
+php artisan make:croft-policy ModelName
 ```
 
 ### Requests
@@ -48,22 +63,22 @@ Requests with permissions already integrated can be created with the following
 commands:
 
 ```
-php artisan make:croft-request Image --ability=index
-php artisan make:croft-request Image --ability=show
-php artisan make:croft-request Image --ability=store
-php artisan make:croft-request Image --ability=update
-php artisan make:croft-request Image --ability=destroy
+php artisan make:croft-request ModelName --ability=index
+php artisan make:croft-request ModelName --ability=show
+php artisan make:croft-request ModelName --ability=store
+php artisan make:croft-request ModelName --ability=update
+php artisan make:croft-request ModelName --ability=destroy
 ```
 
 Multiple requests can be created at once with the `make:croft-requests` command:
 
 ```
-php artisan make:croft-requests Image --abilities=index,store,update
+php artisan make:croft-requests ModelName --abilities=index,store,update
 ```
 
 If the `--abilities` option is not given then all requests for index, show,
 store, update, and destroy will be created:
 
 ```
-php artisan make:croft-requests Image
+php artisan make:croft-requests ModelName
 ```
