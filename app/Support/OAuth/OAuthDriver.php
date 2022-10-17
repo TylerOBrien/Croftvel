@@ -50,8 +50,9 @@ class OAuthDriver
     }
 
     /**
-     * This is a helper function that exists to prevent false positive linter
-     * errors when using the provider returned by Socialite::driver.
+     * This is an alias of the Socialite::driver function. It exists to prevent
+     * false positive linter errors when calling the stateless() function on
+     * the provider returned by Socialite::driver.
      *
      * @param  string  $provider  The name of the OAuth provider.
      *
