@@ -34,7 +34,7 @@ A pivot table associates `App\Models\Ability` and `App\Models\User`.
 
 # Custom Artisan Commands
 
-### Controllers
+### — Controllers
 
 Controllers can be generated with the `make:croft-controller` command:
 
@@ -49,7 +49,7 @@ them into the generated controller:
 php artisan make:croft-controller ModelName --requests
 ```
 
-### Policies
+### — Policies
 
 Policies can be generated with the `make:croft-policy` command:
 
@@ -57,7 +57,7 @@ Policies can be generated with the `make:croft-policy` command:
 php artisan make:croft-policy ModelName
 ```
 
-### Requests
+### — Requests
 
 Requests with permissions already integrated can be created with the following
 commands:
