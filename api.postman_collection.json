@@ -546,6 +546,188 @@
 			]
 		},
 		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Index.Company",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "filter[cost][is]=42",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/companies",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show.Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiv1}}/companies/:company_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"companies",
+								":company_id"
+							],
+							"variable": [
+								{
+									"key": "company_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Store.Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Wedostuff",
+									"description": "required|unique:companies,name",
+									"type": "text"
+								},
+								{
+									"key": "address[line1]",
+									"value": "123 Fake Street",
+									"description": "nullable",
+									"type": "text"
+								},
+								{
+									"key": "address[line2]",
+									"value": "",
+									"description": "nullable",
+									"type": "text"
+								},
+								{
+									"key": "address[city]",
+									"value": "Somewhereville",
+									"description": "nullable",
+									"type": "text"
+								},
+								{
+									"key": "address[country]",
+									"value": "USA",
+									"description": "required|country",
+									"type": "text"
+								},
+								{
+									"key": "address[subdivision]",
+									"value": "NY",
+									"description": "required|subdivision:address.country",
+									"type": "text"
+								},
+								{
+									"key": "address[postal_code]",
+									"value": "62454",
+									"description": "nullable",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/companies",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update.Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Wedostuff",
+									"description": "unique:companies,name",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiv1}}/companies/:company_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"companies",
+								":company_id"
+							],
+							"variable": [
+								{
+									"key": "company_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy.Company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apiv1}}/companies/:company_id",
+							"host": [
+								"{{apiv1}}"
+							],
+							"path": [
+								"companies",
+								":company_id"
+							],
+							"variable": [
+								{
+									"key": "company_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Image",
 			"item": [
 				{
