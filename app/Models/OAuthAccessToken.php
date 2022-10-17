@@ -26,6 +26,10 @@ class OAuthAccessToken extends Model
         'value',
     ];
 
+    protected $casts = [
+        'value' => 'encrypted',
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | Relationships
@@ -38,29 +42,5 @@ class OAuthAccessToken extends Model
     public function oauthable()
     {
         return $this->morphTo();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Attributes
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * @return string
-     */
-    public function getValueAttribute(): string
-    {
-        return decrypt($this->attributes['value']);
-    }
-
-    /**
-     * @param  string  $value
-     *
-     * @return void
-     */
-    public function setValueAttribute(string $value)
-    {
-        $this->attributes['value'] = encrypt($value);
     }
 }
