@@ -8,7 +8,7 @@ use Illuminate\Session\Middleware\StartSession;
 Route::group(
     [
         'middleware' => [
-            StartSession::class,
+            StartSession::class, // Sessions required by \Laravel\Socialite\Two\TwitterProvider
         ],
     ],
     function () {
