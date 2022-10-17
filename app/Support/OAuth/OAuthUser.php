@@ -2,7 +2,7 @@
 
 namespace App\Support\OAuth;
 
-use App\Models\{ GitHubUser, GoogleUser, TwitterUser, Identity };
+use App\Models\{ FacebookUser, GitHubUser, GoogleUser, TwitterUser, Identity };
 
 use Laravel\Socialite\Two\User as SocialiteUser;
 
@@ -18,6 +18,8 @@ class OAuthUser
         $fields = OAuthDriver::user($identity);
 
         switch ($identity->provider) {
+        case 'facebook':
+            return self::createFacebook($identity, $fields);
         case 'github':
             return self::createGitHub($identity, $fields);
         case 'google':
@@ -25,6 +27,21 @@ class OAuthUser
         case 'twitter':
             return self::createTwitter($identity, $fields);
         }
+    }
+
+    /**
+     * @param  \App\Models\Identity  $identity
+     * @param  \Laravel\Socialite\Two\User  $fields
+     *
+     * @return \App\Models\FacebookUser
+     */
+    static public function createFacebook(Identity $identity, SocialiteUser $fields): FacebookUser
+    {
+        return FacebookUser::create([
+            'identity_id' => $identity->id,
+            'facebook_id' => $fields->id,
+            'email' => $fields->email,
+        ]);
     }
 
     /**
