@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use ReflectionClass;
 
-use App\Helpers\QueryFilterHelper;
+use App\Support\Query;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Str;
@@ -47,7 +47,7 @@ class QueryFilter implements Rule
             return false;
         }
 
-        $predicate_names = array_flip((new ReflectionClass(QueryFilterHelper::class))->getConstants());
+        $predicate_names = array_flip((new ReflectionClass(Query::class))->getConstants());
 
         foreach ($value as $column => $predicate) {
             if (!is_string($column) || empty(trim($column)) || (!ctype_alpha($column[0]) && $column[0] !== '_')) {
