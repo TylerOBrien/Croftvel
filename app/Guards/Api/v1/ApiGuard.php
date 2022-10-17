@@ -91,7 +91,7 @@ class ApiGuard implements Guard
         }
 
         $now = now();
-        $expires_at = $now->subMinutes($this->ttl);
+        $expires_at = call_user_func([ $now, "sub{$this->ttl_type}s" ], $this->ttl);
         $pat = PersonalAccessToken::findFromBearer($bearer);
 
         if (is_null($pat)) {
