@@ -283,6 +283,6 @@ class ApiGuard implements Guard
      */
     static public function getInstance(): ApiGuard
     {
-        return auth(config('security.guard.name'));
+        return auth(config('api.guard.name'));
     }
 }
