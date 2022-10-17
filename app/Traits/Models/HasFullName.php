@@ -27,7 +27,7 @@ trait HasFullName
     /**
      * @return string|null
      */
-    public function getFullNameReverseAttribute(): string|null
+    public function getReversedFullName(): string|null
     {
         $full_name = implode(', ', array_filter([ $this->last_name, $this->first_name ]));
 

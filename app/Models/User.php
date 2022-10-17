@@ -21,7 +21,7 @@ class User extends BaseUser
 
     protected $appends = [
         'full_name',
-        'full_name_reverse',
+        'reversed_full_name',
         'is_identified',
     ];
 
