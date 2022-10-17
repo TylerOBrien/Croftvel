@@ -2,7 +2,7 @@
 
 namespace App\Traits\Controllers\Api\v1;
 
-use App\Helpers\Query\QueryFilterHelper;
+use App\Support\Query;
 
 use Illuminate\Database\Eloquent\Builder;
 
@@ -40,7 +40,7 @@ trait HasControllerHelpers
     protected function filtered(Builder $query, array $fields, string $resource_name = null, string $ability_name = null)
     {
         if (isset($fields['filter'])) {
-            $query = QueryFilterHelper::handle($query, $fields['filter']);
+            $query = Query::filter($query, $fields['filter']);
         }
 
         if (is_null($resource_name)) {
