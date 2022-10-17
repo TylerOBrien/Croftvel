@@ -13,7 +13,7 @@ trait HasFullName
     /**
      * @return string|null
      */
-    public function getFullNameAttribute()
+    public function getFullNameAttribute(): string|null
     {
         $full_name = implode(' ', array_filter([ $this->first_name, $this->last_name ]));
 
@@ -27,7 +27,7 @@ trait HasFullName
     /**
      * @return string|null
      */
-    public function getFullNameReverseAttribute()
+    public function getFullNameReverseAttribute(): string|null
     {
         $full_name = implode(', ', array_filter([ $this->last_name, $this->first_name ]));
 
