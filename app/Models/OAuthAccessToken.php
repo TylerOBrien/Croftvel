@@ -13,18 +13,19 @@ class OAuthAccessToken extends Model
     ];
 
     protected $fillable = [
-        'identity_id',
+        'oauthable_id',
+        'oauthable_type',
         'scope',
         'type',
         'value',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function identity()
+    public function oauthable()
     {
-        return $this->belongsTo(Identity::class);
+        return $this->morphTo();
     }
 
     /**
