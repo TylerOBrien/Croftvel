@@ -26,7 +26,7 @@ class StoreCompany extends ApiRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|unique:companies,name',
         ];
     }
 }
