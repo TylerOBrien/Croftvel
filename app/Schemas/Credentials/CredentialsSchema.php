@@ -4,6 +4,7 @@ namespace App\Schemas\Credentials;
 
 use App\Enums\Identity\IdentityType;
 use App\Enums\Secret\SecretType;
+use App\Exceptions\Api\v1\Credentials\InvalidOptions;
 use App\Schemas\Schema;
 
 class CredentialsSchema extends Schema
@@ -14,6 +15,8 @@ class CredentialsSchema extends Schema
 
     /**
      * @return array<string, string>
+     *
+     * @throws \App\Exceptions\Api\v1\Credentials\InvalidOptions
      */
     public function rules(): array
     {
@@ -21,6 +24,7 @@ class CredentialsSchema extends Schema
             self::IDENTITY_AND_SECRET => array_merge($this->identityRules(), $this->secretRules()),
             self::IDENTITY_ONLY => $this->identityRules(),
             self::SECRET_ONLY => $this->secretRules(),
+            default => throw new InvalidOptions,
         };
     }
 
