@@ -23,11 +23,9 @@ class DispatchCreateVerificationEvent implements ShouldQueue
      */
     public function handle(VerificationCreated $event)
     {
-        switch ($event->verification->verifiable_type) {
-        case Identity::class:
-            $this->handleIdentity($event);
-            break;
-        }
+        match ($event->verification->verifiable_type) {
+            Identity::class => $this->handleIdentity($event),
+        };
     }
 
     /**
@@ -39,13 +37,9 @@ class DispatchCreateVerificationEvent implements ShouldQueue
      */
     protected function handleIdentity(VerificationCreated $event)
     {
-        switch ($event->verification->ability) {
-        case 'store':
-            IdentityVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code);
-            break;
-        case 'recover':
-            RecoveryVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code);
-            break;
-        }
+        match ($event->verification->ability) {
+            'store' => IdentityVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code),
+            'recover' => RecoveryVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code),
+        };
     }
 }
