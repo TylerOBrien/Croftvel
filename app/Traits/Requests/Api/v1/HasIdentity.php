@@ -63,11 +63,9 @@ trait HasIdentity
      */
     protected function identityValueRule(): string
     {
-        switch ($this->get('identity.type')) {
-        case 'email':
-            return '|email';
-        default:
-            return '';
-        }
+        return match ($this->get('identity.type')) {
+            'email' => '|email',
+            default => 'email',
+        };
     }
 }
