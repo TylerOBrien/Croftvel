@@ -39,13 +39,6 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     protected $model;
 
     /**
-     * The default field values to use if they were not given in the request.
-     *
-     * @var array<string, mixed>
-     */
-    protected $defaults;
-
-    /**
      * The container instance.
      *
      * @var \Illuminate\Contracts\Container\Container
