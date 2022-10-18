@@ -18,9 +18,9 @@ return [
     'forbidden' => 'Missing :ability:target permissions.',
 
     'token' => [
-        'invalid' => 'Invalid token.',
-        'expired' => 'Expired token.',
-        'missing' => 'Missing token.'
+        'invalid' => 'Invalid auth token.',
+        'expired' => 'Expired auth token.',
+        'missing' => 'Missing auth token.'
     ],
 
 ];
