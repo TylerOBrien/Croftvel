@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\v1\ProfileField;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\ProfileField;
+use App\Schemas\Company\ProfileFieldSchema;
 
 class StoreProfileField extends ApiRequest
 {
@@ -25,11 +26,6 @@ class StoreProfileField extends ApiRequest
      */
     public function rules(): array
     {
-        return [
-            'profile_id' => 'required|int|exists:profiles,id',
-            'name' => 'required|string',
-            'type' => 'required|string|in:' . join(',', config('enum.profile_field.type')),
-            'value' => 'required|string',
-        ];
+        return ProfileFieldSchema::getRules($this->all());
     }
 }
