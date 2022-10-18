@@ -9,7 +9,7 @@ use App\Traits\Requests\Api\v1\HasOwnership;
 class UpdateImage extends ApiRequest
 {
     use HasOwnership;
-    
+
     /**
      * Instantiate the request.
      */
@@ -31,7 +31,7 @@ class UpdateImage extends ApiRequest
             'owner_id' => 'required_with:owner_type|morphable',
             'owner_type' => 'required_with:owner_id|morphable',
             'image' => 'image',
-            'name' => 'string'
+            'name' => 'string',
         ];
     }
 }

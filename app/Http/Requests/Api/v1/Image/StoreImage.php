@@ -30,7 +30,7 @@ class StoreImage extends ApiRequest
             'owner_id' => 'required|morphable',
             'owner_type' => 'required|morphable',
             'image' => 'required|image',
-            'name' => 'required|string'
+            'name' => 'required|string',
         ];
     }
 }
