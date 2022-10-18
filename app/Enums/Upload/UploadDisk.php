@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Secret;
+namespace App\Enums\Upload;
 
 enum UploadDisk: string
 {
