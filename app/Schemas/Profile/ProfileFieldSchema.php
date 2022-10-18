@@ -12,6 +12,7 @@ class ProfileFieldSchema extends Schema
     public function rules(): array
     {
         return [
+            'profile_id' => 'required|int',
             'name' => 'required|string',
             'type' => 'required|string|in:'.join(',', config('enum.profile_field.type')),
             'value' => 'required|'.$this->valueRule(),
