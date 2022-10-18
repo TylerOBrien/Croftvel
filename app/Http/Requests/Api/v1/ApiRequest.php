@@ -78,6 +78,8 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
      * @return array<string, mixed>
      */
     public function attributes()
@@ -86,9 +88,21 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     }
 
     /**
+     * Get custom messages for validator errors.
+     *
      * @return array<string, string>
      */
     public function messages()
+    {
+        return [];
+    }
+
+    /**
+     * Get the default values for fields that have not been provided.
+     *
+     * @return array<string, mixed>
+     */
+    public function defaults()
     {
         return [];
     }
