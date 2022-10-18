@@ -2,6 +2,7 @@
 
 namespace App\Observers\Api\v1;
 
+use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityVerified;
 use App\Models\Identity;
 
@@ -16,7 +17,7 @@ class IdentityObserver
      */
     public function creating(Identity $identity): void
     {
-        if ($identity->type === 'oauth') {
+        if ($identity->type === IdentityType::OAuth) {
             $identity->verified_at = now();
             $identity->user->forceFill([ 'identified_at' => now() ])->save();
         }
