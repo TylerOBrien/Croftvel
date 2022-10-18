@@ -121,7 +121,7 @@ class ApiRequest extends Request implements ValidatesWhenResolved
     public function validated()
     {
         $fields = $this->validator->validated();
-        $defaults = $this->defaults ?? [];
+        $defaults = $this->defaults() ?? [];
 
         if (!is_array($defaults)) {
             throw new InvalidRequestDefaults;

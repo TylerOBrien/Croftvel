@@ -17,7 +17,16 @@ class StoreIdentity extends ApiRequest
     {
         $this->ability = 'store';
         $this->model = Identity::class;
-        $this->defaults = [
+    }
+
+    /**
+     * Get the default values for fields that have not been provided.
+     *
+     * @return array<string, mixed>
+     */
+    public function defaults(): array
+    {
+        return [
             'user_id' => auth()->id(),
         ];
     }
