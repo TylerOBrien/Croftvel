@@ -26,6 +26,7 @@ return [
     ],
 
     'image' => [
+        'breakpoint' => Enum::values(\App\Enums\Image\ImageBreakpoint::class),
         'orientation' => Enum::values(\App\Enums\Image\ImageOrientation::class),
     ],
 

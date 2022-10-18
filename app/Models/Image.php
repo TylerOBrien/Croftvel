@@ -34,6 +34,7 @@ class Image extends Model
         'name',
         'mimetype',
         'filesize',
+        'breakpoint',
         'orientation',
         'width',
         'height',
@@ -63,22 +64,6 @@ class Image extends Model
     protected $dispatchesEvents = [
         'created' => ImageCreated::class,
     ];
-
-    /*
-    |--------------------------------------------------------------------------
-    | Attributes
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    public function breakpoint(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => ImageSupport::breakpoint($this),
-        );
-    }
 
     /*
     |--------------------------------------------------------------------------

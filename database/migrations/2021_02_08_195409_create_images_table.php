@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->string('name');
             $table->string('filepath');
             $table->string('mimetype')->nullable();
+            $table->enum('breakpoint', config('enum.image.breakpoint'));
             $table->enum('orientation', config('enum.image.orientation'));
             $table->unsignedSmallInteger('width');
             $table->unsignedSmallInteger('height');
