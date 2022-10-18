@@ -9,5 +9,6 @@ Route::apiResource('companies', CompanyController::class);
 Route::apiResource('files', FileController::class);
 Route::apiResource('identities', IdentityController::class);
 Route::apiResource('images', ImageController::class);
+Route::apiResource('profiles', ProfileController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('videos', VideoController::class);
