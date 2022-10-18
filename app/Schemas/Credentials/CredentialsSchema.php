@@ -70,16 +70,11 @@ class CredentialsSchema extends Schema
     {
         $rule = 'required_unless:identity.type,' . IdentityType::OAuth->value . '|string';
 
-        switch ($this->attributes['identity']['type'] ?? null) {
-        case IdentityType::Email->value:
-            $rule .= '|email';
-            break;
-        case IdentityType::Mobile->value:
-            $rule .= '|phone_number';
-            break;
-        }
-
-        return $rule;
+        return match ($this->attributes['identity']['type'] ?? null) {
+            IdentityType::Email->value => $rule.'|email',
+            IdentityType::Mobile->value => $rule.'|phone_number',
+            null => $rule,
+        };
     }
 
     /**
@@ -89,18 +84,11 @@ class CredentialsSchema extends Schema
      */
     protected function secretTypeRule(): string
     {
-        $rule = 'required|string';
-
-        switch ($this->attributes['identity']['type'] ?? null) {
-        case IdentityType::Email->value:
-        case IdentityType::Mobile->value:
-            $rule .= '|in:' . SecretType::Password->value . ',' . SecretType::TOTP->value;
-            break;
-        case IdentityType::OAuth->value:
-            $rule .= '|in:' . SecretType::OAuth->value;
-            break;
-        }
-
-        return $rule;
+        return match ($this->attributes['identity']['type'] ?? null) {
+            IdentityType::Email->value => 'required|string|in:'.SecretType::Password->value.','.SecretType::TOTP->value,
+            IdentityType::Mobile->value => 'required|string|in:'.SecretType::Password->value.','.SecretType::TOTP->value,
+            IdentityType::OAuth->value => 'required|string|in:'.SecretType::OAuth->value,
+            default => 'required|string',
+        };
     }
 }
