@@ -3,7 +3,6 @@
 namespace App\Listeners\Api\v1\Identity;
 
 use App\Events\Api\v1\Identity\IdentityVerified;
-use App\Events\Api\v1\User\UserIdentified;
 
 class CheckForFirstTimeVerify
 {
