@@ -26,6 +26,8 @@ class Image extends Model
     */
 
     protected $appends = [
+        'breakpoint',
+        'orientation',
         'url',
     ];
 
