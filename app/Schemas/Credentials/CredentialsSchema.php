@@ -20,7 +20,7 @@ class CredentialsSchema extends Schema
      */
     public function rules(): array
     {
-        return match ($this->options) {
+        return match ($this->options ?? self::IDENTITY_AND_SECRET) {
             self::IDENTITY_AND_SECRET => array_merge($this->identityRules(), $this->secretRules()),
             self::IDENTITY_ONLY => $this->identityRules(),
             self::SECRET_ONLY => $this->secretRules(),
