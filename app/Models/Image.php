@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Image\ImageOrientation;
 use App\Events\Api\v1\Image\ImageCreated;
 use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
@@ -39,6 +40,7 @@ class Image extends Model
         'mimetype',
         'filepath',
         'filesize',
+        'orientation',
         'width',
         'height',
         'owner_id',
@@ -46,6 +48,7 @@ class Image extends Model
     ];
 
     protected $dispatchesEvents = [
+        'orientation' => ImageOrientation::class,
         'created' => ImageCreated::class,
     ];
 
