@@ -139,18 +139,6 @@ class User extends BaseUser
         );
     }
 
-    /**
-     * Get the total number of identities that have been verified/identified.
-     *
-     * @return int
-     */
-    public function getTotalIdentitiesVerifiedAttribute(): int
-    {
-        return $this->identities()
-                    ->whereNotNull('verified_at')
-                    ->count();
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Helpers
