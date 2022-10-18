@@ -9,9 +9,9 @@ use App\Schemas\Schema;
 
 class CredentialsSchema extends Schema
 {
-    const IDENTITY_AND_SECRET = 0x11;
-    const IDENTITY_ONLY = 0x01;
-    const SECRET_ONLY = 0x10;
+    const IDENTITY_AND_SECRET = 0xFF;
+    const IDENTITY_ONLY = 0x0F;
+    const SECRET_ONLY = 0xF0;
 
     /**
      * @return array<string, string>
