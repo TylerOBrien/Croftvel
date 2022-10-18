@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Secret\SecretType;
 use App\Support\OAuth\OAuthDriver;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\{ Crypt, Hash };
 
@@ -51,14 +52,20 @@ class Secret extends Model
     */
 
     /**
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function setValueAttribute(string $value)
+    public function value(): Attribute
     {
-        $this->attributes['value'] = match ($this->type) {
-            SecretType::Password => Hash::make($value),
-            default => Crypt::encryptString($value),
-        };
+        return Attribute::make(
+            get: fn ($value) => match ($this->type) {
+                SecretType::Password => $value,
+                default => Crypt::decryptString($value),
+            },
+            set: fn ($value) => match ($this->type) {
+                SecretType::Password => Hash::make($value),
+                default => Crypt::encryptString($value),
+            },
+        );
     }
 
     /*
