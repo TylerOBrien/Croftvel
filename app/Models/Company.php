@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Models\{ HasAddresses, HasLogo, HasProfiles };
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
@@ -27,10 +28,12 @@ class Company extends Model
     */
 
     /**
-     * @return \App\Models\Address|null
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getLocationAttribute(): Address|null
+    public function location(): Attribute
     {
-        return $this->addresses()->whereName(config('models.default.name'))->first();
+        return Attribute::make(
+            get: fn () => $this->addresses()->whereName(config('models.default.name'))->first(),
+        );
     }
 }
