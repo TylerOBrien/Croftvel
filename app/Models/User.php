@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Events\Api\v1\User\UserCreated;
-use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities };
+use App\Traits\Models\{ HasEnabledState, HasFullName, HasProfiles, HasUserAbilities, HasVariantImages };
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 
 class User extends BaseUser
 {
-    use Notifiable, HasFactory, HasEnabledState, HasFullName, HasUserAbilities, HasProfiles;
+    use Notifiable, HasFactory, HasEnabledState, HasFullName, HasUserAbilities, HasProfiles, HasVariantImages;
 
     /*
     |--------------------------------------------------------------------------
@@ -87,6 +88,16 @@ class User extends BaseUser
     | Attributes
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->imageVariantURLs('avatar'),
+        );
+    }
 
     /**
      * Retreive the primary email address (if it exists) for this user.
