@@ -14,7 +14,7 @@ class ProfilePolicy
      * Determine whether the user can view any profiles.
      *
      * @param \App\Models\User $user
-     * 
+     *
      * @return mixed
      */
     public function index(User $user)
@@ -27,19 +27,19 @@ class ProfilePolicy
      *
      * @param \App\Models\User    $user
      * @param \App\Models\Profile $profile
-     * 
+     *
      * @return mixed
      */
     public function show(User $user, Profile $profile)
     {
-        if ($profile->owner) {
+        if ($profile->owner_type === User::class && $profile->owner) {
             if ($user->id === $profile->owner->id) {
                 return true;
             } else if ($user->can('show', $profile->owner)) {
                 return true;
             }
         }
-        
+
         return $user->hasAbility('show', Profile::class);
     }
 
@@ -47,7 +47,7 @@ class ProfilePolicy
      * Determine whether the user can create profiles.
      *
      * @param \App\Models\User $user
-     * 
+     *
      * @return mixed
      */
     public function store(User $user)
@@ -60,19 +60,19 @@ class ProfilePolicy
      *
      * @param \App\Models\User    $user
      * @param \App\Models\Profile $profile
-     * 
+     *
      * @return mixed
      */
     public function update(User $user, Profile $profile)
     {
-        if ($profile->owner) {
+        if ($profile->owner_type === User::class && $profile->owner) {
             if ($user->id === $profile->owner->id) {
                 return true;
             } else if ($user->can('update', $profile->owner)) {
                 return true;
             }
         }
-        
+
         return $user->hasAbility('update', Profile::class);
     }
 
@@ -81,19 +81,19 @@ class ProfilePolicy
      *
      * @param \App\Models\User    $user
      * @param \App\Models\Profile $profile
-     * 
+     *
      * @return mixed
      */
     public function destroy(User $user, Profile $profile)
     {
-        if ($profile->owner) {
+        if ($profile->owner_type === User::class && $profile->owner) {
             if ($user->id === $profile->owner->id) {
                 return true;
             } else if ($user->can('destroy', $profile->owner)) {
                 return true;
             }
         }
-        
+
         return $user->hasAbility('destroy', Profile::class);
     }
 }
