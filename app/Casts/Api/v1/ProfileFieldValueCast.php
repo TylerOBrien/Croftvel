@@ -22,22 +22,15 @@ class ProfileFieldValueCast implements CastsAttributes
      */
     public function get($model, string $key, $value, array $attributes)
     {
-        switch ($model->type) {
-        case ProfileFieldType::String:
-            return $value;
-        case ProfileFieldType::Integer:
-            return (int) $value;
-        case ProfileFieldType::Float:
-            return (float) $value;
-        case ProfileFieldType::Boolean:
-            return (bool) $value;
-        case ProfileFieldType::Date:
-            return Date::instance(Carbon::createFromFormat('Y-m-d', $value)->startOfDay());
-        case ProfileFieldType::Time:
-            return Date::instance(Carbon::createFromFormat('H:i:s.u', $value)->startOfDay());
-        case ProfileFieldType::DateTime:
-            return Date::instance(Carbon::createFromFormat('Y-m-d H:i:s.u', $value)->startOfDay());
-        }
+        return match ($model->type) {
+            ProfileFieldType::String => $value,
+            ProfileFieldType::Integer => (int) $value,
+            ProfileFieldType::Float => (float) $value,
+            ProfileFieldType::Boolean => (bool) $value,
+            ProfileFieldType::Date => Date::instance(Carbon::createFromFormat('Y-m-d', $value)->startOfDay()),
+            ProfileFieldType::Time => Date::instance(Carbon::createFromFormat('H:i:s.u', $value)->startOfDay()),
+            ProfileFieldType::DateTime => Date::instance(Carbon::createFromFormat('Y-m-d H:i:s.u', $value)->startOfDay()),
+        };
     }
 
     /**
