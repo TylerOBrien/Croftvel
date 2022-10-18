@@ -100,43 +100,43 @@ class User extends BaseUser
     }
 
     /**
-     * Retreive the primary email address (if it exists) for this user.
-     *
-     * @return string|null
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getEmailAttribute(): string|null
+    public function email(): Attribute
     {
-        return $this->identityAttribute('email');
+        return Attribute::make(
+            get: fn () => $this->identityAttribute('email'),
+        );
     }
 
     /**
-     * Retreive the primary mobile number (if it exists) for this user.
-     *
-     * @return string|null
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getMobileAttribute(): string|null
+    public function mobile(): Attribute
     {
-        return $this->identityAttribute('mobile');
+        return Attribute::make(
+            get: fn () => $this->identityAttribute('mobile'),
+        );
     }
 
     /**
-     * Retreive the user's privilege model.
-     *
-     * @return \App\Models\Privilege|null
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getPrivilegeAttribute(): Privilege|null
+    public function privilege(): Attribute
     {
-        return Privilege::whereName("user.$this->id")->first();
+        return Attribute::make(
+            get: fn () => Privilege::whereName("user.$this->id")->first(),
+        );
     }
 
     /**
-     * Return whether or not this user has been verified/identified.
-     *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    public function getIsIdentifiedAttribute(): bool
+    public function isIdentified(): Attribute
     {
-        return (bool) $this->identified_at;
+        return Attribute::make(
+            get: fn () => (bool) $this->identified_at,
+        );
     }
 
     /**
