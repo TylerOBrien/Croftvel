@@ -37,6 +37,10 @@ return [
         'type' => Enum::values(\App\Enums\Secret\SecretType::class),
     ],
 
+    'upload' => [
+        'disk' => Enum::values(\App\Enums\Upload\UploadDisk::class),
+    ],
+
     'verification' => [
         'ability' => Enum::values(\App\Enums\Verification\VerificationAbility::class),
         'type' => Enum::values(\App\Enums\Verification\VerificationType::class),
