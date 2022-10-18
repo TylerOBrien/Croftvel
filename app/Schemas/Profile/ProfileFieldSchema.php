@@ -21,7 +21,7 @@ class ProfileFieldSchema extends Schema
     /**
      * @return string
      */
-    public function valueRule(): string
+    protected function valueRule(): string
     {
         return match ($this->attributes['type'] ?? null) {
             'string' => 'string',
