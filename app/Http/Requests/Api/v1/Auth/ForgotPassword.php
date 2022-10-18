@@ -33,7 +33,7 @@ class ForgotPassword extends ApiRequest
      */
     protected function identityRule(): string
     {
-        return match (request('identity.type')) {
+        return match ($this->input('identity.type')) {
             'email' => '|email',
             default => '',
         };
