@@ -25,6 +25,10 @@ return [
         'type' => Enum::values(\App\Enums\Identity\IdentityType::class),
     ],
 
+    'image' => [
+        'orientation' => Enum::values(\App\Enums\Image\ImageOrientation::class),
+    ],
+
     'oauth' => [
         'provider' => Enum::values(\App\Enums\OAuth\OAuthProvider::class),
     ],
