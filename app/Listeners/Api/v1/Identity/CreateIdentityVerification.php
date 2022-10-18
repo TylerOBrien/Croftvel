@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Api\v1\Identity;
 
+use App\Enums\Identity\IdentityType;
 use App\Events\Api\v1\Identity\IdentityCreated;
 use App\Models\{ Identity, Verification };
 
@@ -16,7 +17,7 @@ class CreateIdentityVerification
      */
     public function handle(IdentityCreated $event)
     {
-        if ($event->identity->type !== 'oauth' && !$event->identity->is_verified) {
+        if ($event->identity->type !== IdentityType::OAuth && !$event->identity->is_verified) {
             Verification::create([
                 'ability' => 'store',
                 'verifiable_id' => $event->identity->id,
