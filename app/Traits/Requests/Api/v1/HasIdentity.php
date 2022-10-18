@@ -65,7 +65,7 @@ trait HasIdentity
     {
         return match ($this->get('identity.type')) {
             'email' => '|email',
-            default => 'email',
+            default => '',
         };
     }
 }
