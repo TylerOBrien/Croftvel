@@ -31,6 +31,7 @@ class ProfileFieldSchema extends Schema
             'date' => 'date',
             'time' => 'time',
             'datetime' => 'datetime',
+            default => 'string',
         };
     }
 }
