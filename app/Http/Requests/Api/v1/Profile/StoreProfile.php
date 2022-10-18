@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api\v1\Profile;
 
 use App\Http\Requests\Api\v1\ApiRequest;
-use App\Models\Profile;
+use App\Models\{ Profile, User };
 
 class StoreProfile extends ApiRequest
 {
@@ -16,6 +16,19 @@ class StoreProfile extends ApiRequest
     {
         $this->ability = 'store';
         $this->model = Profile::class;
+    }
+
+    /**
+     * Get the default values for fields that have not been provided.
+     *
+     * @return array<string, mixed>
+     */
+    public function defaults(): array
+    {
+        return [
+            'owner_id' => auth()->id(),
+            'owner_type' => User::class,
+        ];
     }
 
     /**

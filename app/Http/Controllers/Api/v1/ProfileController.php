@@ -49,10 +49,7 @@ class ProfileController extends Controller
     public function store(StoreProfile $request)
     {
         $fields = $request->validated();
-        $profile = Profile::create(array_merge($fields, [
-            'owner_id' => auth()->id(),
-            'owner_type' => 'App\Models\User',
-        ]));
+        $profile = Profile::create($fields);
 
         if (isset($fields['fields'])) {
             $profile->fields()->createMany($fields['fields']);
