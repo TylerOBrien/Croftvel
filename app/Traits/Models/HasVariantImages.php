@@ -2,7 +2,7 @@
 
 namespace App\Traits\Models;
 
-use App\Enums\Image\ImageSize;
+use App\Enums\Image\ImageBreakpoint;
 use App\Models\Image;
 
 use Illuminate\Http\UploadedFile;
@@ -29,16 +29,16 @@ trait HasVariantImages
     public function imageVariantURLs(string $category): Collection
     {
         $category = str_replace('%', '\\%', $category);
-        $images = $this->images()->where('name', 'like', $category.'.%.%')->get();
+        $images = $this->images()->where('name', 'like', $category.'.%')->get();
         $variants = collect([]);
 
         foreach ($images as $image) {
-            [ $_, $name, $size ] = explode('.', $image->name);
+            [ $_, $name ] = explode('.', $image->name);
 
             if (!$variants->has($name)) {
-                $variants[$name] = collect([ $size => $image->url ]);
+                $variants[$name] = collect([ $image->breakpoint => $image->url ]);
             } else {
-                $variants[$name][$size] = $image->url;
+                $variants[$name][$image->breakpoint] = $image->url;
             }
         }
 
@@ -51,14 +51,14 @@ trait HasVariantImages
      * @param  \Illuminate\Http\UploadedFile  $file  The image file uploaded by a user.
      * @param  string  $category  The category of the image variant.
      * @param  string  $name  The name of the image variant.
-     * @param  \App\Enums\Image\ImageSize  $name  The size of the image variant.
+     * @param  \App\Enums\Image\ImageBreakpoint  $breakpoint  The breakpoint of the image variant.
      *
      * @return \App\Models\Image
      */
-    public function createImageVariant(UploadedFile $file, string $category, string $name, ImageSize $size): Image
+    public function createImageVariant(UploadedFile $file, string $category, string $name, ImageBreakpoint $breakpoint): Image
     {
         return Image::createFromFile($file, [
-            'name' => $category.'.'.$name.'.'.$size->value,
+            'name' => $category.'.'.$name.'.'.$breakpoint->value,
             'owner_id' => $this->id,
             'owner_type' => $this::class,
         ]);
