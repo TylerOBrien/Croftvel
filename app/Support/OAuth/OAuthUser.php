@@ -19,18 +19,13 @@ class OAuthUser
     {
         $fields = OAuthDriver::user($identity);
 
-        switch ($identity->provider) {
-        case OAuthProvider::Apple:
-            return self::createApple($identity, $fields);
-        case OAuthProvider::Facebook:
-            return self::createFacebook($identity, $fields);
-        case OAuthProvider::GitHub:
-            return self::createGitHub($identity, $fields);
-        case OAuthProvider::Google:
-            return self::createGoogle($identity, $fields);
-        case OAuthProvider::Twitter:
-            return self::createTwitter($identity, $fields);
-        }
+        return match ($identity->provider) {
+            OAuthProvider::Apple => self::createApple($identity, $fields),
+            OAuthProvider::Facebook => self::createFacebook($identity, $fields),
+            OAuthProvider::GitHub => self::createGitHub($identity, $fields),
+            OAuthProvider::Google => self::createGoogle($identity, $fields),
+            OAuthProvider::Twitter => self::createTwitter($identity, $fields),
+        };
     }
 
     /**
