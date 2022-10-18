@@ -4,6 +4,7 @@ namespace App\Observers\Api\v1;
 
 use App\Enums\Image\ImageOrientation;
 use App\Models\Image;
+use App\Schemas\Image\ImageSchema;
 use App\Support\Image as ImageSupport;
 
 class ImageObserver
@@ -17,6 +18,8 @@ class ImageObserver
      */
     public function creating(Image $image): void
     {
+        ImageSchema::validated($image->getDirty());
+
         $image->breakpoint = ImageSupport::breakpoint($image);
     }
 
@@ -29,17 +32,11 @@ class ImageObserver
      */
     public function updating(Image $image): void
     {
-        $will_calculate_breakpoint = false;
-
-        if ($image->orientation === ImageOrientation::Landscape) {
-            if ($image->isDirty('width')) {
-                $will_calculate_breakpoint = true;
-            }
-        } else if ($image->orientation === ImageOrientation::Portrait) {
-            if ($image->isDirty('height')) {
-                $will_calculate_breakpoint = true;
-            }
-        }
+        $fields = ImageSchema::validated($image->getDirty());
+        $will_calculate_breakpoint = match ($image->orientation) {
+            ImageOrientation::Landscape => isset($fields['width']),
+            ImageOrientation::Portrait => isset($fields['height']),
+        };
 
         if ($will_calculate_breakpoint) {
             $image->breakpoint = ImageSupport::breakpoint($image);
