@@ -26,7 +26,10 @@ class StoreProfileField extends ApiRequest
     public function rules(): array
     {
         return [
-            //
+            'profile_id' => 'required|int|exists:profiles,id',
+            'name' => 'required|string',
+            'type' => 'required|string|in:' . join(',', config('enum.profile_field.type')),
+            'value' => 'required|string',
         ];
     }
 }
