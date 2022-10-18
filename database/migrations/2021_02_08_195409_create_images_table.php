@@ -15,7 +15,7 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->enum('disk', [ 'local', 'public', 's3' ]);
+            $table->enum('disk', config('enum.upload.disk'));
             $table->string('name');
             $table->string('filepath');
             $table->string('mimetype')->nullable();
