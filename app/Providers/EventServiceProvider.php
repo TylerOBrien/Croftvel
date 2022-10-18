@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\Api\v1\Auth\AuthAttempted;
-use App\Models\{ Address, Company, Identity, User };
+use App\Models\{ Address, Company, Identity, Image, User };
 use App\Observers\Api\v1\{ AddressObserver, CompanyObserver, IdentityObserver, ImageObserver, UserObserver };
 
 use App\Events\Api\v1\Identity\{ IdentityCreated, IdentityVerificationCreated, IdentityVerified };
