@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\v1\ProfileField;
 
 use App\Http\Requests\Api\v1\ApiRequest;
 use App\Models\ProfileField;
-use App\Schemas\Company\ProfileFieldSchema;
+use App\Schemas\Profile\ProfileFieldSchema;
 
 class StoreProfileField extends ApiRequest
 {

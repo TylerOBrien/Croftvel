@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Schemas\Company;
+namespace App\Schemas\Profile;
 
 use App\Schemas\Schema;
 
