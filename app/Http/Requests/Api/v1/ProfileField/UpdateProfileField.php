@@ -22,12 +22,14 @@ class UpdateProfileField extends ApiRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array<string, string>
      */
     public function rules(): array
     {
         return [
-            //
+            'name' => 'string',
+            'type' => 'string',
+            'value' => 'string',
         ];
     }
 }
