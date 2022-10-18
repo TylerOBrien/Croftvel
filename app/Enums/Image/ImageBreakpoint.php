@@ -2,7 +2,7 @@
 
 namespace App\Enums\Image;
 
-enum ImageSize: string
+enum ImageBreakpoint: string
 {
     case XS = 'xs';
     case SM = 'sm';
