@@ -49,9 +49,12 @@ class Image extends Model
         'owner_type',
     ];
 
-    protected $dispatchesEvents = [
+    protected $casts = [
         'breakpoint' => ImageBreakpoint::class,
         'orientation' => ImageOrientation::class,
+    ];
+
+    protected $dispatchesEvents = [
         'created' => ImageCreated::class,
     ];
 
