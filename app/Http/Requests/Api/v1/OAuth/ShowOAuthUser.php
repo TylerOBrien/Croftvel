@@ -9,9 +9,9 @@ class ShowOAuthUser extends OAuthRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'code' => 'required|string',

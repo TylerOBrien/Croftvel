@@ -25,9 +25,9 @@ class UpdateVideo extends ApiRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'owner_id' => 'required_with:owner_type|morphable',

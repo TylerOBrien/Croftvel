@@ -22,9 +22,9 @@ class UpdatePrivilege extends ApiRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'sometimes|string|unique:privileges,name',
