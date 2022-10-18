@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Api\v1\Verification;
 
+use App\Enums\Verification\VerificationAbility;
 use App\Events\Api\v1\Identity\IdentityVerificationCreated;
 use App\Events\Api\v1\Recovery\RecoveryVerificationCreated;
 use App\Events\Api\v1\Verification\VerificationCreated;
@@ -37,9 +38,9 @@ class DispatchCreateVerificationEvent implements ShouldQueue
      */
     protected function handleIdentity(VerificationCreated $event)
     {
-        match ($event->verification->ability) {
-            'store' => IdentityVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code),
-            'recover' => RecoveryVerificationCreated::dispatch($event->verification->verifiable, $event->plaintext_code),
-        };
+        (match ($event->verification->ability) {
+            VerificationAbility::Store => IdentityVerificationCreated::class,
+            VerificationAbility::Recover => RecoveryVerificationCreated::class,
+        })::dispatch($event->verification->verifiable, $event->plaintext_code);
     }
 }
