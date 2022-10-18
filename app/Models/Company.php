@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Traits\Models\{ HasAddresses, HasLogo, HasProfiles };
+use App\Traits\Models\{ HasAddresses, HasProfiles, HasVariantImages };
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    use HasAddresses, HasLogo, HasProfiles;
+    use HasAddresses, HasVariantImages, HasProfiles;
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +34,16 @@ class Company extends Model
     {
         return Attribute::make(
             get: fn () => $this->addresses()->whereName(config('models.default.name'))->first(),
+        );
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function logo(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->imageVariantURLs('logo'),
         );
     }
 }
