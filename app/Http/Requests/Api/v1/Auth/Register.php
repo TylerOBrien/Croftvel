@@ -29,6 +29,6 @@ class Register extends OAuthRequest
      */
     public function rules(): array
     {
-        return CredentialsSchema::getRules($this->all());
+        return CredentialsSchema::getRules($this->all(), CredentialsSchema::IDENTITY_AND_SECRET);
     }
 }

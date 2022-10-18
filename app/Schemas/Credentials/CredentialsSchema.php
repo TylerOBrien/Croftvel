@@ -14,6 +14,18 @@ class CredentialsSchema extends Schema
     const SECRET_ONLY = 0xF0;
 
     /**
+     * Instantiates this schema.
+     *
+     * @param  int  $options  The options value to use.
+     *
+     * @return void
+     */
+    public function __construct(int $options = self::IDENTITY_AND_SECRET)
+    {
+        parent::__construct($options);
+    }
+
+    /**
      * @return array<string, string>
      *
      * @throws \App\Exceptions\Api\v1\Credentials\InvalidOptions
