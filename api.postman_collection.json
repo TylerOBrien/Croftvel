@@ -10,7 +10,7 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "OAuth",
+					"name": "OAuthProvider",
 					"item": [
 						{
 							"name": "Index.OAuthProvider",
@@ -162,6 +162,132 @@
 							"response": []
 						},
 						{
+							"name": "Register.Mobile",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "mobile",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{mobile}}",
+											"description": "required|phone_number",
+											"type": "text"
+										},
+										{
+											"key": "secret[type]",
+											"value": "password",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "letmein123",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register.OAuth.Apple",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "apple",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "3842501109da31ffb71f",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register.OAuth.Facebook",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "facebook",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "3842501109da31ffb71f",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/users",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Register.OAuth.GitHub",
 							"request": {
 								"method": "POST",
@@ -172,19 +298,19 @@
 										{
 											"key": "identity[type]",
 											"value": "oauth",
-											"description": "required|string|in:email,mobile,oauth",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[provider]",
 											"value": "github",
-											"description": "required|string|in:facebook,github,google,twitter",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
-											"value": "77652f46fe268b4b3d66",
-											"description": "required|string",
+											"value": "3842501109da31ffb71f",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -212,19 +338,19 @@
 										{
 											"key": "identity[type]",
 											"value": "oauth",
-											"description": "required|string|in:email,mobile,oauth",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[provider]",
 											"value": "google",
-											"description": "required|string|in:facebook,github,google,twitter",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
 											"value": "4/0ARtbsJpniZ7iVFzLS8KkuA3-tOPtgPgMW-ZRz6NRYlsDPI4zg7TxxUZf3WMOg2yMT4VVcg",
-											"description": "required|string",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -252,24 +378,25 @@
 										{
 											"key": "identity[type]",
 											"value": "oauth",
-											"description": "required|string|in:email,mobile,oauth",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[provider]",
 											"value": "twitter",
-											"description": "required|string|in:facebook,github,google,twitter",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
 											"value": "Rkl0RXRiMWtjM0lmNURhY19vVWNrZFFMWUpUZWs0aUh5VGp6dmVob1NZS2lFOjE2NjU5NDg5NTU4NDc6MTowOmFjOjE",
-											"description": "required|string",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "code_verifier",
 											"value": "homBmwyQNQPR2vHPIN4Hiw6UeVF53Il6AlevLHSbsLemS0RzVVQYNw4LKIO8o8ZzBCFdGU7svNbUeBzZmZBW5b4IGbdzRq2z",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -338,6 +465,132 @@
 							"response": []
 						},
 						{
+							"name": "Login.Mobile",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "mobile",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[value]",
+											"value": "{{mobile}}",
+											"description": "required|phone_number",
+											"type": "text"
+										},
+										{
+											"key": "secret[type]",
+											"value": "password",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "letmein123",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login.OAuth.Apple",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "apple",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "49a714b6c192594856eb",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login.OAuth.Facebook",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "facebook",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "49a714b6c192594856eb",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Login.OAuth.GitHub",
 							"request": {
 								"method": "POST",
@@ -348,19 +601,99 @@
 										{
 											"key": "identity[type]",
 											"value": "oauth",
-											"description": "required|string|in:email,mobile,oauth",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "identity[provider]",
 											"value": "github",
-											"description": "required|string|in:facebook,github,google,twitter",
+											"description": "required",
 											"type": "text"
 										},
 										{
 											"key": "secret[value]",
 											"value": "49a714b6c192594856eb",
-											"description": "required|string",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login.OAuth.Google",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "google",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "49a714b6c192594856eb",
+											"description": "required",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiv1}}/tokens",
+									"host": [
+										"{{apiv1}}"
+									],
+									"path": [
+										"tokens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login.OAuth.Twitter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "identity[type]",
+											"value": "oauth",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "identity[provider]",
+											"value": "twitter",
+											"description": "required",
+											"type": "text"
+										},
+										{
+											"key": "secret[value]",
+											"value": "49a714b6c192594856eb",
+											"description": "required",
 											"type": "text"
 										}
 									]
@@ -1199,6 +1532,16 @@
 		},
 		{
 			"key": "email.secondary",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "mobile",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "mobile.secondary",
 			"value": "",
 			"type": "string"
 		}
