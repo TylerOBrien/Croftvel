@@ -144,7 +144,7 @@ class Identity extends Model
      */
     static public function findFromRequest(Request|ApiRequest $request): Identity|null
     {
-        return self::findFromFields($request->all([ 'identity_id', 'type', 'value' ]));
+        return self::findFromFields($request->all([ 'identity_id', 'identity.type', 'identity.value' ]));
     }
 
     /**
