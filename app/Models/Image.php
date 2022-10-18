@@ -26,16 +26,20 @@ class Image extends Model
     */
 
     protected $appends = [
-        'breakpoint',
-        'orientation',
         'url',
     ];
 
-    protected $hidden = [
-        'disk',
-        'filepath',
-        'owner_id',
-        'owner_type',
+    protected $visible = [
+        'id',
+        'name',
+        'mimetype',
+        'filesize',
+        'orientation',
+        'width',
+        'height',
+        'url',
+        'created_at',
+        'updated_at',
     ];
 
     protected $fillable = [
