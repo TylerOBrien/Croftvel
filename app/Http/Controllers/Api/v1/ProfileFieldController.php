@@ -22,12 +22,7 @@ class ProfileFieldController extends Controller
     public function index(IndexProfileField $request, Profile $profile = null)
     {
         $fields = $request->validated();
-
-        if ($profile) {
-            $profile_fields = $profile->fields();
-        } else {
-            $profile_fields = ProfileField::select();
-        }
+        $profile_fields = $profile ? $profile->fields() : ProfileField::select();
 
         return $this->filtered($profile_fields, $fields);
     }
