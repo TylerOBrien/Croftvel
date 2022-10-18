@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use App\Enums\Image\ImageOrientation;
+use App\Enums\Image\{ ImageBreakpoint, ImageOrientation };
 use App\Events\Api\v1\Image\ImageCreated;
+use App\Support\Image as ImageSupport;
 use App\Traits\Models\{ HasFileUpload, HasOwnership };
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
@@ -48,9 +50,26 @@ class Image extends Model
     ];
 
     protected $dispatchesEvents = [
+        'breakpoint' => ImageBreakpoint::class,
         'orientation' => ImageOrientation::class,
         'created' => ImageCreated::class,
     ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Image
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute
+     */
+    public function breakpoint(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => ImageSupport::breakpoint($this),
+        );
+    }
 
     /*
     |--------------------------------------------------------------------------
