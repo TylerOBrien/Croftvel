@@ -55,14 +55,10 @@ class Secret extends Model
      */
     public function setValueAttribute(string $value)
     {
-        switch ($this->type) {
-        case SecretType::Password:
-            $this->attributes['value'] = Hash::make($value);
-            break;
-        default:
-            $this->attributes['value'] = Crypt::encryptString($value);
-            break;
-        }
+        $this->attributes['value'] = match ($this->type) {
+            SecretType::Password => Hash::make($value),
+            default => Crypt::encryptString($value),
+        };
     }
 
     /*
