@@ -10,8 +10,8 @@ use App\Schemas\Schema;
 class CredentialsSchema extends Schema
 {
     const IDENTITY_AND_SECRET = 0x00;
-    const IDENTITY_ONLY       = 0x01;
-    const SECRET_ONLY         = 0x10;
+    const IDENTITY_ONLY = 0x01;
+    const SECRET_ONLY = 0x10;
 
     /**
      * @return array<string, string>
