@@ -125,7 +125,7 @@ class User extends BaseUser
     public function privilege(): Attribute
     {
         return Attribute::make(
-            get: fn () => Privilege::whereName("user.$this->id")->first(),
+            get: fn () => Privilege::whereName(config('permissions.privilege.name.pattern', $this->toArray()))->first(),
         );
     }
 
