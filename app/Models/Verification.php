@@ -80,24 +80,4 @@ class Verification extends Model
             $this->hash_algo,
         );
     }
-
-    /**
-     * Register creating handler to ensure that a code is created if one has
-     * not already been provided.
-     *
-     * @return void
-     */
-    static public function boot(): void
-    {
-        parent::boot();
-        self::creating(function (Verification $verification) {
-            if (is_null($verification->hash_algo)) {
-                $verification->hash_algo = config('verify.default.hash_algo');
-            }
-
-            if (is_null($verification->code)) {
-                $verification->code = $verification->generate();
-            }
-        });
-    }
 }
