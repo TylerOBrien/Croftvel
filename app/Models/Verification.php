@@ -64,9 +64,12 @@ class Verification extends Model
     */
 
     /**
-     * Generate a new unique verification code.
+     * Generate a new unique verification code. The generated code will not be
+     * persisted in storage.
      *
      * @return int
+     *
+     * @throws \App\Exceptions\Api\v1\Verification\MissingHashAlgo
      */
     public function generate(): int
     {
