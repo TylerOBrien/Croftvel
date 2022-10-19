@@ -23,7 +23,7 @@ trait HasVariantImages
      *
      * @param  string  $category  The category of the image variants.
      *
-     * @return \Illuminate\Support\Collection|null
+     * @return \Illuminate\Support\Collection
      */
     public function imageVariantURLs(string $category): Collection
     {
