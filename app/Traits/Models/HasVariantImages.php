@@ -51,14 +51,13 @@ trait HasVariantImages
      * @param  \Illuminate\Http\UploadedFile  $file  The image file uploaded by a user.
      * @param  string  $category  The category of the image variant.
      * @param  string  $name  The name of the image variant.
-     * @param  \App\Enums\Image\ImageBreakpoint  $breakpoint  The breakpoint of the image variant.
      *
      * @return \App\Models\Image
      */
-    public function createImageVariant(UploadedFile $file, string $category, string $name, ImageBreakpoint $breakpoint): Image
+    public function createImageVariant(UploadedFile $file, string $category, string $name): Image
     {
         return Image::createFromFile($file, [
-            'name' => $category.'.'.$name.'.'.$breakpoint->value,
+            'name' => $category.'.'.$name,
             'owner_id' => $this->id,
             'owner_type' => $this::class,
         ]);
