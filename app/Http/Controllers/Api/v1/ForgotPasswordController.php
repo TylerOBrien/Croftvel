@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Enums\Verification\VerificationAbility;
 use App\Exceptions\Api\v1\Identity\IdentityNotFound;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\v1\Auth\ForgotPassword;
@@ -26,7 +27,7 @@ class ForgotPasswordController extends Controller
         }
 
         return Verification::create([
-            'ability' => 'recover',
+            'ability' => VerificationAbility::Recover,
             'verifiable_id' => $identity->id,
             'verifiable_type' => Identity::class,
         ]);
