@@ -2,7 +2,6 @@
 
 namespace App\Traits\Models;
 
-use App\Enums\Image\ImageBreakpoint;
 use App\Models\Image;
 
 use Illuminate\Http\UploadedFile;
