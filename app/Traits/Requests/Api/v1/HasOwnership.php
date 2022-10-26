@@ -6,15 +6,15 @@ trait HasOwnership
 {
     /**
      * Get the owner_id and owner_type value from the request.
-     * 
+     *
      * @return array
      */
-    protected function owner():array
+    protected function owner(): array
     {
         if (!request()->has([ 'owner_id', 'owner_type' ])) {
             return [ null, null, null ];
         }
-        
+
         $owner_id = request('owner_id');
         $owner_type = request('owner_type');
 
