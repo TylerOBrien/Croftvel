@@ -11,12 +11,12 @@ trait HasOwnership
      */
     protected function owner(): array
     {
-        if (!request()->has([ 'owner_id', 'owner_type' ])) {
+        if (!$this->has([ 'owner_id', 'owner_type' ])) {
             return [ null, null, null ];
         }
 
-        $owner_id = request('owner_id');
-        $owner_type = request('owner_type');
+        $owner_id = $this->input('owner_id');
+        $owner_type = $this->input('owner_type');
 
         if (strpos($owner_type, 'App\\Models\\') !== 0) {
             $owner_type = "App\\Models\\$owner_type";
