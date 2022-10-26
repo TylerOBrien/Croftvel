@@ -12,15 +12,13 @@ trait HasIdentity
      */
     protected function prepareOAuthIfGiven(): void
     {
-        $request = request();
-
-        if ($request->input('identity.type') === IdentityType::OAuth->value) {
-            if ($request->input('identity.provider') === OAuthProvider::Twitter->value) {
-                $request->session()->put('code_verifier', $request->input('code_verifier'));
+        if ($this->input('identity.type') === IdentityType::OAuth->value) {
+            if ($this->input('identity.provider') === OAuthProvider::Twitter->value) {
+                $this->session()->put('code_verifier', $this->input('code_verifier'));
             }
 
-            $request->merge([
-                'code' => $request->input('secret.value'),
+            $this->merge([
+                'code' => $this->input('secret.value'),
             ]);
         }
     }
